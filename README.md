@@ -60,7 +60,7 @@ Our goal: **beat the baseline.**
 | Milestone 1 | Nov 2 | Progress Reporting |
 | Milestone 2 | Nov 30 | Final Reporting |
 | Final Presentation | Nov 30 |
-| Github Submission | Dec 31 | 
+| Github Submission | Nov 30 | 
 
 ##  Credits
 Organized by UC Davis Neuroprosthetics Lab.  
