@@ -56,10 +56,11 @@ Our goal: **beat the baseline.**
 ## 📅 Project Milestones (COMP 433)
 | Milestone | Date | Deliverable |
 |-----------|------|-------------|
-| Proposal  | Sept 15 | Initial repo setup + project plan |
-| Milestone 1 | Oct 15 | Working data loader + baseline model |
-| Milestone 2 | Nov 15 | Improved model + validation pipeline |
-| Final Submission | Dec 31 | Complete repo + report + Kaggle submission |
+| Proposal  | Oct 5 | Initial repo setup + project plan and research |
+| Milestone 1 | Nov 2 | Progress Reporting |
+| Milestone 2 | Nov 30 | Final Reporting |
+| Final Presentation | Nov 30 |
+| Github Submission | Dec 31 | 
 
 ##  Credits
 Organized by UC Davis Neuroprosthetics Lab.  
