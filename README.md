@@ -13,7 +13,7 @@ Our goal: **develop deep learning models to map neural spiking activity → text
 - **Course:** COMP 433 – Fall 2025  
 - **Members:**
   - J. David Ruiz (40176885)
-  - [Member 2] 
+  - Elion Abdyli (40132982) 
   - [Member 3]  
 
 > Detailed contributions are also included in the final project ZIP, as per course requirements.
