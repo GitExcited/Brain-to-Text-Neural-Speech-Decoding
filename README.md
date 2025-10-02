@@ -14,7 +14,7 @@ Our goal: **develop deep learning models to map neural spiking activity → text
 - **Members:**
   - J. David Ruiz (40176885)
   - Elion Abdyli (40132982) 
-  - [Member 3]  
+  - Ion Turcan (40154098) 
 
 > Detailed contributions are also included in the final project ZIP, as per course requirements.
 
