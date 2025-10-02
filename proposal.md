@@ -33,7 +33,7 @@ of the course project grade)
 
 You should write a one-page proposal for the course project to cover the following topics:
 
-### Problem Statement and Application: 
+### Problem Statement and Application: (Ion Turcan 40154098)
 ```
 provide a background about the topic to be
 investigated and specify why the problem is interesting and important? What are the
