@@ -34,27 +34,38 @@ provide a background about the topic to be
 investigated and specify why the problem is interesting and important? What are the
 associated challenges of the problem application? What are your expectations/goals
 throughout developing the application of interest?
+
 ### What reading material (e.g. papers, scientific reports, etc) will you examine to provide
 context and background?
-### Possible Methodology: highlight the possible method or algorithm you are proposing.
+
+### Possible Methodology: 
+highlight the possible method or algorithm you are proposing.
 Are there any existing implementations to be used and how will you use them? How are you
 planning to improve or modify such implementations? You may not have the exact answer
 here but try to give an answer that you will follow as much as possible.
-### Metric Evaluation. Discuss how you will evaluate your results both in terms of
+
+### Metric Evaluation: 
+Discuss how you will evaluate your results both in terms of
 qualitative and quantitative analysis. Qualitatively, what kind of results do you expect (e.g.
 plots or figures)? Quantitatively, what kind of analysis will you use to evaluate and/or
 compare your results with (e.g. what performance metrics or statistical tests)? All these
 metric evaluations will be used to assess and evaluate the pipeline and your expectations
 regarding the kind of results/performance to be achieved.
-### Gantt Chart: use an additional page (supplemental material) to illustrate a Gantt
+
+### Gantt Chart: 
+use an additional page (supplemental material) to illustrate a Gantt
 chart of the project development to list (a) schedules and (b) items of milestones and
 deliverables. Note that you cannot use this page to extend your proposal description.
-### Bibliography: use an additional page to extend your reference list cited in your
+
+### Bibliography: 
+use an additional page to extend your reference list cited in your
 proposal. The citations may include, but not limited to, published papers and domain links.
 (include a link to your dataset). Please note that failure to properly cite your references
 constitutes to a plagiarism.
 You will be given the opportunity to submit your proposal for revision by the professor/LeadTA, before the final graded submission. Only the admin (one person) of your team needs to
 upload the proposal in PDF file in Moodle.
+
+### Formatting:
 For the report format, please consult “Reports Formatting” Section in this guideline. Our
 team (TAs and lecturer) will review your proposal and, if it is acceptable, you may proceed
 with developing the next phase of your project. Otherwise, we will instruct you to either revise
