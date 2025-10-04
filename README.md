@@ -96,3 +96,5 @@ asdf
     - data supplementing
     - data augmenting
     - loss functions
+- clone the benchmarks into our repo for accees and version control
+  - track and modify the benchmarks
