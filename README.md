@@ -89,3 +89,10 @@ asdf
   - build baselines
   - gather the list of suggested improvments
     - assess the list of improvments
+  - create our own list of potentially better models / architectures
+  - create our own list of improvments on the existing models
+    - hyperparam tuning methods
+    - data preprocessing
+    - data supplementing
+    - data augmenting
+    - loss functions
