@@ -65,8 +65,10 @@ Our goal: **beat the baseline.**
 
 
 
-# discussion
 
 ##  Credits
 Organized by UC Davis Neuroprosthetics Lab.  
 Competition link: [Kaggle Brain-to-Text '25](https://www.kaggle.com/competitions/brain-to-text-25)
+
+# discussion
+asdf
