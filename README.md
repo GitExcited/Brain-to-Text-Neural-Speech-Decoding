@@ -79,6 +79,7 @@ asdf
   - find good ones
   - find general methodology used in papers
   - find baselines used in papers
+  - make a list of potential models / methods to attempt
 
 - technical process
   - run existing benchmarks
