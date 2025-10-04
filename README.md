@@ -74,7 +74,12 @@ Competition link: [Kaggle Brain-to-Text '25](https://www.kaggle.com/competitions
 asdf
 - research process
   - gather papers
+  - learn domain
+  - learn existing methods attempted
   - find good ones
+  - find general methodology used in papers
+  - find baselines used in papers
+
 - technical process
   - run existing benchmarks
     - Stanford-NPTL causal RNN Ensemble + 5gram
