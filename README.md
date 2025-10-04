@@ -86,3 +86,5 @@ asdf
     - Stanford-NPTL causal RNN TTA-Ensemble + 5gram
     - UCD-NPL causal RNN + 5gram
   - build baselines
+  - gather the list of suggested improvments
+    - assess the list of improvments
