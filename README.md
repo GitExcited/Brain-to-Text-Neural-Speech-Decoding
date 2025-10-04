@@ -98,3 +98,10 @@ asdf
     - loss functions
 - clone the benchmarks into our repo for accees and version control
   - track and modify the benchmarks
+ 
+- familiarize with kaggle and add entries to the leaderboard
+  - submit titanic dataset
+  - submit benchmark results
+  - train and submit benchmark models
+  - gather links to papers onto this repository
+    - (optionnal) use zotero
