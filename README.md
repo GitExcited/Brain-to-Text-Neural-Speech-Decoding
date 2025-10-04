@@ -72,3 +72,11 @@ Competition link: [Kaggle Brain-to-Text '25](https://www.kaggle.com/competitions
 
 # discussion
 asdf
+- research process
+  - gather papers
+  - find good ones
+- technical process
+  - run existing benchmarks
+    - Stanford-NPTL causal RNN Ensemble + 5gram
+    - Stanford-NPTL causal RNN TTA-Ensemble + 5gram
+    - UCD-NPL causal RNN + 5gram
