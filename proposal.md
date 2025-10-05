@@ -58,31 +58,6 @@ This paper explores how a Transformer-based architectures can outperform RNNs fo
 [https://pmc.ncbi.nlm.nih.gov/articles/PMC11030484/](https://pmc.ncbi.nlm.nih.gov/articles/PMC11030484/)<br />
 This paper is authored by the same team hosting the Kaggle competition. It largely forms the basis of the competition's baseline model architecture.
 
-the authors of the challenge made a paper we should check
-they also made a previous paper for the previous challenge
-we can check what other stuff they have written
-we can check what papers their papers refer to and add them to our reading list
-
-
-- read the abstracts
-- keywords:
-  - brain signals
-
-- research process
-  - gather papers
-  - learn domain
-  - learn existing methods attempted
-  - find good ones
-  - find general methodology used in papers
-  - find baselines used in papers
-  - benchmark datasets
-  - shared datasets
-  - share repo's
-  - make a list of potential models / methods to attempt
-    - maybe simpler or less explored
-
-
-
 ## Possible Methodology: 
 ```
 highlight the possible method or algorithm you are proposing.
