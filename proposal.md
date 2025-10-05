@@ -155,7 +155,7 @@ TODO:
 - make a list of project tasks, phases, milestones, features
 
 
-### Bibliography: 
+### Bibliography (ELION) : 
 ```
 use an additional page to extend your reference list cited in your
 proposal. The citations may include, but not limited to, published papers and domain links.
