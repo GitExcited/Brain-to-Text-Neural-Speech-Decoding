@@ -8,17 +8,6 @@ proposal checklist:
  - Formatting
 
 
-# proposal:instructions
-
-## Main Objective
-```
-The project of the course gives you an opportunity to implement what you have learned in
-the course in a project of interest. There will be two possible tracks for groups that want to
-submit their own project proposal:
-```
-
-## Kaggle Challenges. 
-
 ```
 In Kaggle challenges https://www.kaggle.com/competitions, you
 are expected to choose an open competition, which requires you to study the problem
@@ -27,18 +16,6 @@ text or speech data to apply deep learning models there. You should also check t
 size because the project should not require a lot of computational power i.e. GPU. Note
 that in this track, you will be judged on your ability to apply a methodology and a sound
 solution that works well in a challenging problem. 
-```
-
-```
-Team Formation [Deadline: Sunday 11:59PM, September 21st, 2025]
-Students are required to form a team of Four (4) members for the course project. Please
-submit your team’s detail by email to the lecturer and the Lead TA following the email
-inquiries guideline. A Q&A discussion forum will be created for the course on Moodle and
-you can use the platform to open a discussion on team formation related topic. Students
-who cannot find a team will be randomly shuƯled in incomplete teams. The team, once
-formed, will stay the same until the end.
-Proposal Submission [Deadline: Sunday 11:59PM, October 5th, 2025] (Counts for 10%
-of the course project grade) 
 ```
 
 
