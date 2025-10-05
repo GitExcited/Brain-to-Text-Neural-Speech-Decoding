@@ -60,6 +60,62 @@ planning to improve or modify such implementations? You may not have the exact a
 here but try to give an answer that you will follow as much as possible.
 ```
 
+asdf
+- research process
+  - gather papers
+  - learn domain
+  - learn existing methods attempted
+  - find good ones
+  - find general methodology used in papers
+  - find baselines used in papers
+  - benchmark datasets
+  - shared datasets
+  - share repo's
+  - make a list of potential models / methods to attempt
+    - maybe simpler or less explored
+
+- technical process
+  - run existing benchmarks: load without training and infer
+    - Stanford-NPTL causal RNN Ensemble + 5gram
+    - Stanford-NPTL causal RNN TTA-Ensemble + 5gram
+    - UCD-NPL causal RNN + 5gram
+    - todo: write a submission script / module (prolly does not exist)
+
+  - build (-CHOOSE- / FIND) baselines
+    - naive / simple models / fast to train
+     - random
+     - mean
+     - median
+     - linear regression
+     - logistic regression
+     - knn
+     - svm
+  - gather the list of suggested improvments
+    - assess the list of improvments
+    - find from the kaggle page
+      -  
+  - create our own list of potentially better models / architectures
+  - create our own list of improvments on the existing models
+    - hyperparam tuning methods
+    - data preprocessing
+    - data supplementing
+    - data augmenting
+    - loss functions
+- clone the benchmarks into our repo for accees and version control
+  - track and modify the benchmarks
+ 
+- familiarize with kaggle and add entries to the leaderboard
+  - submit titanic dataset
+  - submit benchmark results
+  - train and submit benchmark models
+  - gather links to papers onto this repository
+    - (optionnal) use zotero
+
+
+todo:
+- clone research repo
+- 
+
 ### Metric Evaluation: 
 ```
 Discuss how you will evaluate your results both in terms of
