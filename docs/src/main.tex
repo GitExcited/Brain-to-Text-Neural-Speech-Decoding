@@ -11,40 +11,95 @@
 \usepackage[numbers]{natbib}   % numeric citations
 \geometry{margin=1in}
 
-\title{Example \LaTeX{} Document}
-\author{Your Name}
+\title{Course Project Proposal: EEG-to-Speech Kaggle Challenge}
+\author{Team Members: Ion Turcan, Kirill, David, Elion}
 \date{\today}
 
 \begin{document}
 
 \maketitle
 
-\begin{abstract}
-This is a short example document to show how to use \LaTeX{}.
-\end{abstract}
+\section{Problem Statement and Application (Ion Turcan 40154098)}
+In this project we are going to investigate the topic of linguistic neural decoding.
+The problem is interesting and important because many people that had a brain stroke or suffer from ALS could lose the capability of talking.
+To restore speech, the patient would need an interface that would capture the brain activity related to speech.
+Next, this brain activity data can be decoded into the message the person wanted to say through an RNN model.
+Our main goal is to try to improve existing models.
+To achieve that we would need to be able to run either an existing benchmark or a baseline model.
+That would be a challenge since we would need to make sure that the whole pipeline is working.
+After accomplishing this task, we will try to improve this model through different improvement strategies.
+These strategies might include data augmentation, model architecture change, using different loss function and using different tokenization strategies.
+The results are going to be reported and discussed.
+Trying to improve the model is really challenging because that involves deeper understanding of the whole pipeline and it is very likely that we will need to consult additional materials to have an idea on how these potential improvements could be implemented.
 
-\section{Introduction}
-Hello, world! This is a sample \LaTeX{} file.  
-You can write equations like
-\[
-E = mc^2
-\]
-or inline math like $a^2 + b^2 = c^2$.
+\section{Reading Material (Kirill)}
+\begin{itemize}
+    \item \citet{lee_enhancing_2025}: The model in this paper is very similar to the Kaggle baseline model. It uses a speech module which is not applicable for our project but serves as a good overview of the current SOA for EEG/speech decoding. It contains:
+    \begin{itemize}
+        \item EEG Module: trains the model to understand EEG structure.
+        \item EEG Encoder: compresses raw EEG signals into ``latent representations''.
+        \item EEG Decoder: reconstructs EEG latent representation into raw EEG, acts as a self-supervised learning constraint.
+        \item Phoneme Predictor: outputs phoneme probabilities by trying to predict phoneme sequences (/p/, /a/, /t/) from compressed EEG signals.
+    \end{itemize}
+    \item \citet{papastratis_speech_2021}: Reviews/explains various DL architectures for speech recognition. Explains and justifies the use of RNNs and CTC-based models (which is what the Kaggle baseline uses), and compares the performance of different models while providing suggestions.
+    \item \citet{lee_eeg-transformer_2021}: Explores how Transformer-based architectures can outperform RNNs for EEG sequence decoding, which could be explored as an alternative to GRUs for modeling temporal relationships in precomputed EEG features.
+    \item \citet{card_accurate_2024}: Authored by the same team hosting the Kaggle competition. It largely forms the basis of the competition's baseline model architecture.
+\end{itemize}
 
-As shown by \citet{willett_high-performance_2023}, neural speech BCIs can achieve low word error rates.
+\section{Possible Methodology}
+\begin{itemize}
+    \item Run existing benchmarks: load without training and infer
+    \begin{itemize}
+        \item Stanford-NPTL causal RNN Ensemble + 5gram
+        \item Stanford-NPTL causal RNN TTA-Ensemble + 5gram
+        \item UCD-NPL causal RNN + 5gram
+        \item Write a submission script/module (if missing).
+    \end{itemize}
+    \item Build simple baselines:
+    \begin{itemize}
+        \item random, mean, median, linear regression, logistic regression, kNN, SVM
+    \end{itemize}
+    \item Gather suggested improvements:
+    \begin{itemize}
+        \item Data augmentation, preprocessing, supplementing
+        \item Model architecture changes (GRUs, Transformers, etc.)
+        \item Hyperparameter tuning methods
+        \item Loss functions
+    \end{itemize}
+    \item Clone and track benchmarks in repository for version control, swap out parts (e.g., optimizer).
+    \item Familiarize with Kaggle leaderboard submissions:
+    \begin{itemize}
+        \item Submit dummy csv (done).
+        \item Submit benchmark results (loaded, not trained).
+        \item Train and submit benchmark models.
+    \end{itemize}
+\end{itemize}
 
-\section{Figures}
-Here’s an example of including a figure (commented out so it won’t error):
+\section{Metric Evaluation (David)}
+We expect a .csv file of our model predictions for the dataset of 1,450 test sentences for this challenge. Our output is therefore sentence predictions based on the input of neural recordings. We will use the performance metric \emph{word error rate} (WER), defined as the edit distance between the decoded sentence and the actual sentence, computed over words. This counts the number of edits such as substitutions, insertions, and deletions necessary to make the predicted sentence match the true sentence. We will also use loss as an ongoing metric during training to determine the confidence of our model in its predictions and to evaluate how loss decreases as the training progresses.
 
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=0.6\textwidth]{figures/example.png}
-%     \caption{An example figure.}
-% \end{figure}
+\section{Gantt Chart (David)}
+\begin{table}[h!]
+\centering
+\scriptsize
+\begin{tabular}{|p{2.8cm}|p{4.5cm}|p{2.5cm}|*{8}{c|}p{4.5cm}|}
+\hline
+\textbf{Phase / Task} & \textbf{Description} & \textbf{Responsible} & W1 & W2 & W3 & W4 & W5 & W6 & W7 & W8 & \textbf{Deliverable / Milestone} \\
+\hline
+Project Setup & Choose competition, define scope, assign roles & All & \checkmark &  &  &  &  &  &  &  & Selected Kaggle competition \\
+Proposal Draft & Write and format proposal & All (Lead: Ion) & \checkmark & \checkmark &  &  &  &  &  &  & Submission-ready proposal \\
+Literature Review & Collect and summarize key papers & Kirill &  & \checkmark & \checkmark & \checkmark &  &  &  &  & Curated reading list \\
+Environment Setup & Configure Kaggle/Colab, clone baselines & David &  & \checkmark & \checkmark &  &  &  &  &  & Reproducible environment \\
+Benchmark Exploration & Run/analyze provided benchmarks & All &  &  & \checkmark & \checkmark &  &  &  &  & Initial benchmark submission \\
+Baseline Validation & Train and validate baseline models & Elion \& Ion &  &  &  & \checkmark & \checkmark &  &  &  & Leaderboard score \\
+Model Improvement & Explore architecture changes, tuning & All &  &  &  &  & \checkmark & \checkmark & \checkmark &  & Improved model \\
+Evaluation & Analyze WER trends, outputs & Kirill \& David &  &  &  &  &  & \checkmark & \checkmark &  & Evaluation report \\
+Final Report & Compile final paper/presentation & Elion \& Ion &  &  &  &  &  &  & \checkmark & \checkmark & Final submission \\
+\hline
+\end{tabular}
+\end{table}
 
-\section{Citations}
-You can add citations later if you include a \texttt{.bib} file.
-
+\section{Bibliography (Elion)}
 \bibliographystyle{plainnat}
 \bibliography{src/references}
 
