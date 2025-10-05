@@ -21,7 +21,7 @@ solution that works well in a challenging problem.
 
 You should write a one-page proposal for the course project to cover the following topics:
 
-### Problem Statement and Application: (Ion Turcan 40154098)
+## Problem Statement and Application: (Ion Turcan 40154098)
 
 ```
 provide a background about the topic to be
@@ -36,7 +36,7 @@ todo: re-structure into parts
 
 In this project we are going to investigate the topic of linguistic neural decoding. The problem is interesting and important because many people that had a brain stroke or suffer from ALS could lose the capability of talking. To restore speech, the patient would need an interface that would capture the brain activity related to speech. Our main goal is to create a model that would be able to decode this brain activity data. For that we would use deep learning architecture such as RNN. For this part we expect to end up with a model that would have an accuracy of 70 % at least. This is a challenge because that involves setting up a working pipeline. After accomplishing this task, our secondary goal would be to try to improve this base model through different improvement strategies. These strategies might include data augmentation, model architecture change, using different loss function and using different tokenization strategies. The results are going to be reported and discussed. This secondary task is really challenging because that involves deeper understanding of the whole pipeline and it is very likely that we will need to consult additional materials to have an idea on how these potential improvements could be implemented.
     
-### What reading material (Kirill)
+## What reading material (Kirill)
 
 ```
 (e.g. papers, scientific reports, etc) will you examine to provide
@@ -68,7 +68,7 @@ we can check what papers their papers refer to and add them to our reading list
 
 
 
-### Possible Methodology: 
+## Possible Methodology: 
 ```
 highlight the possible method or algorithm you are proposing.
 Are there any existing implementations to be used and how will you use them? How are you
@@ -126,7 +126,7 @@ todo:
 - set up codespaces / colab / kaggle env
 
 
-### Metric Evaluation ( david ): 
+## Metric Evaluation ( david ): 
 ```
 Discuss how you will evaluate your results both in terms of
 qualitative and quantitative analysis. Qualitatively, what kind of results do you expect (e.g.
@@ -142,7 +142,7 @@ loss metrics
 
 
 
-### Gantt Chart (David) (to be discussed, add your suggestions and we conclude tomorow): 
+## Gantt Chart (David) (to be discussed, add your suggestions and we conclude tomorow): 
 
 ```
 use an additional page (supplemental material) to illustrate a Gantt
@@ -155,7 +155,7 @@ TODO:
 - make a list of project tasks, phases, milestones, features
 
 
-### Bibliography (ELION) : 
+## Bibliography (ELION) : 
 ```
 use an additional page to extend your reference list cited in your
 proposal. The citations may include, but not limited to, published papers and domain links.
@@ -168,7 +168,7 @@ todo:
 - compile list of papers into bibtex / latex
 
 
-### Formatting (LATEX / SPHINX) [ELION] :
+## Formatting (LATEX / SPHINX) [ELION] :
 ```
 For the report format, please consult “Reports Formatting” Section in this guideline. Our
 team (TAs and lecturer) will review your proposal and, if it is acceptable, you may proceed
