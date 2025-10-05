@@ -38,10 +38,25 @@ todo: re-structure into parts
     
 ## What reading material (Kirill)
 
-```
-(e.g. papers, scientific reports, etc) will you examine to provide
-context and background?
-```
+Draft:<br />
+[https://ojs.aaai.org/index.php/AAAI/article/view/5146](https://arxiv.org/abs/2501.04844?)
+The model in this paper is very similar to the kaggle's baseline model. It uses a speech module which is not applicable for our project though.
+This paper serves as a good overview of the current SOA for EEG/ speech decoding.
+- EEG Module: (This trains the model to understand EEG structure)
+  - EEG Encoder: Compresses raw EEG signals into "latent representations"
+  - EEG Decoder: Reconstructs EEG latent representation into raw EEG, acts as a self-supervised learning constraint.
+- Phoneme Predictor: Outputs phoneme probabilites by trying to predict phoneme sequences (/p/, /a/, /t/) from compressed EEG signals.
+{training phonemes: EEG (signals) <-> Encoder (latent)} -> Phoneme Predictor -> Phoneme probabilities.
+
+[https://theaisummer.com/speech-recognition/](https://theaisummer.com/speech-recognition/)
+Not really a research paper, but this article reviews/explains various DL architectures for speech recognition. 
+It explains and justifies the use of RNN's and CTC-based models (which is what the kaggle baseline uses), and compares the performance of different models while providing suggestions while citing other papers.<br />
+
+[https://arxiv.org/abs/2112.09239](https://arxiv.org/abs/2112.09239)<br />
+This paper explores how a Transformer-based architectures can outperform RNNs for EEG sequence decoding which could be explored as an alternative to GRUs for modeling relationships between data points across time in precomputed EEG features, like those in the Kaggle dataset.
+
+[https://pmc.ncbi.nlm.nih.gov/articles/PMC11030484/](https://pmc.ncbi.nlm.nih.gov/articles/PMC11030484/)<br />
+This paper is authored by the same team hosting the Kaggle competition. It largely forms the basis of the competition's baseline model architecture.
 
 the authors of the challenge made a paper we should check
 they also made a previous paper for the previous challenge
@@ -135,12 +150,7 @@ compare your results with (e.g. what performance metrics or statistical tests)? 
 metric evaluations will be used to assess and evaluate the pipeline and your expectations
 regarding the kind of results/performance to be achieved.
 ```
-loss metrics
-- contest evaluation metric
-  - https://en.wikipedia.org/wiki/Word_error_rate
-- training loss used for backpropagation and gradient descent
-
-
+We expect a .csv file of our model predictions for the dataset  of 1,450 test sentences for this challenge. Our output is therefore sentence predictions based on the input of neural recordings. We will use the performance metric `word error rate` which is defined in the challenge as the "Edit distance between the decoded sentence and the actual sentence, computed over words". This basically means the number of edits such as substitutions, insterions and deletions necessary to make the predicted sentence match the true sentence. We will also be using loss as an ongoing metric during training to determine the confidence of our model in its predictions and to evaluate how loss decreases as the training batches increases.
 
 ## Gantt Chart (David) (to be discussed, add your suggestions and we conclude tomorow): 
 
@@ -149,10 +159,19 @@ use an additional page (supplemental material) to illustrate a Gantt
 chart of the project development to list (a) schedules and (b) items of milestones and
 deliverables. Note that you cannot use this page to extend your proposal description.
 ```
+## 🗓️ Gantt Chart — EEG-to-Speech Kaggle Project
 
-TODO:
-
-- make a list of project tasks, phases, milestones, features
+| **Phase / Task** | **Description** | **Responsible** | **W1** | **W2** | **W3** | **W4** | **W5** | **W6** | **W7** | **W8** | **Deliverable / Milestone** |
+|------------------|-----------------|-----------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|------------------------------|
+| Project Setup | Choose competition, define scope, assign roles | All | ✅ |  |  |  |  |  |  |  | Selected Kaggle competition |
+| Proposal Draft | Write and format proposal (Problem, Reading, Methodology, Metrics, Bibliography) | All (Lead: Ion) | ✅ | ✅ |  |  |  |  |  |  | Submission-ready proposal |
+| Literature Review | Collect and summarize key papers (arXiv, PMC, Kaggle baselines) | Kirill |  | ✅ | ✅ | ✅ |  |  |  |  | Curated reading list |
+| Environment Setup | Configure Kaggle notebooks, Colab / Codespaces; clone baselines | David |  | ✅ | ✅ |  |  |  |  |  | Reproducible environment setup |
+| Benchmark Exploration | Run and analyze provided Kaggle benchmark (baseline RNN models) | All |  |  | ✅ | ✅ |  |  |  |  | Initial benchmark submission |
+| Baseline Validation | Train and validate baseline models; verify WER metric | Elion & Ion |  |  |  | ✅ | ✅ |  |  |  | Working baseline & leaderboard score |
+| Model Improvement | Explore architecture changes (Transformers, GRU variants), hyperparameter tuning | All |  |  |  |  | ✅ | ✅ | ✅ |  | Improved model & documentation |
+| Evaluation & Visualization | Analyze training logs, WER trends, qualitative outputs | Kirill & David |  |  |  |  |  | ✅ | ✅ |  | Evaluation report & figures |
+| Final Report & Presentation | Compile final paper (LaTeX/Sphinx) & presentation slides | Elion & Ion |  |  |  |  |  |  | ✅ | ✅ | Final report & submission |
 
 
 ## Bibliography (ELION) : 
