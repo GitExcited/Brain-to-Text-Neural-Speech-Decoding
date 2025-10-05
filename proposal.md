@@ -1,3 +1,13 @@
+proposal checklist:
+ - Problem Statement and Application
+ - What reading material
+ - Possible Methodology
+ - Metric Evaluation
+ - Gantt Chart
+ - Bibliography
+ - Formatting
+
+
 # proposal:instructions
 
 ## Main Objective
@@ -54,16 +64,10 @@ In this project we are going to investigate the topic of linguistic neural decod
 (e.g. papers, scientific reports, etc) will you examine to provide
 context and background?
 ```
+- read the abstracts
+- keywords:
+  - brain signals
 
-### Possible Methodology: 
-```
-highlight the possible method or algorithm you are proposing.
-Are there any existing implementations to be used and how will you use them? How are you
-planning to improve or modify such implementations? You may not have the exact answer
-here but try to give an answer that you will follow as much as possible.
-```
-
-asdf
 - research process
   - gather papers
   - learn domain
@@ -76,6 +80,18 @@ asdf
   - share repo's
   - make a list of potential models / methods to attempt
     - maybe simpler or less explored
+
+
+
+### Possible Methodology: 
+```
+highlight the possible method or algorithm you are proposing.
+Are there any existing implementations to be used and how will you use them? How are you
+planning to improve or modify such implementations? You may not have the exact answer
+here but try to give an answer that you will follow as much as possible.
+```
+
+asdf
 
 - technical process
   - run existing benchmarks: load without training and infer
