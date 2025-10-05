@@ -38,10 +38,20 @@ In this project we are going to investigate the topic of linguistic neural decod
     
 ## What reading material (Kirill)
 
-```
-(e.g. papers, scientific reports, etc) will you examine to provide
-context and background?
-```
+Draft:
+[https://ojs.aaai.org/index.php/AAAI/article/view/5146](https://arxiv.org/abs/2501.04844?)
+The model in this paper is very similar to the kaggle's baseline model. It uses a speech module which is not applicable for our project though.
+This paper serves as a good overview of the current SOA for EEG/ speech decoding.
+EEG Module: (This trains the model to understand EEG structure)
+  -EEG Encoder: Compresses raw EEG signals into "latent representations"
+  -EEG Decoder: Reconstructs EEG latent representation into raw EEG, acts as a self-supervised learning constraint.
+Phoneme Predictor: Outputs phoneme probabilites by trying to predict phoneme sequences (/p/, /a/, /t/) from compressed EEG signals.
+{training phonemes: EEG (signals) <-> Encoder (latent)} -> Phoneme Predictor -> Phoneme probabilities.
+
+[https://theaisummer.com/speech-recognition/](https://theaisummer.com/speech-recognition/)
+Not really a research paper, but this article reviews/explains various DL architectures for speech recognition. 
+It explains and justifies the use of RNN's and CTC-based models (which is what the kaggle baseline uses), and compares the performance of different models while providing suggestions while citing other papers.
+
 
 the authors of the challenge made a paper we should check
 they also made a previous paper for the previous challenge
