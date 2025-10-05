@@ -1,0 +1,52 @@
+\documentclass[12pt,a4paper]{article}
+
+% Common packages
+\usepackage[utf8]{inputenc}      % UTF-8 encoding
+\usepackage[T1]{fontenc}         % Better font encoding
+\usepackage{lmodern}             % Latin Modern font
+\usepackage{amsmath, amssymb}    % Math symbols
+\usepackage{graphicx}            % Include graphics
+\usepackage{hyperref}            % Clickable links
+\usepackage{geometry}            % Page geometry
+\usepackage{siunitx}             % Units and numbers
+\usepackage{natbib}              % Bibliography
+\geometry{margin=1in}
+
+\title{Sample LaTeX Document}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This is a short example document to show how to use \LaTeX{}.
+\end{abstract}
+
+\section{Introduction}
+Hello, world! This is a sample \LaTeX{} file.  
+You can write equations like
+\[
+E = mc^2
+\]
+or inline math like $a^2 + b^2 = c^2$.
+
+\section{Figures}
+Here’s an example of including a figure (replace with your own image):
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/example.png}
+    \caption{An example figure.}
+    \label{fig:example}
+\end{figure}
+
+\section{Citations}
+You can cite references, e.g. \citet{einstein1905}.  
+See your `.bib` file for details.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
