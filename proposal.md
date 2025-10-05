@@ -55,6 +55,8 @@ It explains and justifies the use of RNN's and CTC-based models (which is what t
 [https://arxiv.org/abs/2112.09239](https://arxiv.org/abs/2112.09239)<br />
 This paper explores how a Transformer-based architectures can outperform RNNs for EEG sequence decoding which could be explored as an alternative to GRUs for modeling relationships between data points across time in precomputed EEG features, like those in the Kaggle dataset.
 
+[https://pmc.ncbi.nlm.nih.gov/articles/PMC11030484/](https://pmc.ncbi.nlm.nih.gov/articles/PMC11030484/)<br />
+This paper is authored by the same team hosting the Kaggle competition. It largely forms the basis of the competition's baseline model architecture.
 
 the authors of the challenge made a paper we should check
 they also made a previous paper for the previous challenge
