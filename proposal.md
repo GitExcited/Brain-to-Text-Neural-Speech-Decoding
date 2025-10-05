@@ -38,7 +38,7 @@ todo: re-structure into parts
     
 ## What reading material (Kirill)
 
-[https://ojs.aaai.org/index.php/AAAI/article/view/5146](https://arxiv.org/abs/2501.04844?)
+[https://ojs.aaai.org/index.php/AAAI/article/view/5146](https://arxiv.org/abs/2501.04844?)<br />
 The model in this paper is very similar to the kaggle's baseline model. It uses a speech module which is not applicable for our project but serves as a good overview of the current SOA for EEG/speech decoding.<br />
 - EEG Module: (This trains the model to understand EEG structure)
   - EEG Encoder: Compresses raw EEG signals into "latent representations"
@@ -46,7 +46,7 @@ The model in this paper is very similar to the kaggle's baseline model. It uses 
 - Phoneme Predictor: Outputs phoneme probabilites by trying to predict phoneme sequences (/p/, /a/, /t/) from compressed EEG signals.
 {training phonemes: EEG (signals) <-> Encoder (latent)} -> Phoneme Predictor -> Phoneme probabilities.
 
-[https://theaisummer.com/speech-recognition/](https://theaisummer.com/speech-recognition/)
+[https://theaisummer.com/speech-recognition/](https://theaisummer.com/speech-recognition/)<br />
 This paper reviews/explains various DL architectures for speech recognition. 
 It explains and justifies the use of RNN's and CTC-based models (which is what the kaggle baseline uses), and compares the performance of different models while providing suggestions while citing other papers.<br />
 
