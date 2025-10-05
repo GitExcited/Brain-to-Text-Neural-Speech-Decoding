@@ -1,15 +1,12 @@
 \documentclass[12pt,a4paper]{article}
 
 % Common packages
-\usepackage[utf8]{inputenc}      % UTF-8 encoding
-\usepackage[T1]{fontenc}         % Better font encoding
-\usepackage{lmodern}             % Latin Modern font
-\usepackage{amsmath, amssymb}    % Math symbols
-\usepackage{graphicx}            % Include graphics
-\usepackage{hyperref}            % Clickable links
-\usepackage{geometry}            % Page geometry
-\usepackage{siunitx}             % Units and numbers
-\usepackage{natbib}              % Bibliography
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
 \geometry{margin=1in}
 
 \title{Sample LaTeX Document}
@@ -33,20 +30,18 @@ E = mc^2
 or inline math like $a^2 + b^2 = c^2$.
 
 \section{Figures}
-Here’s an example of including a figure (replace with your own image):
+Here’s an example of including a figure (commented out so it won’t error):
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.6\textwidth]{figures/example.png}
-    \caption{An example figure.}
-    \label{fig:example}
-\end{figure}
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.6\textwidth]{figures/example.png}
+%     \caption{An example figure.}
+% \end{figure}
 
 \section{Citations}
-You can cite references, e.g. \citet{einstein1905}.  
-See your `.bib` file for details.
+You can add citations later if you include a `.bib` file.
 
-\bibliographystyle{plainnat}
-\bibliography{references}
+% \bibliographystyle{plainnat}
+% \bibliography{references}
 
 \end{document}
