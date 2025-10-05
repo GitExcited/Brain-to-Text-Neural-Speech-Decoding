@@ -168,7 +168,7 @@ todo:
 - compile list of papers into bibtex / latex
 
 
-### Formatting:
+### Formatting (LATEX / SPHINX) [ELION] :
 ```
 For the report format, please consult “Reports Formatting” Section in this guideline. Our
 team (TAs and lecturer) will review your proposal and, if it is acceptable, you may proceed
