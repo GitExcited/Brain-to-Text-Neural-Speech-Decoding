@@ -50,7 +50,10 @@ This paper serves as a good overview of the current SOA for EEG/ speech decoding
 
 [https://theaisummer.com/speech-recognition/](https://theaisummer.com/speech-recognition/)
 Not really a research paper, but this article reviews/explains various DL architectures for speech recognition. 
-It explains and justifies the use of RNN's and CTC-based models (which is what the kaggle baseline uses), and compares the performance of different models while providing suggestions while citing other papers.
+It explains and justifies the use of RNN's and CTC-based models (which is what the kaggle baseline uses), and compares the performance of different models while providing suggestions while citing other papers.<br />
+
+[https://arxiv.org/abs/2112.09239](https://arxiv.org/abs/2112.09239)<br />
+This paper explores how a Transformer-based architectures can outperform RNNs for EEG sequence decoding which could be explored as an alternative to GRUs for modeling temporal dependencies in precomputed EEG features, like those in the Kaggle dataset.
 
 
 the authors of the challenge made a paper we should check
