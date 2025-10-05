@@ -105,3 +105,8 @@ asdf
   - train and submit benchmark models
   - gather links to papers onto this repository
     - (optionnal) use zotero
+
+
+todo:
+- clone research repo
+- 
