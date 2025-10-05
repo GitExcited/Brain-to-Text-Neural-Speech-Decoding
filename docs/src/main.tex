@@ -7,9 +7,10 @@
 \usepackage{amsmath, amssymb}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage[numbers]{natbib}
 \geometry{margin=1in}
 
-\title{Sample LaTeX Document}
+\title{example LaTeX Document}
 \author{Your Name}
 \date{\today}
 
@@ -29,6 +30,8 @@ E = mc^2
 \]
 or inline math like $a^2 + b^2 = c^2$.
 
+As shown by \citet{einstein1905}, energy and mass are related.
+
 \section{Figures}
 Here’s an example of including a figure (commented out so it won’t error):
 
@@ -41,7 +44,7 @@ Here’s an example of including a figure (commented out so it won’t error):
 \section{Citations}
 You can add citations later if you include a `.bib` file.
 
-% \bibliographystyle{plainnat}
-% \bibliography{references}
+\bibliographystyle{plainnat}
+\bibliography{src/references}
 
 \end{document}

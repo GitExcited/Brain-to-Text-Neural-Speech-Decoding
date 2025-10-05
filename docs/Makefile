@@ -1,22 +1,30 @@
-# Makefile for LaTeX without latexmk
+# Makefile for LaTeX with separate output dirs
 MAIN=src/main
-PDF=$(MAIN:.tex=.pdf)
+OUTDIR=out
+PDFDIR=pdf
 
 TEX=pdflatex
 BIB=bibtex
-TEXFLAGS=-interaction=nonstopmode -halt-on-error -file-line-error
+TEXFLAGS=-interaction=nonstopmode -halt-on-error -file-line-error -output-directory=$(OUTDIR)
 
-all: $(PDF)
+all: $(PDFDIR)/main.pdf
 
-# note: depend on references.bib, not main.bib
-$(PDF): $(MAIN).tex src/references.bib
+$(OUTDIR):
+	mkdir -p $(OUTDIR)
+
+$(PDFDIR):
+	mkdir -p $(PDFDIR)
+
+# Build rule
+$(PDFDIR)/main.pdf: $(MAIN).tex src/references.bib | $(OUTDIR) $(PDFDIR)
 	$(TEX) $(TEXFLAGS) $(MAIN).tex
-	$(BIB) $(MAIN)
+	$(BIB) $(OUTDIR)/main
 	$(TEX) $(TEXFLAGS) $(MAIN).tex
 	$(TEX) $(TEXFLAGS) $(MAIN).tex
+	cp $(OUTDIR)/main.pdf $(PDFDIR)/
 
 clean:
-	rm -f src/*.aux src/*.log src/*.bbl src/*.blg src/*.out src/*.toc
+	rm -rf $(OUTDIR)/*
 
 distclean: clean
-	rm -f $(PDF)
+	rm -rf $(PDFDIR)/*
