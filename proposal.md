@@ -8,6 +8,7 @@ submit their own project proposal:
 ```
 
 ## Kaggle Challenges. 
+
 ```
 In Kaggle challenges https://www.kaggle.com/competitions, you
 are expected to choose an open competition, which requires you to study the problem
@@ -34,13 +35,16 @@ of the course project grade)
 You should write a one-page proposal for the course project to cover the following topics:
 
 ### Problem Statement and Application: (Ion Turcan 40154098)
+
 ```
 provide a background about the topic to be
 investigated and specify why the problem is interesting and important? What are the
 associated challenges of the problem application? What are your expectations/goals
 throughout developing the application of interest?
 ```
-	In this project we are going to investigate the topic of linguistic neural decoding. The problem is interesting and important because many people that had a brain stroke or suffer from ALS could lose the capability of talking. To restore speech, the patient would need an interface that would capture the brain activity related to speech. Our main goal is to create a model that would be able to decode this brain activity data. For that we would use deep learning architecture such as RNN. For this part we expect to end up with a model that would have an accuracy of 70 % at least. This is a challenge because that involves setting up a working pipeline. After accomplishing this task, our secondary goal would be to try to improve this base model through different improvement strategies. These strategies might include data augmentation, model architecture change, using different loss function and using different tokenization strategies. The results are going to be reported and discussed. This secondary task is really challenging because that involves deeper understanding of the whole pipeline and it is very likely that we will need to consult additional materials to have an idea on how these potential improvements could be implemented.
+
+
+In this project we are going to investigate the topic of linguistic neural decoding. The problem is interesting and important because many people that had a brain stroke or suffer from ALS could lose the capability of talking. To restore speech, the patient would need an interface that would capture the brain activity related to speech. Our main goal is to create a model that would be able to decode this brain activity data. For that we would use deep learning architecture such as RNN. For this part we expect to end up with a model that would have an accuracy of 70 % at least. This is a challenge because that involves setting up a working pipeline. After accomplishing this task, our secondary goal would be to try to improve this base model through different improvement strategies. These strategies might include data augmentation, model architecture change, using different loss function and using different tokenization strategies. The results are going to be reported and discussed. This secondary task is really challenging because that involves deeper understanding of the whole pipeline and it is very likely that we will need to consult additional materials to have an idea on how these potential improvements could be implemented.
     
 ### What reading material
 ```
