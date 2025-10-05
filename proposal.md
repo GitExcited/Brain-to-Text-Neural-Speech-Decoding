@@ -93,8 +93,9 @@ asdf
   - gather the list of suggested improvments
     - assess the list of improvments
     - find from the kaggle page
-      -  
+      -  authors have suggested stuff
   - create our own list of potentially better models / architectures
+    - from research papers 
   - create our own list of improvments on the existing models
     - hyperparam tuning methods
     - data preprocessing
@@ -103,10 +104,14 @@ asdf
     - loss functions
 - clone the benchmarks into our repo for accees and version control
   - track and modify the benchmarks
- 
+  - swap out parts
+    - optimiser
+    - ...
+
 - familiarize with kaggle and add entries to the leaderboard
-  - submit titanic dataset
-  - submit benchmark results
+  - -submit titanic dataset-
+  - submit dummy csv (done)
+  - submit benchmark results (loaded, not trained)
   - train and submit benchmark models
   - gather links to papers onto this repository
     - (optionnal) use zotero
@@ -114,9 +119,10 @@ asdf
 
 todo:
 - clone research repo
-- 
+- set up codespaces / colab / kaggle env
 
-### Metric Evaluation: 
+
+### Metric Evaluation ( david ): 
 ```
 Discuss how you will evaluate your results both in terms of
 qualitative and quantitative analysis. Qualitatively, what kind of results do you expect (e.g.
@@ -125,6 +131,12 @@ compare your results with (e.g. what performance metrics or statistical tests)? 
 metric evaluations will be used to assess and evaluate the pipeline and your expectations
 regarding the kind of results/performance to be achieved.
 ```
+loss metrics
+- contest evaluation metric
+  - https://en.wikipedia.org/wiki/Word_error_rate
+- training loss used for backpropagation and gradient descent
+
+
 
 ### Gantt Chart: 
 ```
@@ -132,6 +144,12 @@ use an additional page (supplemental material) to illustrate a Gantt
 chart of the project development to list (a) schedules and (b) items of milestones and
 deliverables. Note that you cannot use this page to extend your proposal description.
 ```
+
+TODO:
+
+- make a list of project tasks, phases, milestones, features
+
+
 ### Bibliography: 
 ```
 use an additional page to extend your reference list cited in your
@@ -141,6 +159,9 @@ constitutes to a plagiarism.
 You will be given the opportunity to submit your proposal for revision by the professor/LeadTA, before the final graded submission. Only the admin (one person) of your team needs to
 upload the proposal in PDF file in Moodle.
 ```
+todo: 
+- compile list of papers into bibtex / latex
+
 
 ### Formatting:
 ```
