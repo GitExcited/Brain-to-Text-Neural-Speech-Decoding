@@ -165,7 +165,7 @@ loss metrics
 
 
 
-### Gantt Chart (to be discussed, add your suggestions and we conclude tomorow): 
+### Gantt Chart (David) (to be discussed, add your suggestions and we conclude tomorow): 
 
 ```
 use an additional page (supplemental material) to illustrate a Gantt
