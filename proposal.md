@@ -150,12 +150,7 @@ compare your results with (e.g. what performance metrics or statistical tests)? 
 metric evaluations will be used to assess and evaluate the pipeline and your expectations
 regarding the kind of results/performance to be achieved.
 ```
-loss metrics
-- contest evaluation metric
-  - https://en.wikipedia.org/wiki/Word_error_rate
-- training loss used for backpropagation and gradient descent
-
-
+We expect a .csv file of our model predictions for the dataset  of 1,450 test sentences for this challenge. Our output is therefore sentence predictions based on the input of neural recordings. We will use the performance metric `word error rate` which is defined in the challenge as the "Edit distance between the decoded sentence and the actual sentence, computed over words". This basically means the number of edits such as substitutions, insterions and deletions necessary to make the predicted sentence match the true sentence. We will also be using loss as an ongoing metric during training to determine the confidence of our model in its predictions and to evaluate how loss decreases as the training batches increases.
 
 ## Gantt Chart (David) (to be discussed, add your suggestions and we conclude tomorow): 
 
@@ -164,10 +159,19 @@ use an additional page (supplemental material) to illustrate a Gantt
 chart of the project development to list (a) schedules and (b) items of milestones and
 deliverables. Note that you cannot use this page to extend your proposal description.
 ```
+## 🗓️ Gantt Chart — EEG-to-Speech Kaggle Project
 
-TODO:
-
-- make a list of project tasks, phases, milestones, features
+| **Phase / Task** | **Description** | **Responsible** | **W1** | **W2** | **W3** | **W4** | **W5** | **W6** | **W7** | **W8** | **Deliverable / Milestone** |
+|------------------|-----------------|-----------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|------------------------------|
+| Project Setup | Choose competition, define scope, assign roles | All | ✅ |  |  |  |  |  |  |  | Selected Kaggle competition |
+| Proposal Draft | Write and format proposal (Problem, Reading, Methodology, Metrics, Bibliography) | All (Lead: Ion) | ✅ | ✅ |  |  |  |  |  |  | Submission-ready proposal |
+| Literature Review | Collect and summarize key papers (arXiv, PMC, Kaggle baselines) | Kirill |  | ✅ | ✅ | ✅ |  |  |  |  | Curated reading list |
+| Environment Setup | Configure Kaggle notebooks, Colab / Codespaces; clone baselines | David |  | ✅ | ✅ |  |  |  |  |  | Reproducible environment setup |
+| Benchmark Exploration | Run and analyze provided Kaggle benchmark (baseline RNN models) | All |  |  | ✅ | ✅ |  |  |  |  | Initial benchmark submission |
+| Baseline Validation | Train and validate baseline models; verify WER metric | Elion & Ion |  |  |  | ✅ | ✅ |  |  |  | Working baseline & leaderboard score |
+| Model Improvement | Explore architecture changes (Transformers, GRU variants), hyperparameter tuning | All |  |  |  |  | ✅ | ✅ | ✅ |  | Improved model & documentation |
+| Evaluation & Visualization | Analyze training logs, WER trends, qualitative outputs | Kirill & David |  |  |  |  |  | ✅ | ✅ |  | Evaluation report & figures |
+| Final Report & Presentation | Compile final paper (LaTeX/Sphinx) & presentation slides | Elion & Ion |  |  |  |  |  |  | ✅ | ✅ | Final report & submission |
 
 
 ## Bibliography (ELION) : 
