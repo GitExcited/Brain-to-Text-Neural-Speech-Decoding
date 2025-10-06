@@ -18,7 +18,7 @@
 \def\confName{COMP433/6331}
 \def\confYear{2025}
 
-\title{Course Project Proposal: EEG-to-Speech Kaggle Challenge}
+\title{Course Project Proposal: Brain-to-Text '25 Kaggle Challenge}
 
 \author{
 Ion Turcan \quad Kirill \quad David \quad Elion\\
@@ -34,24 +34,24 @@ Concordia University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Problem Statement and Application}
-We are investigating the problem of linguistic neural decoding for communication restoration in individuals who have lost speech ability, for example due to stroke or ALS. An interface records brain activity signals related to intended speech, and machine learning models attempt to decode these into text output.
+We are investigating the problem of linguistic neural decoding for communication restoration in individuals who have lost speech ability, for example due to stroke or ALS. This project is based on the \textbf{Brain-to-Text '25 Kaggle Challenge}, which provides EEG recordings of participants listening to spoken sentences and requires models to decode these into text.
 
-This problem is both interesting and important: the ability to restore speech would drastically improve quality of life for patients suffering from severe communication impairments. The challenges are significant. They include reproducing an end-to-end pipeline on EEG data, handling complex input formats, ensuring reproducibility of benchmarks, and understanding deeply how each model component contributes to overall performance. Our main expectation is to first reproduce working baselines or benchmark models, then to explore and implement improvements. Possible improvement strategies include data augmentation, architectural changes such as switching from RNNs to Transformer variants, experimenting with loss functions, and investigating different tokenization approaches. Throughout the project, we will document reproducibility issues, highlight the bottlenecks, and report both successful and unsuccessful attempts.
+The problem is important because the ability to restore speech would drastically improve quality of life for patients suffering from severe communication impairments. Challenges include reproducing an end-to-end pipeline on EEG data, handling complex input formats, ensuring reproducibility of baselines, and understanding how model components contribute to performance. Our expectation is to first reproduce working benchmarks and then explore improvements. Possible improvement strategies include data augmentation, architectural changes such as switching from RNNs to Transformer variants, experimenting with loss functions, and investigating different tokenization approaches. Throughout, we will document reproducibility issues, bottlenecks, and both successful and unsuccessful attempts.
 
 \section{Reading Material}
 We selected four main references that ground our understanding of the problem:
 
 \textbf{EEG$\to$Speech with auxiliary phoneme prediction:} \cite{lee_enhancing_2025}.  
-This paper trains an EEG encoder--decoder to compress EEG into latent features and reconstruct signals. A phoneme predictor then outputs phoneme probabilities from the latent space, forming a self-supervised constraint on EEG representations. While their model also uses a speech module not directly applicable to our dataset, it is highly relevant to our problem setup.
+This paper trains an EEG encoder--decoder to compress EEG into latent features and reconstruct signals. A phoneme predictor then outputs phoneme probabilities from the latent space, forming a self-supervised constraint on EEG representations. While their model also uses a speech module not directly applicable to our dataset, it is highly relevant to our setup.
 
 \textbf{Deep learning architectures for speech recognition:} \cite{papastratis_speech_2021}.  
 This review surveys RNNs, CTC-based models, and seq2seq approaches. It contextualizes why the Kaggle baseline model uses causal RNNs and CTC, and compares architectures for performance and trade-offs.
 
 \textbf{Transformer for EEG decoding:} \cite{lee_eeg-transformer_2021}.  
-This study shows how Transformer-based architectures can outperform RNNs for EEG sequence modeling, suggesting a promising improvement direction for us.
+This study shows how Transformer-based architectures can outperform RNNs for EEG sequence modeling, suggesting a promising improvement direction.
 
 \textbf{Host team’s neuroprosthesis baseline:} \cite{card_accurate_2024}.  
-This paper, from the Kaggle competition organizers, provides critical context for the baseline model, experimental setup, and neuroprosthesis motivation.
+This paper, from the competition organizers, outlines their ensemble causal RNN with 5-gram language modeling. It provides critical context for the baseline, evaluation, and neuroprosthesis motivation.
 
 \section{Possible Methodology}
 Our methodology involves structured steps to reproduce and extend results:
