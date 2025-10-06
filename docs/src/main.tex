@@ -86,6 +86,7 @@ During training, we will track loss and visualize learning curves. For model com
 \centering
 \scriptsize
 \renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|p{2.6cm}|p{4.2cm}|p{2.4cm}|*{8}{c|}|p{3.8cm}|}
 \hline
 \textbf{Phase / Task} & \textbf{Description} & \textbf{Responsible} & W1 & W2 & W3 & W4 & W5 & W6 & W7 & W8 & \textbf{Milestone} \\
@@ -100,8 +101,10 @@ Model Improvement & Arch changes, tuning, losses & All &  &  &  &  & \checkmark 
 Evaluation & WER and qualitative outputs & Kirill \& David &  &  &  &  &  & \checkmark & \checkmark &  & Eval report \\
 Final Report & Paper \& slides & Elion \& Ion &  &  &  &  &  &  & \checkmark & \checkmark & Final submission \\
 \hline
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
+
 
 %%%%%%%%%%%%%%%%%%%%%
 % PAGE 3: References%
