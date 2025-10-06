@@ -1,0 +1,18 @@
+# ignore python bytecode files
+*.pyc
+*.egg-info
+
+# ignore redis dump files
+*.rdb
+
+# ignore macOS DS_Store
+.DS_Store
+
+# ignore Markdown files
+*.md
+
+# ignore shell scripts
+*.sh
+
+# ignore PNG images
+*.png
