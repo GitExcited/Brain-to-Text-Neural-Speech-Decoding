@@ -7,6 +7,11 @@ TEX=pdflatex
 BIB=bibtex
 TEXFLAGS=-interaction=nonstopmode -halt-on-error -file-line-error -output-directory=$(OUTDIR)
 
+# Ensure LaTeX/BibTeX can find .sty, .bst, and .bib in src/
+export TEXINPUTS := src:$(TEXINPUTS)
+export BIBINPUTS := src:$(BIBINPUTS)
+export BSTINPUTS := src:$(BSTINPUTS)
+
 all: $(PDFDIR)/main.pdf
 
 $(OUTDIR):

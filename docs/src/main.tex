@@ -1,106 +1,91 @@
-\documentclass[12pt,a4paper]{article}
+% Course Project Proposal built on the CVPR 2026 Author Kit
+% Repo expects: src/cvpr.sty, src/ieeenat_fullname.bst, src/preamble.tex
 
-% Common packages
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage{amsmath, amssymb}
-\usepackage{graphicx}
-\usepackage{geometry}
-\usepackage{hyperref}          % hyperlinks (load before natbib)
-\usepackage[numbers]{natbib}   % numeric citations
-\geometry{margin=1in}
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+% REVIEW build (per assignment). For camera-ready, switch to \usepackage{cvpr}.
+\usepackage[review]{cvpr}
+
+% CVPR preamble (loads amsmath, amssymb, graphicx, xcolor, etc.)
+\input{preamble}
+
+% Hyperlinks (recommended for review)
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+
+% Paper meta (adapted for course)
+\def\paperID{0000}
+\def\confName{COMP433/6331}
+\def\confYear{2025}
 
 \title{Course Project Proposal: EEG-to-Speech Kaggle Challenge}
-\author{Team Members: Ion Turcan, Kirill, David, Elion}
-\date{\today}
+
+\author{
+Ion Turcan \quad Kirill \quad David \quad Elion\\
+Concordia University
+}
 
 \begin{document}
-
 \maketitle
+\thispagestyle{empty}
 
-\section{Problem Statement and Application (Ion Turcan 40154098)}
-In this project we are going to investigate the topic of linguistic neural decoding.
-The problem is interesting and important because many people that had a brain stroke or suffer from ALS could lose the capability of talking.
-To restore speech, the patient would need an interface that would capture the brain activity related to speech.
-Next, this brain activity data can be decoded into the message the person wanted to say through an RNN model.
-Our main goal is to try to improve existing models.
-To achieve that we would need to be able to run either an existing benchmark or a baseline model.
-That would be a challenge since we would need to make sure that the whole pipeline is working.
-After accomplishing this task, we will try to improve this model through different improvement strategies.
-These strategies might include data augmentation, model architecture change, using different loss function and using different tokenization strategies.
-The results are going to be reported and discussed.
-Trying to improve the model is really challenging because that involves deeper understanding of the whole pipeline and it is very likely that we will need to consult additional materials to have an idea on how these potential improvements could be implemented.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PAGE 1: Proposal content %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Reading Material (Kirill)}
-\begin{itemize}
-    \item \citet{lee_enhancing_2025}: The model in this paper is very similar to the Kaggle baseline model. It uses a speech module which is not applicable for our project but serves as a good overview of the current SOA for EEG/speech decoding. It contains:
-    \begin{itemize}
-        \item EEG Module: trains the model to understand EEG structure.
-        \item EEG Encoder: compresses raw EEG signals into ``latent representations''.
-        \item EEG Decoder: reconstructs EEG latent representation into raw EEG, acts as a self-supervised learning constraint.
-        \item Phoneme Predictor: outputs phoneme probabilities by trying to predict phoneme sequences (/p/, /a/, /t/) from compressed EEG signals.
-    \end{itemize}
-    \item \citet{papastratis_speech_2021}: Reviews/explains various DL architectures for speech recognition. Explains and justifies the use of RNNs and CTC-based models (which is what the Kaggle baseline uses), and compares the performance of different models while providing suggestions.
-    \item \citet{lee_eeg-transformer_2021}: Explores how Transformer-based architectures can outperform RNNs for EEG sequence decoding, which could be explored as an alternative to GRUs for modeling temporal relationships in precomputed EEG features.
-    \item \citet{card_accurate_2024}: Authored by the same team hosting the Kaggle competition. It largely forms the basis of the competition's baseline model architecture.
-\end{itemize}
+\section{Problem Statement and Application}
+We investigate linguistic neural decoding for restoring communication in people who lost speech (e.g., post-stroke, ALS). An interface captures brain activity related to speech; models decode it to text. We will (i) reproduce a working baseline/benchmark and (ii) explore improvements. Challenges include standing up a full pipeline, data handling, and understanding model components. Improvement avenues: data augmentation, architectural changes, alternative losses, and tokenization strategies. Results will be reported and discussed with attention to reproducibility.
+
+\section{Reading Material}
+\textbf{EEG$\to$Speech (aux phonemes):} \cite{lee_enhancing_2025}.\
+\textbf{ASR architectures overview (CTC/seq2seq):} \cite{papastratis_speech_2021}.\
+\textbf{Transformer for EEG decoding:} \cite{lee_eeg-transformer_2021}.\
+\textbf{Host team’s neuroprosthesis baseline context:} \cite{card_accurate_2024}.
 
 \section{Possible Methodology}
-\begin{itemize}
-    \item Run existing benchmarks: load without training and infer
-    \begin{itemize}
-        \item Stanford-NPTL causal RNN Ensemble + 5gram
-        \item Stanford-NPTL causal RNN TTA-Ensemble + 5gram
-        \item UCD-NPL causal RNN + 5gram
-        \item Write a submission script/module (if missing).
-    \end{itemize}
-    \item Build simple baselines:
-    \begin{itemize}
-        \item random, mean, median, linear regression, logistic regression, kNN, SVM
-    \end{itemize}
-    \item Gather suggested improvements:
-    \begin{itemize}
-        \item Data augmentation, preprocessing, supplementing
-        \item Model architecture changes (GRUs, Transformers, etc.)
-        \item Hyperparameter tuning methods
-        \item Loss functions
-    \end{itemize}
-    \item Clone and track benchmarks in repository for version control, swap out parts (e.g., optimizer).
-    \item Familiarize with Kaggle leaderboard submissions:
-    \begin{itemize}
-        \item Submit dummy csv (done).
-        \item Submit benchmark results (loaded, not trained).
-        \item Train and submit benchmark models.
-    \end{itemize}
-\end{itemize}
+\textbf{Benchmarks:} run Kaggle-provided baselines without training to verify end-to-end I/O; targets include: Stanford-NPTL causal RNN (ensemble, TTA+5-gram) and UCD-NPL causal RNN (+5-gram). Add a submission script if missing.\
+\textbf{Simple baselines:} random/mean/median; linear/logistic, kNN, SVM.\
+\textbf{Improvements:} augmentation/preprocessing; GRU/Transformer variants; hyperparameter search; loss swaps.\
+\textbf{Repo workflow:} clone and track benchmarks; swap components (e.g., optimizer) under version control.\
+\textbf{Kaggle ops:} submit dummy CSV (done), submit loaded baselines, then trained models.
 
-\section{Metric Evaluation (David)}
-We expect a .csv file of our model predictions for the dataset of 1,450 test sentences for this challenge. Our output is therefore sentence predictions based on the input of neural recordings. We will use the performance metric \emph{word error rate} (WER), defined as the edit distance between the decoded sentence and the actual sentence, computed over words. This counts the number of edits such as substitutions, insertions, and deletions necessary to make the predicted sentence match the true sentence. We will also use loss as an ongoing metric during training to determine the confidence of our model in its predictions and to evaluate how loss decreases as the training progresses.
+\section{Metric Evaluation}
+Primary: \emph{word error rate} (WER)—edit distance at word level (subs/ins/del). Deliverable: CSV predictions for 1{,}450 test sentences. During training: track loss and learning curves; post-hoc: compare WER across baselines/improvements and visualize trends.
 
-\section{Gantt Chart (David)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PAGE 2: Gantt supplement %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\appendix
+\section*{Supplement: Gantt Chart (1 page)}
 \begin{table}[h!]
 \centering
 \scriptsize
-\begin{tabular}{|p{2.8cm}|p{4.5cm}|p{2.5cm}|*{8}{c|}p{4.5cm}|}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|p{2.6cm}|p{4.2cm}|p{2.4cm}|*{8}{c|}|p{3.8cm}|}
 \hline
-\textbf{Phase / Task} & \textbf{Description} & \textbf{Responsible} & W1 & W2 & W3 & W4 & W5 & W6 & W7 & W8 & \textbf{Deliverable / Milestone} \\
+\textbf{Phase / Task} & \textbf{Description} & \textbf{Responsible} & W1 & W2 & W3 & W4 & W5 & W6 & W7 & W8 & \textbf{Milestone} \\
 \hline
-Project Setup & Choose competition, define scope, assign roles & All & \checkmark &  &  &  &  &  &  &  & Selected Kaggle competition \\
-Proposal Draft & Write and format proposal & All (Lead: Ion) & \checkmark & \checkmark &  &  &  &  &  &  & Submission-ready proposal \\
+Project Setup & Choose competition, scope, roles & All & \checkmark &  &  &  &  &  &  &  & Selected competition \\
+Proposal Draft & Write and format proposal & All (Lead: Ion) & \checkmark & \checkmark &  &  &  &  &  &  & Submission-ready draft \\
 Literature Review & Collect and summarize key papers & Kirill &  & \checkmark & \checkmark & \checkmark &  &  &  &  & Curated reading list \\
-Environment Setup & Configure Kaggle/Colab, clone baselines & David &  & \checkmark & \checkmark &  &  &  &  &  & Reproducible environment \\
-Benchmark Exploration & Run/analyze provided benchmarks & All &  &  & \checkmark & \checkmark &  &  &  &  & Initial benchmark submission \\
-Baseline Validation & Train and validate baseline models & Elion \& Ion &  &  &  & \checkmark & \checkmark &  &  &  & Leaderboard score \\
-Model Improvement & Explore architecture changes, tuning & All &  &  &  &  & \checkmark & \checkmark & \checkmark &  & Improved model \\
-Evaluation & Analyze WER trends, outputs & Kirill \& David &  &  &  &  &  & \checkmark & \checkmark &  & Evaluation report \\
-Final Report & Compile final paper/presentation & Elion \& Ion &  &  &  &  &  &  & \checkmark & \checkmark & Final submission \\
+Environment Setup & Kaggle/Colab/Codespaces; clone baselines & David &  & \checkmark & \checkmark &  &  &  &  &  & Reproducible env \\
+Benchmark Exploration & Run/analyze baseline models & All &  &  & \checkmark & \checkmark &  &  &  &  & Initial submission \\
+Baseline Validation & Train/validate baselines & Elion \& Ion &  &  &  & \checkmark & \checkmark &  &  &  & Leaderboard score \\
+Model Improvement & Arch changes, tuning, losses & All &  &  &  &  & \checkmark & \checkmark & \checkmark &  & Improved model \\
+Evaluation & WER and qualitative outputs & Kirill \& David &  &  &  &  &  & \checkmark & \checkmark &  & Eval report \\
+Final Report & Paper \& slides & Elion \& Ion &  &  &  &  &  &  & \checkmark & \checkmark & Final submission \\
 \hline
 \end{tabular}
 \end{table}
 
-\section{Bibliography (Elion)}
-\bibliographystyle{plainnat}
+%%%%%%%%%%%%%%%%%%%%%
+% PAGE 3: References%
+%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+{\small
+\bibliographystyle{ieeenat_fullname}
 \bibliography{src/references}
+}
 
 \end{document}
