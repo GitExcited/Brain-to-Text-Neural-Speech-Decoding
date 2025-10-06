@@ -30,7 +30,7 @@ Concordia University
 \thispagestyle{empty}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PAGE 1: Proposal content %
+% Proposal content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Problem Statement and Application}
@@ -76,12 +76,15 @@ The primary evaluation metric is \emph{word error rate} (WER), computed as edit 
 
 During training, we will track loss and visualize learning curves. For model comparison, we will use WER across baselines and improvements, report leaderboard performance, and qualitatively analyze example outputs. Plots of loss trajectories and WER trends over time will be included in the final report.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PAGE 2: Gantt supplement %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{\small
+\nocite{*}
+\bibliographystyle{ieeenat_fullname}
+\bibliography{src/references}
+}
 \clearpage
 \appendix
-\section*{Supplement: Gantt Chart (1 page)}
+\section*{Supplement: Gantt Chart}
 \begin{table}[h!]
 \centering
 \scriptsize
@@ -104,17 +107,5 @@ Final Report & Paper \& slides & Elion \& Ion &  &  &  &  &  &  & \checkmark & \
 \end{tabular}%
 }
 \end{table}
-
-
-%%%%%%%%%%%%%%%%%%%%%
-% PAGE 3: References%
-%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-{\small
-\nocite{*}
-\bibliographystyle{ieeenat_fullname}
-\bibliography{src/references}
-}
-
 
 \end{document}
