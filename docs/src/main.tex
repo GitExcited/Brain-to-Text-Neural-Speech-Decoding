@@ -34,23 +34,47 @@ Concordia University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Problem Statement and Application}
-We investigate linguistic neural decoding for restoring communication in people who lost speech (e.g., post-stroke, ALS). An interface captures brain activity related to speech; models decode it to text. We will (i) reproduce a working baseline/benchmark and (ii) explore improvements. Challenges include standing up a full pipeline, data handling, and understanding model components. Improvement avenues: data augmentation, architectural changes, alternative losses, and tokenization strategies. Results will be reported and discussed with attention to reproducibility.
+We are investigating the problem of linguistic neural decoding for communication restoration in individuals who have lost speech ability, for example due to stroke or ALS. An interface records brain activity signals related to intended speech, and machine learning models attempt to decode these into text output.
+
+This problem is both interesting and important: the ability to restore speech would drastically improve quality of life for patients suffering from severe communication impairments. The challenges are significant. They include reproducing an end-to-end pipeline on EEG data, handling complex input formats, ensuring reproducibility of benchmarks, and understanding deeply how each model component contributes to overall performance. Our main expectation is to first reproduce working baselines or benchmark models, then to explore and implement improvements. Possible improvement strategies include data augmentation, architectural changes such as switching from RNNs to Transformer variants, experimenting with loss functions, and investigating different tokenization approaches. Throughout the project, we will document reproducibility issues, highlight the bottlenecks, and report both successful and unsuccessful attempts.
 
 \section{Reading Material}
-\textbf{EEG$\to$Speech (aux phonemes):} \cite{lee_enhancing_2025}.\
-\textbf{ASR architectures overview (CTC/seq2seq):} \cite{papastratis_speech_2021}.\
-\textbf{Transformer for EEG decoding:} \cite{lee_eeg-transformer_2021}.\
-\textbf{Host team’s neuroprosthesis baseline context:} \cite{card_accurate_2024}.
+We selected four main references that ground our understanding of the problem:
+
+\textbf{EEG$\to$Speech with auxiliary phoneme prediction:} \cite{lee_enhancing_2025}.  
+This paper trains an EEG encoder--decoder to compress EEG into latent features and reconstruct signals. A phoneme predictor then outputs phoneme probabilities from the latent space, forming a self-supervised constraint on EEG representations. While their model also uses a speech module not directly applicable to our dataset, it is highly relevant to our problem setup.
+
+\textbf{Deep learning architectures for speech recognition:} \cite{papastratis_speech_2021}.  
+This review surveys RNNs, CTC-based models, and seq2seq approaches. It contextualizes why the Kaggle baseline model uses causal RNNs and CTC, and compares architectures for performance and trade-offs.
+
+\textbf{Transformer for EEG decoding:} \cite{lee_eeg-transformer_2021}.  
+This study shows how Transformer-based architectures can outperform RNNs for EEG sequence modeling, suggesting a promising improvement direction for us.
+
+\textbf{Host team’s neuroprosthesis baseline:} \cite{card_accurate_2024}.  
+This paper, from the Kaggle competition organizers, provides critical context for the baseline model, experimental setup, and neuroprosthesis motivation.
 
 \section{Possible Methodology}
-\textbf{Benchmarks:} run Kaggle-provided baselines without training to verify end-to-end I/O; targets include: Stanford-NPTL causal RNN (ensemble, TTA+5-gram) and UCD-NPL causal RNN (+5-gram). Add a submission script if missing.\
-\textbf{Simple baselines:} random/mean/median; linear/logistic, kNN, SVM.\
-\textbf{Improvements:} augmentation/preprocessing; GRU/Transformer variants; hyperparameter search; loss swaps.\
-\textbf{Repo workflow:} clone and track benchmarks; swap components (e.g., optimizer) under version control.\
-\textbf{Kaggle ops:} submit dummy CSV (done), submit loaded baselines, then trained models.
+Our methodology involves structured steps to reproduce and extend results:
+
+\textbf{Technical process:}
+\begin{itemize}
+    \item \textbf{Run existing benchmarks:} load provided Kaggle baselines without training and verify inference. These include Stanford-NPTL causal RNN ensemble (with TTA+5-gram) and UCD-NPL causal RNN (+5-gram). If missing, implement a submission script for Kaggle output.
+    \item \textbf{Simple baselines:} implement fast-to-train models such as random, mean, median, linear regression, logistic regression, kNN, and SVM.
+    \item \textbf{Improvement strategies:} 
+    \begin{itemize}
+        \item Hyperparameter search
+        \item Data preprocessing and augmentation
+        \item Loss function alternatives
+        \item Alternative architectures (GRU, Transformer)
+    \end{itemize}
+    \item \textbf{Repository workflow:} clone Kaggle baselines into our repo for version control, track modifications, and swap components such as optimizers or tokenizers.
+    \item \textbf{Kaggle operations:} submit a dummy CSV (done), submit loaded baseline predictions, then trained models for leaderboard evaluation.
+\end{itemize}
 
 \section{Metric Evaluation}
-Primary: \emph{word error rate} (WER)—edit distance at word level (subs/ins/del). Deliverable: CSV predictions for 1{,}450 test sentences. During training: track loss and learning curves; post-hoc: compare WER across baselines/improvements and visualize trends.
+The primary evaluation metric is \emph{word error rate} (WER), computed as edit distance at the word level (substitutions, insertions, deletions). The official deliverable is a CSV file containing predictions for 1,450 test sentences.
+
+During training, we will track loss and visualize learning curves. For model comparison, we will use WER across baselines and improvements, report leaderboard performance, and qualitatively analyze example outputs. Plots of loss trajectories and WER trends over time will be included in the final report.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PAGE 2: Gantt supplement %
