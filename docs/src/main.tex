@@ -34,54 +34,68 @@ Concordia University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Problem Statement and Application}
-We are investigating the problem of linguistic neural decoding for communication restoration in individuals who have lost speech ability, for example due to stroke or ALS. This project is based on the \textbf{Brain-to-Text '25 Kaggle Challenge}, which provides EEG recordings of participants listening to spoken sentences and requires models to decode these into text.
+We are investigating the problem of linguistic neural decoding for communication restoration in individuals who have lost speech ability, for example due to stroke or ALS.  
+This project is based on the \textbf{Brain-to-Text '25 Kaggle Challenge}, which provides EEG recordings of participants listening to spoken sentences and requires models to decode these into text.  
 
-The problem is important because the ability to restore speech would drastically improve quality of life for patients suffering from severe communication impairments. Challenges include reproducing an end-to-end pipeline on EEG data, handling complex input formats, ensuring reproducibility of baselines, and understanding how model components contribute to performance. Our expectation is to first reproduce working benchmarks and then explore improvements. Possible improvement strategies include data augmentation, architectural changes such as switching from RNNs to Transformer variants, experimenting with loss functions, and investigating different tokenization approaches. Throughout, we will document reproducibility issues, bottlenecks, and both successful and unsuccessful attempts.
+The problem is important because the ability to restore speech would drastically improve quality of life for patients suffering from severe communication impairments.  
+Challenges include reproducing an end-to-end pipeline on EEG data, handling complex input formats, ensuring reproducibility of baselines, and understanding how model components contribute to performance.  
+Our expectation is to first reproduce working benchmarks and then explore improvements.  
+Possible improvement strategies include data augmentation, architectural changes such as switching from RNNs to Transformer variants, experimenting with loss functions, and investigating different tokenization approaches.  
+Throughout, we will document reproducibility issues, bottlenecks, and both successful and unsuccessful attempts.  
 
 \section{Reading Material}
-We selected four main references that ground our understanding of the problem:
+We selected four main references that ground our understanding of the problem:  
 
 \textbf{EEG$\to$Speech with auxiliary phoneme prediction:} \cite{lee_enhancing_2025}.  
-This paper trains an EEG encoder--decoder to compress EEG into latent features and reconstruct signals. A phoneme predictor then outputs phoneme probabilities from the latent space, forming a self-supervised constraint on EEG representations. While their model also uses a speech module not directly applicable to our dataset, it is highly relevant to our setup.
+This paper trains an EEG encoder--decoder to compress EEG into latent features and reconstruct signals.  
+A phoneme predictor then outputs phoneme probabilities from the latent space, forming a self-supervised constraint on EEG representations.  
+While their model also uses a speech module not directly applicable to our dataset, it is highly relevant to our setup.  
 
 \textbf{Deep learning architectures for speech recognition:} \cite{papastratis_speech_2021}.  
-This review surveys RNNs, CTC-based models, and seq2seq approaches. It contextualizes why the Kaggle baseline model uses causal RNNs and CTC, and compares architectures for performance and trade-offs.
+This review surveys RNNs, CTC-based models, and seq2seq approaches.  
+It contextualizes why the Kaggle baseline model uses causal RNNs and CTC, and compares architectures for performance and trade-offs.  
 
 \textbf{Transformer for EEG decoding:} \cite{lee_eeg-transformer_2021}.  
-This study shows how Transformer-based architectures can outperform RNNs for EEG sequence modeling, suggesting a promising improvement direction.
+This study shows how Transformer-based architectures can outperform RNNs for EEG sequence modeling, suggesting a promising improvement direction.  
 
 \textbf{Host team’s neuroprosthesis baseline:} \cite{card_accurate_2024}.  
-This paper, from the competition organizers, outlines their ensemble causal RNN with 5-gram language modeling. It provides critical context for the baseline, evaluation, and neuroprosthesis motivation.
+This paper, from the competition organizers, outlines their ensemble causal RNN with 5-gram language modeling.  
+It provides critical context for the baseline, evaluation, and neuroprosthesis motivation.  
 
 \section{Possible Methodology}
-Our methodology involves structured steps to reproduce and extend results:
+Our methodology involves structured steps to reproduce and extend results:  
 
 \textbf{Technical process:}
 \begin{itemize}
-    \item \textbf{Run existing benchmarks:} load provided Kaggle baselines without training and verify inference. These include Stanford-NPTL causal RNN ensemble (with TTA+5-gram) and UCD-NPL causal RNN (+5-gram). If missing, implement a submission script for Kaggle output.
-    \item \textbf{Simple baselines:} implement fast-to-train models such as random, mean, median, linear regression, logistic regression, kNN, and SVM.
+    \item \textbf{Run existing benchmarks:} load provided Kaggle baselines without training and verify inference.  
+    These include Stanford-NPTL causal RNN ensemble (with TTA+5-gram) and UCD-NPL causal RNN (+5-gram).  
+    If missing, implement a submission script for Kaggle output.  
+    \item \textbf{Simple baselines:} implement fast-to-train models such as random, mean, median, linear regression, logistic regression, kNN, and SVM.  
     \item \textbf{Improvement strategies:} 
     \begin{itemize}
-        \item Hyperparameter search
-        \item Data preprocessing and augmentation
-        \item Loss function alternatives
-        \item Alternative architectures (GRU, Transformer)
+        \item Hyperparameter search  
+        \item Data preprocessing and augmentation  
+        \item Loss function alternatives  
+        \item Alternative architectures (GRU, Transformer)  
     \end{itemize}
-    \item \textbf{Repository workflow:} clone Kaggle baselines into our repo for version control, track modifications, and swap components such as optimizers or tokenizers.
-    \item \textbf{Kaggle operations:} submit a dummy CSV (done), submit loaded baseline predictions, then trained models for leaderboard evaluation.
+    \item \textbf{Repository workflow:} clone Kaggle baselines into our repo for version control, track modifications, and swap components such as optimizers or tokenizers.  
+    \item \textbf{Kaggle operations:} submit a dummy CSV (done), submit loaded baseline predictions, then trained models for leaderboard evaluation.  
 \end{itemize}
 
 \section{Metric Evaluation}
-The primary evaluation metric is \emph{word error rate} (WER), computed as edit distance at the word level (substitutions, insertions, deletions). The official deliverable is a CSV file containing predictions for 1,450 test sentences.
+The primary evaluation metric is \emph{word error rate} (WER), computed as edit distance at the word level (substitutions, insertions, deletions).  
+The official deliverable is a CSV file containing predictions for 1,450 test sentences.  
 
-During training, we will track loss and visualize learning curves. For model comparison, we will use WER across baselines and improvements, report leaderboard performance, and qualitatively analyze example outputs. Plots of loss trajectories and WER trends over time will be included in the final report.
-
+During training, we will track loss and visualize learning curves.  
+For model comparison, we will use WER across baselines and improvements, report leaderboard performance, and qualitatively analyze example outputs.  
+Plots of loss trajectories and WER trends over time will be included in the final report.  
 
 {\small
 \nocite{*}
 \bibliographystyle{ieeenat_fullname}
 \bibliography{src/references}
 }
+
 \clearpage
 \appendix
 \section*{Supplement: Gantt Chart}
