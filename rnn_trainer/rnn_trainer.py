@@ -256,6 +256,10 @@ class BrainToTextDecoder_Trainer:
 
         Day weights should have a separate learning rate
         '''
+        optimizer_name = self.args['optimizer_name'].lower()
+        lr_mult = {"adamw": 1, "lion": 0.25, "sgd": 5}
+        base_lr = self.args['lr_max'] * lr_mult[optimizer_name]
+
         bias_params = [p for name, p in self.model.named_parameters() if 'gru.bias' in name or 'out.bias' in name]
         day_params = [p for name, p in self.model.named_parameters() if 'day_' in name]
         other_params = [p for name, p in self.model.named_parameters() if
@@ -265,7 +269,7 @@ class BrainToTextDecoder_Trainer:
             param_groups = [
                 {'params': bias_params, 'weight_decay': 0, 'group_type': 'bias'},
                 {'params': other_params, 'group_type': 'other'},
-                {'params': day_params, 'lr': self.args['lr_max_day'], 'weight_decay': self.args['weight_decay_day'], 'group_type': 'day_layer'}
+                {'params': day_params, 'lr': self.args["lr_max_day"] * lr_mult[optimizer_name], 'weight_decay': self.args['weight_decay_day'], 'group_type': 'day_layer'}
             ]
         else:
             param_groups = [
@@ -273,11 +277,11 @@ class BrainToTextDecoder_Trainer:
                 {'params': other_params, 'group_type': 'other'}
             ]
 
-        optimizer_name = self.args['optimizer_name'].lower()
+        
         if optimizer_name == 'adamw':
             optim = torch.optim.AdamW(
                 param_groups,
-                lr=self.args['lr_max'],
+                lr = base_lr,
                 betas=(self.args['beta0'], self.args['beta1']),
                 eps=self.args['epsilon'],
                 weight_decay=self.args['weight_decay'],
@@ -285,10 +289,10 @@ class BrainToTextDecoder_Trainer:
             )
         elif optimizer_name == "lion":
             from torch.optim import Lion
-            optim = Lion(param_groups, lr = self.args['lr_max'], betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
+            optim = Lion(param_groups, lr =base_lr, betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
 
         elif optimizer_name == "sgd":
-            optim = torch.optim.SGD(param_groups,  lr = self.args['lr_max'], momentum = self.args["momentum_for_sgd"], weight_decay=self.args['weight_decay'])
+            optim = torch.optim.SGD(param_groups,  lr = base_lr, momentum = self.args["momentum_for_sgd"], weight_decay=self.args['weight_decay'])
         else:
             raise ValueError(f"Unknown optimizer: {optimizer_name}")
 
