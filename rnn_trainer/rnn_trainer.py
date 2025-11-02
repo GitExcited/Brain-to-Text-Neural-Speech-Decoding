@@ -288,7 +288,7 @@ class BrainToTextDecoder_Trainer:
                 fused=True
             )
         elif optimizer_name == "lion":
-            from torch.optim import Lion
+            from lion_pytorch import Lion
             optim = Lion(param_groups, lr =base_lr, betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
 
         elif optimizer_name == "sgd":
