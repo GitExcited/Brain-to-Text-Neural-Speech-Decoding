@@ -151,8 +151,7 @@ class BrainToTextDecoder_Trainer:
 
         # Create datasets and dataloaders
         # For Kaggle competition, only data_train.hdf5 exists, so we split it into train/val
-        all_file_paths = [os.path.join(self.args["dataset"]["dataset_dir"], s, 'data_train.hdf5') for s in
-                          self.args['dataset']['sessions']]
+        all_file_paths = [os.path.join(self.args["dataset"]["dataset_dir"], s, 'data_train.hdf5') for s in self.args['dataset']['sessions']]
 
         # Ensure that there are no duplicate days
         if len(set(all_file_paths)) != len(all_file_paths):
@@ -265,9 +264,8 @@ class BrainToTextDecoder_Trainer:
         if len(day_params) != 0:
             param_groups = [
                 {'params': bias_params, 'weight_decay': 0, 'group_type': 'bias'},
-                {'params': day_params, 'lr': self.args['lr_max_day'], 'weight_decay': self.args['weight_decay_day'],
-                 'group_type': 'day_layer'},
-                {'params': other_params, 'group_type': 'other'}
+                {'params': other_params, 'group_type': 'other'},
+                {'params': day_params, 'lr': self.args['lr_max_day'], 'weight_decay': self.args['weight_decay_day'], 'group_type': 'day_layer'}
             ]
         else:
             param_groups = [
@@ -275,14 +273,24 @@ class BrainToTextDecoder_Trainer:
                 {'params': other_params, 'group_type': 'other'}
             ]
 
-        optim = torch.optim.AdamW(
-            param_groups,
-            lr=self.args['lr_max'],
-            betas=(self.args['beta0'], self.args['beta1']),
-            eps=self.args['epsilon'],
-            weight_decay=self.args['weight_decay'],
-            fused=True
-        )
+        optimizer_name = self.args['optimizer_name'].lower()
+        if optimizer_name == 'adamw':
+            optim = torch.optim.AdamW(
+                param_groups,
+                lr=self.args['lr_max'],
+                betas=(self.args['beta0'], self.args['beta1']),
+                eps=self.args['epsilon'],
+                weight_decay=self.args['weight_decay'],
+                fused=True
+            )
+        elif optimizer_name == "lion":
+            from torch.optim import Lion
+            optim = Lion(param_groups, lr = self.args['lr_max'], betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
+
+        elif optimizer_name == "sgd":
+            optim = torch.optim.SGD(param_groups,  lr = self.args['lr_max'], momentum = self.args["momentum_for_sgd"], weight_decay=self.args['weight_decay'])
+        else:
+            raise ValueError(f"Unknown optimizer: {optimizer_name}")
 
         return optim
 
@@ -526,8 +534,7 @@ class BrainToTextDecoder_Trainer:
                 # Apply augmentations to the data
                 features, n_time_steps = self.transform_data(features, n_time_steps, 'train')
 
-                adjusted_lens = ((n_time_steps - self.args['model']['patch_size']) / self.args['model'][
-                    'patch_stride'] + 1).to(torch.int32)
+                adjusted_lens = ((n_time_steps - self.args['model']['patch_size']) / self.args['model']['patch_stride'] + 1).to(torch.int32)
 
                 # Get phoneme predictions
                 logits = self.model(features, day_indicies)
