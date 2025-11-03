@@ -29,7 +29,7 @@ save_val_metrics: true # whether to save validation metrics during training
 early_stopping: false # whether to use early stopping based on validation metrics
 early_stopping_val_steps: 20 # number of validation steps to wait before stopping training if no improvement is seen
 
-num_training_batches: 120 # number of training batches to run
+num_training_batches: 500 # number of training batches to run
 lr_scheduler_type: cosine # type of learning rate scheduler to use
 lr_max: 0.005 # maximum learning rate for the main model
 lr_min: 0.0001 # minimum learning rate for the main model
@@ -50,8 +50,8 @@ weight_decay_day: 0 # weight decay for the day specific input layers
 seed: 10 # random seed for reproducibility
 grad_norm_clip_value: 10 # gradient norm clipping value
 
-batches_per_train_log: 20 # number of batches per training log
-batches_per_val_step: 2000 # number of batches per validation step
+batches_per_train_log: 100 # number of batches per training log
+batches_per_val_step: 100 # number of batches per validation step
 
 batches_per_save: 0 # number of batches per save
 log_individual_day_val_PER: true # whether to log individual day validation performance

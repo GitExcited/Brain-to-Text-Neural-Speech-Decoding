@@ -60,9 +60,6 @@ class BrainToTextDecoder_Trainer:
         if args['mode'] == 'train':
             os.makedirs(self.args['output_dir'], exist_ok=True)
 
-        # Create checkpoint directory
-        if args['save_best_checkpoint'] or args['save_all_val_steps'] or args['save_final_model']:
-            os.makedirs(self.args['checkpoint_dir'], exist_ok=True)
 
         # Set up logging
         self.logger = logging.getLogger(__name__)
@@ -134,7 +131,7 @@ class BrainToTextDecoder_Trainer:
 
         self.logger.info(f"Initialized RNN decoding model")
 
-        self.logger.info(self.model)
+        #self.logger.info(self.model)
 
         # Log how many parameters are in the model
         total_params = sum(p.numel() for p in self.model.parameters())
@@ -232,10 +229,6 @@ class BrainToTextDecoder_Trainer:
             raise ValueError(f"Invalid learning rate scheduler type: {self.args['lr_scheduler_type']}")
 
         self.ctc_loss = torch.nn.CTCLoss(blank=0, reduction='none', zero_infinity=False)
-
-        # If a checkpoint is provided, then load from checkpoint
-        if self.args['init_from_checkpoint']:
-            self.load_model_checkpoint(self.args['init_checkpoint_path'])
 
         # Set rnn and/or input layers to not trainable if specified
         for name, param in self.model.named_parameters():
@@ -369,49 +362,6 @@ class BrainToTextDecoder_Trainer:
 
         return LambdaLR(optim, lr_lambdas, -1)
 
-    def load_model_checkpoint(self, load_path):
-        '''
-        Load a training checkpoint
-        '''
-        checkpoint = torch.load(load_path, weights_only=False)  # checkpoint is just a dict
-
-        self.model.load_state_dict(checkpoint['model_state_dict'])
-        self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-        self.learning_rate_scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
-        self.best_val_PER = checkpoint['val_PER']  # best phoneme error rate
-        self.best_val_loss = checkpoint['val_loss'] if 'val_loss' in checkpoint.keys() else torch.inf
-
-        self.model.to(self.device)
-
-        # Send optimizer params back to GPU
-        for state in self.optimizer.state.values():
-            for k, v in state.items():
-                if isinstance(v, torch.Tensor):
-                    state[k] = v.to(self.device)
-
-        self.logger.info("Loaded model from checkpoint: " + load_path)
-
-    def save_model_checkpoint(self, save_path, PER, loss):
-        '''
-        Save a training checkpoint
-        '''
-
-        checkpoint = {
-            'model_state_dict': self.model.state_dict(),
-            'optimizer_state_dict': self.optimizer.state_dict(),
-            'scheduler_state_dict': self.learning_rate_scheduler.state_dict(),
-            'val_PER': PER,
-            'val_loss': loss
-        }
-
-        torch.save(checkpoint, save_path)
-
-        self.logger.info("Saved model to checkpoint: " + save_path)
-
-        # Save the args file alongside the checkpoint
-        with open(os.path.join(self.args['checkpoint_dir'], 'args.yaml'), 'w') as f:
-            OmegaConf.save(config=self.args, f=f)
-
     def create_attention_mask(self, sequence_lengths):
 
         max_length = torch.max(sequence_lengths).item()
@@ -509,7 +459,6 @@ class BrainToTextDecoder_Trainer:
         val_steps_since_improvement = 0
 
         # training params
-        save_best_checkpoint = self.args.get('save_best_checkpoint', True)
         early_stopping = self.args.get('early_stopping', True)
 
         early_stopping_val_steps = self.args['early_stopping_val_steps']
@@ -615,9 +564,6 @@ class BrainToTextDecoder_Trainer:
         self.logger.info(f'Best avg val PER achieved: {self.best_val_PER:.5f}')
         self.logger.info(f'Total training time: {(training_duration / 60):.2f} minutes')
 
-        # Save final model
-        if self.args['save_final_model']:
-            self.save_model_checkpoint(f'{self.args["checkpoint_dir"]}/final_checkpoint_batch_{i}', val_PERs[-1])
 
         train_stats = {}
         train_stats['train_losses'] = train_losses
