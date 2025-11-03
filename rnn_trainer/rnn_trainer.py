@@ -572,6 +572,10 @@ class BrainToTextDecoder_Trainer:
 
             # Incrementally log training progress
             if i % self.args['batches_per_train_log'] == 0:
+                print(f'Train batch {i}: ' +
+                                 f'loss: {(loss.detach().item()):.2f} ' +
+                                 f'grad norm: {grad_norm:.2f} '
+                                 f'time: {train_step_duration:.3f}')
                 self.logger.info(f'Train batch {i}: ' +
                                  f'loss: {(loss.detach().item()):.2f} ' +
                                  f'grad norm: {grad_norm:.2f} '
