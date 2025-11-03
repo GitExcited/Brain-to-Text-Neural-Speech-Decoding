@@ -569,18 +569,13 @@ class BrainToTextDecoder_Trainer:
         train_stats['val_PERs'] = val_PERs
         train_stats['val_metrics'] = val_results
 
-        plt.figure(figsize = (12, 8))  
-        plt.plot(list(range(len(train_stats['train_losses']))), train_stats['train_losses'])
+        plt.figure(figsize = (10, 8))
+        plt.plot(list(range(len(train_stats['train_losses']))), train_stats['train_losses'], label='Train Loss')
+        plt.plot(list(range(len(train_stats['val_losses']))), train_stats['val_losses'], label='Val Loss')
         plt.xlabel("Batch")
-        plt.ylabel("CTC Train Loss")
-        plt.title(f"CTC train loss over batches for {self.args['optimizer_name']}")
-        plt.show()
-
-        plt.figure(figsize = (12, 8))  
-        plt.plot(list(range(len(train_stats['val_losses']))), train_stats['val_losses'])
-        plt.xlabel("Batch")
-        plt.ylabel("CTC Val Loss")
-        plt.title(f"CTC Val loss over batches for {self.args['optimizer_name']}")
+        plt.ylabel("CTC Loss")
+        plt.title(f"CTC Loss over batches for {self.args['optimizer_name']}")
+        plt.legend()
         plt.show()
 
         return train_stats
