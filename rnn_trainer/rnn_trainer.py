@@ -11,6 +11,8 @@ import logging
 import sys
 import json
 import pickle
+import matplotlib.pyplot as plt
+
 
 from dataset import BrainToTextDataset, train_test_split_indicies
 from data_augmentations import gauss_smooth
@@ -441,7 +443,8 @@ class BrainToTextDecoder_Trainer:
             )
 
         return features, n_time_steps
-
+    
+    
     def train(self):
         '''
         Train the model
@@ -542,11 +545,6 @@ class BrainToTextDecoder_Trainer:
                                  f'CTC Loss (avg): {val_metrics["avg_loss"]:.4f} ' +
                                  f'time: {val_step_duration:.3f}')
 
-                if self.args['log_individual_day_val_PER']:
-                    for day in val_metrics['day_PERs'].keys():
-                        self.logger.info(
-                            f"{self.args['dataset']['sessions'][day]} val PER: {val_metrics['day_PERs'][day]['total_edit_distance'] / val_metrics['day_PERs'][day]['total_seq_length']:0.4f}")
-
                 # Save metrics
                 val_PERs.append(val_metrics['avg_PER'])
                 val_losses.append(val_metrics['avg_loss'])
@@ -570,6 +568,20 @@ class BrainToTextDecoder_Trainer:
         train_stats['val_losses'] = val_losses
         train_stats['val_PERs'] = val_PERs
         train_stats['val_metrics'] = val_results
+
+        plt.figure(figsize = (12, 8))  
+        plt.plot(list(range(len(train_stats['train_losses']))), train_stats['train_losses'])
+        plt.xlabel("Batch")
+        plt.ylabel("CTC Train Loss")
+        plt.title(f"CTC train loss over batches for {self.args['optimizer_name']}")
+        plt.show()
+
+        plt.figure(figsize = (12, 8))  
+        plt.plot(list(range(len(train_stats['val_losses']))), train_stats['val_losses'])
+        plt.xlabel("Batch")
+        plt.ylabel("CTC Val Loss")
+        plt.title(f"CTC Val loss over batches for {self.args['optimizer_name']}")
+        plt.show()
 
         return train_stats
 
