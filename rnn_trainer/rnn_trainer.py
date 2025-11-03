@@ -69,7 +69,7 @@ class BrainToTextDecoder_Trainer:
         for handler in self.logger.handlers[:]:  # make a copy of the list
             self.logger.removeHandler(handler)
         self.logger.setLevel(logging.INFO)
-        formatter = logging.Formatter(fmt='%(asctime)s: %(message)s')
+        formatter = logging.Formatter(fmt='%(message)s')
 
         if args['mode'] == 'train':
             # During training, save logs to file in output directory
@@ -571,12 +571,7 @@ class BrainToTextDecoder_Trainer:
             train_losses.append(loss.detach().item())
 
             # Incrementally log training progress
-            self.logger.info(f"increment: {i % self.args['batches_per_train_log']}")
             if i % self.args['batches_per_train_log'] == 0:
-                print(f'Train batch {i}: ' +
-                                 f'loss: {(loss.detach().item()):.2f} ' +
-                                 f'grad norm: {grad_norm:.2f} '
-                                 f'time: {train_step_duration:.3f}')
                 self.logger.info(f'Train batch {i}: ' +
                                  f'loss: {(loss.detach().item()):.2f} ' +
                                  f'grad norm: {grad_norm:.2f} '
