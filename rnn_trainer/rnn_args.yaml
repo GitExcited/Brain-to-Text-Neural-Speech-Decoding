@@ -41,7 +41,8 @@ lr_decay_steps_day: 120000 # number of steps for the learning rate decay for the
 lr_warmup_steps_day: 1000 # number of warmup steps for the learning rate scheduler for the day specific input layers
 
 optimizer_name: AdamW # optimizer name to use during training
-momentum_for_sgd: 0.9 # the momentum in case the optimizer is sgd
+alpha: 0.99 # alpha for rmsprop
+momentum: 0.9 # the momentum in case the optimizer is sgd
 beta0: 0.9 # beta0 parameter for the Adam optimizer
 beta1: 0.999 # beta1 parameter for the Adam optimizer
 epsilon: 0.1 # epsilon parameter for the Adam optimizer

@@ -251,7 +251,7 @@ class BrainToTextDecoder_Trainer:
         Day weights should have a separate learning rate
         '''
         optimizer_name = self.args['optimizer_name'].lower()
-        lr_mult = {"adamw": 1, "lion": 0.25, "sgd": 5}
+        lr_mult = {"adamw": 1, "novograd": 1, "lion": 0.25, "sgd": 5, "rmsprop": 0.1}
         base_lr = self.args['lr_max'] * lr_mult[optimizer_name]
 
         bias_params = [p for name, p in self.model.named_parameters() if 'gru.bias' in name or 'out.bias' in name]
@@ -283,10 +283,16 @@ class BrainToTextDecoder_Trainer:
             )
         elif optimizer_name == "lion":
             from lion_pytorch import Lion
-            optim = Lion(param_groups, lr =base_lr, betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
+            optim = Lion(param_groups, lr = base_lr, betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
 
         elif optimizer_name == "sgd":
-            optim = torch.optim.SGD(param_groups,  lr = base_lr, momentum = self.args["momentum_for_sgd"], weight_decay=self.args['weight_decay'])
+            optim = torch.optim.SGD(param_groups,  lr = base_lr, momentum = self.args["momentum"], weight_decay=self.args['weight_decay'])
+
+        elif optimizer_name == "rmsprop":
+            optim = torch.optim.RMSprop(param_groups,  lr = base_lr, momentum = self.args["momentum"], weight_decay = 0.0, alpha = self.args["alpha"])
+        elif optimizer_name == "novograd":
+            from torch_optimizer import NovoGrad
+            optim = NovoGrad(param_groups, lr=base_lr, betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
         else:
             raise ValueError(f"Unknown optimizer: {optimizer_name}")
 
