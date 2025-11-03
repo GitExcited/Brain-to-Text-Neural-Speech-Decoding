@@ -11,7 +11,6 @@ import logging
 import sys
 import json
 import pickle
-import matplotlib.pyplot as plt
 
 
 from dataset import BrainToTextDataset, train_test_split_indicies
@@ -568,15 +567,6 @@ class BrainToTextDecoder_Trainer:
         train_stats['val_losses'] = val_losses
         train_stats['val_PERs'] = val_PERs
         train_stats['val_metrics'] = val_results
-
-        plt.figure(figsize = (10, 8))
-        plt.plot(list(range(len(train_stats['train_losses']))), train_stats['train_losses'], label='Train Loss')
-        plt.plot(list(range(len(train_stats['val_losses']))), train_stats['val_losses'], label='Val Loss')
-        plt.xlabel("Batch")
-        plt.ylabel("CTC Loss")
-        plt.title(f"CTC Loss over batches for {self.args['optimizer_name']}")
-        plt.legend()
-        plt.show()
 
         return train_stats
 
