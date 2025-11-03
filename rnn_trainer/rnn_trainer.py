@@ -571,6 +571,7 @@ class BrainToTextDecoder_Trainer:
             train_losses.append(loss.detach().item())
 
             # Incrementally log training progress
+            print(f"increment: {i % self.args['batches_per_train_log']}")
             if i % self.args['batches_per_train_log'] == 0:
                 print(f'Train batch {i}: ' +
                                  f'loss: {(loss.detach().item()):.2f} ' +
@@ -606,41 +607,6 @@ class BrainToTextDecoder_Trainer:
                 val_PERs.append(val_metrics['avg_PER'])
                 val_losses.append(val_metrics['avg_loss'])
                 val_results.append(val_metrics)
-
-                # Determine if new best day. Based on if PER is lower, or in the case of a PER tie, if loss is lower
-                new_best = False
-                if val_metrics['avg_PER'] < self.best_val_PER:
-                    self.logger.info(f"New best test PER {self.best_val_PER:.4f} --> {val_metrics['avg_PER']:.4f}")
-                    self.best_val_PER = val_metrics['avg_PER']
-                    self.best_val_loss = val_metrics['avg_loss']
-                    new_best = True
-                elif val_metrics['avg_PER'] == self.best_val_PER and (val_metrics['avg_loss'] < self.best_val_loss):
-                    self.logger.info(f"New best test loss {self.best_val_loss:.4f} --> {val_metrics['avg_loss']:.4f}")
-                    self.best_val_loss = val_metrics['avg_loss']
-                    new_best = True
-
-                if new_best:
-
-                    # Checkpoint if metrics have improved
-                    if save_best_checkpoint:
-                        self.logger.info(f"Checkpointing model")
-                        self.save_model_checkpoint(f'{self.args["checkpoint_dir"]}/best_checkpoint', self.best_val_PER,
-                                                   self.best_val_loss)
-
-                    # save validation metrics to pickle file
-                    if self.args['save_val_metrics']:
-                        with open(f'{self.args["checkpoint_dir"]}/val_metrics.pkl', 'wb') as f:
-                            pickle.dump(val_metrics, f)
-
-                    val_steps_since_improvement = 0
-
-                else:
-                    val_steps_since_improvement += 1
-
-                # Optionally save this validation checkpoint, regardless of performance
-                if self.args['save_all_val_steps']:
-                    self.save_model_checkpoint(f'{self.args["checkpoint_dir"]}/checkpoint_batch_{i}',
-                                               val_metrics['avg_PER'])
 
                 # Early stopping
                 if early_stopping and (val_steps_since_improvement >= early_stopping_val_steps):
