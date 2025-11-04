@@ -97,6 +97,9 @@ class GRUDecoder(nn.Module):
 
         # Apply day-specific layer to (hopefully) project neural data from the different days to the same latent space
         day_weights = torch.stack([self.day_weights[i] for i in day_idx], dim=0)
+
+        day_weights = day_weights / (day_weights.norm(dim=-1, keepdim=True) + 1e-8)
+
         day_biases = torch.cat([self.day_biases[i] for i in day_idx], dim=0).unsqueeze(1)
         x = (x - x.mean(dim=1, keepdim=True)) / (x.std(dim=1, keepdim=True) + 1e-8)
         x = torch.einsum("btd,bdk->btk", x, day_weights) + day_biases

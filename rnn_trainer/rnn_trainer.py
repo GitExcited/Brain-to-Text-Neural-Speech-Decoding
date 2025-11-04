@@ -516,7 +516,7 @@ class BrainToTextDecoder_Trainer:
             if self.args['grad_norm_clip_value'] > 0:
                 grad_norm = torch.nn.utils.clip_grad_norm_(self.model.parameters(),
                                                            max_norm=self.args['grad_norm_clip_value'],
-                                                           error_if_nonfinite=True,
+                                                           error_if_nonfinite=False,
                                                            foreach=True
                                                            )
 
