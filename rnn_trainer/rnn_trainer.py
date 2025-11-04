@@ -509,10 +509,7 @@ class BrainToTextDecoder_Trainer:
                 )
 
                 loss = torch.mean(loss)  # take mean loss over batches
-                if not torch.isfinite(loss):
-                    print("Non-finite loss detected!")
-                    print("Loss:", loss.item())
-                    raise ValueError("NaN or inf in loss")
+
             loss.backward()
 
             # Clip gradient

@@ -73,6 +73,8 @@ class GRUDecoder(nn.Module):
             bidirectional=False,
         )
 
+        self.linear_norm_hidden = nn.LayerNorm(n_units)
+
         # Set recurrent units to have orthogonal param init and input layers to have xavier init
         for name, param in self.gru.named_parameters():
             if "weight_hh" in name:
@@ -126,6 +128,9 @@ class GRUDecoder(nn.Module):
 
         # Pass input through RNN
         output, hidden_states = self.gru(x, states)
+        
+        # layer norm
+        output = self.linear_norm_hidden(output)
 
         # Compute logits
         logits = self.out(output)
