@@ -289,7 +289,7 @@ class BrainToTextDecoder_Trainer:
             optim = torch.optim.SGD(param_groups,  lr = base_lr, momentum = self.args["momentum"], weight_decay=self.args['weight_decay'])
 
         elif optimizer_name == "rmsprop":
-            optim = torch.optim.RMSprop(param_groups,  lr = base_lr, momentum = self.args["momentum"], weight_decay = 0.0, alpha = self.args["alpha"])
+            optim = torch.optim.RMSprop(param_groups,  lr = base_lr, momentum = self.args["momentum"], weight_decay = 1e-4, alpha = self.args["alpha"])
         elif optimizer_name == "novograd":
             from torch_optimizer import NovoGrad
             optim = NovoGrad(param_groups, lr=base_lr, betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
