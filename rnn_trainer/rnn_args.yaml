@@ -29,15 +29,15 @@ save_val_metrics: true # whether to save validation metrics during training
 early_stopping: false # whether to use early stopping based on validation metrics
 early_stopping_val_steps: 20 # number of validation steps to wait before stopping training if no improvement is seen
 
-num_training_batches: 4800 # number of training batches to run
+num_training_batches: 2000 # number of training batches to run
 lr_scheduler_type: cosine # type of learning rate scheduler to use
 lr_max: 0.005 # maximum learning rate for the main model
 lr_min: 0.0001 # minimum learning rate for the main model
-lr_decay_steps: 4800 # number of steps for the learning rate decay
+lr_decay_steps: 2000 # number of steps for the learning rate decay
 lr_warmup_steps: 1000 # number of warmup steps for the learning rate scheduler
 lr_max_day: 0.005 # maximum learning rate for the day specific input layers
 lr_min_day: 0.0001 # minimum learning rate for the day specific input layers
-lr_decay_steps_day: 4800 # number of steps for the learning rate decay for the day specific input layers
+lr_decay_steps_day: 2000 # number of steps for the learning rate decay for the day specific input layers
 lr_warmup_steps_day: 1000 # number of warmup steps for the learning rate scheduler for the day specific input layers
 
 optimizer_name: AdamW # optimizer name to use during training
@@ -51,8 +51,8 @@ weight_decay_day: 0 # weight decay for the day specific input layers
 seed: 10 # random seed for reproducibility
 grad_norm_clip_value: 10 # gradient norm clipping value
 
-batches_per_train_log: 960 # number of batches per training log
-batches_per_val_step: 960 # number of batches per validation step
+batches_per_train_log: 500 # number of batches per training log
+batches_per_val_step: 500 # number of batches per validation step
 
 batches_per_save: 0 # number of batches per save
 log_individual_day_val_PER: true # whether to log individual day validation performance

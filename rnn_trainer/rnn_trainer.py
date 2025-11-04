@@ -251,7 +251,7 @@ class BrainToTextDecoder_Trainer:
         Day weights should have a separate learning rate
         '''
         optimizer_name = self.args['optimizer_name'].lower()
-        lr_mult = {"adamw": 1, "novograd": 1, "lion": 0.25, "sgd": 5, "rmsprop": 0.1}
+        lr_mult = {"adamw": 1, "novograd": 1, "lion": 0.25, "sgd": 5, "rmsprop": 0.05}
         base_lr = self.args['lr_max'] * lr_mult[optimizer_name]
 
         bias_params = [p for name, p in self.model.named_parameters() if 'gru.bias' in name or 'out.bias' in name]
