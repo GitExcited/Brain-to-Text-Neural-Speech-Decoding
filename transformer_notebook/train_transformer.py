@@ -351,11 +351,11 @@ def validation(model, loader, criterion, device):
 
     with torch.no_grad():
         for batch in loader:
-            inputData = batch["feature"].to(device)
-            targets = batch["label"].long().to(device)
-            feature_mask = batch["feature_mask"].to(device)
-            label_mask = batch["label_mask"].to(device)
-            day_idx = batch["day"].to(device)
+            inputData = batch["feature"].to(device, non_blocking=True)
+            targets = batch["label"].long().to(device, non_blocking=True)
+            feature_mask = batch["feature_mask"].to(device, non_blocking=True)
+            label_mask = batch["label_mask"].to(device, non_blocking=True)
+            day_idx = batch["day"].to(device, non_blocking=True)
 
             logits = model(inputData, targets, feature_mask, label_mask, day_idx)
             logits = logits.permute(0, 2, 1)
@@ -421,7 +421,9 @@ def train(args):
         collate_fn=custom_collate_fn,
         num_workers=args.num_workers,
         pin_memory=True if args.cuda else False,
-        shuffle=True
+        shuffle=True,
+        persistent_workers=True if args.num_workers > 0 else False,  # Keep workers alive between epochs
+        prefetch_factor=2 if args.num_workers > 0 else None  # Prefetch batches
     )
     
     val_dataset = BrainToTextDataset(
@@ -435,7 +437,8 @@ def train(args):
         batch_size=args.batch_size, 
         collate_fn=custom_collate_fn,
         num_workers=args.num_workers,
-        pin_memory=True if args.cuda else False
+        pin_memory=True if args.cuda else False,
+        persistent_workers=True if args.num_workers > 0 else False
     )
     
     # Create model
@@ -509,13 +512,14 @@ def train(args):
         epoch_lrs = []
         
         for batch_idx, batch in enumerate(train_loader):
-            inputData = batch["feature"].to(device)
-            targets = batch["label"].long().to(device)
-            feature_mask = batch["feature_mask"].to(device)
-            label_mask = batch["label_mask"].to(device)
-            day_idx = batch["day"].to(device)
+            # Use non_blocking=True with pin_memory for async CPU->GPU transfer
+            inputData = batch["feature"].to(device, non_blocking=True)
+            targets = batch["label"].long().to(device, non_blocking=True)
+            feature_mask = batch["feature_mask"].to(device, non_blocking=True)
+            label_mask = batch["label_mask"].to(device, non_blocking=True)
+            day_idx = batch["day"].to(device, non_blocking=True)
             
-            optimizer.zero_grad()
+            optimizer.zero_grad(set_to_none=True)  # More efficient than zero_grad()
             
             logits = model(inputData, targets, feature_mask, label_mask, day_idx)
             logits = logits.permute(0, 2, 1)
@@ -537,6 +541,10 @@ def train(args):
         
         # Validation
         metrics = validation(model, val_loader, criterion, device)
+        
+        # Free up GPU memory after validation
+        if args.cuda and torch.cuda.is_available():
+            torch.cuda.empty_cache()
         
         avg_train_loss = sum(epoch_losses) / len(epoch_losses)
         avg_lr = sum(epoch_lrs) / len(epoch_lrs)
