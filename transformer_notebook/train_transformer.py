@@ -95,18 +95,25 @@ class BrainToTextDataset(Dataset):
                         skipped += 1
                         continue
                     
+                    # Skip empty or very short sequences
+                    if len(X_trial) < 2 or len(y_trial) < 2:
+                        skipped += 1
+                        continue
+                    
                     # Clip extreme values to prevent overflow
                     X_trial = np.clip(X_trial, -10.0, 10.0)
                     
                     self.X.append({
                         "features": torch.from_numpy(X_trial),
                         "labels": torch.from_numpy(y_trial),
+                        "feature_len": len(X_trial),  # Store actual length
+                        "label_len": len(y_trial),    # Store actual length
                         "day_id": day_idx,
                         "trial_id": trial_idx
                     })
         
         if skipped > 0:
-            print(f"Skipped {skipped} trials with NaN/Inf values")
+            print(f"Skipped {skipped} trials with NaN/Inf/empty values")
         print(f"Loaded {len(self.X)} trials from {self.days} days ({split})")
 
     def __len__(self):
@@ -121,12 +128,26 @@ def custom_collate_fn(batch):
     labels = [d["labels"] for d in batch]
     day_ids = [d["day_id"] for d in batch]
     trial_ids = [d["trial_id"] for d in batch]
+    feature_lens = [d["feature_len"] for d in batch]
+    label_lens = [d["label_len"] for d in batch]
 
     padded_features = pad_sequence(features, batch_first=True, padding_value=0)
     padded_labels = pad_sequence(labels, batch_first=True, padding_value=0)
-
-    feature_padding_mask = (padded_features[:, :, 0] == 0)
-    label_padding_mask = (padded_labels == 0)
+    
+    batch_size = padded_features.size(0)
+    max_feature_len = padded_features.size(1)
+    max_label_len = padded_labels.size(1)
+    
+    # Create masks based on actual lengths, not values
+    # True = masked (ignored), False = valid
+    feature_padding_mask = torch.zeros(batch_size, max_feature_len, dtype=torch.bool)
+    label_padding_mask = torch.zeros(batch_size, max_label_len, dtype=torch.bool)
+    
+    for i in range(batch_size):
+        if feature_lens[i] < max_feature_len:
+            feature_padding_mask[i, feature_lens[i]:] = True
+        if label_lens[i] < max_label_len:
+            label_padding_mask[i, label_lens[i]:] = True
 
     return {
         "feature": padded_features,
@@ -265,8 +286,28 @@ class NeuralToPhonemeTransformer(nn.Module):
         class_id_in = class_id_tokens[:, :-1]
         seq_len = class_id_in.size(1)
         
+        # Safety check: ensure seq_len > 0
+        if seq_len == 0:
+            raise ValueError("Sequence length is 0, cannot process empty sequences")
+        
         # Create mask on the same device as input
         subsequent_mask = make_subsequent_mask(seq_len, class_id_in.device)
+        
+        # Safety: ensure masks don't mask everything (would cause NaN in attention)
+        # If all positions are masked, unmask the first position
+        if neural_feature_padding_mask is not None:
+            all_masked = neural_feature_padding_mask.all(dim=1)
+            if all_masked.any():
+                neural_feature_padding_mask = neural_feature_padding_mask.clone()
+                neural_feature_padding_mask[all_masked, 0] = False
+        
+        if class_id_padding_mask is not None:
+            # Adjust for the :-1 slice
+            adjusted_mask = class_id_padding_mask[:, :-1]
+            all_masked = adjusted_mask.all(dim=1)
+            if all_masked.any():
+                class_id_padding_mask = class_id_padding_mask.clone()
+                class_id_padding_mask[all_masked, 0] = False
         
         memory = self.encoder(
             neural_feature_input, 
@@ -390,27 +431,41 @@ def validation(model, loader, criterion, device):
             label_mask = batch["label_mask"].to(device, non_blocking=True)
             day_idx = batch["day"].to(device, non_blocking=True)
 
-            logits = model(inputData, targets, feature_mask, label_mask, day_idx)
-            logits = logits.permute(0, 2, 1)
+            try:
+                logits = model(inputData, targets, feature_mask, label_mask, day_idx)
+                logits = logits.permute(0, 2, 1)
 
-            loss = criterion(logits, targets[:, 1:])
-            metrics['losses'].append(loss.item())
+                loss = criterion(logits, targets[:, 1:])
+                
+                # Skip NaN losses in validation too
+                if torch.isnan(loss) or torch.isinf(loss):
+                    continue
+                    
+                metrics['losses'].append(loss.item())
 
-            batch_size = logits.shape[0]
-            seq_lens = (~label_mask).sum(dim=1)
+                batch_size = logits.shape[0]
+                # Use label_mask to get actual sequence lengths
+                seq_lens = (~label_mask).sum(dim=1)
 
-            for i in range(batch_size):
-                pred_seq = torch.argmax(logits[i, :, :seq_lens[i]], dim=0).cpu().numpy()
-                pred_seq = np.array([x for x, _ in itertools.groupby(pred_seq) if x != 0])
-                true_seq = targets[i, 1:seq_lens[i]+1].cpu().numpy()
+                for i in range(batch_size):
+                    actual_len = min(seq_lens[i].item(), logits.shape[2])
+                    if actual_len <= 1:
+                        continue
+                    pred_seq = torch.argmax(logits[i, :, :actual_len-1], dim=0).cpu().numpy()
+                    pred_seq = np.array([x for x, _ in itertools.groupby(pred_seq) if x != 0])
+                    true_seq = targets[i, 1:actual_len].cpu().numpy()
 
-                edit_dist = editdistance.eval(pred_seq, true_seq)
-                total_edit_distance += edit_dist
-                total_seq_length += len(true_seq)
+                    edit_dist = editdistance.eval(pred_seq, true_seq)
+                    total_edit_distance += edit_dist
+                    total_seq_length += len(true_seq)
 
-                day = day_idx[i].item()
-                day_per[day]['total_edit_distance'] += edit_dist
-                day_per[day]['total_seq_length'] += len(true_seq)
+                    day = day_idx[i].item()
+                    if day in day_per:
+                        day_per[day]['total_edit_distance'] += edit_dist
+                        day_per[day]['total_seq_length'] += len(true_seq)
+            except Exception as e:
+                print(f"Validation batch error: {e}")
+                continue
 
     avg_PER = total_edit_distance / max(total_seq_length, 1)
     metrics['day_PERs'] = day_per
