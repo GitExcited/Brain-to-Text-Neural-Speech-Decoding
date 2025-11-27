@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import json
 from datetime import datetime
+from torch.utils.tensorboard import SummaryWriter
 
 # ============================================================================
 # Configuration
@@ -419,6 +420,10 @@ def train(args):
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     
+    # Initialize TensorBoard
+    writer = SummaryWriter(log_dir=output_dir / 'tensorboard')
+    print(f"TensorBoard logs: {output_dir / 'tensorboard'}")
+    
     # Load datasets
     print(f"\nLoading data from: {args.data_dir}")
     train_dataset = BrainToTextDataset(
@@ -570,6 +575,12 @@ def train(args):
         print(f"  PER: {metrics['avg_PER']:.4f}")
         print(f"  Avg LR: {avg_lr:.2e}")
         print("-" * 60)
+        
+        # Log to TensorBoard
+        writer.add_scalars('Loss', {'train': avg_train_loss, 'val': metrics['avg_loss']}, epoch + 1)
+        writer.add_scalar('PER', metrics['avg_PER'], epoch + 1)
+        writer.add_scalar('Learning_Rate', avg_lr, epoch + 1)
+        writer.flush()
         
         # Save best model
         if metrics['avg_PER'] < history['best_per']:
