@@ -148,6 +148,19 @@ class PositionalEncoding(nn.Module):
         return x
 
 
+def init_weights_xavier(module):
+    """Apply Xavier initialization to linear layers and embeddings."""
+    if isinstance(module, nn.Linear):
+        nn.init.xavier_uniform_(module.weight)
+        if module.bias is not None:
+            nn.init.zeros_(module.bias)
+    elif isinstance(module, nn.Embedding):
+        nn.init.xavier_uniform_(module.weight)
+    elif isinstance(module, nn.LayerNorm):
+        nn.init.ones_(module.weight)
+        nn.init.zeros_(module.bias)
+
+
 class NeuralEncoder(nn.Module):
     def __init__(self, d_model=256, nhead=4, num_layers=4):
         super().__init__()
@@ -209,6 +222,10 @@ class NeuralToPhonemeTransformer(nn.Module):
         super().__init__()
         self.encoder = NeuralEncoder(d_model=d_model)
         self.decoder = NeuralDecoder(vocab_size, d_model=d_model, num_days=num_days)
+        
+        # Apply Xavier initialization
+        self.apply(init_weights_xavier)
+        print("Applied Xavier initialization to all layers")
 
     def forward(self, neural_feature_input, class_id_tokens, 
                 neural_feature_padding_mask, class_id_padding_mask, day_idx):
@@ -232,6 +249,90 @@ class NeuralToPhonemeTransformer(nn.Module):
             day_idx=day_idx
         )
         return logits
+
+
+# ============================================================================
+# Learning Rate Scheduler with Warmup
+# ============================================================================
+
+class WarmupCosineScheduler:
+    """Learning rate scheduler with linear warmup and cosine decay."""
+    def __init__(self, optimizer, warmup_steps, total_steps, min_lr=1e-7):
+        self.optimizer = optimizer
+        self.warmup_steps = warmup_steps
+        self.total_steps = total_steps
+        self.min_lr = min_lr
+        self.base_lrs = [group['lr'] for group in optimizer.param_groups]
+        self.current_step = 0
+        
+    def step(self):
+        self.current_step += 1
+        lr = self.get_lr()
+        for param_group, base_lr in zip(self.optimizer.param_groups, self.base_lrs):
+            param_group['lr'] = lr
+        return lr
+    
+    def get_lr(self):
+        if self.current_step < self.warmup_steps:
+            # Linear warmup
+            return self.base_lrs[0] * (self.current_step / max(1, self.warmup_steps))
+        else:
+            # Cosine decay
+            progress = (self.current_step - self.warmup_steps) / max(1, self.total_steps - self.warmup_steps)
+            return self.min_lr + 0.5 * (self.base_lrs[0] - self.min_lr) * (1 + math.cos(math.pi * progress))
+    
+    def state_dict(self):
+        return {'current_step': self.current_step}
+    
+    def load_state_dict(self, state_dict):
+        self.current_step = state_dict['current_step']
+
+
+# ============================================================================
+# Early Stopping
+# ============================================================================
+
+class EarlyStopping:
+    """Early stopping to prevent overfitting."""
+    def __init__(self, patience=10, min_delta=0.001, mode='min'):
+        self.patience = patience
+        self.min_delta = min_delta
+        self.mode = mode
+        self.counter = 0
+        self.best_score = None
+        self.early_stop = False
+        
+    def __call__(self, score):
+        if self.best_score is None:
+            self.best_score = score
+            return False
+        
+        if self.mode == 'min':
+            improved = score < self.best_score - self.min_delta
+        else:
+            improved = score > self.best_score + self.min_delta
+            
+        if improved:
+            self.best_score = score
+            self.counter = 0
+        else:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.early_stop = True
+                return True
+        return False
+    
+    def state_dict(self):
+        return {
+            'counter': self.counter,
+            'best_score': self.best_score,
+            'early_stop': self.early_stop
+        }
+    
+    def load_state_dict(self, state_dict):
+        self.counter = state_dict['counter']
+        self.best_score = state_dict['best_score']
+        self.early_stop = state_dict['early_stop']
 
 
 # ============================================================================
@@ -353,24 +454,59 @@ def train(args):
     
     # Setup training
     criterion = nn.CrossEntropyLoss(ignore_index=0)
-    optimizer = optim.AdamW(model.parameters(), lr=args.lr)
+    optimizer = optim.AdamW(model.parameters(), lr=args.lr, weight_decay=0.01)
+    
+    # Learning rate scheduler with warmup
+    total_steps = len(train_loader) * args.epochs
+    warmup_steps = min(len(train_loader) * args.warmup_epochs, total_steps // 10)
+    scheduler = WarmupCosineScheduler(
+        optimizer, 
+        warmup_steps=warmup_steps,
+        total_steps=total_steps,
+        min_lr=args.lr * 0.01
+    )
+    print(f"LR Scheduler: {warmup_steps} warmup steps, {total_steps} total steps")
+    
+    # Early stopping
+    early_stopping = EarlyStopping(
+        patience=args.patience,
+        min_delta=args.min_delta,
+        mode='min'
+    )
+    print(f"Early stopping: patience={args.patience}, min_delta={args.min_delta}")
     
     # Training history
     history = {
         'train_losses': [],
         'val_losses': [],
         'avg_per': [],
+        'learning_rates': [],
         'best_per': float('inf'),
         'best_epoch': 0
     }
+    
+    # Resume from checkpoint if exists
+    start_epoch = 0
+    resume_checkpoint = output_dir / 'latest_checkpoint.pt'
+    if args.resume and resume_checkpoint.exists():
+        print(f"\nResuming from checkpoint: {resume_checkpoint}")
+        checkpoint = torch.load(resume_checkpoint, map_location=device)
+        model.load_state_dict(checkpoint['model_state_dict'])
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+        early_stopping.load_state_dict(checkpoint['early_stopping_state_dict'])
+        history = checkpoint['history']
+        start_epoch = checkpoint['epoch']
+        print(f"Resumed from epoch {start_epoch}, best PER: {history['best_per']:.4f}")
     
     # Training loop
     print(f"\nStarting training for {args.epochs} epochs...")
     print("=" * 60)
     
-    for epoch in range(args.epochs):
+    for epoch in range(start_epoch, args.epochs):
         model.train()
         epoch_losses = []
+        epoch_lrs = []
         
         for batch_idx, batch in enumerate(train_loader):
             inputData = batch["feature"].to(device)
@@ -389,24 +525,31 @@ def train(args):
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             optimizer.step()
             
+            # Step the learning rate scheduler
+            current_lr = scheduler.step()
+            epoch_lrs.append(current_lr)
+            
             epoch_losses.append(loss.item())
             
             # Log progress
             if batch_idx % args.log_interval == 0:
-                print(f"Epoch {epoch+1}/{args.epochs} | Batch {batch_idx}/{len(train_loader)} | Loss: {loss.item():.4f}")
+                print(f"Epoch {epoch+1}/{args.epochs} | Batch {batch_idx}/{len(train_loader)} | Loss: {loss.item():.4f} | LR: {current_lr:.2e}")
         
         # Validation
         metrics = validation(model, val_loader, criterion, device)
         
         avg_train_loss = sum(epoch_losses) / len(epoch_losses)
+        avg_lr = sum(epoch_lrs) / len(epoch_lrs)
         history['train_losses'].append(avg_train_loss)
         history['val_losses'].append(metrics['avg_loss'])
         history['avg_per'].append(metrics['avg_PER'])
+        history['learning_rates'].append(avg_lr)
         
         print(f"\nEpoch {epoch+1} Summary:")
         print(f"  Train Loss: {avg_train_loss:.4f}")
         print(f"  Val Loss: {metrics['avg_loss']:.4f}")
         print(f"  PER: {metrics['avg_PER']:.4f}")
+        print(f"  Avg LR: {avg_lr:.2e}")
         print("-" * 60)
         
         # Save best model
@@ -417,19 +560,38 @@ def train(args):
                 'epoch': epoch + 1,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
+                'scheduler_state_dict': scheduler.state_dict(),
                 'per': metrics['avg_PER'],
-                'loss': metrics['avg_loss']
+                'loss': metrics['avg_loss'],
+                'history': history
             }, output_dir / 'best_model.pt')
             print(f"  ** New best model saved! PER: {metrics['avg_PER']:.4f}")
         
-        # Save checkpoint
+        # Save latest checkpoint (always, for resumption)
+        torch.save({
+            'epoch': epoch + 1,
+            'model_state_dict': model.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'scheduler_state_dict': scheduler.state_dict(),
+            'early_stopping_state_dict': early_stopping.state_dict(),
+            'history': history
+        }, output_dir / 'latest_checkpoint.pt')
+        
+        # Save periodic checkpoint
         if (epoch + 1) % args.save_interval == 0:
             torch.save({
                 'epoch': epoch + 1,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
+                'scheduler_state_dict': scheduler.state_dict(),
                 'history': history
             }, output_dir / f'checkpoint_epoch_{epoch+1}.pt')
+        
+        # Check early stopping
+        if early_stopping(metrics['avg_PER']):
+            print(f"\n** Early stopping triggered! No improvement for {args.patience} epochs.")
+            print(f"** Best PER: {history['best_per']:.4f} at epoch {history['best_epoch']}")
+            break
     
     # Save final model and history
     torch.save({
@@ -455,24 +617,46 @@ def train(args):
 
 def plot_training_curves(history, output_dir):
     """Plot and save training curves"""
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
     
     # Loss curves
-    axes[0].plot(history['train_losses'], label='Train Loss')
-    axes[0].plot(history['val_losses'], label='Val Loss')
-    axes[0].set_xlabel('Epoch')
-    axes[0].set_ylabel('Loss')
-    axes[0].set_title('Training and Validation Loss')
-    axes[0].legend()
-    axes[0].grid(True, alpha=0.3)
+    axes[0, 0].plot(history['train_losses'], label='Train Loss')
+    axes[0, 0].plot(history['val_losses'], label='Val Loss')
+    axes[0, 0].set_xlabel('Epoch')
+    axes[0, 0].set_ylabel('Loss')
+    axes[0, 0].set_title('Training and Validation Loss')
+    axes[0, 0].legend()
+    axes[0, 0].grid(True, alpha=0.3)
     
     # PER curve
-    axes[1].plot(history['avg_per'], label='PER', color='green')
-    axes[1].set_xlabel('Epoch')
-    axes[1].set_ylabel('Phoneme Error Rate')
-    axes[1].set_title('Phoneme Error Rate over Training')
-    axes[1].legend()
-    axes[1].grid(True, alpha=0.3)
+    axes[0, 1].plot(history['avg_per'], label='PER', color='green')
+    axes[0, 1].axhline(y=history['best_per'], color='red', linestyle='--', label=f'Best PER: {history["best_per"]:.4f}')
+    axes[0, 1].set_xlabel('Epoch')
+    axes[0, 1].set_ylabel('Phoneme Error Rate')
+    axes[0, 1].set_title('Phoneme Error Rate over Training')
+    axes[0, 1].legend()
+    axes[0, 1].grid(True, alpha=0.3)
+    
+    # Learning rate curve
+    if 'learning_rates' in history and history['learning_rates']:
+        axes[1, 0].plot(history['learning_rates'], label='Learning Rate', color='orange')
+        axes[1, 0].set_xlabel('Epoch')
+        axes[1, 0].set_ylabel('Learning Rate')
+        axes[1, 0].set_title('Learning Rate Schedule')
+        axes[1, 0].legend()
+        axes[1, 0].grid(True, alpha=0.3)
+        axes[1, 0].set_yscale('log')
+    
+    # Train vs Val loss difference (overfitting indicator)
+    if len(history['train_losses']) > 0 and len(history['val_losses']) > 0:
+        loss_diff = [v - t for t, v in zip(history['train_losses'], history['val_losses'])]
+        axes[1, 1].plot(loss_diff, label='Val - Train Loss', color='purple')
+        axes[1, 1].axhline(y=0, color='gray', linestyle='--')
+        axes[1, 1].set_xlabel('Epoch')
+        axes[1, 1].set_ylabel('Loss Difference')
+        axes[1, 1].set_title('Overfitting Indicator (Val - Train Loss)')
+        axes[1, 1].legend()
+        axes[1, 1].grid(True, alpha=0.3)
     
     plt.tight_layout()
     plt.savefig(output_dir / 'training_curves.png', dpi=150)
@@ -503,6 +687,20 @@ def main():
                         help='Learning rate')
     parser.add_argument('--num-workers', type=int, default=4,
                         help='Number of data loader workers')
+    
+    # Learning rate scheduler arguments
+    parser.add_argument('--warmup-epochs', type=int, default=2,
+                        help='Number of warmup epochs for LR scheduler')
+    
+    # Early stopping arguments
+    parser.add_argument('--patience', type=int, default=10,
+                        help='Early stopping patience (epochs without improvement)')
+    parser.add_argument('--min-delta', type=float, default=0.001,
+                        help='Minimum improvement for early stopping')
+    
+    # Resume training
+    parser.add_argument('--resume', action='store_true',
+                        help='Resume training from latest checkpoint')
     
     # Device arguments
     parser.add_argument('--cuda', action='store_true', default=True,

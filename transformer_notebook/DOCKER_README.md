@@ -84,25 +84,28 @@ Your HDF5 data should be organized as:
 
 #### Option A: Using docker-compose (Recommended)
 
+By default, the container looks for data in `./data` and saves outputs to `./outputs` (relative to the `transformer_notebook` folder). Just run:
+
 ```bash
-# Set your data path and run
-DATA_PATH=/path/to/your/data OUTPUT_PATH=./outputs docker-compose up transformer-training
+# Simple run with default paths (./data and ./outputs)
+docker-compose up transformer-training
 
 # Or with custom training parameters
-DATA_PATH=/path/to/your/data \
-OUTPUT_PATH=./outputs \
 EPOCHS=10 \
 BATCH_SIZE=32 \
 LR=0.001 \
 docker-compose up transformer-training
+
+# Override data path if needed
+DATA_PATH=/custom/path OUTPUT_PATH=/custom/output docker-compose up transformer-training
 ```
 
 #### Option B: Using docker run directly
 
 ```bash
 docker run --gpus all \
-  -v /path/to/your/data:/data:ro \
-  -v $(pwd)/outputs:/outputs \
+  -v ./data:/data:ro \
+  -v ./outputs:/outputs \
   --shm-size=8g \
   brain-to-text-transformer:latest \
   --data-dir /data \
