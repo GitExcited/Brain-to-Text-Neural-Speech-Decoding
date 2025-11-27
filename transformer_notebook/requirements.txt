@@ -1,0 +1,17 @@
+# Brain-to-Text Transformer Training Requirements
+# For use with NVIDIA CUDA Docker images
+
+# PyTorch with CUDA support (installed via pip in Dockerfile)
+# torch>=2.0.0
+# torchaudio>=2.0.0
+# torchvision>=0.15.0
+
+# Core dependencies
+numpy>=1.21.0
+h5py>=3.7.0
+matplotlib>=3.5.0
+editdistance>=0.6.0
+
+# Optional but useful
+tqdm>=4.64.0
+pandas>=1.4.0
