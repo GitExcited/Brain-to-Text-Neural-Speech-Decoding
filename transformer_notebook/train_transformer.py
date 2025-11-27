@@ -83,18 +83,30 @@ class BrainToTextDataset(Dataset):
         self.days = len(self.paths)
         
         self.X = []
+        skipped = 0
         for day_idx, train_path in enumerate(paths):
             with h5py.File(train_path, 'r') as f:
                 for trial_idx, trial in enumerate(f):
-                    X_trial = torch.from_numpy(np.array(f[trial]["input_features"]))
-                    y_trial = torch.from_numpy(np.array(f[trial]["seq_class_ids"]))
+                    X_trial = np.array(f[trial]["input_features"], dtype=np.float32)
+                    y_trial = np.array(f[trial]["seq_class_ids"])
+                    
+                    # Skip trials with NaN/Inf values
+                    if np.isnan(X_trial).any() or np.isinf(X_trial).any():
+                        skipped += 1
+                        continue
+                    
+                    # Clip extreme values to prevent overflow
+                    X_trial = np.clip(X_trial, -10.0, 10.0)
+                    
                     self.X.append({
-                        "features": X_trial,
-                        "labels": y_trial,
+                        "features": torch.from_numpy(X_trial),
+                        "labels": torch.from_numpy(y_trial),
                         "day_id": day_idx,
                         "trial_id": trial_idx
                     })
         
+        if skipped > 0:
+            print(f"Skipped {skipped} trials with NaN/Inf values")
         print(f"Loaded {len(self.X)} trials from {self.days} days ({split})")
 
     def __len__(self):
@@ -136,8 +148,9 @@ def make_subsequent_mask(size, device):
 
 
 class PositionalEncoding(nn.Module):
-    def __init__(self, d_model, max_len=10000):
+    def __init__(self, d_model, max_len=10000, dropout=0.1):
         super().__init__()
+        self.dropout = nn.Dropout(p=dropout)
         
         pe = torch.zeros(max_len, d_model)
         pos = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
@@ -152,37 +165,44 @@ class PositionalEncoding(nn.Module):
     def forward(self, x):
         T = x.size(1)
         x = x + self.pe[:, :T, :]
-        return x
+        return self.dropout(x)
 
 
 def init_weights_xavier(module):
-    """Apply Xavier initialization to linear layers and embeddings."""
+    """Apply Xavier initialization to linear layers and embeddings with small gain for stability."""
     if isinstance(module, nn.Linear):
-        nn.init.xavier_uniform_(module.weight)
+        # Use smaller gain for better stability
+        nn.init.xavier_uniform_(module.weight, gain=0.5)
         if module.bias is not None:
             nn.init.zeros_(module.bias)
     elif isinstance(module, nn.Embedding):
-        nn.init.xavier_uniform_(module.weight)
+        # Normal init for embeddings is more stable
+        nn.init.normal_(module.weight, mean=0.0, std=0.02)
     elif isinstance(module, nn.LayerNorm):
         nn.init.ones_(module.weight)
         nn.init.zeros_(module.bias)
 
 
 class NeuralEncoder(nn.Module):
-    def __init__(self, d_model=256, nhead=4, num_layers=4):
+    def __init__(self, d_model=256, nhead=4, num_layers=4, dropout=0.1):
         super().__init__()
         self.input_proj = nn.Linear(512, d_model)
-        self.pos = PositionalEncoding(d_model)
+        self.input_norm = nn.LayerNorm(d_model)  # Normalize after projection
+        self.pos = PositionalEncoding(d_model, dropout=dropout)
         
         encoder_layer = nn.TransformerEncoderLayer(
             d_model=d_model,
             nhead=nhead,
-            batch_first=True
+            dim_feedforward=d_model * 4,
+            dropout=dropout,
+            batch_first=True,
+            norm_first=True  # Pre-norm for better stability
         )
         self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
 
     def forward(self, neural_feature, neural_feature_key_padding_mask=None):
         neural_feature = self.input_proj(neural_feature)
+        neural_feature = self.input_norm(neural_feature)  # Normalize for stability
         neural_feature = self.pos(neural_feature)
         return self.encoder(
             neural_feature,
@@ -191,28 +211,34 @@ class NeuralEncoder(nn.Module):
 
 
 class NeuralDecoder(nn.Module):
-    def __init__(self, vocab_size, d_model=256, nhead=4, num_layers=4, num_days=1000):
+    def __init__(self, vocab_size, d_model=256, nhead=4, num_layers=4, num_days=1000, dropout=0.1):
         super().__init__()
         self.embed = nn.Embedding(vocab_size, d_model, padding_idx=0)
+        self.embed_scale = math.sqrt(d_model)  # Scale embeddings
         self.day_embed = nn.Embedding(num_days, d_model)
-        self.pos = PositionalEncoding(d_model)
+        self.pos = PositionalEncoding(d_model, dropout=dropout)
+        self.embed_norm = nn.LayerNorm(d_model)  # Normalize embeddings
         
         decoder_layer = nn.TransformerDecoderLayer(
             d_model=d_model,
             nhead=nhead,
-            batch_first=True
+            dim_feedforward=d_model * 4,
+            dropout=dropout,
+            batch_first=True,
+            norm_first=True  # Pre-norm for better stability
         )
         self.decoder = nn.TransformerDecoder(decoder_layer, num_layers=num_layers)
         self.fc = nn.Linear(d_model, vocab_size)
 
     def forward(self, class_id, memory, day_idx, class_id_mask=None, 
                 class_id_key_padding_mask=None, memory_key_padding_mask=None):
-        class_id = self.embed(class_id)
+        class_id = self.embed(class_id) * self.embed_scale  # Scale embeddings
         class_id = self.pos(class_id)
         
         day_vec = self.day_embed(day_idx)
         day_vec = day_vec.unsqueeze(1)
         class_id = class_id + day_vec
+        class_id = self.embed_norm(class_id)  # Normalize before decoder
         
         out = self.decoder(
             class_id,
@@ -442,11 +468,16 @@ def train(args):
         prefetch_factor=2 if args.num_workers > 0 else None  # Prefetch batches
     )
     
+    # Filter validation paths to only include files that exist
+    val_paths = [path.replace("train", "val") for path in train_dataset.paths]
+    val_paths = [p for p in val_paths if os.path.exists(p)]
+    print(f"Found {len(val_paths)} validation files (some sessions may not have val data)")
+    
     val_dataset = BrainToTextDataset(
         root_dir=args.data_dir, 
         split='val', 
         max_days=args.max_days,
-        paths=[path.replace("train", "val") for path in train_dataset.paths]
+        paths=val_paths
     )
     val_loader = DataLoader(
         val_dataset, 
@@ -471,9 +502,9 @@ def train(args):
     print(f"Total parameters: {total_params:,}")
     print(f"Trainable parameters: {trainable_params:,}")
     
-    # Setup training
-    criterion = nn.CrossEntropyLoss(ignore_index=0)
-    optimizer = optim.AdamW(model.parameters(), lr=args.lr, weight_decay=0.01)
+    # Setup training - use label smoothing for better generalization and stability
+    criterion = nn.CrossEntropyLoss(ignore_index=0, label_smoothing=0.1)
+    optimizer = optim.AdamW(model.parameters(), lr=args.lr, weight_decay=0.01, eps=1e-8)
     
     # Learning rate scheduler with warmup
     total_steps = len(train_loader) * args.epochs
@@ -528,22 +559,64 @@ def train(args):
         epoch_lrs = []
         
         for batch_idx, batch in enumerate(train_loader):
-            # Use non_blocking=True with pin_memory for async CPU->GPU transfer
-            inputData = batch["feature"].to(device, non_blocking=True)
-            targets = batch["label"].long().to(device, non_blocking=True)
-            feature_mask = batch["feature_mask"].to(device, non_blocking=True)
-            label_mask = batch["label_mask"].to(device, non_blocking=True)
-            day_idx = batch["day"].to(device, non_blocking=True)
-            
-            optimizer.zero_grad(set_to_none=True)  # More efficient than zero_grad()
-            
-            logits = model(inputData, targets, feature_mask, label_mask, day_idx)
-            logits = logits.permute(0, 2, 1)
-            
-            loss = criterion(logits, targets[:, 1:])
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-            optimizer.step()
+            try:
+                # Use non_blocking=True with pin_memory for async CPU->GPU transfer
+                inputData = batch["feature"].to(device, non_blocking=True)
+                targets = batch["label"].long().to(device, non_blocking=True)
+                feature_mask = batch["feature_mask"].to(device, non_blocking=True)
+                label_mask = batch["label_mask"].to(device, non_blocking=True)
+                day_idx = batch["day"].to(device, non_blocking=True)
+                
+                # Skip batches with invalid input (all zeros, NaN in features)
+                if torch.isnan(inputData).any() or torch.isinf(inputData).any():
+                    print(f"WARNING: NaN/Inf in input features at batch {batch_idx}, skipping...")
+                    del inputData, targets, feature_mask, label_mask, day_idx
+                    torch.cuda.empty_cache()
+                    continue
+                
+                optimizer.zero_grad(set_to_none=True)  # More efficient than zero_grad()
+                
+                logits = model(inputData, targets, feature_mask, label_mask, day_idx)
+                logits = logits.permute(0, 2, 1)
+                
+                loss = criterion(logits, targets[:, 1:])
+                
+                # Check for NaN loss and skip batch if detected
+                if torch.isnan(loss) or torch.isinf(loss):
+                    print(f"WARNING: NaN/Inf loss detected at batch {batch_idx}, skipping...")
+                    optimizer.zero_grad(set_to_none=True)
+                    del inputData, targets, feature_mask, label_mask, day_idx, logits, loss
+                    torch.cuda.empty_cache()
+                    continue
+                
+                loss.backward()
+                
+                # Check for NaN gradients
+                has_nan_grad = False
+                for name, param in model.named_parameters():
+                    if param.grad is not None and (torch.isnan(param.grad).any() or torch.isinf(param.grad).any()):
+                        has_nan_grad = True
+                        break
+                
+                if has_nan_grad:
+                    print(f"WARNING: NaN/Inf gradients detected at batch {batch_idx}, skipping...")
+                    optimizer.zero_grad(set_to_none=True)
+                    del inputData, targets, feature_mask, label_mask, day_idx, logits, loss
+                    torch.cuda.empty_cache()
+                    continue
+                
+                # Clip gradients with a stricter threshold
+                torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.5)
+                optimizer.step()
+                
+                # Clean up to free memory
+                del inputData, targets, feature_mask, label_mask, day_idx, logits
+                
+            except torch.cuda.OutOfMemoryError:
+                print(f"WARNING: CUDA OOM at batch {batch_idx}, clearing cache and skipping...")
+                optimizer.zero_grad(set_to_none=True)
+                torch.cuda.empty_cache()
+                continue
             
             # Step the learning rate scheduler
             current_lr = scheduler.step()
@@ -713,8 +786,8 @@ def main():
                         help='Number of training epochs')
     parser.add_argument('--batch-size', type=int, default=16,
                         help='Batch size')
-    parser.add_argument('--lr', type=float, default=0.0005,
-                        help='Learning rate')
+    parser.add_argument('--lr', type=float, default=0.0001,
+                        help='Learning rate (reduced default for stability)')
     parser.add_argument('--num-workers', type=int, default=4,
                         help='Number of data loader workers')
     
