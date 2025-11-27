@@ -1,0 +1,38 @@
+# Data files (large HDF5 datasets)
+transformer_notebook/data/
+transformer_notebook/outputs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+.env
+.venv/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model checkpoints (if you don't want to track them)
+*.pt
+*.pth
+*.ckpt

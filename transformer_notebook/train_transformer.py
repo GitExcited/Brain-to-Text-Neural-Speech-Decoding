@@ -58,19 +58,25 @@ class BrainToTextDataset(Dataset):
                 sessionPath = os.path.join(self.root_dir, item)
                 if not os.path.isdir(sessionPath):
                     continue
-                    
-                session = sorted(os.listdir(sessionPath))
-                if len(session) != 3:
-                    continue  # skip if not train, val, test in the folder
-                    
-                data_type = 0  # test
-                if split == "train":
-                    data_type = 1
-                elif split == "val":
-                    data_type = 2
-    
-                paths.append(os.path.join(sessionPath, session[data_type]))
-                days_loaded += 1
+                
+                # Look for data_train.hdf5, data_val.hdf5, data_test.hdf5 pattern
+                expected_file = f"data_{split}.hdf5"
+                file_path = os.path.join(sessionPath, expected_file)
+                
+                if os.path.exists(file_path):
+                    paths.append(file_path)
+                    days_loaded += 1
+                else:
+                    # Fallback: try old pattern (test.hdf5, train.hdf5, val.hdf5)
+                    session_files = sorted(os.listdir(sessionPath))
+                    if len(session_files) == 3:
+                        data_type = 0  # test
+                        if split == "train":
+                            data_type = 1
+                        elif split == "val":
+                            data_type = 2
+                        paths.append(os.path.join(sessionPath, session_files[data_type]))
+                        days_loaded += 1
                 
         self.paths = paths
         self.days = len(self.paths)

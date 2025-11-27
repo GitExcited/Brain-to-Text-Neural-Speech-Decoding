@@ -33,7 +33,7 @@ services:
     
     # Training configuration via command
     command: [
-      "--data-dir", "/data",
+      "--data-dir", "/data/t15_copyTask_neuralData/hdf5_data_final",
       "--output-dir", "/outputs",
       "--epochs", "${EPOCHS:-5}",
       "--batch-size", "${BATCH_SIZE:-16}",
