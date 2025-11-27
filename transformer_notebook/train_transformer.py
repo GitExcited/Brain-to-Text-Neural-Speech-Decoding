@@ -397,6 +397,11 @@ def train(args):
         device = torch.device("cuda")
         print(f"Using CUDA: {torch.cuda.get_device_name(0)}")
         print(f"CUDA Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
+        
+        # Enable TF32 for Ampere GPUs (RTX 30xx, A100, etc.) - ~2x speedup
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+        print("TF32 enabled for faster matrix operations")
     else:
         device = torch.device("cpu")
         if args.cuda:
