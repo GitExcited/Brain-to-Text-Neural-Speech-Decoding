@@ -56,6 +56,39 @@ services:
     # Shared memory size (important for DataLoader with multiple workers)
     shm_size: '8gb'
 
+  # Experiment runner - runs multiple experiments sequentially overnight
+  experiment-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-transformer:latest
+    container_name: b2t-experiment-runner
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    volumes:
+      - ${DATA_PATH:-./data}:/data:ro
+      - ${OUTPUT_PATH:-./outputs}:/outputs
+      - ./run_experiments.sh:/app/run_experiments.sh:ro
+      - ./train_transformer.py:/app/train_transformer.py:ro
+    
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    
+    # Run the experiment script
+    entrypoint: ["/bin/bash", "/app/run_experiments.sh"]
+    
+    shm_size: '8gb'
+    restart: "no"
+
   # Alternative service for interactive development
   transformer-dev:
     build:

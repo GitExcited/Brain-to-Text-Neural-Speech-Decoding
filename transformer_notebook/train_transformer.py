@@ -510,13 +510,11 @@ def validation(model, loader, criterion, device):
                             prev = t
                     true_collapsed = np.array(true_collapsed)
                     
-                    # Store debug samples (first batch only)
-                    if batch_idx == 0 and len(debug_samples) < 3:
+                    # Store one debug swait(first batch only)
+                    if batch_idx == 0 and len(debug_samples) < 1:
                         debug_samples.append({
-                            'pred_raw': pred_seq[:20].tolist(),
-                            'true_raw': true_seq[:20].tolist(),
-                            'pred_collapsed': pred_collapsed[:20].tolist() if len(pred_collapsed) > 0 else [],
-                            'true_collapsed': true_collapsed[:20].tolist() if len(true_collapsed) > 0 else []
+                            'pred': pred_collapsed[:15].tolist() if len(pred_collapsed) > 0 else [],
+                            'true': true_collapsed[:15].tolist() if len(true_collapsed) > 0 else []
                         })
                     
                     # Calculate edit distance
@@ -536,16 +534,10 @@ def validation(model, loader, criterion, device):
                 traceback.print_exc()
                 continue
 
-    # Print debug samples
+    # Print one debug sample (concise)
     if debug_samples:
-        print("\n=== PER Debug Samples ===")
-        for idx, s in enumerate(debug_samples):
-            print(f"Sample {idx+1}:")
-            print(f"  Pred raw (first 20):      {s['pred_raw']}")
-            print(f"  True raw (first 20):      {s['true_raw']}")
-            print(f"  Pred collapsed (first 20): {s['pred_collapsed']}")
-            print(f"  True collapsed (first 20): {s['true_collapsed']}")
-        print("========================\n")
+        s = debug_samples[0]
+        print(f"  Sample - Pred: {s['pred']} | True: {s['true']}")
 
     avg_PER = total_edit_distance / max(total_seq_length, 1)
     metrics['day_PERs'] = day_per
@@ -553,8 +545,6 @@ def validation(model, loader, criterion, device):
     metrics['avg_loss'] = sum(metrics['losses']) / max(len(metrics['losses']), 1)
     metrics['total_edit_distance'] = total_edit_distance
     metrics['total_seq_length'] = total_seq_length
-    
-    print(f"  PER Debug: edit_dist={total_edit_distance}, seq_len={total_seq_length}, PER={avg_PER:.4f}")
     
     return metrics
 
@@ -753,15 +743,7 @@ def train(args):
                 # Log progress (before cleanup)
                 if batch_idx % args.log_interval == 0:
                     print(f"Epoch {epoch+1}/{args.epochs} | Batch {batch_idx}/{len(train_loader)} | Loss: {loss.item():.4f} | LR: {scheduler.get_lr():.2e}")
-                    
-                    # Debug: Show what the model is predicting (first sample in batch)
-                    with torch.no_grad():
-                        sample_pred = torch.argmax(logits[0], dim=0)[:20].cpu().tolist()
-                        sample_true = targets[0, 1:21].cpu().tolist()
-                        pred_unique = len(set(sample_pred))
-                        print(f"  DEBUG - Pred (first 20): {sample_pred}")
-                        print(f"  DEBUG - True (first 20): {sample_true}")
-                        print(f"  DEBUG - Unique predictions: {pred_unique}/20")
+
                 
                 # Clean up to free memory
                 del inputData, targets, feature_mask, label_mask, day_idx, logits
