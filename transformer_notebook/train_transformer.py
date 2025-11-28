@@ -115,6 +115,20 @@ class BrainToTextDataset(Dataset):
         if skipped > 0:
             print(f"Skipped {skipped} trials with NaN/Inf/empty values")
         print(f"Loaded {len(self.X)} trials from {self.days} days ({split})")
+        
+        # Analyze label distribution
+        all_labels = []
+        for item in self.X:
+            all_labels.extend(item["labels"].numpy().tolist())
+        from collections import Counter
+        label_counts = Counter(all_labels)
+        total_labels = len(all_labels)
+        print(f"\nLabel distribution ({split}):")
+        for label_id, count in sorted(label_counts.items())[:10]:  # Top 10
+            pct = 100 * count / total_labels
+            name = LOGIT_TO_PHONEME[label_id] if label_id < len(LOGIT_TO_PHONEME) else f"UNK_{label_id}"
+            print(f"  {label_id} ({name}): {count} ({pct:.1f}%)")
+        print(f"  ... ({len(label_counts)} unique labels total)")
 
     def __len__(self):
         return len(self.X)
@@ -132,7 +146,9 @@ def custom_collate_fn(batch):
     label_lens = [d["label_len"] for d in batch]
 
     padded_features = pad_sequence(features, batch_first=True, padding_value=0)
-    padded_labels = pad_sequence(labels, batch_first=True, padding_value=0)
+    # Use -100 as padding for labels (PyTorch's default ignore_index)
+    # This way we can properly ignore padding while still learning BLANK (index 0)
+    padded_labels = pad_sequence(labels, batch_first=True, padding_value=-100)
     
     batch_size = padded_features.size(0)
     max_feature_len = padded_features.size(1)
@@ -234,7 +250,8 @@ class NeuralEncoder(nn.Module):
 class NeuralDecoder(nn.Module):
     def __init__(self, vocab_size, d_model=256, nhead=4, num_layers=4, num_days=1000, dropout=0.1):
         super().__init__()
-        self.embed = nn.Embedding(vocab_size, d_model, padding_idx=0)
+        # Don't use padding_idx=0 because 0=BLANK is a valid token we want to learn
+        self.embed = nn.Embedding(vocab_size, d_model)
         self.embed_scale = math.sqrt(d_model)  # Scale embeddings
         self.day_embed = nn.Embedding(num_days, d_model)
         self.pos = PositionalEncoding(d_model, dropout=dropout)
@@ -557,8 +574,10 @@ def train(args):
     print(f"Total parameters: {total_params:,}")
     print(f"Trainable parameters: {trainable_params:,}")
     
-    # Setup training - use label smoothing for better generalization and stability
-    criterion = nn.CrossEntropyLoss(ignore_index=0, label_smoothing=0.1)
+    # Setup training
+    # Use ignore_index=-100 to ignore padding tokens (not BLANK which is index 0)
+    # This ensures BLANK predictions are penalized correctly
+    criterion = nn.CrossEntropyLoss(ignore_index=-100, label_smoothing=0.1)
     optimizer = optim.AdamW(model.parameters(), lr=args.lr, weight_decay=0.01, eps=1e-8)
     
     # Learning rate scheduler with warmup
@@ -682,6 +701,15 @@ def train(args):
             # Log progress
             if batch_idx % args.log_interval == 0:
                 print(f"Epoch {epoch+1}/{args.epochs} | Batch {batch_idx}/{len(train_loader)} | Loss: {loss.item():.4f} | LR: {current_lr:.2e}")
+                
+                # Debug: Show what the model is predicting (first sample in batch)
+                with torch.no_grad():
+                    sample_pred = torch.argmax(logits[0], dim=0)[:20].cpu().tolist()
+                    sample_true = targets[0, 1:21].cpu().tolist()
+                    pred_unique = len(set(sample_pred))
+                    print(f"  DEBUG - Pred (first 20): {sample_pred}")
+                    print(f"  DEBUG - True (first 20): {sample_true}")
+                    print(f"  DEBUG - Unique predictions: {pred_unique}/20")
         
         # Validation
         metrics = validation(model, val_loader, criterion, device)
