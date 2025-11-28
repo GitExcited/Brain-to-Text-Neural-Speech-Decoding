@@ -300,7 +300,11 @@ class NeuralToPhonemeTransformer(nn.Module):
 
     def forward(self, neural_feature_input, class_id_tokens, 
                 neural_feature_padding_mask, class_id_padding_mask, day_idx):
-        class_id_in = class_id_tokens[:, :-1]
+        # Replace -100 padding with 0 before embedding (embedding layer can't handle -100)
+        class_id_tokens_safe = class_id_tokens.clone()
+        class_id_tokens_safe[class_id_tokens_safe == -100] = 0
+        
+        class_id_in = class_id_tokens_safe[:, :-1]
         seq_len = class_id_in.size(1)
         
         # Safety check: ensure seq_len > 0
@@ -439,9 +443,10 @@ def validation(model, loader, criterion, device):
     
     total_edit_distance = 0
     total_seq_length = 0
+    debug_samples = []  # Store a few samples for debugging
 
     with torch.no_grad():
-        for batch in loader:
+        for batch_idx, batch in enumerate(loader):
             inputData = batch["feature"].to(device, non_blocking=True)
             targets = batch["label"].long().to(device, non_blocking=True)
             feature_mask = batch["feature_mask"].to(device, non_blocking=True)
@@ -450,7 +455,7 @@ def validation(model, loader, criterion, device):
 
             try:
                 logits = model(inputData, targets, feature_mask, label_mask, day_idx)
-                logits = logits.permute(0, 2, 1)
+                logits = logits.permute(0, 2, 1)  # [B, vocab, seq_len]
 
                 loss = criterion(logits, targets[:, 1:])
                 
@@ -461,33 +466,95 @@ def validation(model, loader, criterion, device):
                 metrics['losses'].append(loss.item())
 
                 batch_size = logits.shape[0]
-                # Use label_mask to get actual sequence lengths
-                seq_lens = (~label_mask).sum(dim=1)
-
+                
                 for i in range(batch_size):
-                    actual_len = min(seq_lens[i].item(), logits.shape[2])
-                    if actual_len <= 1:
+                    # Get the actual sequence length from label_mask
+                    # label_mask is True for padded positions
+                    seq_len = (~label_mask[i]).sum().item()
+                    
+                    if seq_len <= 1:
                         continue
-                    pred_seq = torch.argmax(logits[i, :, :actual_len-1], dim=0).cpu().numpy()
-                    pred_seq = np.array([x for x, _ in itertools.groupby(pred_seq) if x != 0])
-                    true_seq = targets[i, 1:actual_len].cpu().numpy()
+                    
+                    # Predictions: argmax over vocab dimension
+                    # logits shape: [vocab, seq_len-1] for sample i
+                    # We predict positions 1 to seq_len-1 (predicting next token)
+                    pred_len = min(seq_len - 1, logits.shape[2])
+                    pred_seq = torch.argmax(logits[i, :, :pred_len], dim=0).cpu().numpy()
+                    
+                    # Ground truth: targets shifted by 1 (we predict target[1:seq_len])
+                    # Filter out -100 padding values
+                    true_seq = targets[i, 1:seq_len].cpu().numpy()
+                    true_seq = true_seq[true_seq != -100]  # Remove any -100 padding
+                    
+                    if len(true_seq) == 0:
+                        continue
+                    
+                    # For CTC-style decoding: collapse repeated predictions and remove blanks
+                    # But ONLY remove consecutive duplicates, keep the sequence structure
+                    pred_collapsed = []
+                    prev = -1
+                    for p in pred_seq:
+                        if p != prev:  # Remove consecutive duplicates
+                            if p != 0:  # Remove BLANK tokens (index 0)
+                                pred_collapsed.append(p)
+                            prev = p
+                    pred_collapsed = np.array(pred_collapsed)
+                    
+                    # Also collapse true sequence for fair comparison (if it has BLANK tokens)
+                    true_collapsed = []
+                    prev = -1
+                    for t in true_seq:
+                        if t != prev:
+                            if t != 0:  # Remove BLANK tokens
+                                true_collapsed.append(t)
+                            prev = t
+                    true_collapsed = np.array(true_collapsed)
+                    
+                    # Store debug samples (first batch only)
+                    if batch_idx == 0 and len(debug_samples) < 3:
+                        debug_samples.append({
+                            'pred_raw': pred_seq[:20].tolist(),
+                            'true_raw': true_seq[:20].tolist(),
+                            'pred_collapsed': pred_collapsed[:20].tolist() if len(pred_collapsed) > 0 else [],
+                            'true_collapsed': true_collapsed[:20].tolist() if len(true_collapsed) > 0 else []
+                        })
+                    
+                    # Calculate edit distance
+                    if len(true_collapsed) > 0:
+                        edit_dist = editdistance.eval(pred_collapsed.tolist(), true_collapsed.tolist())
+                        total_edit_distance += edit_dist
+                        total_seq_length += len(true_collapsed)
 
-                    edit_dist = editdistance.eval(pred_seq, true_seq)
-                    total_edit_distance += edit_dist
-                    total_seq_length += len(true_seq)
-
-                    day = day_idx[i].item()
-                    if day in day_per:
-                        day_per[day]['total_edit_distance'] += edit_dist
-                        day_per[day]['total_seq_length'] += len(true_seq)
+                        day = day_idx[i].item()
+                        if day in day_per:
+                            day_per[day]['total_edit_distance'] += edit_dist
+                            day_per[day]['total_seq_length'] += len(true_collapsed)
+                            
             except Exception as e:
                 print(f"Validation batch error: {e}")
+                import traceback
+                traceback.print_exc()
                 continue
+
+    # Print debug samples
+    if debug_samples:
+        print("\n=== PER Debug Samples ===")
+        for idx, s in enumerate(debug_samples):
+            print(f"Sample {idx+1}:")
+            print(f"  Pred raw (first 20):      {s['pred_raw']}")
+            print(f"  True raw (first 20):      {s['true_raw']}")
+            print(f"  Pred collapsed (first 20): {s['pred_collapsed']}")
+            print(f"  True collapsed (first 20): {s['true_collapsed']}")
+        print("========================\n")
 
     avg_PER = total_edit_distance / max(total_seq_length, 1)
     metrics['day_PERs'] = day_per
     metrics['avg_PER'] = avg_PER
     metrics['avg_loss'] = sum(metrics['losses']) / max(len(metrics['losses']), 1)
+    metrics['total_edit_distance'] = total_edit_distance
+    metrics['total_seq_length'] = total_seq_length
+    
+    print(f"  PER Debug: edit_dist={total_edit_distance}, seq_len={total_seq_length}, PER={avg_PER:.4f}")
     
     return metrics
 
