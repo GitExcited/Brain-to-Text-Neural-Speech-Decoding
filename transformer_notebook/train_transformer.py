@@ -683,6 +683,19 @@ def train(args):
                 torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.5)
                 optimizer.step()
                 
+                # Log progress (before cleanup)
+                if batch_idx % args.log_interval == 0:
+                    print(f"Epoch {epoch+1}/{args.epochs} | Batch {batch_idx}/{len(train_loader)} | Loss: {loss.item():.4f} | LR: {scheduler.get_lr():.2e}")
+                    
+                    # Debug: Show what the model is predicting (first sample in batch)
+                    with torch.no_grad():
+                        sample_pred = torch.argmax(logits[0], dim=0)[:20].cpu().tolist()
+                        sample_true = targets[0, 1:21].cpu().tolist()
+                        pred_unique = len(set(sample_pred))
+                        print(f"  DEBUG - Pred (first 20): {sample_pred}")
+                        print(f"  DEBUG - True (first 20): {sample_true}")
+                        print(f"  DEBUG - Unique predictions: {pred_unique}/20")
+                
                 # Clean up to free memory
                 del inputData, targets, feature_mask, label_mask, day_idx, logits
                 
@@ -697,19 +710,6 @@ def train(args):
             epoch_lrs.append(current_lr)
             
             epoch_losses.append(loss.item())
-            
-            # Log progress
-            if batch_idx % args.log_interval == 0:
-                print(f"Epoch {epoch+1}/{args.epochs} | Batch {batch_idx}/{len(train_loader)} | Loss: {loss.item():.4f} | LR: {current_lr:.2e}")
-                
-                # Debug: Show what the model is predicting (first sample in batch)
-                with torch.no_grad():
-                    sample_pred = torch.argmax(logits[0], dim=0)[:20].cpu().tolist()
-                    sample_true = targets[0, 1:21].cpu().tolist()
-                    pred_unique = len(set(sample_pred))
-                    print(f"  DEBUG - Pred (first 20): {sample_pred}")
-                    print(f"  DEBUG - True (first 20): {sample_true}")
-                    print(f"  DEBUG - Unique predictions: {pred_unique}/20")
         
         # Validation
         metrics = validation(model, val_loader, criterion, device)
