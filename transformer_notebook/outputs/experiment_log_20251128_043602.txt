@@ -1,0 +1,566 @@
+=============================================
+Starting Experiment Suite: 20251128_043602
+=============================================
+
+---------------------------------------------
+Experiment: exp01_d512_b4
+  d_model=512, batch_size=4, epochs=35, max_days=45
+  Output: /outputs/exp01_d512_b4_20251128_043602
+  Started: Fri Nov 28 04:36:02 UTC 2025
+---------------------------------------------
+✓ Experiment exp01_d512_b4 completed successfully!
+  Finished: Fri Nov 28 07:11:43 UTC 2025
+
+
+---------------------------------------------
+Experiment: exp02_d576_b4
+  d_model=576, batch_size=4, epochs=35, max_days=45
+  Output: /outputs/exp02_d576_b4_20251128_043602
+  Started: Fri Nov 28 07:11:53 UTC 2025
+---------------------------------------------
+✓ Experiment exp02_d576_b4 completed successfully!
+  Finished: Fri Nov 28 10:31:52 UTC 2025
+
+
+---------------------------------------------
+Experiment: exp03_d640_b3
+  d_model=640, batch_size=3, epochs=35, max_days=45
+  Output: /outputs/exp03_d640_b3_20251128_043602
+  Started: Fri Nov 28 10:32:03 UTC 2025
+---------------------------------------------
+✓ Experiment exp03_d640_b3 completed successfully!
+  Finished: Fri Nov 28 14:12:17 UTC 2025
+
+
+---------------------------------------------
+Experiment: exp04_d768_b2
+  d_model=768, batch_size=2, epochs=30, max_days=45
+  Output: /outputs/exp04_d768_b2_20251128_043602
+  Started: Fri Nov 28 14:12:27 UTC 2025
+---------------------------------------------
+✓ Experiment exp04_d768_b2 completed successfully!
+  Finished: Fri Nov 28 18:09:43 UTC 2025
+
+
+---------------------------------------------
+Experiment: exp05_d512_e60
+  d_model=512, batch_size=4, epochs=60, max_days=45
+  Output: /outputs/exp05_d512_e60_20251128_043602
+  Started: Fri Nov 28 18:09:53 UTC 2025
+---------------------------------------------
+✓ Experiment exp05_d512_e60 completed successfully!
+  Finished: Fri Nov 28 22:35:29 UTC 2025
+
+
+---------------------------------------------
+Experiment: exp06_d512_lr5e5
+  d_model=512, batch_size=4, epochs=40, max_days=45
+  Output: /outputs/exp06_d512_lr5e5_20251128_043602
+  Started: Fri Nov 28 22:35:39 UTC 2025
+---------------------------------------------
+✓ Experiment exp06_d512_lr5e5 completed successfully!
+  Finished: Sat Nov 29 01:33:51 UTC 2025
+
+
+---------------------------------------------
+Experiment: exp07_d512_lr3e4
+  d_model=512, batch_size=4, epochs=40, max_days=45
+  Output: /outputs/exp07_d512_lr3e4_20251128_043602
+  Started: Sat Nov 29 01:34:01 UTC 2025
+---------------------------------------------
+✓ Experiment exp07_d512_lr3e4 completed successfully!
+  Finished: Sat Nov 29 04:32:37 UTC 2025
+
+
+---------------------------------------------
+Experiment: exp08_d448_b8
+  d_model=448, batch_size=8, epochs=40, max_days=45
+  Output: /outputs/exp08_d448_b8_20251128_043602
+  Started: Sat Nov 29 04:32:47 UTC 2025
+---------------------------------------------
+✓ Experiment exp08_d448_b8 completed successfully!
+  Finished: Sat Nov 29 07:14:07 UTC 2025
+
+
+---------------------------------------------
+Experiment: exp09_d384_b12
+  d_model=384, batch_size=12, epochs=45, max_days=45
+  Output: /outputs/exp09_d384_b12_20251128_043602
+  Started: Sat Nov 29 07:14:17 UTC 2025
+---------------------------------------------
+✗ Experiment exp09_d384_b12 failed with exit code 1
+  Finished: Sat Nov 29 07:18:45 UTC 2025
+
+
+---------------------------------------------
+Experiment: exp10_d896_b1
+  d_model=896, batch_size=1, epochs=25, max_days=45
+  Output: /outputs/exp10_d896_b1_20251128_043602
+  Started: Sat Nov 29 07:18:55 UTC 2025
+---------------------------------------------
+✓ Experiment exp10_d896_b1 completed successfully!
+  Finished: Sat Nov 29 12:14:31 UTC 2025
+
+
+=============================================
+All experiments completed!
+Finished: Sat Nov 29 12:14:41 UTC 2025
+=============================================
+
+Output directories created:
+-rwxrwxrwx 1 1000 1000 3898 Nov 29 12:14 /outputs/experiment_log_20251128_043602.txt
+
+/outputs/exp01_d512_b4_20251128_043602:
+total 14776968
+drwxrwxrwx 1 1000 1000       512 Nov 28 07:11 .
+drwxrwxrwx 1 1000 1000       512 Nov 29 07:18 ..
+-rwxrwxrwx 1 1000 1000 398187528 Nov 28 07:02 best_model.pt
+-rwxrwxrwx 1 1000 1000 398190584 Nov 28 04:43 checkpoint_epoch_1.pt
+-rwxrwxrwx 1 1000 1000 398191430 Nov 28 05:22 checkpoint_epoch_10.pt
+-rwxrwxrwx 1 1000 1000 398191430 Nov 28 05:27 checkpoint_epoch_11.pt
+-rwxrwxrwx 1 1000 1000 398191494 Nov 28 05:31 checkpoint_epoch_12.pt
+-rwxrwxrwx 1 1000 1000 398191558 Nov 28 05:35 checkpoint_epoch_13.pt
+-rwxrwxrwx 1 1000 1000 398191558 Nov 28 05:40 checkpoint_epoch_14.pt
+-rwxrwxrwx 1 1000 1000 398191622 Nov 28 05:44 checkpoint_epoch_15.pt
+-rwxrwxrwx 1 1000 1000 398191622 Nov 28 05:48 checkpoint_epoch_16.pt
+-rwxrwxrwx 1 1000 1000 398191686 Nov 28 05:53 checkpoint_epoch_17.pt
+-rwxrwxrwx 1 1000 1000 398191686 Nov 28 05:57 checkpoint_epoch_18.pt
+-rwxrwxrwx 1 1000 1000 398191750 Nov 28 06:01 checkpoint_epoch_19.pt
+-rwxrwxrwx 1 1000 1000 398190584 Nov 28 04:47 checkpoint_epoch_2.pt
+-rwxrwxrwx 1 1000 1000 398191750 Nov 28 06:06 checkpoint_epoch_20.pt
+-rwxrwxrwx 1 1000 1000 398191814 Nov 28 06:10 checkpoint_epoch_21.pt
+-rwxrwxrwx 1 1000 1000 398191878 Nov 28 06:15 checkpoint_epoch_22.pt
+-rwxrwxrwx 1 1000 1000 398191878 Nov 28 06:19 checkpoint_epoch_23.pt
+-rwxrwxrwx 1 1000 1000 398191942 Nov 28 06:23 checkpoint_epoch_24.pt
+-rwxrwxrwx 1 1000 1000 398191942 Nov 28 06:28 checkpoint_epoch_25.pt
+-rwxrwxrwx 1 1000 1000 398192006 Nov 28 06:32 checkpoint_epoch_26.pt
+-rwxrwxrwx 1 1000 1000 398192006 Nov 28 06:36 checkpoint_epoch_27.pt
+-rwxrwxrwx 1 1000 1000 398192070 Nov 28 06:41 checkpoint_epoch_28.pt
+-rwxrwxrwx 1 1000 1000 398192134 Nov 28 06:45 checkpoint_epoch_29.pt
+-rwxrwxrwx 1 1000 1000 398190648 Nov 28 04:52 checkpoint_epoch_3.pt
+-rwxrwxrwx 1 1000 1000 398192134 Nov 28 06:49 checkpoint_epoch_30.pt
+-rwxrwxrwx 1 1000 1000 398192198 Nov 28 06:54 checkpoint_epoch_31.pt
+-rwxrwxrwx 1 1000 1000 398192198 Nov 28 06:58 checkpoint_epoch_32.pt
+-rwxrwxrwx 1 1000 1000 398192262 Nov 28 07:02 checkpoint_epoch_33.pt
+-rwxrwxrwx 1 1000 1000 398192262 Nov 28 07:07 checkpoint_epoch_34.pt
+-rwxrwxrwx 1 1000 1000 398192326 Nov 28 07:11 checkpoint_epoch_35.pt
+-rwxrwxrwx 1 1000 1000 398190648 Nov 28 04:56 checkpoint_epoch_4.pt
+-rwxrwxrwx 1 1000 1000 398190712 Nov 28 05:00 checkpoint_epoch_5.pt
+-rwxrwxrwx 1 1000 1000 398190776 Nov 28 05:05 checkpoint_epoch_6.pt
+-rwxrwxrwx 1 1000 1000 398190776 Nov 28 05:09 checkpoint_epoch_7.pt
+-rwxrwxrwx 1 1000 1000 398190840 Nov 28 05:14 checkpoint_epoch_8.pt
+-rwxrwxrwx 1 1000 1000 398190840 Nov 28 05:18 checkpoint_epoch_9.pt
+-rwxrwxrwx 1 1000 1000 398188054 Nov 28 07:11 final_model.pt
+-rwxrwxrwx 1 1000 1000 398191402 Nov 28 07:11 latest_checkpoint.pt
+drwxrwxrwx 1 1000 1000       512 Nov 28 04:43 tensorboard
+-rwxrwxrwx 1 1000 1000    175694 Nov 28 07:11 training_curves.png
+-rwxrwxrwx 1 1000 1000      3629 Nov 28 07:11 training_history.json
+-rwxrwxrwx 1 1000 1000    119388 Nov 28 07:11 training_output.log
+
+/outputs/exp02_d576_b4_20251128_043602:
+total 18461904
+drwxrwxrwx 1 1000 1000       512 Nov 28 10:31 .
+drwxrwxrwx 1 1000 1000       512 Nov 29 07:18 ..
+-rwxrwxrwx 1 1000 1000 497485960 Nov 28 10:31 best_model.pt
+-rwxrwxrwx 1 1000 1000 497488888 Nov 28 07:20 checkpoint_epoch_1.pt
+-rwxrwxrwx 1 1000 1000 497489734 Nov 28 08:11 checkpoint_epoch_10.pt
+-rwxrwxrwx 1 1000 1000 497489734 Nov 28 08:16 checkpoint_epoch_11.pt
+-rwxrwxrwx 1 1000 1000 497489798 Nov 28 08:22 checkpoint_epoch_12.pt
+-rwxrwxrwx 1 1000 1000 497489862 Nov 28 08:27 checkpoint_epoch_13.pt
+-rwxrwxrwx 1 1000 1000 497489862 Nov 28 08:33 checkpoint_epoch_14.pt
+-rwxrwxrwx 1 1000 1000 497489926 Nov 28 08:39 checkpoint_epoch_15.pt
+-rwxrwxrwx 1 1000 1000 497489926 Nov 28 08:44 checkpoint_epoch_16.pt
+-rwxrwxrwx 1 1000 1000 497489990 Nov 28 08:50 checkpoint_epoch_17.pt
+-rwxrwxrwx 1 1000 1000 497489990 Nov 28 08:56 checkpoint_epoch_18.pt
+-rwxrwxrwx 1 1000 1000 497490054 Nov 28 09:01 checkpoint_epoch_19.pt
+-rwxrwxrwx 1 1000 1000 497488888 Nov 28 07:26 checkpoint_epoch_2.pt
+-rwxrwxrwx 1 1000 1000 497490054 Nov 28 09:07 checkpoint_epoch_20.pt
+-rwxrwxrwx 1 1000 1000 497490118 Nov 28 09:13 checkpoint_epoch_21.pt
+-rwxrwxrwx 1 1000 1000 497490182 Nov 28 09:18 checkpoint_epoch_22.pt
+-rwxrwxrwx 1 1000 1000 497490182 Nov 28 09:24 checkpoint_epoch_23.pt
+-rwxrwxrwx 1 1000 1000 497490246 Nov 28 09:29 checkpoint_epoch_24.pt
+-rwxrwxrwx 1 1000 1000 497490246 Nov 28 09:35 checkpoint_epoch_25.pt
+-rwxrwxrwx 1 1000 1000 497490310 Nov 28 09:41 checkpoint_epoch_26.pt
+-rwxrwxrwx 1 1000 1000 497490310 Nov 28 09:46 checkpoint_epoch_27.pt
+-rwxrwxrwx 1 1000 1000 497490374 Nov 28 09:52 checkpoint_epoch_28.pt
+-rwxrwxrwx 1 1000 1000 497490438 Nov 28 09:57 checkpoint_epoch_29.pt
+-rwxrwxrwx 1 1000 1000 497488952 Nov 28 07:31 checkpoint_epoch_3.pt
+-rwxrwxrwx 1 1000 1000 497490438 Nov 28 10:03 checkpoint_epoch_30.pt
+-rwxrwxrwx 1 1000 1000 497490502 Nov 28 10:09 checkpoint_epoch_31.pt
+-rwxrwxrwx 1 1000 1000 497490502 Nov 28 10:14 checkpoint_epoch_32.pt
+-rwxrwxrwx 1 1000 1000 497490566 Nov 28 10:20 checkpoint_epoch_33.pt
+-rwxrwxrwx 1 1000 1000 497490566 Nov 28 10:25 checkpoint_epoch_34.pt
+-rwxrwxrwx 1 1000 1000 497490630 Nov 28 10:31 checkpoint_epoch_35.pt
+-rwxrwxrwx 1 1000 1000 497488952 Nov 28 07:37 checkpoint_epoch_4.pt
+-rwxrwxrwx 1 1000 1000 497489016 Nov 28 07:42 checkpoint_epoch_5.pt
+-rwxrwxrwx 1 1000 1000 497489080 Nov 28 07:48 checkpoint_epoch_6.pt
+-rwxrwxrwx 1 1000 1000 497489080 Nov 28 07:54 checkpoint_epoch_7.pt
+-rwxrwxrwx 1 1000 1000 497489144 Nov 28 07:59 checkpoint_epoch_8.pt
+-rwxrwxrwx 1 1000 1000 497489144 Nov 28 08:05 checkpoint_epoch_9.pt
+-rwxrwxrwx 1 1000 1000 497486358 Nov 28 10:31 final_model.pt
+-rwxrwxrwx 1 1000 1000 497489706 Nov 28 10:31 latest_checkpoint.pt
+drwxrwxrwx 1 1000 1000       512 Nov 28 07:20 tensorboard
+-rwxrwxrwx 1 1000 1000    175734 Nov 28 10:31 training_curves.png
+-rwxrwxrwx 1 1000 1000      3631 Nov 28 10:31 training_history.json
+-rwxrwxrwx 1 1000 1000    119451 Nov 28 10:31 training_output.log
+
+/outputs/exp03_d640_b3_20251128_043602:
+total 22555440
+drwxrwxrwx 1 1000 1000       512 Nov 28 14:11 .
+drwxrwxrwx 1 1000 1000       512 Nov 29 07:18 ..
+-rwxrwxrwx 1 1000 1000 607794248 Nov 28 14:05 best_model.pt
+-rwxrwxrwx 1 1000 1000 607797240 Nov 28 10:41 checkpoint_epoch_1.pt
+-rwxrwxrwx 1 1000 1000 607798086 Nov 28 11:36 checkpoint_epoch_10.pt
+-rwxrwxrwx 1 1000 1000 607798086 Nov 28 11:43 checkpoint_epoch_11.pt
+-rwxrwxrwx 1 1000 1000 607798150 Nov 28 11:49 checkpoint_epoch_12.pt
+-rwxrwxrwx 1 1000 1000 607798214 Nov 28 11:55 checkpoint_epoch_13.pt
+-rwxrwxrwx 1 1000 1000 607798214 Nov 28 12:01 checkpoint_epoch_14.pt
+-rwxrwxrwx 1 1000 1000 607798278 Nov 28 12:07 checkpoint_epoch_15.pt
+-rwxrwxrwx 1 1000 1000 607798278 Nov 28 12:14 checkpoint_epoch_16.pt
+-rwxrwxrwx 1 1000 1000 607798342 Nov 28 12:20 checkpoint_epoch_17.pt
+-rwxrwxrwx 1 1000 1000 607798342 Nov 28 12:26 checkpoint_epoch_18.pt
+-rwxrwxrwx 1 1000 1000 607798406 Nov 28 12:32 checkpoint_epoch_19.pt
+-rwxrwxrwx 1 1000 1000 607797240 Nov 28 10:47 checkpoint_epoch_2.pt
+-rwxrwxrwx 1 1000 1000 607798406 Nov 28 12:38 checkpoint_epoch_20.pt
+-rwxrwxrwx 1 1000 1000 607798470 Nov 28 12:44 checkpoint_epoch_21.pt
+-rwxrwxrwx 1 1000 1000 607798534 Nov 28 12:51 checkpoint_epoch_22.pt
+-rwxrwxrwx 1 1000 1000 607798534 Nov 28 12:57 checkpoint_epoch_23.pt
+-rwxrwxrwx 1 1000 1000 607798598 Nov 28 13:03 checkpoint_epoch_24.pt
+-rwxrwxrwx 1 1000 1000 607798598 Nov 28 13:09 checkpoint_epoch_25.pt
+-rwxrwxrwx 1 1000 1000 607798662 Nov 28 13:15 checkpoint_epoch_26.pt
+-rwxrwxrwx 1 1000 1000 607798662 Nov 28 13:21 checkpoint_epoch_27.pt
+-rwxrwxrwx 1 1000 1000 607798726 Nov 28 13:28 checkpoint_epoch_28.pt
+-rwxrwxrwx 1 1000 1000 607798790 Nov 28 13:34 checkpoint_epoch_29.pt
+-rwxrwxrwx 1 1000 1000 607797304 Nov 28 10:53 checkpoint_epoch_3.pt
+-rwxrwxrwx 1 1000 1000 607798790 Nov 28 13:40 checkpoint_epoch_30.pt
+-rwxrwxrwx 1 1000 1000 607798854 Nov 28 13:46 checkpoint_epoch_31.pt
+-rwxrwxrwx 1 1000 1000 607798854 Nov 28 13:53 checkpoint_epoch_32.pt
+-rwxrwxrwx 1 1000 1000 607798918 Nov 28 13:59 checkpoint_epoch_33.pt
+-rwxrwxrwx 1 1000 1000 607798918 Nov 28 14:05 checkpoint_epoch_34.pt
+-rwxrwxrwx 1 1000 1000 607798982 Nov 28 14:11 checkpoint_epoch_35.pt
+-rwxrwxrwx 1 1000 1000 607797304 Nov 28 10:59 checkpoint_epoch_4.pt
+-rwxrwxrwx 1 1000 1000 607797368 Nov 28 11:05 checkpoint_epoch_5.pt
+-rwxrwxrwx 1 1000 1000 607797432 Nov 28 11:12 checkpoint_epoch_6.pt
+-rwxrwxrwx 1 1000 1000 607797432 Nov 28 11:18 checkpoint_epoch_7.pt
+-rwxrwxrwx 1 1000 1000 607797496 Nov 28 11:24 checkpoint_epoch_8.pt
+-rwxrwxrwx 1 1000 1000 607797496 Nov 28 11:30 checkpoint_epoch_9.pt
+-rwxrwxrwx 1 1000 1000 607794710 Nov 28 14:11 final_model.pt
+-rwxrwxrwx 1 1000 1000 607798058 Nov 28 14:11 latest_checkpoint.pt
+drwxrwxrwx 1 1000 1000       512 Nov 28 10:41 tensorboard
+-rwxrwxrwx 1 1000 1000    174149 Nov 28 14:11 training_curves.png
+-rwxrwxrwx 1 1000 1000      3633 Nov 28 14:11 training_history.json
+-rwxrwxrwx 1 1000 1000    155112 Nov 28 14:11 training_output.log
+
+/outputs/exp04_d768_b2_20251128_043602:
+total 27761812
+drwxrwxrwx 1 1000 1000       512 Nov 28 18:09 .
+drwxrwxrwx 1 1000 1000       512 Nov 29 07:18 ..
+-rwxrwxrwx 1 1000 1000 861440904 Nov 28 17:54 best_model.pt
+-rwxrwxrwx 1 1000 1000 861444088 Nov 28 14:23 checkpoint_epoch_1.pt
+-rwxrwxrwx 1 1000 1000 861444934 Nov 28 15:33 checkpoint_epoch_10.pt
+-rwxrwxrwx 1 1000 1000 861444934 Nov 28 15:41 checkpoint_epoch_11.pt
+-rwxrwxrwx 1 1000 1000 861444998 Nov 28 15:49 checkpoint_epoch_12.pt
+-rwxrwxrwx 1 1000 1000 861445062 Nov 28 15:57 checkpoint_epoch_13.pt
+-rwxrwxrwx 1 1000 1000 861445062 Nov 28 16:05 checkpoint_epoch_14.pt
+-rwxrwxrwx 1 1000 1000 861445126 Nov 28 16:12 checkpoint_epoch_15.pt
+-rwxrwxrwx 1 1000 1000 861445126 Nov 28 16:20 checkpoint_epoch_16.pt
+-rwxrwxrwx 1 1000 1000 861445190 Nov 28 16:28 checkpoint_epoch_17.pt
+-rwxrwxrwx 1 1000 1000 861445190 Nov 28 16:36 checkpoint_epoch_18.pt
+-rwxrwxrwx 1 1000 1000 861445254 Nov 28 16:44 checkpoint_epoch_19.pt
+-rwxrwxrwx 1 1000 1000 861444088 Nov 28 14:31 checkpoint_epoch_2.pt
+-rwxrwxrwx 1 1000 1000 861445318 Nov 28 16:51 checkpoint_epoch_20.pt
+-rwxrwxrwx 1 1000 1000 861445318 Nov 28 16:59 checkpoint_epoch_21.pt
+-rwxrwxrwx 1 1000 1000 861445382 Nov 28 17:07 checkpoint_epoch_22.pt
+-rwxrwxrwx 1 1000 1000 861445382 Nov 28 17:15 checkpoint_epoch_23.pt
+-rwxrwxrwx 1 1000 1000 861445446 Nov 28 17:22 checkpoint_epoch_24.pt
+-rwxrwxrwx 1 1000 1000 861445446 Nov 28 17:30 checkpoint_epoch_25.pt
+-rwxrwxrwx 1 1000 1000 861445510 Nov 28 17:38 checkpoint_epoch_26.pt
+-rwxrwxrwx 1 1000 1000 861445510 Nov 28 17:46 checkpoint_epoch_27.pt
+-rwxrwxrwx 1 1000 1000 861445574 Nov 28 17:54 checkpoint_epoch_28.pt
+-rwxrwxrwx 1 1000 1000 861445638 Nov 28 18:01 checkpoint_epoch_29.pt
+-rwxrwxrwx 1 1000 1000 861444152 Nov 28 14:39 checkpoint_epoch_3.pt
+-rwxrwxrwx 1 1000 1000 861445638 Nov 28 18:09 checkpoint_epoch_30.pt
+-rwxrwxrwx 1 1000 1000 861444152 Nov 28 14:46 checkpoint_epoch_4.pt
+-rwxrwxrwx 1 1000 1000 861444216 Nov 28 14:54 checkpoint_epoch_5.pt
+-rwxrwxrwx 1 1000 1000 861444280 Nov 28 15:02 checkpoint_epoch_6.pt
+-rwxrwxrwx 1 1000 1000 861444280 Nov 28 15:10 checkpoint_epoch_7.pt
+-rwxrwxrwx 1 1000 1000 861444344 Nov 28 15:18 checkpoint_epoch_8.pt
+-rwxrwxrwx 1 1000 1000 861444344 Nov 28 15:26 checkpoint_epoch_9.pt
+-rwxrwxrwx 1 1000 1000 861441366 Nov 28 18:09 final_model.pt
+-rwxrwxrwx 1 1000 1000 861444714 Nov 28 18:09 latest_checkpoint.pt
+drwxrwxrwx 1 1000 1000       512 Nov 28 14:23 tensorboard
+-rwxrwxrwx 1 1000 1000    183861 Nov 28 18:09 training_curves.png
+-rwxrwxrwx 1 1000 1000      3129 Nov 28 18:09 training_history.json
+-rwxrwxrwx 1 1000 1000    192258 Nov 28 18:09 training_output.log
+
+/outputs/exp05_d512_e60_20251128_043602:
+total 24498632
+drwxrwxrwx 1 1000 1000       512 Nov 28 22:35 .
+drwxrwxrwx 1 1000 1000       512 Nov 29 07:18 ..
+-rwxrwxrwx 1 1000 1000 398188488 Nov 28 22:30 best_model.pt
+-rwxrwxrwx 1 1000 1000 398190584 Nov 28 18:17 checkpoint_epoch_1.pt
+-rwxrwxrwx 1 1000 1000 398191430 Nov 28 18:56 checkpoint_epoch_10.pt
+-rwxrwxrwx 1 1000 1000 398191430 Nov 28 19:01 checkpoint_epoch_11.pt
+-rwxrwxrwx 1 1000 1000 398191494 Nov 28 19:05 checkpoint_epoch_12.pt
+-rwxrwxrwx 1 1000 1000 398191558 Nov 28 19:09 checkpoint_epoch_13.pt
+-rwxrwxrwx 1 1000 1000 398191558 Nov 28 19:14 checkpoint_epoch_14.pt
+-rwxrwxrwx 1 1000 1000 398191622 Nov 28 19:18 checkpoint_epoch_15.pt
+-rwxrwxrwx 1 1000 1000 398191622 Nov 28 19:22 checkpoint_epoch_16.pt
+-rwxrwxrwx 1 1000 1000 398191686 Nov 28 19:27 checkpoint_epoch_17.pt
+-rwxrwxrwx 1 1000 1000 398191686 Nov 28 19:31 checkpoint_epoch_18.pt
+-rwxrwxrwx 1 1000 1000 398191750 Nov 28 19:36 checkpoint_epoch_19.pt
+-rwxrwxrwx 1 1000 1000 398190584 Nov 28 18:21 checkpoint_epoch_2.pt
+-rwxrwxrwx 1 1000 1000 398191750 Nov 28 19:40 checkpoint_epoch_20.pt
+-rwxrwxrwx 1 1000 1000 398191814 Nov 28 19:44 checkpoint_epoch_21.pt
+-rwxrwxrwx 1 1000 1000 398191878 Nov 28 19:49 checkpoint_epoch_22.pt
+-rwxrwxrwx 1 1000 1000 398191878 Nov 28 19:53 checkpoint_epoch_23.pt
+-rwxrwxrwx 1 1000 1000 398191942 Nov 28 19:57 checkpoint_epoch_24.pt
+-rwxrwxrwx 1 1000 1000 398191942 Nov 28 20:02 checkpoint_epoch_25.pt
+-rwxrwxrwx 1 1000 1000 398192006 Nov 28 20:06 checkpoint_epoch_26.pt
+-rwxrwxrwx 1 1000 1000 398192006 Nov 28 20:10 checkpoint_epoch_27.pt
+-rwxrwxrwx 1 1000 1000 398192070 Nov 28 20:15 checkpoint_epoch_28.pt
+-rwxrwxrwx 1 1000 1000 398192134 Nov 28 20:19 checkpoint_epoch_29.pt
+-rwxrwxrwx 1 1000 1000 398190648 Nov 28 18:26 checkpoint_epoch_3.pt
+-rwxrwxrwx 1 1000 1000 398192134 Nov 28 20:24 checkpoint_epoch_30.pt
+-rwxrwxrwx 1 1000 1000 398192198 Nov 28 20:28 checkpoint_epoch_31.pt
+-rwxrwxrwx 1 1000 1000 398192198 Nov 28 20:32 checkpoint_epoch_32.pt
+-rwxrwxrwx 1 1000 1000 398192262 Nov 28 20:37 checkpoint_epoch_33.pt
+-rwxrwxrwx 1 1000 1000 398192262 Nov 28 20:41 checkpoint_epoch_34.pt
+-rwxrwxrwx 1 1000 1000 398192326 Nov 28 20:45 checkpoint_epoch_35.pt
+-rwxrwxrwx 1 1000 1000 398192390 Nov 28 20:50 checkpoint_epoch_36.pt
+-rwxrwxrwx 1 1000 1000 398192390 Nov 28 20:54 checkpoint_epoch_37.pt
+-rwxrwxrwx 1 1000 1000 398192454 Nov 28 20:58 checkpoint_epoch_38.pt
+-rwxrwxrwx 1 1000 1000 398192454 Nov 28 21:03 checkpoint_epoch_39.pt
+-rwxrwxrwx 1 1000 1000 398190648 Nov 28 18:30 checkpoint_epoch_4.pt
+-rwxrwxrwx 1 1000 1000 398192518 Nov 28 21:07 checkpoint_epoch_40.pt
+-rwxrwxrwx 1 1000 1000 398192518 Nov 28 21:12 checkpoint_epoch_41.pt
+-rwxrwxrwx 1 1000 1000 398192582 Nov 28 21:16 checkpoint_epoch_42.pt
+-rwxrwxrwx 1 1000 1000 398192582 Nov 28 21:20 checkpoint_epoch_43.pt
+-rwxrwxrwx 1 1000 1000 398192646 Nov 28 21:25 checkpoint_epoch_44.pt
+-rwxrwxrwx 1 1000 1000 398192710 Nov 28 21:29 checkpoint_epoch_45.pt
+-rwxrwxrwx 1 1000 1000 398192710 Nov 28 21:33 checkpoint_epoch_46.pt
+-rwxrwxrwx 1 1000 1000 398192774 Nov 28 21:38 checkpoint_epoch_47.pt
+-rwxrwxrwx 1 1000 1000 398192774 Nov 28 21:42 checkpoint_epoch_48.pt
+-rwxrwxrwx 1 1000 1000 398192838 Nov 28 21:47 checkpoint_epoch_49.pt
+-rwxrwxrwx 1 1000 1000 398190712 Nov 28 18:34 checkpoint_epoch_5.pt
+-rwxrwxrwx 1 1000 1000 398192838 Nov 28 21:51 checkpoint_epoch_50.pt
+-rwxrwxrwx 1 1000 1000 398192902 Nov 28 21:55 checkpoint_epoch_51.pt
+-rwxrwxrwx 1 1000 1000 398192966 Nov 28 22:00 checkpoint_epoch_52.pt
+-rwxrwxrwx 1 1000 1000 398192966 Nov 28 22:04 checkpoint_epoch_53.pt
+-rwxrwxrwx 1 1000 1000 398193030 Nov 28 22:08 checkpoint_epoch_54.pt
+-rwxrwxrwx 1 1000 1000 398193030 Nov 28 22:13 checkpoint_epoch_55.pt
+-rwxrwxrwx 1 1000 1000 398193094 Nov 28 22:17 checkpoint_epoch_56.pt
+-rwxrwxrwx 1 1000 1000 398193094 Nov 28 22:21 checkpoint_epoch_57.pt
+-rwxrwxrwx 1 1000 1000 398193158 Nov 28 22:26 checkpoint_epoch_58.pt
+-rwxrwxrwx 1 1000 1000 398193158 Nov 28 22:30 checkpoint_epoch_59.pt
+-rwxrwxrwx 1 1000 1000 398190776 Nov 28 18:39 checkpoint_epoch_6.pt
+-rwxrwxrwx 1 1000 1000 398193222 Nov 28 22:35 checkpoint_epoch_60.pt
+-rwxrwxrwx 1 1000 1000 398190776 Nov 28 18:43 checkpoint_epoch_7.pt
+-rwxrwxrwx 1 1000 1000 398190840 Nov 28 18:48 checkpoint_epoch_8.pt
+-rwxrwxrwx 1 1000 1000 398190840 Nov 28 18:52 checkpoint_epoch_9.pt
+-rwxrwxrwx 1 1000 1000 398188950 Nov 28 22:35 final_model.pt
+-rwxrwxrwx 1 1000 1000 398192298 Nov 28 22:35 latest_checkpoint.pt
+drwxrwxrwx 1 1000 1000       512 Nov 28 18:17 tensorboard
+-rwxrwxrwx 1 1000 1000    182558 Nov 28 22:35 training_curves.png
+-rwxrwxrwx 1 1000 1000      6119 Nov 28 22:35 training_history.json
+-rwxrwxrwx 1 1000 1000    202728 Nov 28 22:35 training_output.log
+
+/outputs/exp06_d512_lr5e5_20251128_043602:
+total 16721288
+drwxrwxrwx 1 1000 1000       512 Nov 29 01:33 .
+drwxrwxrwx 1 1000 1000       512 Nov 29 07:18 ..
+-rwxrwxrwx 1 1000 1000 398187720 Nov 29 01:20 best_model.pt
+-rwxrwxrwx 1 1000 1000 398190584 Nov 28 22:43 checkpoint_epoch_1.pt
+-rwxrwxrwx 1 1000 1000 398191430 Nov 28 23:22 checkpoint_epoch_10.pt
+-rwxrwxrwx 1 1000 1000 398191430 Nov 28 23:26 checkpoint_epoch_11.pt
+-rwxrwxrwx 1 1000 1000 398191494 Nov 28 23:31 checkpoint_epoch_12.pt
+-rwxrwxrwx 1 1000 1000 398191558 Nov 28 23:35 checkpoint_epoch_13.pt
+-rwxrwxrwx 1 1000 1000 398191558 Nov 28 23:40 checkpoint_epoch_14.pt
+-rwxrwxrwx 1 1000 1000 398191622 Nov 28 23:44 checkpoint_epoch_15.pt
+-rwxrwxrwx 1 1000 1000 398191622 Nov 28 23:48 checkpoint_epoch_16.pt
+-rwxrwxrwx 1 1000 1000 398191686 Nov 28 23:53 checkpoint_epoch_17.pt
+-rwxrwxrwx 1 1000 1000 398191686 Nov 28 23:57 checkpoint_epoch_18.pt
+-rwxrwxrwx 1 1000 1000 398191750 Nov 29 00:01 checkpoint_epoch_19.pt
+-rwxrwxrwx 1 1000 1000 398190584 Nov 28 22:47 checkpoint_epoch_2.pt
+-rwxrwxrwx 1 1000 1000 398191750 Nov 29 00:06 checkpoint_epoch_20.pt
+-rwxrwxrwx 1 1000 1000 398191814 Nov 29 00:10 checkpoint_epoch_21.pt
+-rwxrwxrwx 1 1000 1000 398191878 Nov 29 00:14 checkpoint_epoch_22.pt
+-rwxrwxrwx 1 1000 1000 398191878 Nov 29 00:19 checkpoint_epoch_23.pt
+-rwxrwxrwx 1 1000 1000 398191942 Nov 29 00:23 checkpoint_epoch_24.pt
+-rwxrwxrwx 1 1000 1000 398191942 Nov 29 00:27 checkpoint_epoch_25.pt
+-rwxrwxrwx 1 1000 1000 398192006 Nov 29 00:32 checkpoint_epoch_26.pt
+-rwxrwxrwx 1 1000 1000 398192006 Nov 29 00:36 checkpoint_epoch_27.pt
+-rwxrwxrwx 1 1000 1000 398192070 Nov 29 00:41 checkpoint_epoch_28.pt
+-rwxrwxrwx 1 1000 1000 398192134 Nov 29 00:45 checkpoint_epoch_29.pt
+-rwxrwxrwx 1 1000 1000 398190648 Nov 28 22:51 checkpoint_epoch_3.pt
+-rwxrwxrwx 1 1000 1000 398192134 Nov 29 00:49 checkpoint_epoch_30.pt
+-rwxrwxrwx 1 1000 1000 398192198 Nov 29 00:54 checkpoint_epoch_31.pt
+-rwxrwxrwx 1 1000 1000 398192198 Nov 29 00:58 checkpoint_epoch_32.pt
+-rwxrwxrwx 1 1000 1000 398192262 Nov 29 01:02 checkpoint_epoch_33.pt
+-rwxrwxrwx 1 1000 1000 398192262 Nov 29 01:07 checkpoint_epoch_34.pt
+-rwxrwxrwx 1 1000 1000 398192326 Nov 29 01:11 checkpoint_epoch_35.pt
+-rwxrwxrwx 1 1000 1000 398192390 Nov 29 01:16 checkpoint_epoch_36.pt
+-rwxrwxrwx 1 1000 1000 398192390 Nov 29 01:20 checkpoint_epoch_37.pt
+-rwxrwxrwx 1 1000 1000 398192454 Nov 29 01:24 checkpoint_epoch_38.pt
+-rwxrwxrwx 1 1000 1000 398192454 Nov 29 01:29 checkpoint_epoch_39.pt
+-rwxrwxrwx 1 1000 1000 398190648 Nov 28 22:56 checkpoint_epoch_4.pt
+-rwxrwxrwx 1 1000 1000 398192518 Nov 29 01:33 checkpoint_epoch_40.pt
+-rwxrwxrwx 1 1000 1000 398190712 Nov 28 23:00 checkpoint_epoch_5.pt
+-rwxrwxrwx 1 1000 1000 398190776 Nov 28 23:05 checkpoint_epoch_6.pt
+-rwxrwxrwx 1 1000 1000 398190776 Nov 28 23:09 checkpoint_epoch_7.pt
+-rwxrwxrwx 1 1000 1000 398190840 Nov 28 23:13 checkpoint_epoch_8.pt
+-rwxrwxrwx 1 1000 1000 398190840 Nov 28 23:18 checkpoint_epoch_9.pt
+-rwxrwxrwx 1 1000 1000 398188246 Nov 29 01:33 final_model.pt
+-rwxrwxrwx 1 1000 1000 398191530 Nov 29 01:33 latest_checkpoint.pt
+drwxrwxrwx 1 1000 1000       512 Nov 28 22:43 tensorboard
+-rwxrwxrwx 1 1000 1000    175097 Nov 29 01:33 training_curves.png
+-rwxrwxrwx 1 1000 1000      4137 Nov 29 01:33 training_history.json
+-rwxrwxrwx 1 1000 1000    136223 Nov 29 01:33 training_output.log
+
+/outputs/exp07_d512_lr3e4_20251128_043602:
+total 16721304
+drwxrwxrwx 1 1000 1000       512 Nov 29 04:32 .
+drwxrwxrwx 1 1000 1000       512 Nov 29 07:18 ..
+-rwxrwxrwx 1 1000 1000 398187720 Nov 29 04:23 best_model.pt
+-rwxrwxrwx 1 1000 1000 398190584 Nov 29 01:41 checkpoint_epoch_1.pt
+-rwxrwxrwx 1 1000 1000 398191430 Nov 29 02:20 checkpoint_epoch_10.pt
+-rwxrwxrwx 1 1000 1000 398191430 Nov 29 02:25 checkpoint_epoch_11.pt
+-rwxrwxrwx 1 1000 1000 398191494 Nov 29 02:29 checkpoint_epoch_12.pt
+-rwxrwxrwx 1 1000 1000 398191558 Nov 29 02:34 checkpoint_epoch_13.pt
+-rwxrwxrwx 1 1000 1000 398191558 Nov 29 02:38 checkpoint_epoch_14.pt
+-rwxrwxrwx 1 1000 1000 398191622 Nov 29 02:42 checkpoint_epoch_15.pt
+-rwxrwxrwx 1 1000 1000 398191622 Nov 29 02:47 checkpoint_epoch_16.pt
+-rwxrwxrwx 1 1000 1000 398191686 Nov 29 02:51 checkpoint_epoch_17.pt
+-rwxrwxrwx 1 1000 1000 398191686 Nov 29 02:56 checkpoint_epoch_18.pt
+-rwxrwxrwx 1 1000 1000 398191750 Nov 29 03:00 checkpoint_epoch_19.pt
+-rwxrwxrwx 1 1000 1000 398190584 Nov 29 01:45 checkpoint_epoch_2.pt
+-rwxrwxrwx 1 1000 1000 398191750 Nov 29 03:04 checkpoint_epoch_20.pt
+-rwxrwxrwx 1 1000 1000 398191814 Nov 29 03:09 checkpoint_epoch_21.pt
+-rwxrwxrwx 1 1000 1000 398191878 Nov 29 03:13 checkpoint_epoch_22.pt
+-rwxrwxrwx 1 1000 1000 398191878 Nov 29 03:17 checkpoint_epoch_23.pt
+-rwxrwxrwx 1 1000 1000 398191942 Nov 29 03:22 checkpoint_epoch_24.pt
+-rwxrwxrwx 1 1000 1000 398191942 Nov 29 03:26 checkpoint_epoch_25.pt
+-rwxrwxrwx 1 1000 1000 398192006 Nov 29 03:31 checkpoint_epoch_26.pt
+-rwxrwxrwx 1 1000 1000 398192006 Nov 29 03:35 checkpoint_epoch_27.pt
+-rwxrwxrwx 1 1000 1000 398192070 Nov 29 03:39 checkpoint_epoch_28.pt
+-rwxrwxrwx 1 1000 1000 398192134 Nov 29 03:44 checkpoint_epoch_29.pt
+-rwxrwxrwx 1 1000 1000 398190648 Nov 29 01:50 checkpoint_epoch_3.pt
+-rwxrwxrwx 1 1000 1000 398192134 Nov 29 03:48 checkpoint_epoch_30.pt
+-rwxrwxrwx 1 1000 1000 398192198 Nov 29 03:52 checkpoint_epoch_31.pt
+-rwxrwxrwx 1 1000 1000 398192198 Nov 29 03:57 checkpoint_epoch_32.pt
+-rwxrwxrwx 1 1000 1000 398192262 Nov 29 04:01 checkpoint_epoch_33.pt
+-rwxrwxrwx 1 1000 1000 398192262 Nov 29 04:06 checkpoint_epoch_34.pt
+-rwxrwxrwx 1 1000 1000 398192326 Nov 29 04:10 checkpoint_epoch_35.pt
+-rwxrwxrwx 1 1000 1000 398192390 Nov 29 04:14 checkpoint_epoch_36.pt
+-rwxrwxrwx 1 1000 1000 398192390 Nov 29 04:19 checkpoint_epoch_37.pt
+-rwxrwxrwx 1 1000 1000 398192454 Nov 29 04:23 checkpoint_epoch_38.pt
+-rwxrwxrwx 1 1000 1000 398192454 Nov 29 04:27 checkpoint_epoch_39.pt
+-rwxrwxrwx 1 1000 1000 398190648 Nov 29 01:54 checkpoint_epoch_4.pt
+-rwxrwxrwx 1 1000 1000 398192518 Nov 29 04:32 checkpoint_epoch_40.pt
+-rwxrwxrwx 1 1000 1000 398190712 Nov 29 01:59 checkpoint_epoch_5.pt
+-rwxrwxrwx 1 1000 1000 398190776 Nov 29 02:03 checkpoint_epoch_6.pt
+-rwxrwxrwx 1 1000 1000 398190776 Nov 29 02:07 checkpoint_epoch_7.pt
+-rwxrwxrwx 1 1000 1000 398190840 Nov 29 02:12 checkpoint_epoch_8.pt
+-rwxrwxrwx 1 1000 1000 398190840 Nov 29 02:16 checkpoint_epoch_9.pt
+-rwxrwxrwx 1 1000 1000 398188246 Nov 29 04:32 final_model.pt
+-rwxrwxrwx 1 1000 1000 398191530 Nov 29 04:32 latest_checkpoint.pt
+drwxrwxrwx 1 1000 1000       512 Nov 29 01:41 tensorboard
+-rwxrwxrwx 1 1000 1000    189222 Nov 29 04:32 training_curves.png
+-rwxrwxrwx 1 1000 1000      4146 Nov 29 04:32 training_history.json
+-rwxrwxrwx 1 1000 1000    136199 Nov 29 04:32 training_output.log
+
+/outputs/exp08_d448_b8_20251128_043602:
+total 13013884
+drwxrwxrwx 1 1000 1000       512 Nov 29 07:13 .
+drwxrwxrwx 1 1000 1000       512 Nov 29 07:18 ..
+-rwxrwxrwx 1 1000 1000 309899336 Nov 29 06:54 best_model.pt
+-rwxrwxrwx 1 1000 1000 309902328 Nov 29 04:39 checkpoint_epoch_1.pt
+-rwxrwxrwx 1 1000 1000 309903174 Nov 29 05:15 checkpoint_epoch_10.pt
+-rwxrwxrwx 1 1000 1000 309903174 Nov 29 05:19 checkpoint_epoch_11.pt
+-rwxrwxrwx 1 1000 1000 309903238 Nov 29 05:23 checkpoint_epoch_12.pt
+-rwxrwxrwx 1 1000 1000 309903302 Nov 29 05:27 checkpoint_epoch_13.pt
+-rwxrwxrwx 1 1000 1000 309903302 Nov 29 05:31 checkpoint_epoch_14.pt
+-rwxrwxrwx 1 1000 1000 309903366 Nov 29 05:34 checkpoint_epoch_15.pt
+-rwxrwxrwx 1 1000 1000 309903366 Nov 29 05:38 checkpoint_epoch_16.pt
+-rwxrwxrwx 1 1000 1000 309903430 Nov 29 05:42 checkpoint_epoch_17.pt
+-rwxrwxrwx 1 1000 1000 309903430 Nov 29 05:46 checkpoint_epoch_18.pt
+-rwxrwxrwx 1 1000 1000 309903494 Nov 29 05:50 checkpoint_epoch_19.pt
+-rwxrwxrwx 1 1000 1000 309902328 Nov 29 04:43 checkpoint_epoch_2.pt
+-rwxrwxrwx 1 1000 1000 309903494 Nov 29 05:54 checkpoint_epoch_20.pt
+-rwxrwxrwx 1 1000 1000 309903558 Nov 29 05:58 checkpoint_epoch_21.pt
+-rwxrwxrwx 1 1000 1000 309903622 Nov 29 06:02 checkpoint_epoch_22.pt
+-rwxrwxrwx 1 1000 1000 309903622 Nov 29 06:06 checkpoint_epoch_23.pt
+-rwxrwxrwx 1 1000 1000 309903686 Nov 29 06:10 checkpoint_epoch_24.pt
+-rwxrwxrwx 1 1000 1000 309903686 Nov 29 06:14 checkpoint_epoch_25.pt
+-rwxrwxrwx 1 1000 1000 309903750 Nov 29 06:18 checkpoint_epoch_26.pt
+-rwxrwxrwx 1 1000 1000 309903750 Nov 29 06:22 checkpoint_epoch_27.pt
+-rwxrwxrwx 1 1000 1000 309903814 Nov 29 06:26 checkpoint_epoch_28.pt
+-rwxrwxrwx 1 1000 1000 309903878 Nov 29 06:30 checkpoint_epoch_29.pt
+-rwxrwxrwx 1 1000 1000 309902392 Nov 29 04:47 checkpoint_epoch_3.pt
+-rwxrwxrwx 1 1000 1000 309903878 Nov 29 06:34 checkpoint_epoch_30.pt
+-rwxrwxrwx 1 1000 1000 309903942 Nov 29 06:38 checkpoint_epoch_31.pt
+-rwxrwxrwx 1 1000 1000 309903942 Nov 29 06:42 checkpoint_epoch_32.pt
+-rwxrwxrwx 1 1000 1000 309904006 Nov 29 06:46 checkpoint_epoch_33.pt
+-rwxrwxrwx 1 1000 1000 309904006 Nov 29 06:50 checkpoint_epoch_34.pt
+-rwxrwxrwx 1 1000 1000 309904070 Nov 29 06:54 checkpoint_epoch_35.pt
+-rwxrwxrwx 1 1000 1000 309904070 Nov 29 06:57 checkpoint_epoch_36.pt
+-rwxrwxrwx 1 1000 1000 309904134 Nov 29 07:01 checkpoint_epoch_37.pt
+-rwxrwxrwx 1 1000 1000 309904198 Nov 29 07:05 checkpoint_epoch_38.pt
+-rwxrwxrwx 1 1000 1000 309904198 Nov 29 07:09 checkpoint_epoch_39.pt
+-rwxrwxrwx 1 1000 1000 309902392 Nov 29 04:51 checkpoint_epoch_4.pt
+-rwxrwxrwx 1 1000 1000 309904262 Nov 29 07:13 checkpoint_epoch_40.pt
+-rwxrwxrwx 1 1000 1000 309902456 Nov 29 04:55 checkpoint_epoch_5.pt
+-rwxrwxrwx 1 1000 1000 309902520 Nov 29 04:59 checkpoint_epoch_6.pt
+-rwxrwxrwx 1 1000 1000 309902520 Nov 29 05:03 checkpoint_epoch_7.pt
+-rwxrwxrwx 1 1000 1000 309902584 Nov 29 05:07 checkpoint_epoch_8.pt
+-rwxrwxrwx 1 1000 1000 309902584 Nov 29 05:11 checkpoint_epoch_9.pt
+-rwxrwxrwx 1 1000 1000 309899990 Nov 29 07:13 final_model.pt
+-rwxrwxrwx 1 1000 1000 309903274 Nov 29 07:13 latest_checkpoint.pt
+drwxrwxrwx 1 1000 1000       512 Nov 29 04:39 tensorboard
+-rwxrwxrwx 1 1000 1000    178239 Nov 29 07:13 training_curves.png
+-rwxrwxrwx 1 1000 1000      4147 Nov 29 07:13 training_history.json
+-rwxrwxrwx 1 1000 1000     76254 Nov 29 07:13 training_output.log
+
+/outputs/exp09_d384_b12_20251128_043602:
+total 8
+drwxrwxrwx 1 1000 1000  512 Nov 29 07:14 .
+drwxrwxrwx 1 1000 1000  512 Nov 29 07:18 ..
+drwxrwxrwx 1 1000 1000  512 Nov 29 07:14 tensorboard
+-rwxrwxrwx 1 1000 1000 5685 Nov 29 07:18 training_output.log
+
+/outputs/exp10_d896_b1_20251128_043602:
+total 31695572
+drwxrwxrwx 1 1000 1000        512 Nov 29 12:14 .
+drwxrwxrwx 1 1000 1000        512 Nov 29 07:18 ..
+-rwxrwxrwx 1 1000 1000 1159127816 Nov 29 12:13 best_model.pt
+-rwxrwxrwx 1 1000 1000 1159131128 Nov 29 07:33 checkpoint_epoch_1.pt
+-rwxrwxrwx 1 1000 1000 1159131974 Nov 29 09:18 checkpoint_epoch_10.pt
+-rwxrwxrwx 1 1000 1000 1159131974 Nov 29 09:30 checkpoint_epoch_11.pt
+-rwxrwxrwx 1 1000 1000 1159132038 Nov 29 09:42 checkpoint_epoch_12.pt
+-rwxrwxrwx 1 1000 1000 1159132102 Nov 29 09:53 checkpoint_epoch_13.pt
+-rwxrwxrwx 1 1000 1000 1159132102 Nov 29 10:05 checkpoint_epoch_14.pt
+-rwxrwxrwx 1 1000 1000 1159132166 Nov 29 10:17 checkpoint_epoch_15.pt
+-rwxrwxrwx 1 1000 1000 1159132166 Nov 29 10:28 checkpoint_epoch_16.pt
+-rwxrwxrwx 1 1000 1000 1159132230 Nov 29 10:40 checkpoint_epoch_17.pt
+-rwxrwxrwx 1 1000 1000 1159132230 Nov 29 10:52 checkpoint_epoch_18.pt
+-rwxrwxrwx 1 1000 1000 1159132294 Nov 29 11:03 checkpoint_epoch_19.pt
+-rwxrwxrwx 1 1000 1000 1159131128 Nov 29 07:45 checkpoint_epoch_2.pt
+-rwxrwxrwx 1 1000 1000 1159132358 Nov 29 11:15 checkpoint_epoch_20.pt
+-rwxrwxrwx 1 1000 1000 1159132358 Nov 29 11:27 checkpoint_epoch_21.pt
+-rwxrwxrwx 1 1000 1000 1159132422 Nov 29 11:38 checkpoint_epoch_22.pt
+-rwxrwxrwx 1 1000 1000 1159132422 Nov 29 11:50 checkpoint_epoch_23.pt
+-rwxrwxrwx 1 1000 1000 1159132486 Nov 29 12:02 checkpoint_epoch_24.pt
+-rwxrwxrwx 1 1000 1000 1159132486 Nov 29 12:14 checkpoint_epoch_25.pt
+-rwxrwxrwx 1 1000 1000 1159131192 Nov 29 07:56 checkpoint_epoch_3.pt
+-rwxrwxrwx 1 1000 1000 1159131192 Nov 29 08:08 checkpoint_epoch_4.pt
+-rwxrwxrwx 1 1000 1000 1159131256 Nov 29 08:20 checkpoint_epoch_5.pt
+-rwxrwxrwx 1 1000 1000 1159131320 Nov 29 08:31 checkpoint_epoch_6.pt
+-rwxrwxrwx 1 1000 1000 1159131320 Nov 29 08:43 checkpoint_epoch_7.pt
+-rwxrwxrwx 1 1000 1000 1159131384 Nov 29 08:55 checkpoint_epoch_8.pt
+-rwxrwxrwx 1 1000 1000 1159131384 Nov 29 09:06 checkpoint_epoch_9.pt
+-rwxrwxrwx 1 1000 1000 1159128214 Nov 29 12:14 final_model.pt
+-rwxrwxrwx 1 1000 1000 1159131562 Nov 29 12:14 latest_checkpoint.pt
+drwxrwxrwx 1 1000 1000        512 Nov 29 07:33 tensorboard
+-rwxrwxrwx 1 1000 1000     179936 Nov 29 12:14 training_curves.png
+-rwxrwxrwx 1 1000 1000       2635 Nov 29 12:14 training_history.json
+-rwxrwxrwx 1 1000 1000     311213 Nov 29 12:14 training_output.log

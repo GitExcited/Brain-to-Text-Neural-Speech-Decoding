@@ -1,6 +1,8 @@
 # Data files (large HDF5 datasets)
 transformer_notebook/data/
-transformer_notebook/outputs/**
+transformer_notebook/outputs/**/*.pt
+transformer_notebook/outputs/**/tensorboard/**
+
 !transformer_notebook/outputs/**/
 !transformer_notebook/outputs/**/training_history.json
 

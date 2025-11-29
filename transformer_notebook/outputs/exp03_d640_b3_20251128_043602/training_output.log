@@ -1,0 +1,2768 @@
+============================================================
+Brain-to-Text Transformer Training
+============================================================
+PyTorch version: 2.1.0+cu121
+CUDA available: True
+CUDA version: 12.1
+GPU: NVIDIA GeForce RTX 3080
+============================================================
+
+Configuration:
+  data_dir: /data/t15_copyTask_neuralData/hdf5_data_final
+  output_dir: /outputs/exp03_d640_b3_20251128_043602
+  max_days: 45
+  d_model: 640
+  epochs: 35
+  batch_size: 3
+  lr: 0.0001
+  num_workers: 2
+  warmup_epochs: 2
+  patience: 10
+  min_delta: 0.001
+  resume: False
+  cuda: True
+  log_interval: 40
+  save_interval: 1
+============================================================
+Using CUDA: NVIDIA GeForce RTX 3080
+CUDA Memory: 10.74 GB
+TF32 enabled for faster matrix operations
+TensorBoard logs: /outputs/exp03_d640_b3_20251128_043602/tensorboard
+
+Loading data from: /data/t15_copyTask_neuralData/hdf5_data_final
+Loaded 8072 trials from 45 days (train)
+
+Label distribution (train):
+  0 (BLANK): 3821756 (94.7%)
+  1 (AA): 3403 (0.1%)
+  2 (AE): 4373 (0.1%)
+  3 (AH): 12662 (0.3%)
+  4 (AO): 2341 (0.1%)
+  5 (AW): 1316 (0.0%)
+  6 (AY): 5337 (0.1%)
+  7 (B): 2593 (0.1%)
+  8 (CH): 736 (0.0%)
+  9 (D): 6260 (0.2%)
+  ... (41 unique labels total)
+Found 41 validation files (some sessions may not have val data)
+Loaded 1426 trials from 41 days (val)
+
+Label distribution (val):
+  0 (BLANK): 671608 (94.2%)
+  1 (AA): 661 (0.1%)
+  2 (AE): 772 (0.1%)
+  3 (AH): 2705 (0.4%)
+  4 (AO): 544 (0.1%)
+  5 (AW): 226 (0.0%)
+  6 (AY): 809 (0.1%)
+  7 (B): 468 (0.1%)
+  8 (CH): 167 (0.0%)
+  9 (D): 1274 (0.2%)
+  ... (41 unique labels total)
+
+Creating model with d_model=640, 45 days
+/usr/local/lib/python3.10/dist-packages/torch/nn/modules/transformer.py:282: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Applied Xavier initialization to all layers
+Total parameters: 46,369,321
+Trainable parameters: 46,369,321
+LR Scheduler: 5382 warmup steps, 94185 total steps
+Early stopping: patience=10, min_delta=0.001
+
+Starting training for 35 epochs...
+============================================================
+Epoch 1/35 | Batch 0/2691 | Loss: 3.4985 | LR: 0.00e+00
+Epoch 1/35 | Batch 40/2691 | Loss: 1.3827 | LR: 7.43e-07
+Epoch 1/35 | Batch 80/2691 | Loss: 0.9095 | LR: 1.49e-06
+Epoch 1/35 | Batch 120/2691 | Loss: 0.8289 | LR: 2.23e-06
+Epoch 1/35 | Batch 160/2691 | Loss: 0.8332 | LR: 2.97e-06
+Epoch 1/35 | Batch 200/2691 | Loss: 0.8399 | LR: 3.72e-06
+Epoch 1/35 | Batch 240/2691 | Loss: 0.8156 | LR: 4.46e-06
+Epoch 1/35 | Batch 280/2691 | Loss: 0.8321 | LR: 5.20e-06
+Epoch 1/35 | Batch 320/2691 | Loss: 0.8109 | LR: 5.95e-06
+Epoch 1/35 | Batch 360/2691 | Loss: 0.8497 | LR: 6.69e-06
+Epoch 1/35 | Batch 400/2691 | Loss: 0.8284 | LR: 7.43e-06
+Epoch 1/35 | Batch 440/2691 | Loss: 0.7874 | LR: 8.18e-06
+Epoch 1/35 | Batch 480/2691 | Loss: 0.7890 | LR: 8.92e-06
+Epoch 1/35 | Batch 520/2691 | Loss: 0.8195 | LR: 9.66e-06
+Epoch 1/35 | Batch 560/2691 | Loss: 0.8020 | LR: 1.04e-05
+Epoch 1/35 | Batch 600/2691 | Loss: 0.7843 | LR: 1.11e-05
+Epoch 1/35 | Batch 640/2691 | Loss: 0.7619 | LR: 1.19e-05
+Epoch 1/35 | Batch 680/2691 | Loss: 0.8034 | LR: 1.26e-05
+Epoch 1/35 | Batch 720/2691 | Loss: 0.8075 | LR: 1.34e-05
+Epoch 1/35 | Batch 760/2691 | Loss: 0.7707 | LR: 1.41e-05
+Epoch 1/35 | Batch 800/2691 | Loss: 0.8173 | LR: 1.49e-05
+Epoch 1/35 | Batch 840/2691 | Loss: 0.7791 | LR: 1.56e-05
+Epoch 1/35 | Batch 880/2691 | Loss: 0.7869 | LR: 1.64e-05
+Epoch 1/35 | Batch 920/2691 | Loss: 0.7669 | LR: 1.71e-05
+Epoch 1/35 | Batch 960/2691 | Loss: 0.7757 | LR: 1.78e-05
+Epoch 1/35 | Batch 1000/2691 | Loss: 0.7450 | LR: 1.86e-05
+Epoch 1/35 | Batch 1040/2691 | Loss: 0.7909 | LR: 1.93e-05
+Epoch 1/35 | Batch 1080/2691 | Loss: 0.8120 | LR: 2.01e-05
+Epoch 1/35 | Batch 1120/2691 | Loss: 0.7756 | LR: 2.08e-05
+Epoch 1/35 | Batch 1160/2691 | Loss: 0.8196 | LR: 2.16e-05
+Epoch 1/35 | Batch 1200/2691 | Loss: 0.7905 | LR: 2.23e-05
+Epoch 1/35 | Batch 1240/2691 | Loss: 0.8325 | LR: 2.30e-05
+Epoch 1/35 | Batch 1280/2691 | Loss: 0.7628 | LR: 2.38e-05
+Epoch 1/35 | Batch 1320/2691 | Loss: 0.7759 | LR: 2.45e-05
+Epoch 1/35 | Batch 1360/2691 | Loss: 0.7988 | LR: 2.53e-05
+Epoch 1/35 | Batch 1400/2691 | Loss: 0.7656 | LR: 2.60e-05
+Epoch 1/35 | Batch 1440/2691 | Loss: 0.7596 | LR: 2.68e-05
+Epoch 1/35 | Batch 1480/2691 | Loss: 0.7764 | LR: 2.75e-05
+Epoch 1/35 | Batch 1520/2691 | Loss: 0.7785 | LR: 2.82e-05
+Epoch 1/35 | Batch 1560/2691 | Loss: 0.7734 | LR: 2.90e-05
+Epoch 1/35 | Batch 1600/2691 | Loss: 0.7653 | LR: 2.97e-05
+Epoch 1/35 | Batch 1640/2691 | Loss: 0.7571 | LR: 3.05e-05
+Epoch 1/35 | Batch 1680/2691 | Loss: 0.7833 | LR: 3.12e-05
+Epoch 1/35 | Batch 1720/2691 | Loss: 0.7971 | LR: 3.20e-05
+Epoch 1/35 | Batch 1760/2691 | Loss: 0.7485 | LR: 3.27e-05
+Epoch 1/35 | Batch 1800/2691 | Loss: 0.7666 | LR: 3.34e-05
+Epoch 1/35 | Batch 1840/2691 | Loss: 0.7522 | LR: 3.42e-05
+Epoch 1/35 | Batch 1880/2691 | Loss: 0.7530 | LR: 3.49e-05
+Epoch 1/35 | Batch 1920/2691 | Loss: 0.7749 | LR: 3.57e-05
+Epoch 1/35 | Batch 1960/2691 | Loss: 0.7872 | LR: 3.64e-05
+Epoch 1/35 | Batch 2000/2691 | Loss: 0.7924 | LR: 3.72e-05
+Epoch 1/35 | Batch 2040/2691 | Loss: 0.7759 | LR: 3.79e-05
+Epoch 1/35 | Batch 2080/2691 | Loss: 0.7426 | LR: 3.86e-05
+Epoch 1/35 | Batch 2120/2691 | Loss: 0.8037 | LR: 3.94e-05
+Epoch 1/35 | Batch 2160/2691 | Loss: 0.7501 | LR: 4.01e-05
+Epoch 1/35 | Batch 2200/2691 | Loss: 0.7818 | LR: 4.09e-05
+Epoch 1/35 | Batch 2240/2691 | Loss: 0.7954 | LR: 4.16e-05
+Epoch 1/35 | Batch 2280/2691 | Loss: 0.7791 | LR: 4.24e-05
+Epoch 1/35 | Batch 2320/2691 | Loss: 0.7602 | LR: 4.31e-05
+Epoch 1/35 | Batch 2360/2691 | Loss: 0.7740 | LR: 4.38e-05
+Epoch 1/35 | Batch 2400/2691 | Loss: 0.7781 | LR: 4.46e-05
+Epoch 1/35 | Batch 2440/2691 | Loss: 0.7796 | LR: 4.53e-05
+Epoch 1/35 | Batch 2480/2691 | Loss: 0.8245 | LR: 4.61e-05
+Epoch 1/35 | Batch 2520/2691 | Loss: 0.7335 | LR: 4.68e-05
+Epoch 1/35 | Batch 2560/2691 | Loss: 0.7352 | LR: 4.76e-05
+Epoch 1/35 | Batch 2600/2691 | Loss: 0.7801 | LR: 4.83e-05
+Epoch 1/35 | Batch 2640/2691 | Loss: 0.7623 | LR: 4.91e-05
+Epoch 1/35 | Batch 2680/2691 | Loss: 0.7643 | LR: 4.98e-05
+  Sample - Pred: [34, 40, 16, 2, 23, 31, 10, 18, 40, 17, 2, 40, 16, 2, 23] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 1 Summary:
+  Train Loss: 0.8000
+  Val Loss: 0.7773
+  PER: 0.5496
+  Avg LR: 2.50e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.5496
+Epoch 2/35 | Batch 0/2691 | Loss: 0.7665 | LR: 5.00e-05
+Epoch 2/35 | Batch 40/2691 | Loss: 0.7712 | LR: 5.07e-05
+Epoch 2/35 | Batch 80/2691 | Loss: 0.7922 | LR: 5.15e-05
+Epoch 2/35 | Batch 120/2691 | Loss: 0.7711 | LR: 5.22e-05
+Epoch 2/35 | Batch 160/2691 | Loss: 0.7962 | LR: 5.30e-05
+Epoch 2/35 | Batch 200/2691 | Loss: 0.7859 | LR: 5.37e-05
+Epoch 2/35 | Batch 240/2691 | Loss: 0.7773 | LR: 5.45e-05
+Epoch 2/35 | Batch 280/2691 | Loss: 0.8122 | LR: 5.52e-05
+Epoch 2/35 | Batch 320/2691 | Loss: 0.7365 | LR: 5.59e-05
+Epoch 2/35 | Batch 360/2691 | Loss: 0.7598 | LR: 5.67e-05
+Epoch 2/35 | Batch 400/2691 | Loss: 0.7781 | LR: 5.74e-05
+Epoch 2/35 | Batch 440/2691 | Loss: 0.7416 | LR: 5.82e-05
+Epoch 2/35 | Batch 480/2691 | Loss: 0.7460 | LR: 5.89e-05
+Epoch 2/35 | Batch 520/2691 | Loss: 0.7574 | LR: 5.97e-05
+Epoch 2/35 | Batch 560/2691 | Loss: 0.7385 | LR: 6.04e-05
+Epoch 2/35 | Batch 600/2691 | Loss: 0.7365 | LR: 6.11e-05
+Epoch 2/35 | Batch 640/2691 | Loss: 0.7648 | LR: 6.19e-05
+Epoch 2/35 | Batch 680/2691 | Loss: 0.7708 | LR: 6.26e-05
+Epoch 2/35 | Batch 720/2691 | Loss: 0.7551 | LR: 6.34e-05
+Epoch 2/35 | Batch 760/2691 | Loss: 0.7470 | LR: 6.41e-05
+Epoch 2/35 | Batch 800/2691 | Loss: 0.7411 | LR: 6.49e-05
+Epoch 2/35 | Batch 840/2691 | Loss: 0.7674 | LR: 6.56e-05
+Epoch 2/35 | Batch 880/2691 | Loss: 0.7849 | LR: 6.64e-05
+Epoch 2/35 | Batch 920/2691 | Loss: 0.7386 | LR: 6.71e-05
+Epoch 2/35 | Batch 960/2691 | Loss: 0.7380 | LR: 6.78e-05
+Epoch 2/35 | Batch 1000/2691 | Loss: 0.7497 | LR: 6.86e-05
+Epoch 2/35 | Batch 1040/2691 | Loss: 0.8367 | LR: 6.93e-05
+Epoch 2/35 | Batch 1080/2691 | Loss: 0.7670 | LR: 7.01e-05
+Epoch 2/35 | Batch 1120/2691 | Loss: 0.7290 | LR: 7.08e-05
+Epoch 2/35 | Batch 1160/2691 | Loss: 0.7384 | LR: 7.16e-05
+Epoch 2/35 | Batch 1200/2691 | Loss: 0.7635 | LR: 7.23e-05
+Epoch 2/35 | Batch 1240/2691 | Loss: 0.7557 | LR: 7.30e-05
+Epoch 2/35 | Batch 1280/2691 | Loss: 0.7397 | LR: 7.38e-05
+Epoch 2/35 | Batch 1320/2691 | Loss: 0.7252 | LR: 7.45e-05
+Epoch 2/35 | Batch 1360/2691 | Loss: 0.7861 | LR: 7.53e-05
+Epoch 2/35 | Batch 1400/2691 | Loss: 0.7848 | LR: 7.60e-05
+Epoch 2/35 | Batch 1440/2691 | Loss: 0.7500 | LR: 7.68e-05
+Epoch 2/35 | Batch 1480/2691 | Loss: 0.7540 | LR: 7.75e-05
+Epoch 2/35 | Batch 1520/2691 | Loss: 0.7318 | LR: 7.82e-05
+Epoch 2/35 | Batch 1560/2691 | Loss: 0.7095 | LR: 7.90e-05
+Epoch 2/35 | Batch 1600/2691 | Loss: 0.7867 | LR: 7.97e-05
+Epoch 2/35 | Batch 1640/2691 | Loss: 0.7329 | LR: 8.05e-05
+Epoch 2/35 | Batch 1680/2691 | Loss: 0.7731 | LR: 8.12e-05
+Epoch 2/35 | Batch 1720/2691 | Loss: 0.7133 | LR: 8.20e-05
+Epoch 2/35 | Batch 1760/2691 | Loss: 0.7264 | LR: 8.27e-05
+Epoch 2/35 | Batch 1800/2691 | Loss: 0.7334 | LR: 8.34e-05
+Epoch 2/35 | Batch 1840/2691 | Loss: 0.7095 | LR: 8.42e-05
+Epoch 2/35 | Batch 1880/2691 | Loss: 0.7388 | LR: 8.49e-05
+Epoch 2/35 | Batch 1920/2691 | Loss: 0.7454 | LR: 8.57e-05
+Epoch 2/35 | Batch 1960/2691 | Loss: 0.7524 | LR: 8.64e-05
+Epoch 2/35 | Batch 2000/2691 | Loss: 0.7798 | LR: 8.72e-05
+Epoch 2/35 | Batch 2040/2691 | Loss: 0.7398 | LR: 8.79e-05
+Epoch 2/35 | Batch 2080/2691 | Loss: 0.7312 | LR: 8.86e-05
+Epoch 2/35 | Batch 2120/2691 | Loss: 0.7700 | LR: 8.94e-05
+Epoch 2/35 | Batch 2160/2691 | Loss: 0.7265 | LR: 9.01e-05
+Epoch 2/35 | Batch 2200/2691 | Loss: 0.7483 | LR: 9.09e-05
+Epoch 2/35 | Batch 2240/2691 | Loss: 0.7515 | LR: 9.16e-05
+Epoch 2/35 | Batch 2280/2691 | Loss: 0.7492 | LR: 9.24e-05
+Epoch 2/35 | Batch 2320/2691 | Loss: 0.7276 | LR: 9.31e-05
+Epoch 2/35 | Batch 2360/2691 | Loss: 0.7131 | LR: 9.38e-05
+Epoch 2/35 | Batch 2400/2691 | Loss: 0.7372 | LR: 9.46e-05
+Epoch 2/35 | Batch 2440/2691 | Loss: 0.7173 | LR: 9.53e-05
+Epoch 2/35 | Batch 2480/2691 | Loss: 0.7362 | LR: 9.61e-05
+Epoch 2/35 | Batch 2520/2691 | Loss: 0.7150 | LR: 9.68e-05
+Epoch 2/35 | Batch 2560/2691 | Loss: 0.7458 | LR: 9.76e-05
+Epoch 2/35 | Batch 2600/2691 | Loss: 0.7386 | LR: 9.83e-05
+Epoch 2/35 | Batch 2640/2691 | Loss: 0.7489 | LR: 9.91e-05
+Epoch 2/35 | Batch 2680/2691 | Loss: 0.7217 | LR: 9.98e-05
+  Sample - Pred: [34, 40, 20, 33, 23, 40, 10, 18, 22, 10, 2, 40, 20, 1, 23] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 2 Summary:
+  Train Loss: 0.7491
+  Val Loss: 0.7501
+  PER: 0.4161
+  Avg LR: 7.50e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.4161
+Epoch 3/35 | Batch 0/2691 | Loss: 0.7320 | LR: 1.00e-04
+Epoch 3/35 | Batch 40/2691 | Loss: 0.7569 | LR: 1.00e-04
+Epoch 3/35 | Batch 80/2691 | Loss: 0.7313 | LR: 1.00e-04
+Epoch 3/35 | Batch 120/2691 | Loss: 0.7572 | LR: 1.00e-04
+Epoch 3/35 | Batch 160/2691 | Loss: 0.7548 | LR: 1.00e-04
+Epoch 3/35 | Batch 200/2691 | Loss: 0.7371 | LR: 1.00e-04
+Epoch 3/35 | Batch 240/2691 | Loss: 0.7236 | LR: 1.00e-04
+Epoch 3/35 | Batch 280/2691 | Loss: 0.7237 | LR: 1.00e-04
+Epoch 3/35 | Batch 320/2691 | Loss: 0.7303 | LR: 1.00e-04
+Epoch 3/35 | Batch 360/2691 | Loss: 0.7372 | LR: 1.00e-04
+Epoch 3/35 | Batch 400/2691 | Loss: 0.7692 | LR: 1.00e-04
+Epoch 3/35 | Batch 440/2691 | Loss: 0.7155 | LR: 1.00e-04
+Epoch 3/35 | Batch 480/2691 | Loss: 0.7238 | LR: 1.00e-04
+Epoch 3/35 | Batch 520/2691 | Loss: 0.7208 | LR: 1.00e-04
+Epoch 3/35 | Batch 560/2691 | Loss: 0.6990 | LR: 1.00e-04
+Epoch 3/35 | Batch 600/2691 | Loss: 0.7276 | LR: 1.00e-04
+Epoch 3/35 | Batch 640/2691 | Loss: 0.7404 | LR: 1.00e-04
+Epoch 3/35 | Batch 680/2691 | Loss: 0.7094 | LR: 1.00e-04
+Epoch 3/35 | Batch 720/2691 | Loss: 0.7152 | LR: 1.00e-04
+Epoch 3/35 | Batch 760/2691 | Loss: 0.7148 | LR: 1.00e-04
+Epoch 3/35 | Batch 800/2691 | Loss: 0.7273 | LR: 1.00e-04
+Epoch 3/35 | Batch 840/2691 | Loss: 0.7233 | LR: 1.00e-04
+Epoch 3/35 | Batch 880/2691 | Loss: 0.7195 | LR: 1.00e-04
+Epoch 3/35 | Batch 920/2691 | Loss: 0.7088 | LR: 1.00e-04
+Epoch 3/35 | Batch 960/2691 | Loss: 0.7193 | LR: 1.00e-04
+Epoch 3/35 | Batch 1000/2691 | Loss: 0.7109 | LR: 1.00e-04
+Epoch 3/35 | Batch 1040/2691 | Loss: 0.7062 | LR: 1.00e-04
+Epoch 3/35 | Batch 1080/2691 | Loss: 0.7168 | LR: 1.00e-04
+Epoch 3/35 | Batch 1120/2691 | Loss: 0.7615 | LR: 1.00e-04
+Epoch 3/35 | Batch 1160/2691 | Loss: 0.7352 | LR: 1.00e-04
+Epoch 3/35 | Batch 1200/2691 | Loss: 0.7104 | LR: 1.00e-04
+Epoch 3/35 | Batch 1240/2691 | Loss: 0.7145 | LR: 1.00e-04
+Epoch 3/35 | Batch 1280/2691 | Loss: 0.7489 | LR: 9.99e-05
+Epoch 3/35 | Batch 1320/2691 | Loss: 0.7411 | LR: 9.99e-05
+Epoch 3/35 | Batch 1360/2691 | Loss: 0.7512 | LR: 9.99e-05
+Epoch 3/35 | Batch 1400/2691 | Loss: 0.7449 | LR: 9.99e-05
+Epoch 3/35 | Batch 1440/2691 | Loss: 0.7122 | LR: 9.99e-05
+Epoch 3/35 | Batch 1480/2691 | Loss: 0.7032 | LR: 9.99e-05
+Epoch 3/35 | Batch 1520/2691 | Loss: 0.7218 | LR: 9.99e-05
+Epoch 3/35 | Batch 1560/2691 | Loss: 0.7458 | LR: 9.99e-05
+Epoch 3/35 | Batch 1600/2691 | Loss: 0.7314 | LR: 9.99e-05
+Epoch 3/35 | Batch 1640/2691 | Loss: 0.7159 | LR: 9.99e-05
+Epoch 3/35 | Batch 1680/2691 | Loss: 0.7225 | LR: 9.99e-05
+Epoch 3/35 | Batch 1720/2691 | Loss: 0.7390 | LR: 9.99e-05
+Epoch 3/35 | Batch 1760/2691 | Loss: 0.7293 | LR: 9.99e-05
+Epoch 3/35 | Batch 1800/2691 | Loss: 0.7386 | LR: 9.99e-05
+Epoch 3/35 | Batch 1840/2691 | Loss: 0.7579 | LR: 9.99e-05
+Epoch 3/35 | Batch 1880/2691 | Loss: 0.7290 | LR: 9.99e-05
+Epoch 3/35 | Batch 1920/2691 | Loss: 0.7237 | LR: 9.99e-05
+Epoch 3/35 | Batch 1960/2691 | Loss: 0.7451 | LR: 9.99e-05
+Epoch 3/35 | Batch 2000/2691 | Loss: 0.7148 | LR: 9.99e-05
+Epoch 3/35 | Batch 2040/2691 | Loss: 0.7139 | LR: 9.99e-05
+Epoch 3/35 | Batch 2080/2691 | Loss: 0.7319 | LR: 9.99e-05
+Epoch 3/35 | Batch 2120/2691 | Loss: 0.6969 | LR: 9.99e-05
+Epoch 3/35 | Batch 2160/2691 | Loss: 0.6938 | LR: 9.99e-05
+Epoch 3/35 | Batch 2200/2691 | Loss: 0.6923 | LR: 9.99e-05
+Epoch 3/35 | Batch 2240/2691 | Loss: 0.7286 | LR: 9.98e-05
+Epoch 3/35 | Batch 2280/2691 | Loss: 0.7121 | LR: 9.98e-05
+Epoch 3/35 | Batch 2320/2691 | Loss: 0.7143 | LR: 9.98e-05
+Epoch 3/35 | Batch 2360/2691 | Loss: 0.7828 | LR: 9.98e-05
+Epoch 3/35 | Batch 2400/2691 | Loss: 0.7144 | LR: 9.98e-05
+Epoch 3/35 | Batch 2440/2691 | Loss: 0.7102 | LR: 9.98e-05
+Epoch 3/35 | Batch 2480/2691 | Loss: 0.7272 | LR: 9.98e-05
+Epoch 3/35 | Batch 2520/2691 | Loss: 0.7060 | LR: 9.98e-05
+Epoch 3/35 | Batch 2560/2691 | Loss: 0.7435 | LR: 9.98e-05
+Epoch 3/35 | Batch 2600/2691 | Loss: 0.7475 | LR: 9.98e-05
+Epoch 3/35 | Batch 2640/2691 | Loss: 0.7222 | LR: 9.98e-05
+Epoch 3/35 | Batch 2680/2691 | Loss: 0.6932 | LR: 9.98e-05
+  Sample - Pred: [34, 40, 23, 2, 23, 40, 29, 18, 40, 20, 3, 40, 20, 25, 23] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 3 Summary:
+  Train Loss: 0.7289
+  Val Loss: 0.7351
+  PER: 0.3190
+  Avg LR: 9.99e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.3190
+Epoch 4/35 | Batch 0/2691 | Loss: 0.7338 | LR: 9.98e-05
+Epoch 4/35 | Batch 40/2691 | Loss: 0.7190 | LR: 9.98e-05
+Epoch 4/35 | Batch 80/2691 | Loss: 0.7062 | LR: 9.98e-05
+Epoch 4/35 | Batch 120/2691 | Loss: 0.7204 | LR: 9.98e-05
+Epoch 4/35 | Batch 160/2691 | Loss: 0.7197 | LR: 9.97e-05
+Epoch 4/35 | Batch 200/2691 | Loss: 0.7083 | LR: 9.97e-05
+Epoch 4/35 | Batch 240/2691 | Loss: 0.7200 | LR: 9.97e-05
+Epoch 4/35 | Batch 280/2691 | Loss: 0.7211 | LR: 9.97e-05
+Epoch 4/35 | Batch 320/2691 | Loss: 0.7214 | LR: 9.97e-05
+Epoch 4/35 | Batch 360/2691 | Loss: 0.7173 | LR: 9.97e-05
+Epoch 4/35 | Batch 400/2691 | Loss: 0.7082 | LR: 9.97e-05
+Epoch 4/35 | Batch 440/2691 | Loss: 0.6977 | LR: 9.97e-05
+Epoch 4/35 | Batch 480/2691 | Loss: 0.7296 | LR: 9.97e-05
+Epoch 4/35 | Batch 520/2691 | Loss: 0.7294 | LR: 9.97e-05
+Epoch 4/35 | Batch 560/2691 | Loss: 0.6984 | LR: 9.97e-05
+Epoch 4/35 | Batch 600/2691 | Loss: 0.7128 | LR: 9.97e-05
+Epoch 4/35 | Batch 640/2691 | Loss: 0.7032 | LR: 9.97e-05
+Epoch 4/35 | Batch 680/2691 | Loss: 0.7007 | LR: 9.96e-05
+Epoch 4/35 | Batch 720/2691 | Loss: 0.7183 | LR: 9.96e-05
+Epoch 4/35 | Batch 760/2691 | Loss: 0.7465 | LR: 9.96e-05
+Epoch 4/35 | Batch 800/2691 | Loss: 0.7106 | LR: 9.96e-05
+Epoch 4/35 | Batch 840/2691 | Loss: 0.6875 | LR: 9.96e-05
+Epoch 4/35 | Batch 880/2691 | Loss: 0.6990 | LR: 9.96e-05
+Epoch 4/35 | Batch 920/2691 | Loss: 0.7290 | LR: 9.96e-05
+Epoch 4/35 | Batch 960/2691 | Loss: 0.7257 | LR: 9.96e-05
+Epoch 4/35 | Batch 1000/2691 | Loss: 0.7235 | LR: 9.96e-05
+Epoch 4/35 | Batch 1040/2691 | Loss: 0.7184 | LR: 9.96e-05
+Epoch 4/35 | Batch 1080/2691 | Loss: 0.7013 | LR: 9.96e-05
+Epoch 4/35 | Batch 1120/2691 | Loss: 0.7082 | LR: 9.96e-05
+Epoch 4/35 | Batch 1160/2691 | Loss: 0.7402 | LR: 9.95e-05
+Epoch 4/35 | Batch 1200/2691 | Loss: 0.7192 | LR: 9.95e-05
+Epoch 4/35 | Batch 1240/2691 | Loss: 0.7156 | LR: 9.95e-05
+Epoch 4/35 | Batch 1280/2691 | Loss: 0.6952 | LR: 9.95e-05
+Epoch 4/35 | Batch 1320/2691 | Loss: 0.7207 | LR: 9.95e-05
+Epoch 4/35 | Batch 1360/2691 | Loss: 0.7308 | LR: 9.95e-05
+Epoch 4/35 | Batch 1400/2691 | Loss: 0.6999 | LR: 9.95e-05
+Epoch 4/35 | Batch 1440/2691 | Loss: 0.7101 | LR: 9.95e-05
+Epoch 4/35 | Batch 1480/2691 | Loss: 0.7185 | LR: 9.95e-05
+Epoch 4/35 | Batch 1520/2691 | Loss: 0.7305 | LR: 9.95e-05
+Epoch 4/35 | Batch 1560/2691 | Loss: 0.6937 | LR: 9.94e-05
+Epoch 4/35 | Batch 1600/2691 | Loss: 0.7219 | LR: 9.94e-05
+Epoch 4/35 | Batch 1640/2691 | Loss: 0.7308 | LR: 9.94e-05
+Epoch 4/35 | Batch 1680/2691 | Loss: 0.7086 | LR: 9.94e-05
+Epoch 4/35 | Batch 1720/2691 | Loss: 0.7376 | LR: 9.94e-05
+Epoch 4/35 | Batch 1760/2691 | Loss: 0.7051 | LR: 9.94e-05
+Epoch 4/35 | Batch 1800/2691 | Loss: 0.7287 | LR: 9.94e-05
+Epoch 4/35 | Batch 1840/2691 | Loss: 0.6940 | LR: 9.94e-05
+Epoch 4/35 | Batch 1880/2691 | Loss: 0.7190 | LR: 9.94e-05
+Epoch 4/35 | Batch 1920/2691 | Loss: 0.7043 | LR: 9.93e-05
+Epoch 4/35 | Batch 1960/2691 | Loss: 0.7240 | LR: 9.93e-05
+Epoch 4/35 | Batch 2000/2691 | Loss: 0.7197 | LR: 9.93e-05
+Epoch 4/35 | Batch 2040/2691 | Loss: 0.7155 | LR: 9.93e-05
+Epoch 4/35 | Batch 2080/2691 | Loss: 0.7162 | LR: 9.93e-05
+Epoch 4/35 | Batch 2120/2691 | Loss: 0.7343 | LR: 9.93e-05
+Epoch 4/35 | Batch 2160/2691 | Loss: 0.7256 | LR: 9.93e-05
+Epoch 4/35 | Batch 2200/2691 | Loss: 0.7139 | LR: 9.93e-05
+Epoch 4/35 | Batch 2240/2691 | Loss: 0.7342 | LR: 9.92e-05
+Epoch 4/35 | Batch 2280/2691 | Loss: 0.7411 | LR: 9.92e-05
+Epoch 4/35 | Batch 2320/2691 | Loss: 0.7322 | LR: 9.92e-05
+Epoch 4/35 | Batch 2360/2691 | Loss: 0.7094 | LR: 9.92e-05
+Epoch 4/35 | Batch 2400/2691 | Loss: 0.6952 | LR: 9.92e-05
+Epoch 4/35 | Batch 2440/2691 | Loss: 0.7359 | LR: 9.92e-05
+Epoch 4/35 | Batch 2480/2691 | Loss: 0.7084 | LR: 9.92e-05
+Epoch 4/35 | Batch 2520/2691 | Loss: 0.7285 | LR: 9.92e-05
+Epoch 4/35 | Batch 2560/2691 | Loss: 0.7181 | LR: 9.91e-05
+Epoch 4/35 | Batch 2600/2691 | Loss: 0.7525 | LR: 9.91e-05
+Epoch 4/35 | Batch 2640/2691 | Loss: 0.7278 | LR: 9.91e-05
+Epoch 4/35 | Batch 2680/2691 | Loss: 0.7352 | LR: 9.91e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 9, 18, 40, 10, 3, 40, 15, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 4 Summary:
+  Train Loss: 0.7162
+  Val Loss: 0.7291
+  PER: 0.2780
+  Avg LR: 9.95e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2780
+Epoch 5/35 | Batch 0/2691 | Loss: 0.7341 | LR: 9.91e-05
+Epoch 5/35 | Batch 40/2691 | Loss: 0.6966 | LR: 9.91e-05
+Epoch 5/35 | Batch 80/2691 | Loss: 0.7046 | LR: 9.91e-05
+Epoch 5/35 | Batch 120/2691 | Loss: 0.6991 | LR: 9.91e-05
+Epoch 5/35 | Batch 160/2691 | Loss: 0.7015 | LR: 9.91e-05
+Epoch 5/35 | Batch 200/2691 | Loss: 0.7152 | LR: 9.90e-05
+Epoch 5/35 | Batch 240/2691 | Loss: 0.6887 | LR: 9.90e-05
+Epoch 5/35 | Batch 280/2691 | Loss: 0.6889 | LR: 9.90e-05
+Epoch 5/35 | Batch 320/2691 | Loss: 0.7032 | LR: 9.90e-05
+Epoch 5/35 | Batch 360/2691 | Loss: 0.7160 | LR: 9.90e-05
+Epoch 5/35 | Batch 400/2691 | Loss: 0.7142 | LR: 9.90e-05
+Epoch 5/35 | Batch 440/2691 | Loss: 0.6907 | LR: 9.90e-05
+Epoch 5/35 | Batch 480/2691 | Loss: 0.7283 | LR: 9.89e-05
+Epoch 5/35 | Batch 520/2691 | Loss: 0.7041 | LR: 9.89e-05
+Epoch 5/35 | Batch 560/2691 | Loss: 0.7046 | LR: 9.89e-05
+Epoch 5/35 | Batch 600/2691 | Loss: 0.7054 | LR: 9.89e-05
+Epoch 5/35 | Batch 640/2691 | Loss: 0.7185 | LR: 9.89e-05
+Epoch 5/35 | Batch 680/2691 | Loss: 0.7002 | LR: 9.89e-05
+Epoch 5/35 | Batch 720/2691 | Loss: 0.7001 | LR: 9.89e-05
+Epoch 5/35 | Batch 760/2691 | Loss: 0.6914 | LR: 9.88e-05
+Epoch 5/35 | Batch 800/2691 | Loss: 0.7016 | LR: 9.88e-05
+Epoch 5/35 | Batch 840/2691 | Loss: 0.7120 | LR: 9.88e-05
+Epoch 5/35 | Batch 880/2691 | Loss: 0.7089 | LR: 9.88e-05
+Epoch 5/35 | Batch 920/2691 | Loss: 0.7029 | LR: 9.88e-05
+Epoch 5/35 | Batch 960/2691 | Loss: 0.6955 | LR: 9.88e-05
+Epoch 5/35 | Batch 1000/2691 | Loss: 0.7154 | LR: 9.87e-05
+Epoch 5/35 | Batch 1040/2691 | Loss: 0.7023 | LR: 9.87e-05
+Epoch 5/35 | Batch 1080/2691 | Loss: 0.7062 | LR: 9.87e-05
+Epoch 5/35 | Batch 1120/2691 | Loss: 0.7015 | LR: 9.87e-05
+Epoch 5/35 | Batch 1160/2691 | Loss: 0.6970 | LR: 9.87e-05
+Epoch 5/35 | Batch 1200/2691 | Loss: 0.6946 | LR: 9.87e-05
+Epoch 5/35 | Batch 1240/2691 | Loss: 0.7114 | LR: 9.86e-05
+Epoch 5/35 | Batch 1280/2691 | Loss: 0.7189 | LR: 9.86e-05
+Epoch 5/35 | Batch 1320/2691 | Loss: 0.7063 | LR: 9.86e-05
+Epoch 5/35 | Batch 1360/2691 | Loss: 0.6992 | LR: 9.86e-05
+Epoch 5/35 | Batch 1400/2691 | Loss: 0.7238 | LR: 9.86e-05
+Epoch 5/35 | Batch 1440/2691 | Loss: 0.6942 | LR: 9.86e-05
+Epoch 5/35 | Batch 1480/2691 | Loss: 0.6976 | LR: 9.85e-05
+Epoch 5/35 | Batch 1520/2691 | Loss: 0.7176 | LR: 9.85e-05
+Epoch 5/35 | Batch 1560/2691 | Loss: 0.6986 | LR: 9.85e-05
+Epoch 5/35 | Batch 1600/2691 | Loss: 0.7023 | LR: 9.85e-05
+Epoch 5/35 | Batch 1640/2691 | Loss: 0.7159 | LR: 9.85e-05
+Epoch 5/35 | Batch 1680/2691 | Loss: 0.7051 | LR: 9.85e-05
+Epoch 5/35 | Batch 1720/2691 | Loss: 0.7055 | LR: 9.84e-05
+Epoch 5/35 | Batch 1760/2691 | Loss: 0.6908 | LR: 9.84e-05
+Epoch 5/35 | Batch 1800/2691 | Loss: 0.6985 | LR: 9.84e-05
+Epoch 5/35 | Batch 1840/2691 | Loss: 0.6996 | LR: 9.84e-05
+Epoch 5/35 | Batch 1880/2691 | Loss: 0.7190 | LR: 9.84e-05
+Epoch 5/35 | Batch 1920/2691 | Loss: 0.7202 | LR: 9.84e-05
+Epoch 5/35 | Batch 1960/2691 | Loss: 0.7175 | LR: 9.83e-05
+Epoch 5/35 | Batch 2000/2691 | Loss: 0.7025 | LR: 9.83e-05
+Epoch 5/35 | Batch 2040/2691 | Loss: 0.6962 | LR: 9.83e-05
+Epoch 5/35 | Batch 2080/2691 | Loss: 0.7225 | LR: 9.83e-05
+Epoch 5/35 | Batch 2120/2691 | Loss: 0.6995 | LR: 9.83e-05
+Epoch 5/35 | Batch 2160/2691 | Loss: 0.7025 | LR: 9.82e-05
+Epoch 5/35 | Batch 2200/2691 | Loss: 0.7111 | LR: 9.82e-05
+Epoch 5/35 | Batch 2240/2691 | Loss: 0.6975 | LR: 9.82e-05
+Epoch 5/35 | Batch 2280/2691 | Loss: 0.6993 | LR: 9.82e-05
+Epoch 5/35 | Batch 2320/2691 | Loss: 0.7215 | LR: 9.82e-05
+Epoch 5/35 | Batch 2360/2691 | Loss: 0.7149 | LR: 9.82e-05
+Epoch 5/35 | Batch 2400/2691 | Loss: 0.6950 | LR: 9.81e-05
+Epoch 5/35 | Batch 2440/2691 | Loss: 0.7041 | LR: 9.81e-05
+Epoch 5/35 | Batch 2480/2691 | Loss: 0.7048 | LR: 9.81e-05
+Epoch 5/35 | Batch 2520/2691 | Loss: 0.7090 | LR: 9.81e-05
+Epoch 5/35 | Batch 2560/2691 | Loss: 0.7012 | LR: 9.81e-05
+Epoch 5/35 | Batch 2600/2691 | Loss: 0.7056 | LR: 9.80e-05
+Epoch 5/35 | Batch 2640/2691 | Loss: 0.6996 | LR: 9.80e-05
+Epoch 5/35 | Batch 2680/2691 | Loss: 0.6995 | LR: 9.80e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 31, 29, 18, 40, 10, 3, 40, 20, 3, 22] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 5 Summary:
+  Train Loss: 0.7075
+  Val Loss: 0.7224
+  PER: 0.2401
+  Avg LR: 9.86e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2401
+Epoch 6/35 | Batch 0/2691 | Loss: 0.6876 | LR: 9.80e-05
+Epoch 6/35 | Batch 40/2691 | Loss: 0.6994 | LR: 9.80e-05
+Epoch 6/35 | Batch 80/2691 | Loss: 0.6952 | LR: 9.80e-05
+Epoch 6/35 | Batch 120/2691 | Loss: 0.6953 | LR: 9.79e-05
+Epoch 6/35 | Batch 160/2691 | Loss: 0.6899 | LR: 9.79e-05
+Epoch 6/35 | Batch 200/2691 | Loss: 0.6918 | LR: 9.79e-05
+Epoch 6/35 | Batch 240/2691 | Loss: 0.6913 | LR: 9.79e-05
+Epoch 6/35 | Batch 280/2691 | Loss: 0.6910 | LR: 9.79e-05
+Epoch 6/35 | Batch 320/2691 | Loss: 0.7038 | LR: 9.78e-05
+Epoch 6/35 | Batch 360/2691 | Loss: 0.7062 | LR: 9.78e-05
+Epoch 6/35 | Batch 400/2691 | Loss: 0.7039 | LR: 9.78e-05
+Epoch 6/35 | Batch 440/2691 | Loss: 0.7043 | LR: 9.78e-05
+Epoch 6/35 | Batch 480/2691 | Loss: 0.6938 | LR: 9.78e-05
+Epoch 6/35 | Batch 520/2691 | Loss: 0.6872 | LR: 9.77e-05
+Epoch 6/35 | Batch 560/2691 | Loss: 0.6851 | LR: 9.77e-05
+Epoch 6/35 | Batch 600/2691 | Loss: 0.7001 | LR: 9.77e-05
+Epoch 6/35 | Batch 640/2691 | Loss: 0.7070 | LR: 9.77e-05
+Epoch 6/35 | Batch 680/2691 | Loss: 0.7052 | LR: 9.76e-05
+Epoch 6/35 | Batch 720/2691 | Loss: 0.6897 | LR: 9.76e-05
+Epoch 6/35 | Batch 760/2691 | Loss: 0.6965 | LR: 9.76e-05
+Epoch 6/35 | Batch 800/2691 | Loss: 0.6913 | LR: 9.76e-05
+Epoch 6/35 | Batch 840/2691 | Loss: 0.6894 | LR: 9.76e-05
+Epoch 6/35 | Batch 880/2691 | Loss: 0.6983 | LR: 9.75e-05
+Epoch 6/35 | Batch 920/2691 | Loss: 0.7005 | LR: 9.75e-05
+Epoch 6/35 | Batch 960/2691 | Loss: 0.6948 | LR: 9.75e-05
+Epoch 6/35 | Batch 1000/2691 | Loss: 0.6919 | LR: 9.75e-05
+Epoch 6/35 | Batch 1040/2691 | Loss: 0.6939 | LR: 9.74e-05
+Epoch 6/35 | Batch 1080/2691 | Loss: 0.7014 | LR: 9.74e-05
+Epoch 6/35 | Batch 1120/2691 | Loss: 0.7002 | LR: 9.74e-05
+Epoch 6/35 | Batch 1160/2691 | Loss: 0.7037 | LR: 9.74e-05
+Epoch 6/35 | Batch 1200/2691 | Loss: 0.6898 | LR: 9.74e-05
+Epoch 6/35 | Batch 1240/2691 | Loss: 0.7003 | LR: 9.73e-05
+Epoch 6/35 | Batch 1280/2691 | Loss: 0.6972 | LR: 9.73e-05
+Epoch 6/35 | Batch 1320/2691 | Loss: 0.6931 | LR: 9.73e-05
+Epoch 6/35 | Batch 1360/2691 | Loss: 0.6918 | LR: 9.73e-05
+Epoch 6/35 | Batch 1400/2691 | Loss: 0.7160 | LR: 9.72e-05
+Epoch 6/35 | Batch 1440/2691 | Loss: 0.6902 | LR: 9.72e-05
+Epoch 6/35 | Batch 1480/2691 | Loss: 0.7393 | LR: 9.72e-05
+Epoch 6/35 | Batch 1520/2691 | Loss: 0.7010 | LR: 9.72e-05
+Epoch 6/35 | Batch 1560/2691 | Loss: 0.7054 | LR: 9.72e-05
+Epoch 6/35 | Batch 1600/2691 | Loss: 0.6999 | LR: 9.71e-05
+Epoch 6/35 | Batch 1640/2691 | Loss: 0.6947 | LR: 9.71e-05
+Epoch 6/35 | Batch 1680/2691 | Loss: 0.6918 | LR: 9.71e-05
+Epoch 6/35 | Batch 1720/2691 | Loss: 0.6954 | LR: 9.71e-05
+Epoch 6/35 | Batch 1760/2691 | Loss: 0.6880 | LR: 9.70e-05
+Epoch 6/35 | Batch 1800/2691 | Loss: 0.6985 | LR: 9.70e-05
+Epoch 6/35 | Batch 1840/2691 | Loss: 0.7104 | LR: 9.70e-05
+Epoch 6/35 | Batch 1880/2691 | Loss: 0.6965 | LR: 9.70e-05
+Epoch 6/35 | Batch 1920/2691 | Loss: 0.6923 | LR: 9.69e-05
+Epoch 6/35 | Batch 1960/2691 | Loss: 0.6948 | LR: 9.69e-05
+Epoch 6/35 | Batch 2000/2691 | Loss: 0.7125 | LR: 9.69e-05
+Epoch 6/35 | Batch 2040/2691 | Loss: 0.7054 | LR: 9.69e-05
+Epoch 6/35 | Batch 2080/2691 | Loss: 0.6978 | LR: 9.68e-05
+Epoch 6/35 | Batch 2120/2691 | Loss: 0.7093 | LR: 9.68e-05
+Epoch 6/35 | Batch 2160/2691 | Loss: 0.7021 | LR: 9.68e-05
+Epoch 6/35 | Batch 2200/2691 | Loss: 0.6968 | LR: 9.68e-05
+Epoch 6/35 | Batch 2240/2691 | Loss: 0.7195 | LR: 9.67e-05
+Epoch 6/35 | Batch 2280/2691 | Loss: 0.7173 | LR: 9.67e-05
+Epoch 6/35 | Batch 2320/2691 | Loss: 0.6934 | LR: 9.67e-05
+Epoch 6/35 | Batch 2360/2691 | Loss: 0.7007 | LR: 9.67e-05
+Epoch 6/35 | Batch 2400/2691 | Loss: 0.6973 | LR: 9.66e-05
+Epoch 6/35 | Batch 2440/2691 | Loss: 0.6980 | LR: 9.66e-05
+Epoch 6/35 | Batch 2480/2691 | Loss: 0.6953 | LR: 9.66e-05
+Epoch 6/35 | Batch 2520/2691 | Loss: 0.7381 | LR: 9.66e-05
+Epoch 6/35 | Batch 2560/2691 | Loss: 0.6955 | LR: 9.65e-05
+Epoch 6/35 | Batch 2600/2691 | Loss: 0.7089 | LR: 9.65e-05
+Epoch 6/35 | Batch 2640/2691 | Loss: 0.7180 | LR: 9.65e-05
+Epoch 6/35 | Batch 2680/2691 | Loss: 0.6993 | LR: 9.65e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 31, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 6 Summary:
+  Train Loss: 0.7012
+  Val Loss: 0.7202
+  PER: 0.2196
+  Avg LR: 9.73e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2196
+Epoch 7/35 | Batch 0/2691 | Loss: 0.6939 | LR: 9.65e-05
+Epoch 7/35 | Batch 40/2691 | Loss: 0.7098 | LR: 9.64e-05
+Epoch 7/35 | Batch 80/2691 | Loss: 0.7003 | LR: 9.64e-05
+Epoch 7/35 | Batch 120/2691 | Loss: 0.6955 | LR: 9.64e-05
+Epoch 7/35 | Batch 160/2691 | Loss: 0.7101 | LR: 9.63e-05
+Epoch 7/35 | Batch 200/2691 | Loss: 0.6860 | LR: 9.63e-05
+Epoch 7/35 | Batch 240/2691 | Loss: 0.6964 | LR: 9.63e-05
+Epoch 7/35 | Batch 280/2691 | Loss: 0.6933 | LR: 9.63e-05
+Epoch 7/35 | Batch 320/2691 | Loss: 0.6894 | LR: 9.62e-05
+Epoch 7/35 | Batch 360/2691 | Loss: 0.6954 | LR: 9.62e-05
+Epoch 7/35 | Batch 400/2691 | Loss: 0.6882 | LR: 9.62e-05
+Epoch 7/35 | Batch 440/2691 | Loss: 0.6970 | LR: 9.62e-05
+Epoch 7/35 | Batch 480/2691 | Loss: 0.7050 | LR: 9.61e-05
+Epoch 7/35 | Batch 520/2691 | Loss: 0.6997 | LR: 9.61e-05
+Epoch 7/35 | Batch 560/2691 | Loss: 0.6942 | LR: 9.61e-05
+Epoch 7/35 | Batch 600/2691 | Loss: 0.6944 | LR: 9.61e-05
+Epoch 7/35 | Batch 640/2691 | Loss: 0.7049 | LR: 9.60e-05
+Epoch 7/35 | Batch 680/2691 | Loss: 0.6939 | LR: 9.60e-05
+Epoch 7/35 | Batch 720/2691 | Loss: 0.6855 | LR: 9.60e-05
+Epoch 7/35 | Batch 760/2691 | Loss: 0.6957 | LR: 9.59e-05
+Epoch 7/35 | Batch 800/2691 | Loss: 0.7002 | LR: 9.59e-05
+Epoch 7/35 | Batch 840/2691 | Loss: 0.7060 | LR: 9.59e-05
+Epoch 7/35 | Batch 880/2691 | Loss: 0.7018 | LR: 9.59e-05
+Epoch 7/35 | Batch 920/2691 | Loss: 0.6955 | LR: 9.58e-05
+Epoch 7/35 | Batch 960/2691 | Loss: 0.7054 | LR: 9.58e-05
+Epoch 7/35 | Batch 1000/2691 | Loss: 0.6895 | LR: 9.58e-05
+Epoch 7/35 | Batch 1040/2691 | Loss: 0.6973 | LR: 9.57e-05
+Epoch 7/35 | Batch 1080/2691 | Loss: 0.7105 | LR: 9.57e-05
+Epoch 7/35 | Batch 1120/2691 | Loss: 0.6920 | LR: 9.57e-05
+Epoch 7/35 | Batch 1160/2691 | Loss: 0.6944 | LR: 9.57e-05
+Epoch 7/35 | Batch 1200/2691 | Loss: 0.6994 | LR: 9.56e-05
+Epoch 7/35 | Batch 1240/2691 | Loss: 0.6871 | LR: 9.56e-05
+Epoch 7/35 | Batch 1280/2691 | Loss: 0.7039 | LR: 9.56e-05
+Epoch 7/35 | Batch 1320/2691 | Loss: 0.6924 | LR: 9.55e-05
+Epoch 7/35 | Batch 1360/2691 | Loss: 0.7071 | LR: 9.55e-05
+Epoch 7/35 | Batch 1400/2691 | Loss: 0.7171 | LR: 9.55e-05
+Epoch 7/35 | Batch 1440/2691 | Loss: 0.6989 | LR: 9.55e-05
+Epoch 7/35 | Batch 1480/2691 | Loss: 0.6841 | LR: 9.54e-05
+Epoch 7/35 | Batch 1520/2691 | Loss: 0.6902 | LR: 9.54e-05
+Epoch 7/35 | Batch 1560/2691 | Loss: 0.6951 | LR: 9.54e-05
+Epoch 7/35 | Batch 1600/2691 | Loss: 0.6920 | LR: 9.53e-05
+Epoch 7/35 | Batch 1640/2691 | Loss: 0.6904 | LR: 9.53e-05
+Epoch 7/35 | Batch 1680/2691 | Loss: 0.6935 | LR: 9.53e-05
+Epoch 7/35 | Batch 1720/2691 | Loss: 0.7133 | LR: 9.53e-05
+Epoch 7/35 | Batch 1760/2691 | Loss: 0.6931 | LR: 9.52e-05
+Epoch 7/35 | Batch 1800/2691 | Loss: 0.6867 | LR: 9.52e-05
+Epoch 7/35 | Batch 1840/2691 | Loss: 0.7003 | LR: 9.52e-05
+Epoch 7/35 | Batch 1880/2691 | Loss: 0.7045 | LR: 9.51e-05
+Epoch 7/35 | Batch 1920/2691 | Loss: 0.6886 | LR: 9.51e-05
+Epoch 7/35 | Batch 1960/2691 | Loss: 0.6831 | LR: 9.51e-05
+Epoch 7/35 | Batch 2000/2691 | Loss: 0.6941 | LR: 9.50e-05
+Epoch 7/35 | Batch 2040/2691 | Loss: 0.6939 | LR: 9.50e-05
+Epoch 7/35 | Batch 2080/2691 | Loss: 0.6894 | LR: 9.50e-05
+Epoch 7/35 | Batch 2120/2691 | Loss: 0.6936 | LR: 9.49e-05
+Epoch 7/35 | Batch 2160/2691 | Loss: 0.7075 | LR: 9.49e-05
+Epoch 7/35 | Batch 2200/2691 | Loss: 0.6973 | LR: 9.49e-05
+Epoch 7/35 | Batch 2240/2691 | Loss: 0.7025 | LR: 9.49e-05
+Epoch 7/35 | Batch 2280/2691 | Loss: 0.7131 | LR: 9.48e-05
+Epoch 7/35 | Batch 2320/2691 | Loss: 0.7004 | LR: 9.48e-05
+Epoch 7/35 | Batch 2360/2691 | Loss: 0.6901 | LR: 9.48e-05
+Epoch 7/35 | Batch 2400/2691 | Loss: 0.6897 | LR: 9.47e-05
+Epoch 7/35 | Batch 2440/2691 | Loss: 0.7140 | LR: 9.47e-05
+Epoch 7/35 | Batch 2480/2691 | Loss: 0.6986 | LR: 9.47e-05
+Epoch 7/35 | Batch 2520/2691 | Loss: 0.6914 | LR: 9.46e-05
+Epoch 7/35 | Batch 2560/2691 | Loss: 0.6960 | LR: 9.46e-05
+Epoch 7/35 | Batch 2600/2691 | Loss: 0.7149 | LR: 9.46e-05
+Epoch 7/35 | Batch 2640/2691 | Loss: 0.6942 | LR: 9.45e-05
+Epoch 7/35 | Batch 2680/2691 | Loss: 0.6996 | LR: 9.45e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 31, 18, 40, 10, 3, 40, 20, 2, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 7 Summary:
+  Train Loss: 0.6966
+  Val Loss: 0.7168
+  PER: 0.2047
+  Avg LR: 9.55e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2047
+Epoch 8/35 | Batch 0/2691 | Loss: 0.6969 | LR: 9.45e-05
+Epoch 8/35 | Batch 40/2691 | Loss: 0.6877 | LR: 9.45e-05
+Epoch 8/35 | Batch 80/2691 | Loss: 0.6885 | LR: 9.44e-05
+Epoch 8/35 | Batch 120/2691 | Loss: 0.6922 | LR: 9.44e-05
+Epoch 8/35 | Batch 160/2691 | Loss: 0.6963 | LR: 9.44e-05
+Epoch 8/35 | Batch 200/2691 | Loss: 0.6917 | LR: 9.43e-05
+Epoch 8/35 | Batch 240/2691 | Loss: 0.6922 | LR: 9.43e-05
+Epoch 8/35 | Batch 280/2691 | Loss: 0.7002 | LR: 9.43e-05
+Epoch 8/35 | Batch 320/2691 | Loss: 0.6854 | LR: 9.42e-05
+Epoch 8/35 | Batch 360/2691 | Loss: 0.6975 | LR: 9.42e-05
+Epoch 8/35 | Batch 400/2691 | Loss: 0.6885 | LR: 9.42e-05
+Epoch 8/35 | Batch 440/2691 | Loss: 0.6905 | LR: 9.41e-05
+Epoch 8/35 | Batch 480/2691 | Loss: 0.6904 | LR: 9.41e-05
+Epoch 8/35 | Batch 520/2691 | Loss: 0.6896 | LR: 9.41e-05
+Epoch 8/35 | Batch 560/2691 | Loss: 0.6919 | LR: 9.40e-05
+Epoch 8/35 | Batch 600/2691 | Loss: 0.6855 | LR: 9.40e-05
+Epoch 8/35 | Batch 640/2691 | Loss: 0.6871 | LR: 9.40e-05
+Epoch 8/35 | Batch 680/2691 | Loss: 0.6840 | LR: 9.39e-05
+Epoch 8/35 | Batch 720/2691 | Loss: 0.7128 | LR: 9.39e-05
+Epoch 8/35 | Batch 760/2691 | Loss: 0.6890 | LR: 9.39e-05
+Epoch 8/35 | Batch 800/2691 | Loss: 0.7021 | LR: 9.38e-05
+Epoch 8/35 | Batch 840/2691 | Loss: 0.6841 | LR: 9.38e-05
+Epoch 8/35 | Batch 880/2691 | Loss: 0.7130 | LR: 9.38e-05
+Epoch 8/35 | Batch 920/2691 | Loss: 0.6855 | LR: 9.37e-05
+Epoch 8/35 | Batch 960/2691 | Loss: 0.6915 | LR: 9.37e-05
+Epoch 8/35 | Batch 1000/2691 | Loss: 0.6933 | LR: 9.37e-05
+Epoch 8/35 | Batch 1040/2691 | Loss: 0.6897 | LR: 9.36e-05
+Epoch 8/35 | Batch 1080/2691 | Loss: 0.6876 | LR: 9.36e-05
+Epoch 8/35 | Batch 1120/2691 | Loss: 0.6861 | LR: 9.36e-05
+Epoch 8/35 | Batch 1160/2691 | Loss: 0.6894 | LR: 9.35e-05
+Epoch 8/35 | Batch 1200/2691 | Loss: 0.6931 | LR: 9.35e-05
+Epoch 8/35 | Batch 1240/2691 | Loss: 0.6949 | LR: 9.35e-05
+Epoch 8/35 | Batch 1280/2691 | Loss: 0.6890 | LR: 9.34e-05
+Epoch 8/35 | Batch 1320/2691 | Loss: 0.7057 | LR: 9.34e-05
+Epoch 8/35 | Batch 1360/2691 | Loss: 0.6876 | LR: 9.34e-05
+Epoch 8/35 | Batch 1400/2691 | Loss: 0.6860 | LR: 9.33e-05
+Epoch 8/35 | Batch 1440/2691 | Loss: 0.6992 | LR: 9.33e-05
+Epoch 8/35 | Batch 1480/2691 | Loss: 0.6884 | LR: 9.33e-05
+Epoch 8/35 | Batch 1520/2691 | Loss: 0.6987 | LR: 9.32e-05
+Epoch 8/35 | Batch 1560/2691 | Loss: 0.6928 | LR: 9.32e-05
+Epoch 8/35 | Batch 1600/2691 | Loss: 0.6833 | LR: 9.31e-05
+Epoch 8/35 | Batch 1640/2691 | Loss: 0.6937 | LR: 9.31e-05
+Epoch 8/35 | Batch 1680/2691 | Loss: 0.7006 | LR: 9.31e-05
+Epoch 8/35 | Batch 1720/2691 | Loss: 0.6989 | LR: 9.30e-05
+Epoch 8/35 | Batch 1760/2691 | Loss: 0.6890 | LR: 9.30e-05
+Epoch 8/35 | Batch 1800/2691 | Loss: 0.7039 | LR: 9.30e-05
+Epoch 8/35 | Batch 1840/2691 | Loss: 0.7042 | LR: 9.29e-05
+Epoch 8/35 | Batch 1880/2691 | Loss: 0.6959 | LR: 9.29e-05
+Epoch 8/35 | Batch 1920/2691 | Loss: 0.6940 | LR: 9.29e-05
+Epoch 8/35 | Batch 1960/2691 | Loss: 0.6897 | LR: 9.28e-05
+Epoch 8/35 | Batch 2000/2691 | Loss: 0.6985 | LR: 9.28e-05
+Epoch 8/35 | Batch 2040/2691 | Loss: 0.6925 | LR: 9.27e-05
+Epoch 8/35 | Batch 2080/2691 | Loss: 0.6956 | LR: 9.27e-05
+Epoch 8/35 | Batch 2120/2691 | Loss: 0.6932 | LR: 9.27e-05
+Epoch 8/35 | Batch 2160/2691 | Loss: 0.7169 | LR: 9.26e-05
+Epoch 8/35 | Batch 2200/2691 | Loss: 0.6965 | LR: 9.26e-05
+Epoch 8/35 | Batch 2240/2691 | Loss: 0.6972 | LR: 9.26e-05
+Epoch 8/35 | Batch 2280/2691 | Loss: 0.6937 | LR: 9.25e-05
+Epoch 8/35 | Batch 2320/2691 | Loss: 0.6918 | LR: 9.25e-05
+Epoch 8/35 | Batch 2360/2691 | Loss: 0.6927 | LR: 9.25e-05
+Epoch 8/35 | Batch 2400/2691 | Loss: 0.6965 | LR: 9.24e-05
+Epoch 8/35 | Batch 2440/2691 | Loss: 0.6820 | LR: 9.24e-05
+Epoch 8/35 | Batch 2480/2691 | Loss: 0.6899 | LR: 9.23e-05
+Epoch 8/35 | Batch 2520/2691 | Loss: 0.6902 | LR: 9.23e-05
+Epoch 8/35 | Batch 2560/2691 | Loss: 0.6886 | LR: 9.23e-05
+Epoch 8/35 | Batch 2600/2691 | Loss: 0.6984 | LR: 9.22e-05
+Epoch 8/35 | Batch 2640/2691 | Loss: 0.6904 | LR: 9.22e-05
+Epoch 8/35 | Batch 2680/2691 | Loss: 0.7040 | LR: 9.22e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 8 Summary:
+  Train Loss: 0.6932
+  Val Loss: 0.7155
+  PER: 0.1976
+  Avg LR: 9.34e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1976
+Epoch 9/35 | Batch 0/2691 | Loss: 0.6870 | LR: 9.21e-05
+Epoch 9/35 | Batch 40/2691 | Loss: 0.6970 | LR: 9.21e-05
+Epoch 9/35 | Batch 80/2691 | Loss: 0.6885 | LR: 9.21e-05
+Epoch 9/35 | Batch 120/2691 | Loss: 0.6896 | LR: 9.20e-05
+Epoch 9/35 | Batch 160/2691 | Loss: 0.6928 | LR: 9.20e-05
+Epoch 9/35 | Batch 200/2691 | Loss: 0.6950 | LR: 9.20e-05
+Epoch 9/35 | Batch 240/2691 | Loss: 0.6907 | LR: 9.19e-05
+Epoch 9/35 | Batch 280/2691 | Loss: 0.6928 | LR: 9.19e-05
+Epoch 9/35 | Batch 320/2691 | Loss: 0.6889 | LR: 9.18e-05
+Epoch 9/35 | Batch 360/2691 | Loss: 0.6858 | LR: 9.18e-05
+Epoch 9/35 | Batch 400/2691 | Loss: 0.6842 | LR: 9.18e-05
+Epoch 9/35 | Batch 440/2691 | Loss: 0.6891 | LR: 9.17e-05
+Epoch 9/35 | Batch 480/2691 | Loss: 0.6875 | LR: 9.17e-05
+Epoch 9/35 | Batch 520/2691 | Loss: 0.6861 | LR: 9.16e-05
+Epoch 9/35 | Batch 560/2691 | Loss: 0.6903 | LR: 9.16e-05
+Epoch 9/35 | Batch 600/2691 | Loss: 0.6891 | LR: 9.16e-05
+Epoch 9/35 | Batch 640/2691 | Loss: 0.6880 | LR: 9.15e-05
+Epoch 9/35 | Batch 680/2691 | Loss: 0.6909 | LR: 9.15e-05
+Epoch 9/35 | Batch 720/2691 | Loss: 0.6906 | LR: 9.14e-05
+Epoch 9/35 | Batch 760/2691 | Loss: 0.6987 | LR: 9.14e-05
+Epoch 9/35 | Batch 800/2691 | Loss: 0.6912 | LR: 9.14e-05
+Epoch 9/35 | Batch 840/2691 | Loss: 0.6933 | LR: 9.13e-05
+Epoch 9/35 | Batch 880/2691 | Loss: 0.6846 | LR: 9.13e-05
+Epoch 9/35 | Batch 920/2691 | Loss: 0.6949 | LR: 9.12e-05
+Epoch 9/35 | Batch 960/2691 | Loss: 0.6838 | LR: 9.12e-05
+Epoch 9/35 | Batch 1000/2691 | Loss: 0.6863 | LR: 9.12e-05
+Epoch 9/35 | Batch 1040/2691 | Loss: 0.6989 | LR: 9.11e-05
+Epoch 9/35 | Batch 1080/2691 | Loss: 0.6978 | LR: 9.11e-05
+Epoch 9/35 | Batch 1120/2691 | Loss: 0.6929 | LR: 9.10e-05
+Epoch 9/35 | Batch 1160/2691 | Loss: 0.6868 | LR: 9.10e-05
+Epoch 9/35 | Batch 1200/2691 | Loss: 0.6933 | LR: 9.10e-05
+Epoch 9/35 | Batch 1240/2691 | Loss: 0.6886 | LR: 9.09e-05
+Epoch 9/35 | Batch 1280/2691 | Loss: 0.6837 | LR: 9.09e-05
+Epoch 9/35 | Batch 1320/2691 | Loss: 0.6847 | LR: 9.08e-05
+Epoch 9/35 | Batch 1360/2691 | Loss: 0.6892 | LR: 9.08e-05
+Epoch 9/35 | Batch 1400/2691 | Loss: 0.6894 | LR: 9.08e-05
+Epoch 9/35 | Batch 1440/2691 | Loss: 0.6843 | LR: 9.07e-05
+Epoch 9/35 | Batch 1480/2691 | Loss: 0.6919 | LR: 9.07e-05
+Epoch 9/35 | Batch 1520/2691 | Loss: 0.7055 | LR: 9.06e-05
+Epoch 9/35 | Batch 1560/2691 | Loss: 0.7099 | LR: 9.06e-05
+Epoch 9/35 | Batch 1600/2691 | Loss: 0.6893 | LR: 9.06e-05
+Epoch 9/35 | Batch 1640/2691 | Loss: 0.6906 | LR: 9.05e-05
+Epoch 9/35 | Batch 1680/2691 | Loss: 0.6987 | LR: 9.05e-05
+Epoch 9/35 | Batch 1720/2691 | Loss: 0.6999 | LR: 9.04e-05
+Epoch 9/35 | Batch 1760/2691 | Loss: 0.7007 | LR: 9.04e-05
+Epoch 9/35 | Batch 1800/2691 | Loss: 0.6868 | LR: 9.04e-05
+Epoch 9/35 | Batch 1840/2691 | Loss: 0.6862 | LR: 9.03e-05
+Epoch 9/35 | Batch 1880/2691 | Loss: 0.6874 | LR: 9.03e-05
+Epoch 9/35 | Batch 1920/2691 | Loss: 0.6883 | LR: 9.02e-05
+Epoch 9/35 | Batch 1960/2691 | Loss: 0.6936 | LR: 9.02e-05
+Epoch 9/35 | Batch 2000/2691 | Loss: 0.6886 | LR: 9.01e-05
+Epoch 9/35 | Batch 2040/2691 | Loss: 0.7012 | LR: 9.01e-05
+Epoch 9/35 | Batch 2080/2691 | Loss: 0.6906 | LR: 9.01e-05
+Epoch 9/35 | Batch 2120/2691 | Loss: 0.6892 | LR: 9.00e-05
+Epoch 9/35 | Batch 2160/2691 | Loss: 0.6911 | LR: 9.00e-05
+Epoch 9/35 | Batch 2200/2691 | Loss: 0.6933 | LR: 8.99e-05
+Epoch 9/35 | Batch 2240/2691 | Loss: 0.6999 | LR: 8.99e-05
+Epoch 9/35 | Batch 2280/2691 | Loss: 0.6956 | LR: 8.99e-05
+Epoch 9/35 | Batch 2320/2691 | Loss: 0.6919 | LR: 8.98e-05
+Epoch 9/35 | Batch 2360/2691 | Loss: 0.6968 | LR: 8.98e-05
+Epoch 9/35 | Batch 2400/2691 | Loss: 0.6913 | LR: 8.97e-05
+Epoch 9/35 | Batch 2440/2691 | Loss: 0.6939 | LR: 8.97e-05
+Epoch 9/35 | Batch 2480/2691 | Loss: 0.6889 | LR: 8.96e-05
+Epoch 9/35 | Batch 2520/2691 | Loss: 0.6897 | LR: 8.96e-05
+Epoch 9/35 | Batch 2560/2691 | Loss: 0.6965 | LR: 8.96e-05
+Epoch 9/35 | Batch 2600/2691 | Loss: 0.6969 | LR: 8.95e-05
+Epoch 9/35 | Batch 2640/2691 | Loss: 0.6877 | LR: 8.95e-05
+Epoch 9/35 | Batch 2680/2691 | Loss: 0.6877 | LR: 8.94e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 9, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 9 Summary:
+  Train Loss: 0.6907
+  Val Loss: 0.7149
+  PER: 0.1861
+  Avg LR: 9.08e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1861
+Epoch 10/35 | Batch 0/2691 | Loss: 0.6868 | LR: 8.94e-05
+Epoch 10/35 | Batch 40/2691 | Loss: 0.6844 | LR: 8.94e-05
+Epoch 10/35 | Batch 80/2691 | Loss: 0.6892 | LR: 8.93e-05
+Epoch 10/35 | Batch 120/2691 | Loss: 0.6851 | LR: 8.93e-05
+Epoch 10/35 | Batch 160/2691 | Loss: 0.6849 | LR: 8.92e-05
+Epoch 10/35 | Batch 200/2691 | Loss: 0.6877 | LR: 8.92e-05
+Epoch 10/35 | Batch 240/2691 | Loss: 0.6955 | LR: 8.91e-05
+Epoch 10/35 | Batch 280/2691 | Loss: 0.6877 | LR: 8.91e-05
+Epoch 10/35 | Batch 320/2691 | Loss: 0.6911 | LR: 8.91e-05
+Epoch 10/35 | Batch 360/2691 | Loss: 0.6886 | LR: 8.90e-05
+Epoch 10/35 | Batch 400/2691 | Loss: 0.6937 | LR: 8.90e-05
+Epoch 10/35 | Batch 440/2691 | Loss: 0.6915 | LR: 8.89e-05
+Epoch 10/35 | Batch 480/2691 | Loss: 0.6863 | LR: 8.89e-05
+Epoch 10/35 | Batch 520/2691 | Loss: 0.6847 | LR: 8.88e-05
+Epoch 10/35 | Batch 560/2691 | Loss: 0.6883 | LR: 8.88e-05
+Epoch 10/35 | Batch 600/2691 | Loss: 0.6923 | LR: 8.88e-05
+Epoch 10/35 | Batch 640/2691 | Loss: 0.6907 | LR: 8.87e-05
+Epoch 10/35 | Batch 680/2691 | Loss: 0.6918 | LR: 8.87e-05
+Epoch 10/35 | Batch 720/2691 | Loss: 0.6835 | LR: 8.86e-05
+Epoch 10/35 | Batch 760/2691 | Loss: 0.6848 | LR: 8.86e-05
+Epoch 10/35 | Batch 800/2691 | Loss: 0.6912 | LR: 8.85e-05
+Epoch 10/35 | Batch 840/2691 | Loss: 0.6846 | LR: 8.85e-05
+Epoch 10/35 | Batch 880/2691 | Loss: 0.6866 | LR: 8.84e-05
+Epoch 10/35 | Batch 920/2691 | Loss: 0.6858 | LR: 8.84e-05
+Epoch 10/35 | Batch 960/2691 | Loss: 0.6872 | LR: 8.83e-05
+Epoch 10/35 | Batch 1000/2691 | Loss: 0.6861 | LR: 8.83e-05
+Epoch 10/35 | Batch 1040/2691 | Loss: 0.6872 | LR: 8.83e-05
+Epoch 10/35 | Batch 1080/2691 | Loss: 0.6896 | LR: 8.82e-05
+Epoch 10/35 | Batch 1120/2691 | Loss: 0.6870 | LR: 8.82e-05
+Epoch 10/35 | Batch 1160/2691 | Loss: 0.6889 | LR: 8.81e-05
+Epoch 10/35 | Batch 1200/2691 | Loss: 0.6828 | LR: 8.81e-05
+Epoch 10/35 | Batch 1240/2691 | Loss: 0.6907 | LR: 8.80e-05
+Epoch 10/35 | Batch 1280/2691 | Loss: 0.6866 | LR: 8.80e-05
+Epoch 10/35 | Batch 1320/2691 | Loss: 0.6838 | LR: 8.79e-05
+Epoch 10/35 | Batch 1360/2691 | Loss: 0.6846 | LR: 8.79e-05
+Epoch 10/35 | Batch 1400/2691 | Loss: 0.6896 | LR: 8.78e-05
+Epoch 10/35 | Batch 1440/2691 | Loss: 0.6895 | LR: 8.78e-05
+Epoch 10/35 | Batch 1480/2691 | Loss: 0.6810 | LR: 8.78e-05
+Epoch 10/35 | Batch 1520/2691 | Loss: 0.6873 | LR: 8.77e-05
+Epoch 10/35 | Batch 1560/2691 | Loss: 0.6851 | LR: 8.77e-05
+Epoch 10/35 | Batch 1600/2691 | Loss: 0.6842 | LR: 8.76e-05
+Epoch 10/35 | Batch 1640/2691 | Loss: 0.6989 | LR: 8.76e-05
+Epoch 10/35 | Batch 1680/2691 | Loss: 0.6874 | LR: 8.75e-05
+Epoch 10/35 | Batch 1720/2691 | Loss: 0.6846 | LR: 8.75e-05
+Epoch 10/35 | Batch 1760/2691 | Loss: 0.6865 | LR: 8.74e-05
+Epoch 10/35 | Batch 1800/2691 | Loss: 0.6891 | LR: 8.74e-05
+Epoch 10/35 | Batch 1840/2691 | Loss: 0.6864 | LR: 8.73e-05
+Epoch 10/35 | Batch 1880/2691 | Loss: 0.6856 | LR: 8.73e-05
+Epoch 10/35 | Batch 1920/2691 | Loss: 0.6834 | LR: 8.72e-05
+Epoch 10/35 | Batch 1960/2691 | Loss: 0.6895 | LR: 8.72e-05
+Epoch 10/35 | Batch 2000/2691 | Loss: 0.6827 | LR: 8.71e-05
+Epoch 10/35 | Batch 2040/2691 | Loss: 0.6840 | LR: 8.71e-05
+Epoch 10/35 | Batch 2080/2691 | Loss: 0.7080 | LR: 8.71e-05
+Epoch 10/35 | Batch 2120/2691 | Loss: 0.6857 | LR: 8.70e-05
+Epoch 10/35 | Batch 2160/2691 | Loss: 0.6971 | LR: 8.70e-05
+Epoch 10/35 | Batch 2200/2691 | Loss: 0.6939 | LR: 8.69e-05
+Epoch 10/35 | Batch 2240/2691 | Loss: 0.6861 | LR: 8.69e-05
+Epoch 10/35 | Batch 2280/2691 | Loss: 0.6899 | LR: 8.68e-05
+Epoch 10/35 | Batch 2320/2691 | Loss: 0.6866 | LR: 8.68e-05
+Epoch 10/35 | Batch 2360/2691 | Loss: 0.6827 | LR: 8.67e-05
+Epoch 10/35 | Batch 2400/2691 | Loss: 0.6857 | LR: 8.67e-05
+Epoch 10/35 | Batch 2440/2691 | Loss: 0.6886 | LR: 8.66e-05
+Epoch 10/35 | Batch 2480/2691 | Loss: 0.6951 | LR: 8.66e-05
+Epoch 10/35 | Batch 2520/2691 | Loss: 0.6856 | LR: 8.65e-05
+Epoch 10/35 | Batch 2560/2691 | Loss: 0.6884 | LR: 8.65e-05
+Epoch 10/35 | Batch 2600/2691 | Loss: 0.6869 | LR: 8.64e-05
+Epoch 10/35 | Batch 2640/2691 | Loss: 0.6877 | LR: 8.64e-05
+Epoch 10/35 | Batch 2680/2691 | Loss: 0.6863 | LR: 8.63e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 10 Summary:
+  Train Loss: 0.6888
+  Val Loss: 0.7131
+  PER: 0.1819
+  Avg LR: 8.79e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1819
+Epoch 11/35 | Batch 0/2691 | Loss: 0.6873 | LR: 8.63e-05
+Epoch 11/35 | Batch 40/2691 | Loss: 0.6904 | LR: 8.63e-05
+Epoch 11/35 | Batch 80/2691 | Loss: 0.6858 | LR: 8.62e-05
+Epoch 11/35 | Batch 120/2691 | Loss: 0.6875 | LR: 8.62e-05
+Epoch 11/35 | Batch 160/2691 | Loss: 0.6831 | LR: 8.61e-05
+Epoch 11/35 | Batch 200/2691 | Loss: 0.6894 | LR: 8.61e-05
+Epoch 11/35 | Batch 240/2691 | Loss: 0.6829 | LR: 8.60e-05
+Epoch 11/35 | Batch 280/2691 | Loss: 0.6854 | LR: 8.60e-05
+Epoch 11/35 | Batch 320/2691 | Loss: 0.6866 | LR: 8.59e-05
+Epoch 11/35 | Batch 360/2691 | Loss: 0.6874 | LR: 8.59e-05
+Epoch 11/35 | Batch 400/2691 | Loss: 0.6883 | LR: 8.58e-05
+Epoch 11/35 | Batch 440/2691 | Loss: 0.6929 | LR: 8.58e-05
+Epoch 11/35 | Batch 480/2691 | Loss: 0.6859 | LR: 8.57e-05
+Epoch 11/35 | Batch 520/2691 | Loss: 0.6835 | LR: 8.57e-05
+Epoch 11/35 | Batch 560/2691 | Loss: 0.6830 | LR: 8.56e-05
+Epoch 11/35 | Batch 600/2691 | Loss: 0.6848 | LR: 8.56e-05
+Epoch 11/35 | Batch 640/2691 | Loss: 0.7001 | LR: 8.55e-05
+Epoch 11/35 | Batch 680/2691 | Loss: 0.6918 | LR: 8.55e-05
+Epoch 11/35 | Batch 720/2691 | Loss: 0.6879 | LR: 8.54e-05
+Epoch 11/35 | Batch 760/2691 | Loss: 0.6860 | LR: 8.54e-05
+Epoch 11/35 | Batch 800/2691 | Loss: 0.6904 | LR: 8.53e-05
+Epoch 11/35 | Batch 840/2691 | Loss: 0.6837 | LR: 8.53e-05
+Epoch 11/35 | Batch 880/2691 | Loss: 0.6901 | LR: 8.52e-05
+Epoch 11/35 | Batch 920/2691 | Loss: 0.6863 | LR: 8.52e-05
+Epoch 11/35 | Batch 960/2691 | Loss: 0.6871 | LR: 8.51e-05
+Epoch 11/35 | Batch 1000/2691 | Loss: 0.6828 | LR: 8.51e-05
+Epoch 11/35 | Batch 1040/2691 | Loss: 0.6866 | LR: 8.50e-05
+Epoch 11/35 | Batch 1080/2691 | Loss: 0.6849 | LR: 8.50e-05
+Epoch 11/35 | Batch 1120/2691 | Loss: 0.6871 | LR: 8.49e-05
+Epoch 11/35 | Batch 1160/2691 | Loss: 0.7064 | LR: 8.49e-05
+Epoch 11/35 | Batch 1200/2691 | Loss: 0.6863 | LR: 8.48e-05
+Epoch 11/35 | Batch 1240/2691 | Loss: 0.6879 | LR: 8.48e-05
+Epoch 11/35 | Batch 1280/2691 | Loss: 0.6853 | LR: 8.47e-05
+Epoch 11/35 | Batch 1320/2691 | Loss: 0.6871 | LR: 8.47e-05
+Epoch 11/35 | Batch 1360/2691 | Loss: 0.6852 | LR: 8.46e-05
+Epoch 11/35 | Batch 1400/2691 | Loss: 0.6893 | LR: 8.46e-05
+Epoch 11/35 | Batch 1440/2691 | Loss: 0.6842 | LR: 8.45e-05
+Epoch 11/35 | Batch 1480/2691 | Loss: 0.6909 | LR: 8.45e-05
+Epoch 11/35 | Batch 1520/2691 | Loss: 0.6875 | LR: 8.44e-05
+Epoch 11/35 | Batch 1560/2691 | Loss: 0.6826 | LR: 8.44e-05
+Epoch 11/35 | Batch 1600/2691 | Loss: 0.6915 | LR: 8.43e-05
+Epoch 11/35 | Batch 1640/2691 | Loss: 0.6870 | LR: 8.43e-05
+Epoch 11/35 | Batch 1680/2691 | Loss: 0.6906 | LR: 8.42e-05
+Epoch 11/35 | Batch 1720/2691 | Loss: 0.6887 | LR: 8.42e-05
+Epoch 11/35 | Batch 1760/2691 | Loss: 0.6856 | LR: 8.41e-05
+Epoch 11/35 | Batch 1800/2691 | Loss: 0.6920 | LR: 8.41e-05
+Epoch 11/35 | Batch 1840/2691 | Loss: 0.6863 | LR: 8.40e-05
+Epoch 11/35 | Batch 1880/2691 | Loss: 0.6868 | LR: 8.40e-05
+Epoch 11/35 | Batch 1920/2691 | Loss: 0.6863 | LR: 8.39e-05
+Epoch 11/35 | Batch 1960/2691 | Loss: 0.6862 | LR: 8.39e-05
+Epoch 11/35 | Batch 2000/2691 | Loss: 0.6883 | LR: 8.38e-05
+Epoch 11/35 | Batch 2040/2691 | Loss: 0.6830 | LR: 8.38e-05
+Epoch 11/35 | Batch 2080/2691 | Loss: 0.6826 | LR: 8.37e-05
+Epoch 11/35 | Batch 2120/2691 | Loss: 0.6951 | LR: 8.37e-05
+Epoch 11/35 | Batch 2160/2691 | Loss: 0.6854 | LR: 8.36e-05
+Epoch 11/35 | Batch 2200/2691 | Loss: 0.6834 | LR: 8.36e-05
+Epoch 11/35 | Batch 2240/2691 | Loss: 0.6847 | LR: 8.35e-05
+Epoch 11/35 | Batch 2280/2691 | Loss: 0.6847 | LR: 8.35e-05
+Epoch 11/35 | Batch 2320/2691 | Loss: 0.6818 | LR: 8.34e-05
+Epoch 11/35 | Batch 2360/2691 | Loss: 0.6846 | LR: 8.34e-05
+Epoch 11/35 | Batch 2400/2691 | Loss: 0.6859 | LR: 8.33e-05
+Epoch 11/35 | Batch 2440/2691 | Loss: 0.6859 | LR: 8.32e-05
+Epoch 11/35 | Batch 2480/2691 | Loss: 0.6868 | LR: 8.32e-05
+Epoch 11/35 | Batch 2520/2691 | Loss: 0.6882 | LR: 8.31e-05
+Epoch 11/35 | Batch 2560/2691 | Loss: 0.6841 | LR: 8.31e-05
+Epoch 11/35 | Batch 2600/2691 | Loss: 0.6845 | LR: 8.30e-05
+Epoch 11/35 | Batch 2640/2691 | Loss: 0.6849 | LR: 8.30e-05
+Epoch 11/35 | Batch 2680/2691 | Loss: 0.6877 | LR: 8.29e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 9, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 11 Summary:
+  Train Loss: 0.6872
+  Val Loss: 0.7127
+  PER: 0.1799
+  Avg LR: 8.46e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1799
+Epoch 12/35 | Batch 0/2691 | Loss: 0.6912 | LR: 8.29e-05
+Epoch 12/35 | Batch 40/2691 | Loss: 0.6833 | LR: 8.29e-05
+Epoch 12/35 | Batch 80/2691 | Loss: 0.6851 | LR: 8.28e-05
+Epoch 12/35 | Batch 120/2691 | Loss: 0.6851 | LR: 8.28e-05
+Epoch 12/35 | Batch 160/2691 | Loss: 0.6879 | LR: 8.27e-05
+Epoch 12/35 | Batch 200/2691 | Loss: 0.6838 | LR: 8.27e-05
+Epoch 12/35 | Batch 240/2691 | Loss: 0.6854 | LR: 8.26e-05
+Epoch 12/35 | Batch 280/2691 | Loss: 0.6849 | LR: 8.25e-05
+Epoch 12/35 | Batch 320/2691 | Loss: 0.6835 | LR: 8.25e-05
+Epoch 12/35 | Batch 360/2691 | Loss: 0.6868 | LR: 8.24e-05
+Epoch 12/35 | Batch 400/2691 | Loss: 0.6841 | LR: 8.24e-05
+Epoch 12/35 | Batch 440/2691 | Loss: 0.6885 | LR: 8.23e-05
+Epoch 12/35 | Batch 480/2691 | Loss: 0.6848 | LR: 8.23e-05
+Epoch 12/35 | Batch 520/2691 | Loss: 0.6856 | LR: 8.22e-05
+Epoch 12/35 | Batch 560/2691 | Loss: 0.6832 | LR: 8.22e-05
+Epoch 12/35 | Batch 600/2691 | Loss: 0.6826 | LR: 8.21e-05
+Epoch 12/35 | Batch 640/2691 | Loss: 0.6830 | LR: 8.21e-05
+Epoch 12/35 | Batch 680/2691 | Loss: 0.6826 | LR: 8.20e-05
+Epoch 12/35 | Batch 720/2691 | Loss: 0.6837 | LR: 8.20e-05
+Epoch 12/35 | Batch 760/2691 | Loss: 0.6825 | LR: 8.19e-05
+Epoch 12/35 | Batch 800/2691 | Loss: 0.6869 | LR: 8.18e-05
+Epoch 12/35 | Batch 840/2691 | Loss: 0.6859 | LR: 8.18e-05
+Epoch 12/35 | Batch 880/2691 | Loss: 0.6818 | LR: 8.17e-05
+Epoch 12/35 | Batch 920/2691 | Loss: 0.6830 | LR: 8.17e-05
+Epoch 12/35 | Batch 960/2691 | Loss: 0.6847 | LR: 8.16e-05
+Epoch 12/35 | Batch 1000/2691 | Loss: 0.6859 | LR: 8.16e-05
+Epoch 12/35 | Batch 1040/2691 | Loss: 0.6900 | LR: 8.15e-05
+Epoch 12/35 | Batch 1080/2691 | Loss: 0.6883 | LR: 8.15e-05
+Epoch 12/35 | Batch 1120/2691 | Loss: 0.6864 | LR: 8.14e-05
+Epoch 12/35 | Batch 1160/2691 | Loss: 0.6834 | LR: 8.14e-05
+Epoch 12/35 | Batch 1200/2691 | Loss: 0.6892 | LR: 8.13e-05
+Epoch 12/35 | Batch 1240/2691 | Loss: 0.6858 | LR: 8.12e-05
+Epoch 12/35 | Batch 1280/2691 | Loss: 0.6852 | LR: 8.12e-05
+Epoch 12/35 | Batch 1320/2691 | Loss: 0.6815 | LR: 8.11e-05
+Epoch 12/35 | Batch 1360/2691 | Loss: 0.6897 | LR: 8.11e-05
+Epoch 12/35 | Batch 1400/2691 | Loss: 0.6889 | LR: 8.10e-05
+Epoch 12/35 | Batch 1440/2691 | Loss: 0.6859 | LR: 8.10e-05
+Epoch 12/35 | Batch 1480/2691 | Loss: 0.6869 | LR: 8.09e-05
+Epoch 12/35 | Batch 1520/2691 | Loss: 0.6901 | LR: 8.09e-05
+Epoch 12/35 | Batch 1560/2691 | Loss: 0.6840 | LR: 8.08e-05
+Epoch 12/35 | Batch 1600/2691 | Loss: 0.6850 | LR: 8.07e-05
+Epoch 12/35 | Batch 1640/2691 | Loss: 0.6851 | LR: 8.07e-05
+Epoch 12/35 | Batch 1680/2691 | Loss: 0.6873 | LR: 8.06e-05
+Epoch 12/35 | Batch 1720/2691 | Loss: 0.6880 | LR: 8.06e-05
+Epoch 12/35 | Batch 1760/2691 | Loss: 0.6899 | LR: 8.05e-05
+Epoch 12/35 | Batch 1800/2691 | Loss: 0.6851 | LR: 8.05e-05
+Epoch 12/35 | Batch 1840/2691 | Loss: 0.6853 | LR: 8.04e-05
+Epoch 12/35 | Batch 1880/2691 | Loss: 0.6931 | LR: 8.04e-05
+Epoch 12/35 | Batch 1920/2691 | Loss: 0.6883 | LR: 8.03e-05
+Epoch 12/35 | Batch 1960/2691 | Loss: 0.6842 | LR: 8.02e-05
+Epoch 12/35 | Batch 2000/2691 | Loss: 0.6866 | LR: 8.02e-05
+Epoch 12/35 | Batch 2040/2691 | Loss: 0.6841 | LR: 8.01e-05
+Epoch 12/35 | Batch 2080/2691 | Loss: 0.6858 | LR: 8.01e-05
+Epoch 12/35 | Batch 2120/2691 | Loss: 0.6888 | LR: 8.00e-05
+Epoch 12/35 | Batch 2160/2691 | Loss: 0.6828 | LR: 8.00e-05
+Epoch 12/35 | Batch 2200/2691 | Loss: 0.6902 | LR: 7.99e-05
+Epoch 12/35 | Batch 2240/2691 | Loss: 0.6897 | LR: 7.99e-05
+Epoch 12/35 | Batch 2280/2691 | Loss: 0.6840 | LR: 7.98e-05
+Epoch 12/35 | Batch 2320/2691 | Loss: 0.6864 | LR: 7.97e-05
+Epoch 12/35 | Batch 2360/2691 | Loss: 0.6870 | LR: 7.97e-05
+Epoch 12/35 | Batch 2400/2691 | Loss: 0.6898 | LR: 7.96e-05
+Epoch 12/35 | Batch 2440/2691 | Loss: 0.6913 | LR: 7.96e-05
+Epoch 12/35 | Batch 2480/2691 | Loss: 0.6836 | LR: 7.95e-05
+Epoch 12/35 | Batch 2520/2691 | Loss: 0.6863 | LR: 7.95e-05
+Epoch 12/35 | Batch 2560/2691 | Loss: 0.6870 | LR: 7.94e-05
+Epoch 12/35 | Batch 2600/2691 | Loss: 0.6855 | LR: 7.93e-05
+Epoch 12/35 | Batch 2640/2691 | Loss: 0.6903 | LR: 7.93e-05
+Epoch 12/35 | Batch 2680/2691 | Loss: 0.6841 | LR: 7.92e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 12 Summary:
+  Train Loss: 0.6861
+  Val Loss: 0.7126
+  PER: 0.1756
+  Avg LR: 8.11e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1756
+Epoch 13/35 | Batch 0/2691 | Loss: 0.6840 | LR: 7.92e-05
+Epoch 13/35 | Batch 40/2691 | Loss: 0.6845 | LR: 7.92e-05
+Epoch 13/35 | Batch 80/2691 | Loss: 0.6833 | LR: 7.91e-05
+Epoch 13/35 | Batch 120/2691 | Loss: 0.6844 | LR: 7.90e-05
+Epoch 13/35 | Batch 160/2691 | Loss: 0.6837 | LR: 7.90e-05
+Epoch 13/35 | Batch 200/2691 | Loss: 0.6828 | LR: 7.89e-05
+Epoch 13/35 | Batch 240/2691 | Loss: 0.6954 | LR: 7.89e-05
+Epoch 13/35 | Batch 280/2691 | Loss: 0.6871 | LR: 7.88e-05
+Epoch 13/35 | Batch 320/2691 | Loss: 0.6838 | LR: 7.88e-05
+Epoch 13/35 | Batch 360/2691 | Loss: 0.6822 | LR: 7.87e-05
+Epoch 13/35 | Batch 400/2691 | Loss: 0.6856 | LR: 7.86e-05
+Epoch 13/35 | Batch 440/2691 | Loss: 0.6882 | LR: 7.86e-05
+Epoch 13/35 | Batch 480/2691 | Loss: 0.6817 | LR: 7.85e-05
+Epoch 13/35 | Batch 520/2691 | Loss: 0.6840 | LR: 7.85e-05
+Epoch 13/35 | Batch 560/2691 | Loss: 0.6857 | LR: 7.84e-05
+Epoch 13/35 | Batch 600/2691 | Loss: 0.6841 | LR: 7.84e-05
+Epoch 13/35 | Batch 640/2691 | Loss: 0.6831 | LR: 7.83e-05
+Epoch 13/35 | Batch 680/2691 | Loss: 0.6835 | LR: 7.82e-05
+Epoch 13/35 | Batch 720/2691 | Loss: 0.6868 | LR: 7.82e-05
+Epoch 13/35 | Batch 760/2691 | Loss: 0.6826 | LR: 7.81e-05
+Epoch 13/35 | Batch 800/2691 | Loss: 0.6822 | LR: 7.81e-05
+Epoch 13/35 | Batch 840/2691 | Loss: 0.6829 | LR: 7.80e-05
+Epoch 13/35 | Batch 880/2691 | Loss: 0.6831 | LR: 7.79e-05
+Epoch 13/35 | Batch 920/2691 | Loss: 0.6828 | LR: 7.79e-05
+Epoch 13/35 | Batch 960/2691 | Loss: 0.6835 | LR: 7.78e-05
+Epoch 13/35 | Batch 1000/2691 | Loss: 0.6855 | LR: 7.78e-05
+Epoch 13/35 | Batch 1040/2691 | Loss: 0.6877 | LR: 7.77e-05
+Epoch 13/35 | Batch 1080/2691 | Loss: 0.6882 | LR: 7.77e-05
+Epoch 13/35 | Batch 1120/2691 | Loss: 0.6823 | LR: 7.76e-05
+Epoch 13/35 | Batch 1160/2691 | Loss: 0.6841 | LR: 7.75e-05
+Epoch 13/35 | Batch 1200/2691 | Loss: 0.6859 | LR: 7.75e-05
+Epoch 13/35 | Batch 1240/2691 | Loss: 0.6836 | LR: 7.74e-05
+Epoch 13/35 | Batch 1280/2691 | Loss: 0.6869 | LR: 7.74e-05
+Epoch 13/35 | Batch 1320/2691 | Loss: 0.6859 | LR: 7.73e-05
+Epoch 13/35 | Batch 1360/2691 | Loss: 0.6861 | LR: 7.72e-05
+Epoch 13/35 | Batch 1400/2691 | Loss: 0.6879 | LR: 7.72e-05
+Epoch 13/35 | Batch 1440/2691 | Loss: 0.6851 | LR: 7.71e-05
+Epoch 13/35 | Batch 1480/2691 | Loss: 0.6866 | LR: 7.71e-05
+Epoch 13/35 | Batch 1520/2691 | Loss: 0.6838 | LR: 7.70e-05
+Epoch 13/35 | Batch 1560/2691 | Loss: 0.6852 | LR: 7.69e-05
+Epoch 13/35 | Batch 1600/2691 | Loss: 0.6842 | LR: 7.69e-05
+Epoch 13/35 | Batch 1640/2691 | Loss: 0.6862 | LR: 7.68e-05
+Epoch 13/35 | Batch 1680/2691 | Loss: 0.6837 | LR: 7.68e-05
+Epoch 13/35 | Batch 1720/2691 | Loss: 0.6820 | LR: 7.67e-05
+Epoch 13/35 | Batch 1760/2691 | Loss: 0.6812 | LR: 7.66e-05
+Epoch 13/35 | Batch 1800/2691 | Loss: 0.6886 | LR: 7.66e-05
+Epoch 13/35 | Batch 1840/2691 | Loss: 0.6863 | LR: 7.65e-05
+Epoch 13/35 | Batch 1880/2691 | Loss: 0.6819 | LR: 7.65e-05
+Epoch 13/35 | Batch 1920/2691 | Loss: 0.6854 | LR: 7.64e-05
+Epoch 13/35 | Batch 1960/2691 | Loss: 0.6856 | LR: 7.64e-05
+Epoch 13/35 | Batch 2000/2691 | Loss: 0.6878 | LR: 7.63e-05
+Epoch 13/35 | Batch 2040/2691 | Loss: 0.6818 | LR: 7.62e-05
+Epoch 13/35 | Batch 2080/2691 | Loss: 0.6866 | LR: 7.62e-05
+Epoch 13/35 | Batch 2120/2691 | Loss: 0.6825 | LR: 7.61e-05
+Epoch 13/35 | Batch 2160/2691 | Loss: 0.6838 | LR: 7.61e-05
+Epoch 13/35 | Batch 2200/2691 | Loss: 0.6825 | LR: 7.60e-05
+Epoch 13/35 | Batch 2240/2691 | Loss: 0.6879 | LR: 7.59e-05
+Epoch 13/35 | Batch 2280/2691 | Loss: 0.6880 | LR: 7.59e-05
+Epoch 13/35 | Batch 2320/2691 | Loss: 0.6830 | LR: 7.58e-05
+Epoch 13/35 | Batch 2360/2691 | Loss: 0.6862 | LR: 7.58e-05
+Epoch 13/35 | Batch 2400/2691 | Loss: 0.6820 | LR: 7.57e-05
+Epoch 13/35 | Batch 2440/2691 | Loss: 0.6824 | LR: 7.56e-05
+Epoch 13/35 | Batch 2480/2691 | Loss: 0.6822 | LR: 7.56e-05
+Epoch 13/35 | Batch 2520/2691 | Loss: 0.6847 | LR: 7.55e-05
+Epoch 13/35 | Batch 2560/2691 | Loss: 0.6831 | LR: 7.54e-05
+Epoch 13/35 | Batch 2600/2691 | Loss: 0.6838 | LR: 7.54e-05
+Epoch 13/35 | Batch 2640/2691 | Loss: 0.6837 | LR: 7.53e-05
+Epoch 13/35 | Batch 2680/2691 | Loss: 0.6829 | LR: 7.53e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 13 Summary:
+  Train Loss: 0.6851
+  Val Loss: 0.7124
+  PER: 0.1764
+  Avg LR: 7.73e-05
+------------------------------------------------------------
+Epoch 14/35 | Batch 0/2691 | Loss: 0.6844 | LR: 7.52e-05
+Epoch 14/35 | Batch 40/2691 | Loss: 0.6844 | LR: 7.52e-05
+Epoch 14/35 | Batch 80/2691 | Loss: 0.6824 | LR: 7.51e-05
+Epoch 14/35 | Batch 120/2691 | Loss: 0.6828 | LR: 7.51e-05
+Epoch 14/35 | Batch 160/2691 | Loss: 0.6828 | LR: 7.50e-05
+Epoch 14/35 | Batch 200/2691 | Loss: 0.6838 | LR: 7.49e-05
+Epoch 14/35 | Batch 240/2691 | Loss: 0.6863 | LR: 7.49e-05
+Epoch 14/35 | Batch 280/2691 | Loss: 0.6851 | LR: 7.48e-05
+Epoch 14/35 | Batch 320/2691 | Loss: 0.6853 | LR: 7.48e-05
+Epoch 14/35 | Batch 360/2691 | Loss: 0.6826 | LR: 7.47e-05
+Epoch 14/35 | Batch 400/2691 | Loss: 0.6849 | LR: 7.46e-05
+Epoch 14/35 | Batch 440/2691 | Loss: 0.6821 | LR: 7.46e-05
+Epoch 14/35 | Batch 480/2691 | Loss: 0.6866 | LR: 7.45e-05
+Epoch 14/35 | Batch 520/2691 | Loss: 0.6842 | LR: 7.45e-05
+Epoch 14/35 | Batch 560/2691 | Loss: 0.6831 | LR: 7.44e-05
+Epoch 14/35 | Batch 600/2691 | Loss: 0.6808 | LR: 7.43e-05
+Epoch 14/35 | Batch 640/2691 | Loss: 0.6837 | LR: 7.43e-05
+Epoch 14/35 | Batch 680/2691 | Loss: 0.6834 | LR: 7.42e-05
+Epoch 14/35 | Batch 720/2691 | Loss: 0.6817 | LR: 7.42e-05
+Epoch 14/35 | Batch 760/2691 | Loss: 0.6812 | LR: 7.41e-05
+Epoch 14/35 | Batch 800/2691 | Loss: 0.6836 | LR: 7.40e-05
+Epoch 14/35 | Batch 840/2691 | Loss: 0.6880 | LR: 7.40e-05
+Epoch 14/35 | Batch 880/2691 | Loss: 0.6838 | LR: 7.39e-05
+Epoch 14/35 | Batch 920/2691 | Loss: 0.6848 | LR: 7.38e-05
+Epoch 14/35 | Batch 960/2691 | Loss: 0.6832 | LR: 7.38e-05
+Epoch 14/35 | Batch 1000/2691 | Loss: 0.6813 | LR: 7.37e-05
+Epoch 14/35 | Batch 1040/2691 | Loss: 0.6848 | LR: 7.37e-05
+Epoch 14/35 | Batch 1080/2691 | Loss: 0.6856 | LR: 7.36e-05
+Epoch 14/35 | Batch 1120/2691 | Loss: 0.6842 | LR: 7.35e-05
+Epoch 14/35 | Batch 1160/2691 | Loss: 0.6830 | LR: 7.35e-05
+Epoch 14/35 | Batch 1200/2691 | Loss: 0.6854 | LR: 7.34e-05
+Epoch 14/35 | Batch 1240/2691 | Loss: 0.6840 | LR: 7.33e-05
+Epoch 14/35 | Batch 1280/2691 | Loss: 0.6831 | LR: 7.33e-05
+Epoch 14/35 | Batch 1320/2691 | Loss: 0.6887 | LR: 7.32e-05
+Epoch 14/35 | Batch 1360/2691 | Loss: 0.6845 | LR: 7.32e-05
+Epoch 14/35 | Batch 1400/2691 | Loss: 0.6814 | LR: 7.31e-05
+Epoch 14/35 | Batch 1440/2691 | Loss: 0.6830 | LR: 7.30e-05
+Epoch 14/35 | Batch 1480/2691 | Loss: 0.6842 | LR: 7.30e-05
+Epoch 14/35 | Batch 1520/2691 | Loss: 0.6831 | LR: 7.29e-05
+Epoch 14/35 | Batch 1560/2691 | Loss: 0.6887 | LR: 7.28e-05
+Epoch 14/35 | Batch 1600/2691 | Loss: 0.6881 | LR: 7.28e-05
+Epoch 14/35 | Batch 1640/2691 | Loss: 0.6869 | LR: 7.27e-05
+Epoch 14/35 | Batch 1680/2691 | Loss: 0.6847 | LR: 7.27e-05
+Epoch 14/35 | Batch 1720/2691 | Loss: 0.6832 | LR: 7.26e-05
+Epoch 14/35 | Batch 1760/2691 | Loss: 0.6821 | LR: 7.25e-05
+Epoch 14/35 | Batch 1800/2691 | Loss: 0.6839 | LR: 7.25e-05
+Epoch 14/35 | Batch 1840/2691 | Loss: 0.6849 | LR: 7.24e-05
+Epoch 14/35 | Batch 1880/2691 | Loss: 0.6839 | LR: 7.23e-05
+Epoch 14/35 | Batch 1920/2691 | Loss: 0.6829 | LR: 7.23e-05
+Epoch 14/35 | Batch 1960/2691 | Loss: 0.6828 | LR: 7.22e-05
+Epoch 14/35 | Batch 2000/2691 | Loss: 0.6870 | LR: 7.22e-05
+Epoch 14/35 | Batch 2040/2691 | Loss: 0.6843 | LR: 7.21e-05
+Epoch 14/35 | Batch 2080/2691 | Loss: 0.6835 | LR: 7.20e-05
+Epoch 14/35 | Batch 2120/2691 | Loss: 0.6845 | LR: 7.20e-05
+Epoch 14/35 | Batch 2160/2691 | Loss: 0.6858 | LR: 7.19e-05
+Epoch 14/35 | Batch 2200/2691 | Loss: 0.6823 | LR: 7.18e-05
+Epoch 14/35 | Batch 2240/2691 | Loss: 0.6823 | LR: 7.18e-05
+Epoch 14/35 | Batch 2280/2691 | Loss: 0.6818 | LR: 7.17e-05
+Epoch 14/35 | Batch 2320/2691 | Loss: 0.6855 | LR: 7.17e-05
+Epoch 14/35 | Batch 2360/2691 | Loss: 0.6855 | LR: 7.16e-05
+Epoch 14/35 | Batch 2400/2691 | Loss: 0.6829 | LR: 7.15e-05
+Epoch 14/35 | Batch 2440/2691 | Loss: 0.6833 | LR: 7.15e-05
+Epoch 14/35 | Batch 2480/2691 | Loss: 0.6850 | LR: 7.14e-05
+Epoch 14/35 | Batch 2520/2691 | Loss: 0.6899 | LR: 7.13e-05
+Epoch 14/35 | Batch 2560/2691 | Loss: 0.6894 | LR: 7.13e-05
+Epoch 14/35 | Batch 2600/2691 | Loss: 0.6879 | LR: 7.12e-05
+Epoch 14/35 | Batch 2640/2691 | Loss: 0.6844 | LR: 7.11e-05
+Epoch 14/35 | Batch 2680/2691 | Loss: 0.6843 | LR: 7.11e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 2, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 14 Summary:
+  Train Loss: 0.6844
+  Val Loss: 0.7101
+  PER: 0.1649
+  Avg LR: 7.32e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1649
+Epoch 15/35 | Batch 0/2691 | Loss: 0.6841 | LR: 7.11e-05
+Epoch 15/35 | Batch 40/2691 | Loss: 0.6832 | LR: 7.10e-05
+Epoch 15/35 | Batch 80/2691 | Loss: 0.6848 | LR: 7.09e-05
+Epoch 15/35 | Batch 120/2691 | Loss: 0.6838 | LR: 7.09e-05
+Epoch 15/35 | Batch 160/2691 | Loss: 0.6832 | LR: 7.08e-05
+Epoch 15/35 | Batch 200/2691 | Loss: 0.6878 | LR: 7.07e-05
+Epoch 15/35 | Batch 240/2691 | Loss: 0.6839 | LR: 7.07e-05
+Epoch 15/35 | Batch 280/2691 | Loss: 0.6828 | LR: 7.06e-05
+Epoch 15/35 | Batch 320/2691 | Loss: 0.6823 | LR: 7.06e-05
+Epoch 15/35 | Batch 360/2691 | Loss: 0.6844 | LR: 7.05e-05
+Epoch 15/35 | Batch 400/2691 | Loss: 0.6820 | LR: 7.04e-05
+Epoch 15/35 | Batch 440/2691 | Loss: 0.6836 | LR: 7.04e-05
+Epoch 15/35 | Batch 480/2691 | Loss: 0.6853 | LR: 7.03e-05
+Epoch 15/35 | Batch 520/2691 | Loss: 0.6848 | LR: 7.02e-05
+Epoch 15/35 | Batch 560/2691 | Loss: 0.6830 | LR: 7.02e-05
+Epoch 15/35 | Batch 600/2691 | Loss: 0.6876 | LR: 7.01e-05
+Epoch 15/35 | Batch 640/2691 | Loss: 0.6885 | LR: 7.00e-05
+Epoch 15/35 | Batch 680/2691 | Loss: 0.6822 | LR: 7.00e-05
+Epoch 15/35 | Batch 720/2691 | Loss: 0.6841 | LR: 6.99e-05
+Epoch 15/35 | Batch 760/2691 | Loss: 0.6836 | LR: 6.98e-05
+Epoch 15/35 | Batch 800/2691 | Loss: 0.6851 | LR: 6.98e-05
+Epoch 15/35 | Batch 840/2691 | Loss: 0.6843 | LR: 6.97e-05
+Epoch 15/35 | Batch 880/2691 | Loss: 0.6886 | LR: 6.97e-05
+Epoch 15/35 | Batch 920/2691 | Loss: 0.6838 | LR: 6.96e-05
+Epoch 15/35 | Batch 960/2691 | Loss: 0.6813 | LR: 6.95e-05
+Epoch 15/35 | Batch 1000/2691 | Loss: 0.6850 | LR: 6.95e-05
+Epoch 15/35 | Batch 1040/2691 | Loss: 0.6883 | LR: 6.94e-05
+Epoch 15/35 | Batch 1080/2691 | Loss: 0.6843 | LR: 6.93e-05
+Epoch 15/35 | Batch 1120/2691 | Loss: 0.6810 | LR: 6.93e-05
+Epoch 15/35 | Batch 1160/2691 | Loss: 0.6828 | LR: 6.92e-05
+Epoch 15/35 | Batch 1200/2691 | Loss: 0.6806 | LR: 6.91e-05
+Epoch 15/35 | Batch 1240/2691 | Loss: 0.6840 | LR: 6.91e-05
+Epoch 15/35 | Batch 1280/2691 | Loss: 0.6815 | LR: 6.90e-05
+Epoch 15/35 | Batch 1320/2691 | Loss: 0.6836 | LR: 6.89e-05
+Epoch 15/35 | Batch 1360/2691 | Loss: 0.6843 | LR: 6.89e-05
+Epoch 15/35 | Batch 1400/2691 | Loss: 0.6831 | LR: 6.88e-05
+Epoch 15/35 | Batch 1440/2691 | Loss: 0.6842 | LR: 6.87e-05
+Epoch 15/35 | Batch 1480/2691 | Loss: 0.6833 | LR: 6.87e-05
+Epoch 15/35 | Batch 1520/2691 | Loss: 0.6817 | LR: 6.86e-05
+Epoch 15/35 | Batch 1560/2691 | Loss: 0.6872 | LR: 6.85e-05
+Epoch 15/35 | Batch 1600/2691 | Loss: 0.6821 | LR: 6.85e-05
+Epoch 15/35 | Batch 1640/2691 | Loss: 0.6835 | LR: 6.84e-05
+Epoch 15/35 | Batch 1680/2691 | Loss: 0.6822 | LR: 6.84e-05
+Epoch 15/35 | Batch 1720/2691 | Loss: 0.6834 | LR: 6.83e-05
+Epoch 15/35 | Batch 1760/2691 | Loss: 0.6846 | LR: 6.82e-05
+Epoch 15/35 | Batch 1800/2691 | Loss: 0.6838 | LR: 6.82e-05
+Epoch 15/35 | Batch 1840/2691 | Loss: 0.6839 | LR: 6.81e-05
+Epoch 15/35 | Batch 1880/2691 | Loss: 0.6825 | LR: 6.80e-05
+Epoch 15/35 | Batch 1920/2691 | Loss: 0.6852 | LR: 6.80e-05
+Epoch 15/35 | Batch 1960/2691 | Loss: 0.6811 | LR: 6.79e-05
+Epoch 15/35 | Batch 2000/2691 | Loss: 0.6832 | LR: 6.78e-05
+Epoch 15/35 | Batch 2040/2691 | Loss: 0.6840 | LR: 6.78e-05
+Epoch 15/35 | Batch 2080/2691 | Loss: 0.6895 | LR: 6.77e-05
+Epoch 15/35 | Batch 2120/2691 | Loss: 0.6823 | LR: 6.76e-05
+Epoch 15/35 | Batch 2160/2691 | Loss: 0.6876 | LR: 6.76e-05
+Epoch 15/35 | Batch 2200/2691 | Loss: 0.7186 | LR: 6.75e-05
+Epoch 15/35 | Batch 2240/2691 | Loss: 0.6830 | LR: 6.74e-05
+Epoch 15/35 | Batch 2280/2691 | Loss: 0.6842 | LR: 6.74e-05
+Epoch 15/35 | Batch 2320/2691 | Loss: 0.6824 | LR: 6.73e-05
+Epoch 15/35 | Batch 2360/2691 | Loss: 0.6839 | LR: 6.72e-05
+Epoch 15/35 | Batch 2400/2691 | Loss: 0.6808 | LR: 6.72e-05
+Epoch 15/35 | Batch 2440/2691 | Loss: 0.6869 | LR: 6.71e-05
+Epoch 15/35 | Batch 2480/2691 | Loss: 0.6836 | LR: 6.70e-05
+Epoch 15/35 | Batch 2520/2691 | Loss: 0.6815 | LR: 6.70e-05
+Epoch 15/35 | Batch 2560/2691 | Loss: 0.6831 | LR: 6.69e-05
+Epoch 15/35 | Batch 2600/2691 | Loss: 0.6835 | LR: 6.68e-05
+Epoch 15/35 | Batch 2640/2691 | Loss: 0.6821 | LR: 6.68e-05
+Epoch 15/35 | Batch 2680/2691 | Loss: 0.6821 | LR: 6.67e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 15 Summary:
+  Train Loss: 0.6837
+  Val Loss: 0.7094
+  PER: 0.1605
+  Avg LR: 6.89e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1605
+Epoch 16/35 | Batch 0/2691 | Loss: 0.6852 | LR: 6.67e-05
+Epoch 16/35 | Batch 40/2691 | Loss: 0.6835 | LR: 6.66e-05
+Epoch 16/35 | Batch 80/2691 | Loss: 0.6822 | LR: 6.66e-05
+Epoch 16/35 | Batch 120/2691 | Loss: 0.6860 | LR: 6.65e-05
+Epoch 16/35 | Batch 160/2691 | Loss: 0.6856 | LR: 6.64e-05
+Epoch 16/35 | Batch 200/2691 | Loss: 0.6833 | LR: 6.64e-05
+Epoch 16/35 | Batch 240/2691 | Loss: 0.6834 | LR: 6.63e-05
+Epoch 16/35 | Batch 280/2691 | Loss: 0.6828 | LR: 6.62e-05
+Epoch 16/35 | Batch 320/2691 | Loss: 0.6823 | LR: 6.62e-05
+Epoch 16/35 | Batch 360/2691 | Loss: 0.6824 | LR: 6.61e-05
+Epoch 16/35 | Batch 400/2691 | Loss: 0.6807 | LR: 6.60e-05
+Epoch 16/35 | Batch 440/2691 | Loss: 0.6857 | LR: 6.60e-05
+Epoch 16/35 | Batch 480/2691 | Loss: 0.6816 | LR: 6.59e-05
+Epoch 16/35 | Batch 520/2691 | Loss: 0.6826 | LR: 6.58e-05
+Epoch 16/35 | Batch 560/2691 | Loss: 0.6829 | LR: 6.58e-05
+Epoch 16/35 | Batch 600/2691 | Loss: 0.6821 | LR: 6.57e-05
+Epoch 16/35 | Batch 640/2691 | Loss: 0.6817 | LR: 6.56e-05
+Epoch 16/35 | Batch 680/2691 | Loss: 0.6812 | LR: 6.56e-05
+Epoch 16/35 | Batch 720/2691 | Loss: 0.6817 | LR: 6.55e-05
+Epoch 16/35 | Batch 760/2691 | Loss: 0.6821 | LR: 6.54e-05
+Epoch 16/35 | Batch 800/2691 | Loss: 0.6814 | LR: 6.54e-05
+Epoch 16/35 | Batch 840/2691 | Loss: 0.6849 | LR: 6.53e-05
+Epoch 16/35 | Batch 880/2691 | Loss: 0.6820 | LR: 6.52e-05
+Epoch 16/35 | Batch 920/2691 | Loss: 0.6837 | LR: 6.52e-05
+Epoch 16/35 | Batch 960/2691 | Loss: 0.6849 | LR: 6.51e-05
+Epoch 16/35 | Batch 1000/2691 | Loss: 0.6813 | LR: 6.50e-05
+Epoch 16/35 | Batch 1040/2691 | Loss: 0.6835 | LR: 6.50e-05
+Epoch 16/35 | Batch 1080/2691 | Loss: 0.6836 | LR: 6.49e-05
+Epoch 16/35 | Batch 1120/2691 | Loss: 0.6831 | LR: 6.48e-05
+Epoch 16/35 | Batch 1160/2691 | Loss: 0.6813 | LR: 6.48e-05
+Epoch 16/35 | Batch 1200/2691 | Loss: 0.6819 | LR: 6.47e-05
+Epoch 16/35 | Batch 1240/2691 | Loss: 0.6825 | LR: 6.46e-05
+Epoch 16/35 | Batch 1280/2691 | Loss: 0.6809 | LR: 6.46e-05
+Epoch 16/35 | Batch 1320/2691 | Loss: 0.6845 | LR: 6.45e-05
+Epoch 16/35 | Batch 1360/2691 | Loss: 0.6832 | LR: 6.44e-05
+Epoch 16/35 | Batch 1400/2691 | Loss: 0.6822 | LR: 6.44e-05
+Epoch 16/35 | Batch 1440/2691 | Loss: 0.6887 | LR: 6.43e-05
+Epoch 16/35 | Batch 1480/2691 | Loss: 0.6828 | LR: 6.42e-05
+Epoch 16/35 | Batch 1520/2691 | Loss: 0.6826 | LR: 6.42e-05
+Epoch 16/35 | Batch 1560/2691 | Loss: 0.6828 | LR: 6.41e-05
+Epoch 16/35 | Batch 1600/2691 | Loss: 0.6826 | LR: 6.40e-05
+Epoch 16/35 | Batch 1640/2691 | Loss: 0.6930 | LR: 6.40e-05
+Epoch 16/35 | Batch 1680/2691 | Loss: 0.6846 | LR: 6.39e-05
+Epoch 16/35 | Batch 1720/2691 | Loss: 0.6845 | LR: 6.38e-05
+Epoch 16/35 | Batch 1760/2691 | Loss: 0.6814 | LR: 6.37e-05
+Epoch 16/35 | Batch 1800/2691 | Loss: 0.6809 | LR: 6.37e-05
+Epoch 16/35 | Batch 1840/2691 | Loss: 0.6844 | LR: 6.36e-05
+Epoch 16/35 | Batch 1880/2691 | Loss: 0.6817 | LR: 6.35e-05
+Epoch 16/35 | Batch 1920/2691 | Loss: 0.6810 | LR: 6.35e-05
+Epoch 16/35 | Batch 1960/2691 | Loss: 0.6824 | LR: 6.34e-05
+Epoch 16/35 | Batch 2000/2691 | Loss: 0.6831 | LR: 6.33e-05
+Epoch 16/35 | Batch 2040/2691 | Loss: 0.6823 | LR: 6.33e-05
+Epoch 16/35 | Batch 2080/2691 | Loss: 0.6833 | LR: 6.32e-05
+Epoch 16/35 | Batch 2120/2691 | Loss: 0.6824 | LR: 6.31e-05
+Epoch 16/35 | Batch 2160/2691 | Loss: 0.6813 | LR: 6.31e-05
+Epoch 16/35 | Batch 2200/2691 | Loss: 0.6812 | LR: 6.30e-05
+Epoch 16/35 | Batch 2240/2691 | Loss: 0.6814 | LR: 6.29e-05
+Epoch 16/35 | Batch 2280/2691 | Loss: 0.6843 | LR: 6.29e-05
+Epoch 16/35 | Batch 2320/2691 | Loss: 0.6823 | LR: 6.28e-05
+Epoch 16/35 | Batch 2360/2691 | Loss: 0.6821 | LR: 6.27e-05
+Epoch 16/35 | Batch 2400/2691 | Loss: 0.6846 | LR: 6.27e-05
+Epoch 16/35 | Batch 2440/2691 | Loss: 0.6843 | LR: 6.26e-05
+Epoch 16/35 | Batch 2480/2691 | Loss: 0.6819 | LR: 6.25e-05
+Epoch 16/35 | Batch 2520/2691 | Loss: 0.6821 | LR: 6.25e-05
+Epoch 16/35 | Batch 2560/2691 | Loss: 0.6829 | LR: 6.24e-05
+Epoch 16/35 | Batch 2600/2691 | Loss: 0.6812 | LR: 6.23e-05
+Epoch 16/35 | Batch 2640/2691 | Loss: 0.6814 | LR: 6.23e-05
+Epoch 16/35 | Batch 2680/2691 | Loss: 0.6814 | LR: 6.22e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 9] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 16 Summary:
+  Train Loss: 0.6831
+  Val Loss: 0.7076
+  PER: 0.1557
+  Avg LR: 6.44e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1557
+Epoch 17/35 | Batch 0/2691 | Loss: 0.6818 | LR: 6.22e-05
+Epoch 17/35 | Batch 40/2691 | Loss: 0.6819 | LR: 6.21e-05
+Epoch 17/35 | Batch 80/2691 | Loss: 0.6836 | LR: 6.20e-05
+Epoch 17/35 | Batch 120/2691 | Loss: 0.6812 | LR: 6.20e-05
+Epoch 17/35 | Batch 160/2691 | Loss: 0.6818 | LR: 6.19e-05
+Epoch 17/35 | Batch 200/2691 | Loss: 0.6825 | LR: 6.18e-05
+Epoch 17/35 | Batch 240/2691 | Loss: 0.6812 | LR: 6.18e-05
+Epoch 17/35 | Batch 280/2691 | Loss: 0.6849 | LR: 6.17e-05
+Epoch 17/35 | Batch 320/2691 | Loss: 0.6826 | LR: 6.16e-05
+Epoch 17/35 | Batch 360/2691 | Loss: 0.6813 | LR: 6.16e-05
+Epoch 17/35 | Batch 400/2691 | Loss: 0.6816 | LR: 6.15e-05
+Epoch 17/35 | Batch 440/2691 | Loss: 0.6831 | LR: 6.14e-05
+Epoch 17/35 | Batch 480/2691 | Loss: 0.6811 | LR: 6.14e-05
+Epoch 17/35 | Batch 520/2691 | Loss: 0.6807 | LR: 6.13e-05
+Epoch 17/35 | Batch 560/2691 | Loss: 0.6817 | LR: 6.12e-05
+Epoch 17/35 | Batch 600/2691 | Loss: 0.6824 | LR: 6.11e-05
+Epoch 17/35 | Batch 640/2691 | Loss: 0.6814 | LR: 6.11e-05
+Epoch 17/35 | Batch 680/2691 | Loss: 0.6822 | LR: 6.10e-05
+Epoch 17/35 | Batch 720/2691 | Loss: 0.6835 | LR: 6.09e-05
+Epoch 17/35 | Batch 760/2691 | Loss: 0.6848 | LR: 6.09e-05
+Epoch 17/35 | Batch 800/2691 | Loss: 0.6812 | LR: 6.08e-05
+Epoch 17/35 | Batch 840/2691 | Loss: 0.6833 | LR: 6.07e-05
+Epoch 17/35 | Batch 880/2691 | Loss: 0.6825 | LR: 6.07e-05
+Epoch 17/35 | Batch 920/2691 | Loss: 0.6834 | LR: 6.06e-05
+Epoch 17/35 | Batch 960/2691 | Loss: 0.6814 | LR: 6.05e-05
+Epoch 17/35 | Batch 1000/2691 | Loss: 0.6818 | LR: 6.05e-05
+Epoch 17/35 | Batch 1040/2691 | Loss: 0.6832 | LR: 6.04e-05
+Epoch 17/35 | Batch 1080/2691 | Loss: 0.6817 | LR: 6.03e-05
+Epoch 17/35 | Batch 1120/2691 | Loss: 0.6822 | LR: 6.03e-05
+Epoch 17/35 | Batch 1160/2691 | Loss: 0.6822 | LR: 6.02e-05
+Epoch 17/35 | Batch 1200/2691 | Loss: 0.6805 | LR: 6.01e-05
+Epoch 17/35 | Batch 1240/2691 | Loss: 0.6815 | LR: 6.00e-05
+Epoch 17/35 | Batch 1280/2691 | Loss: 0.6822 | LR: 6.00e-05
+Epoch 17/35 | Batch 1320/2691 | Loss: 0.6810 | LR: 5.99e-05
+Epoch 17/35 | Batch 1360/2691 | Loss: 0.6824 | LR: 5.98e-05
+Epoch 17/35 | Batch 1400/2691 | Loss: 0.6826 | LR: 5.98e-05
+Epoch 17/35 | Batch 1440/2691 | Loss: 0.6807 | LR: 5.97e-05
+Epoch 17/35 | Batch 1480/2691 | Loss: 0.6862 | LR: 5.96e-05
+Epoch 17/35 | Batch 1520/2691 | Loss: 0.6828 | LR: 5.96e-05
+Epoch 17/35 | Batch 1560/2691 | Loss: 0.6809 | LR: 5.95e-05
+Epoch 17/35 | Batch 1600/2691 | Loss: 0.6827 | LR: 5.94e-05
+Epoch 17/35 | Batch 1640/2691 | Loss: 0.6832 | LR: 5.94e-05
+Epoch 17/35 | Batch 1680/2691 | Loss: 0.6816 | LR: 5.93e-05
+Epoch 17/35 | Batch 1720/2691 | Loss: 0.6815 | LR: 5.92e-05
+Epoch 17/35 | Batch 1760/2691 | Loss: 0.6827 | LR: 5.92e-05
+Epoch 17/35 | Batch 1800/2691 | Loss: 0.6826 | LR: 5.91e-05
+Epoch 17/35 | Batch 1840/2691 | Loss: 0.6830 | LR: 5.90e-05
+Epoch 17/35 | Batch 1880/2691 | Loss: 0.6830 | LR: 5.89e-05
+Epoch 17/35 | Batch 1920/2691 | Loss: 0.6812 | LR: 5.89e-05
+Epoch 17/35 | Batch 1960/2691 | Loss: 0.6816 | LR: 5.88e-05
+Epoch 17/35 | Batch 2000/2691 | Loss: 0.6840 | LR: 5.87e-05
+Epoch 17/35 | Batch 2040/2691 | Loss: 0.6815 | LR: 5.87e-05
+Epoch 17/35 | Batch 2080/2691 | Loss: 0.6814 | LR: 5.86e-05
+Epoch 17/35 | Batch 2120/2691 | Loss: 0.6821 | LR: 5.85e-05
+Epoch 17/35 | Batch 2160/2691 | Loss: 0.6828 | LR: 5.85e-05
+Epoch 17/35 | Batch 2200/2691 | Loss: 0.6873 | LR: 5.84e-05
+Epoch 17/35 | Batch 2240/2691 | Loss: 0.6818 | LR: 5.83e-05
+Epoch 17/35 | Batch 2280/2691 | Loss: 0.6808 | LR: 5.83e-05
+Epoch 17/35 | Batch 2320/2691 | Loss: 0.6843 | LR: 5.82e-05
+Epoch 17/35 | Batch 2360/2691 | Loss: 0.6826 | LR: 5.81e-05
+Epoch 17/35 | Batch 2400/2691 | Loss: 0.6816 | LR: 5.80e-05
+Epoch 17/35 | Batch 2440/2691 | Loss: 0.6833 | LR: 5.80e-05
+Epoch 17/35 | Batch 2480/2691 | Loss: 0.6820 | LR: 5.79e-05
+Epoch 17/35 | Batch 2520/2691 | Loss: 0.6823 | LR: 5.78e-05
+Epoch 17/35 | Batch 2560/2691 | Loss: 0.6810 | LR: 5.78e-05
+Epoch 17/35 | Batch 2600/2691 | Loss: 0.6831 | LR: 5.77e-05
+Epoch 17/35 | Batch 2640/2691 | Loss: 0.6829 | LR: 5.76e-05
+Epoch 17/35 | Batch 2680/2691 | Loss: 0.6830 | LR: 5.76e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 22, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 17 Summary:
+  Train Loss: 0.6826
+  Val Loss: 0.7076
+  PER: 0.1526
+  Avg LR: 5.99e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1526
+Epoch 18/35 | Batch 0/2691 | Loss: 0.6814 | LR: 5.75e-05
+Epoch 18/35 | Batch 40/2691 | Loss: 0.6819 | LR: 5.75e-05
+Epoch 18/35 | Batch 80/2691 | Loss: 0.6849 | LR: 5.74e-05
+Epoch 18/35 | Batch 120/2691 | Loss: 0.6848 | LR: 5.73e-05
+Epoch 18/35 | Batch 160/2691 | Loss: 0.6823 | LR: 5.73e-05
+Epoch 18/35 | Batch 200/2691 | Loss: 0.6815 | LR: 5.72e-05
+Epoch 18/35 | Batch 240/2691 | Loss: 0.6811 | LR: 5.71e-05
+Epoch 18/35 | Batch 280/2691 | Loss: 0.6808 | LR: 5.71e-05
+Epoch 18/35 | Batch 320/2691 | Loss: 0.6814 | LR: 5.70e-05
+Epoch 18/35 | Batch 360/2691 | Loss: 0.6811 | LR: 5.69e-05
+Epoch 18/35 | Batch 400/2691 | Loss: 0.6802 | LR: 5.69e-05
+Epoch 18/35 | Batch 440/2691 | Loss: 0.6817 | LR: 5.68e-05
+Epoch 18/35 | Batch 480/2691 | Loss: 0.6821 | LR: 5.67e-05
+Epoch 18/35 | Batch 520/2691 | Loss: 0.6812 | LR: 5.66e-05
+Epoch 18/35 | Batch 560/2691 | Loss: 0.6825 | LR: 5.66e-05
+Epoch 18/35 | Batch 600/2691 | Loss: 0.6817 | LR: 5.65e-05
+Epoch 18/35 | Batch 640/2691 | Loss: 0.6809 | LR: 5.64e-05
+Epoch 18/35 | Batch 680/2691 | Loss: 0.6811 | LR: 5.64e-05
+Epoch 18/35 | Batch 720/2691 | Loss: 0.6834 | LR: 5.63e-05
+Epoch 18/35 | Batch 760/2691 | Loss: 0.6808 | LR: 5.62e-05
+Epoch 18/35 | Batch 800/2691 | Loss: 0.6825 | LR: 5.62e-05
+Epoch 18/35 | Batch 840/2691 | Loss: 0.6818 | LR: 5.61e-05
+Epoch 18/35 | Batch 880/2691 | Loss: 0.6819 | LR: 5.60e-05
+Epoch 18/35 | Batch 920/2691 | Loss: 0.6816 | LR: 5.59e-05
+Epoch 18/35 | Batch 960/2691 | Loss: 0.6809 | LR: 5.59e-05
+Epoch 18/35 | Batch 1000/2691 | Loss: 0.6814 | LR: 5.58e-05
+Epoch 18/35 | Batch 1040/2691 | Loss: 0.6817 | LR: 5.57e-05
+Epoch 18/35 | Batch 1080/2691 | Loss: 0.6811 | LR: 5.57e-05
+Epoch 18/35 | Batch 1120/2691 | Loss: 0.6828 | LR: 5.56e-05
+Epoch 18/35 | Batch 1160/2691 | Loss: 0.6820 | LR: 5.55e-05
+Epoch 18/35 | Batch 1200/2691 | Loss: 0.6821 | LR: 5.55e-05
+Epoch 18/35 | Batch 1240/2691 | Loss: 0.6825 | LR: 5.54e-05
+Epoch 18/35 | Batch 1280/2691 | Loss: 0.6817 | LR: 5.53e-05
+Epoch 18/35 | Batch 1320/2691 | Loss: 0.6818 | LR: 5.52e-05
+Epoch 18/35 | Batch 1360/2691 | Loss: 0.6828 | LR: 5.52e-05
+Epoch 18/35 | Batch 1400/2691 | Loss: 0.6823 | LR: 5.51e-05
+Epoch 18/35 | Batch 1440/2691 | Loss: 0.6812 | LR: 5.50e-05
+Epoch 18/35 | Batch 1480/2691 | Loss: 0.6820 | LR: 5.50e-05
+Epoch 18/35 | Batch 1520/2691 | Loss: 0.6830 | LR: 5.49e-05
+Epoch 18/35 | Batch 1560/2691 | Loss: 0.6833 | LR: 5.48e-05
+Epoch 18/35 | Batch 1600/2691 | Loss: 0.6822 | LR: 5.48e-05
+Epoch 18/35 | Batch 1640/2691 | Loss: 0.6831 | LR: 5.47e-05
+Epoch 18/35 | Batch 1680/2691 | Loss: 0.6834 | LR: 5.46e-05
+Epoch 18/35 | Batch 1720/2691 | Loss: 0.6811 | LR: 5.46e-05
+Epoch 18/35 | Batch 1760/2691 | Loss: 0.6813 | LR: 5.45e-05
+Epoch 18/35 | Batch 1800/2691 | Loss: 0.6831 | LR: 5.44e-05
+Epoch 18/35 | Batch 1840/2691 | Loss: 0.6813 | LR: 5.43e-05
+Epoch 18/35 | Batch 1880/2691 | Loss: 0.6812 | LR: 5.43e-05
+Epoch 18/35 | Batch 1920/2691 | Loss: 0.6824 | LR: 5.42e-05
+Epoch 18/35 | Batch 1960/2691 | Loss: 0.6814 | LR: 5.41e-05
+Epoch 18/35 | Batch 2000/2691 | Loss: 0.6833 | LR: 5.41e-05
+Epoch 18/35 | Batch 2040/2691 | Loss: 0.6829 | LR: 5.40e-05
+Epoch 18/35 | Batch 2080/2691 | Loss: 0.6828 | LR: 5.39e-05
+Epoch 18/35 | Batch 2120/2691 | Loss: 0.6823 | LR: 5.39e-05
+Epoch 18/35 | Batch 2160/2691 | Loss: 0.6822 | LR: 5.38e-05
+Epoch 18/35 | Batch 2200/2691 | Loss: 0.6815 | LR: 5.37e-05
+Epoch 18/35 | Batch 2240/2691 | Loss: 0.6813 | LR: 5.36e-05
+Epoch 18/35 | Batch 2280/2691 | Loss: 0.6849 | LR: 5.36e-05
+Epoch 18/35 | Batch 2320/2691 | Loss: 0.6810 | LR: 5.35e-05
+Epoch 18/35 | Batch 2360/2691 | Loss: 0.6815 | LR: 5.34e-05
+Epoch 18/35 | Batch 2400/2691 | Loss: 0.6823 | LR: 5.34e-05
+Epoch 18/35 | Batch 2440/2691 | Loss: 0.6814 | LR: 5.33e-05
+Epoch 18/35 | Batch 2480/2691 | Loss: 0.6812 | LR: 5.32e-05
+Epoch 18/35 | Batch 2520/2691 | Loss: 0.6824 | LR: 5.32e-05
+Epoch 18/35 | Batch 2560/2691 | Loss: 0.6832 | LR: 5.31e-05
+Epoch 18/35 | Batch 2600/2691 | Loss: 0.6813 | LR: 5.30e-05
+Epoch 18/35 | Batch 2640/2691 | Loss: 0.6811 | LR: 5.29e-05
+Epoch 18/35 | Batch 2680/2691 | Loss: 0.6823 | LR: 5.29e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 11, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 18 Summary:
+  Train Loss: 0.6822
+  Val Loss: 0.7076
+  PER: 0.1510
+  Avg LR: 5.52e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1510
+Epoch 19/35 | Batch 0/2691 | Loss: 0.6816 | LR: 5.29e-05
+Epoch 19/35 | Batch 40/2691 | Loss: 0.6806 | LR: 5.28e-05
+Epoch 19/35 | Batch 80/2691 | Loss: 0.6804 | LR: 5.27e-05
+Epoch 19/35 | Batch 120/2691 | Loss: 0.6821 | LR: 5.26e-05
+Epoch 19/35 | Batch 160/2691 | Loss: 0.6815 | LR: 5.26e-05
+Epoch 19/35 | Batch 200/2691 | Loss: 0.6816 | LR: 5.25e-05
+Epoch 19/35 | Batch 240/2691 | Loss: 0.6815 | LR: 5.24e-05
+Epoch 19/35 | Batch 280/2691 | Loss: 0.6814 | LR: 5.24e-05
+Epoch 19/35 | Batch 320/2691 | Loss: 0.6810 | LR: 5.23e-05
+Epoch 19/35 | Batch 360/2691 | Loss: 0.6821 | LR: 5.22e-05
+Epoch 19/35 | Batch 400/2691 | Loss: 0.6812 | LR: 5.22e-05
+Epoch 19/35 | Batch 440/2691 | Loss: 0.6823 | LR: 5.21e-05
+Epoch 19/35 | Batch 480/2691 | Loss: 0.6814 | LR: 5.20e-05
+Epoch 19/35 | Batch 520/2691 | Loss: 0.6814 | LR: 5.19e-05
+Epoch 19/35 | Batch 560/2691 | Loss: 0.6826 | LR: 5.19e-05
+Epoch 19/35 | Batch 600/2691 | Loss: 0.6818 | LR: 5.18e-05
+Epoch 19/35 | Batch 640/2691 | Loss: 0.6828 | LR: 5.17e-05
+Epoch 19/35 | Batch 680/2691 | Loss: 0.6816 | LR: 5.17e-05
+Epoch 19/35 | Batch 720/2691 | Loss: 0.6821 | LR: 5.16e-05
+Epoch 19/35 | Batch 760/2691 | Loss: 0.6812 | LR: 5.15e-05
+Epoch 19/35 | Batch 800/2691 | Loss: 0.6813 | LR: 5.15e-05
+Epoch 19/35 | Batch 840/2691 | Loss: 0.6844 | LR: 5.14e-05
+Epoch 19/35 | Batch 880/2691 | Loss: 0.6813 | LR: 5.13e-05
+Epoch 19/35 | Batch 920/2691 | Loss: 0.6816 | LR: 5.12e-05
+Epoch 19/35 | Batch 960/2691 | Loss: 0.6812 | LR: 5.12e-05
+Epoch 19/35 | Batch 1000/2691 | Loss: 0.6815 | LR: 5.11e-05
+Epoch 19/35 | Batch 1040/2691 | Loss: 0.6816 | LR: 5.10e-05
+Epoch 19/35 | Batch 1080/2691 | Loss: 0.6826 | LR: 5.10e-05
+Epoch 19/35 | Batch 1120/2691 | Loss: 0.6812 | LR: 5.09e-05
+Epoch 19/35 | Batch 1160/2691 | Loss: 0.6819 | LR: 5.08e-05
+Epoch 19/35 | Batch 1200/2691 | Loss: 0.6810 | LR: 5.08e-05
+Epoch 19/35 | Batch 1240/2691 | Loss: 0.6831 | LR: 5.07e-05
+Epoch 19/35 | Batch 1280/2691 | Loss: 0.6811 | LR: 5.06e-05
+Epoch 19/35 | Batch 1320/2691 | Loss: 0.6807 | LR: 5.05e-05
+Epoch 19/35 | Batch 1360/2691 | Loss: 0.6825 | LR: 5.05e-05
+Epoch 19/35 | Batch 1400/2691 | Loss: 0.6820 | LR: 5.04e-05
+Epoch 19/35 | Batch 1440/2691 | Loss: 0.6813 | LR: 5.03e-05
+Epoch 19/35 | Batch 1480/2691 | Loss: 0.6812 | LR: 5.03e-05
+Epoch 19/35 | Batch 1520/2691 | Loss: 0.6832 | LR: 5.02e-05
+Epoch 19/35 | Batch 1560/2691 | Loss: 0.6811 | LR: 5.01e-05
+Epoch 19/35 | Batch 1600/2691 | Loss: 0.6803 | LR: 5.01e-05
+Epoch 19/35 | Batch 1640/2691 | Loss: 0.6816 | LR: 5.00e-05
+Epoch 19/35 | Batch 1680/2691 | Loss: 0.6817 | LR: 4.99e-05
+Epoch 19/35 | Batch 1720/2691 | Loss: 0.6825 | LR: 4.98e-05
+Epoch 19/35 | Batch 1760/2691 | Loss: 0.6828 | LR: 4.98e-05
+Epoch 19/35 | Batch 1800/2691 | Loss: 0.6812 | LR: 4.97e-05
+Epoch 19/35 | Batch 1840/2691 | Loss: 0.6830 | LR: 4.96e-05
+Epoch 19/35 | Batch 1880/2691 | Loss: 0.6831 | LR: 4.96e-05
+Epoch 19/35 | Batch 1920/2691 | Loss: 0.6817 | LR: 4.95e-05
+Epoch 19/35 | Batch 1960/2691 | Loss: 0.6809 | LR: 4.94e-05
+Epoch 19/35 | Batch 2000/2691 | Loss: 0.6805 | LR: 4.94e-05
+Epoch 19/35 | Batch 2040/2691 | Loss: 0.6804 | LR: 4.93e-05
+Epoch 19/35 | Batch 2080/2691 | Loss: 0.6808 | LR: 4.92e-05
+Epoch 19/35 | Batch 2120/2691 | Loss: 0.6806 | LR: 4.91e-05
+Epoch 19/35 | Batch 2160/2691 | Loss: 0.6818 | LR: 4.91e-05
+Epoch 19/35 | Batch 2200/2691 | Loss: 0.6809 | LR: 4.90e-05
+Epoch 19/35 | Batch 2240/2691 | Loss: 0.6822 | LR: 4.89e-05
+Epoch 19/35 | Batch 2280/2691 | Loss: 0.6804 | LR: 4.89e-05
+Epoch 19/35 | Batch 2320/2691 | Loss: 0.6819 | LR: 4.88e-05
+Epoch 19/35 | Batch 2360/2691 | Loss: 0.6805 | LR: 4.87e-05
+Epoch 19/35 | Batch 2400/2691 | Loss: 0.6828 | LR: 4.87e-05
+Epoch 19/35 | Batch 2440/2691 | Loss: 0.6815 | LR: 4.86e-05
+Epoch 19/35 | Batch 2480/2691 | Loss: 0.6815 | LR: 4.85e-05
+Epoch 19/35 | Batch 2520/2691 | Loss: 0.6806 | LR: 4.84e-05
+Epoch 19/35 | Batch 2560/2691 | Loss: 0.6827 | LR: 4.84e-05
+Epoch 19/35 | Batch 2600/2691 | Loss: 0.6817 | LR: 4.83e-05
+Epoch 19/35 | Batch 2640/2691 | Loss: 0.6814 | LR: 4.82e-05
+Epoch 19/35 | Batch 2680/2691 | Loss: 0.6818 | LR: 4.82e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 22, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 19 Summary:
+  Train Loss: 0.6818
+  Val Loss: 0.7062
+  PER: 0.1489
+  Avg LR: 5.05e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1489
+Epoch 20/35 | Batch 0/2691 | Loss: 0.6814 | LR: 4.81e-05
+Epoch 20/35 | Batch 40/2691 | Loss: 0.6810 | LR: 4.81e-05
+Epoch 20/35 | Batch 80/2691 | Loss: 0.6813 | LR: 4.80e-05
+Epoch 20/35 | Batch 120/2691 | Loss: 0.6834 | LR: 4.79e-05
+Epoch 20/35 | Batch 160/2691 | Loss: 0.6814 | LR: 4.79e-05
+Epoch 20/35 | Batch 200/2691 | Loss: 0.6807 | LR: 4.78e-05
+Epoch 20/35 | Batch 240/2691 | Loss: 0.6860 | LR: 4.77e-05
+Epoch 20/35 | Batch 280/2691 | Loss: 0.6805 | LR: 4.77e-05
+Epoch 20/35 | Batch 320/2691 | Loss: 0.6806 | LR: 4.76e-05
+Epoch 20/35 | Batch 360/2691 | Loss: 0.6807 | LR: 4.75e-05
+Epoch 20/35 | Batch 400/2691 | Loss: 0.6809 | LR: 4.74e-05
+Epoch 20/35 | Batch 440/2691 | Loss: 0.6811 | LR: 4.74e-05
+Epoch 20/35 | Batch 480/2691 | Loss: 0.6803 | LR: 4.73e-05
+Epoch 20/35 | Batch 520/2691 | Loss: 0.6812 | LR: 4.72e-05
+Epoch 20/35 | Batch 560/2691 | Loss: 0.6808 | LR: 4.72e-05
+Epoch 20/35 | Batch 600/2691 | Loss: 0.6821 | LR: 4.71e-05
+Epoch 20/35 | Batch 640/2691 | Loss: 0.6809 | LR: 4.70e-05
+Epoch 20/35 | Batch 680/2691 | Loss: 0.6829 | LR: 4.70e-05
+Epoch 20/35 | Batch 720/2691 | Loss: 0.6805 | LR: 4.69e-05
+Epoch 20/35 | Batch 760/2691 | Loss: 0.6808 | LR: 4.68e-05
+Epoch 20/35 | Batch 800/2691 | Loss: 0.6817 | LR: 4.67e-05
+Epoch 20/35 | Batch 840/2691 | Loss: 0.6807 | LR: 4.67e-05
+Epoch 20/35 | Batch 880/2691 | Loss: 0.6812 | LR: 4.66e-05
+Epoch 20/35 | Batch 920/2691 | Loss: 0.6805 | LR: 4.65e-05
+Epoch 20/35 | Batch 960/2691 | Loss: 0.6807 | LR: 4.65e-05
+Epoch 20/35 | Batch 1000/2691 | Loss: 0.6806 | LR: 4.64e-05
+Epoch 20/35 | Batch 1040/2691 | Loss: 0.6803 | LR: 4.63e-05
+Epoch 20/35 | Batch 1080/2691 | Loss: 0.6812 | LR: 4.63e-05
+Epoch 20/35 | Batch 1120/2691 | Loss: 0.6814 | LR: 4.62e-05
+Epoch 20/35 | Batch 1160/2691 | Loss: 0.6818 | LR: 4.61e-05
+Epoch 20/35 | Batch 1200/2691 | Loss: 0.6819 | LR: 4.60e-05
+Epoch 20/35 | Batch 1240/2691 | Loss: 0.6807 | LR: 4.60e-05
+Epoch 20/35 | Batch 1280/2691 | Loss: 0.6827 | LR: 4.59e-05
+Epoch 20/35 | Batch 1320/2691 | Loss: 0.6825 | LR: 4.58e-05
+Epoch 20/35 | Batch 1360/2691 | Loss: 0.6827 | LR: 4.58e-05
+Epoch 20/35 | Batch 1400/2691 | Loss: 0.6818 | LR: 4.57e-05
+Epoch 20/35 | Batch 1440/2691 | Loss: 0.6802 | LR: 4.56e-05
+Epoch 20/35 | Batch 1480/2691 | Loss: 0.6809 | LR: 4.56e-05
+Epoch 20/35 | Batch 1520/2691 | Loss: 0.6812 | LR: 4.55e-05
+Epoch 20/35 | Batch 1560/2691 | Loss: 0.6820 | LR: 4.54e-05
+Epoch 20/35 | Batch 1600/2691 | Loss: 0.6808 | LR: 4.54e-05
+Epoch 20/35 | Batch 1640/2691 | Loss: 0.6820 | LR: 4.53e-05
+Epoch 20/35 | Batch 1680/2691 | Loss: 0.6807 | LR: 4.52e-05
+Epoch 20/35 | Batch 1720/2691 | Loss: 0.6805 | LR: 4.51e-05
+Epoch 20/35 | Batch 1760/2691 | Loss: 0.6826 | LR: 4.51e-05
+Epoch 20/35 | Batch 1800/2691 | Loss: 0.6828 | LR: 4.50e-05
+Epoch 20/35 | Batch 1840/2691 | Loss: 0.6810 | LR: 4.49e-05
+Epoch 20/35 | Batch 1880/2691 | Loss: 0.6814 | LR: 4.49e-05
+Epoch 20/35 | Batch 1920/2691 | Loss: 0.6813 | LR: 4.48e-05
+Epoch 20/35 | Batch 1960/2691 | Loss: 0.6850 | LR: 4.47e-05
+Epoch 20/35 | Batch 2000/2691 | Loss: 0.6807 | LR: 4.47e-05
+Epoch 20/35 | Batch 2040/2691 | Loss: 0.6805 | LR: 4.46e-05
+Epoch 20/35 | Batch 2080/2691 | Loss: 0.6808 | LR: 4.45e-05
+Epoch 20/35 | Batch 2120/2691 | Loss: 0.6817 | LR: 4.44e-05
+Epoch 20/35 | Batch 2160/2691 | Loss: 0.6812 | LR: 4.44e-05
+Epoch 20/35 | Batch 2200/2691 | Loss: 0.6808 | LR: 4.43e-05
+Epoch 20/35 | Batch 2240/2691 | Loss: 0.6805 | LR: 4.42e-05
+Epoch 20/35 | Batch 2280/2691 | Loss: 0.6822 | LR: 4.42e-05
+Epoch 20/35 | Batch 2320/2691 | Loss: 0.6816 | LR: 4.41e-05
+Epoch 20/35 | Batch 2360/2691 | Loss: 0.6810 | LR: 4.40e-05
+Epoch 20/35 | Batch 2400/2691 | Loss: 0.6814 | LR: 4.40e-05
+Epoch 20/35 | Batch 2440/2691 | Loss: 0.6824 | LR: 4.39e-05
+Epoch 20/35 | Batch 2480/2691 | Loss: 0.6813 | LR: 4.38e-05
+Epoch 20/35 | Batch 2520/2691 | Loss: 0.6808 | LR: 4.38e-05
+Epoch 20/35 | Batch 2560/2691 | Loss: 0.6819 | LR: 4.37e-05
+Epoch 20/35 | Batch 2600/2691 | Loss: 0.6817 | LR: 4.36e-05
+Epoch 20/35 | Batch 2640/2691 | Loss: 0.6824 | LR: 4.35e-05
+Epoch 20/35 | Batch 2680/2691 | Loss: 0.6806 | LR: 4.35e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 20 Summary:
+  Train Loss: 0.6814
+  Val Loss: 0.7062
+  PER: 0.1472
+  Avg LR: 4.58e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1472
+Epoch 21/35 | Batch 0/2691 | Loss: 0.6809 | LR: 4.35e-05
+Epoch 21/35 | Batch 40/2691 | Loss: 0.6821 | LR: 4.34e-05
+Epoch 21/35 | Batch 80/2691 | Loss: 0.6812 | LR: 4.33e-05
+Epoch 21/35 | Batch 120/2691 | Loss: 0.6823 | LR: 4.32e-05
+Epoch 21/35 | Batch 160/2691 | Loss: 0.6809 | LR: 4.32e-05
+Epoch 21/35 | Batch 200/2691 | Loss: 0.6809 | LR: 4.31e-05
+Epoch 21/35 | Batch 240/2691 | Loss: 0.6816 | LR: 4.30e-05
+Epoch 21/35 | Batch 280/2691 | Loss: 0.6812 | LR: 4.30e-05
+Epoch 21/35 | Batch 320/2691 | Loss: 0.6852 | LR: 4.29e-05
+Epoch 21/35 | Batch 360/2691 | Loss: 0.6805 | LR: 4.28e-05
+Epoch 21/35 | Batch 400/2691 | Loss: 0.6813 | LR: 4.28e-05
+Epoch 21/35 | Batch 440/2691 | Loss: 0.6809 | LR: 4.27e-05
+Epoch 21/35 | Batch 480/2691 | Loss: 0.6820 | LR: 4.26e-05
+Epoch 21/35 | Batch 520/2691 | Loss: 0.6823 | LR: 4.26e-05
+Epoch 21/35 | Batch 560/2691 | Loss: 0.6810 | LR: 4.25e-05
+Epoch 21/35 | Batch 600/2691 | Loss: 0.6809 | LR: 4.24e-05
+Epoch 21/35 | Batch 640/2691 | Loss: 0.6806 | LR: 4.23e-05
+Epoch 21/35 | Batch 680/2691 | Loss: 0.6808 | LR: 4.23e-05
+Epoch 21/35 | Batch 720/2691 | Loss: 0.6822 | LR: 4.22e-05
+Epoch 21/35 | Batch 760/2691 | Loss: 0.6807 | LR: 4.21e-05
+Epoch 21/35 | Batch 800/2691 | Loss: 0.6806 | LR: 4.21e-05
+Epoch 21/35 | Batch 840/2691 | Loss: 0.6805 | LR: 4.20e-05
+Epoch 21/35 | Batch 880/2691 | Loss: 0.6808 | LR: 4.19e-05
+Epoch 21/35 | Batch 920/2691 | Loss: 0.6810 | LR: 4.19e-05
+Epoch 21/35 | Batch 960/2691 | Loss: 0.6808 | LR: 4.18e-05
+Epoch 21/35 | Batch 1000/2691 | Loss: 0.6836 | LR: 4.17e-05
+Epoch 21/35 | Batch 1040/2691 | Loss: 0.6827 | LR: 4.17e-05
+Epoch 21/35 | Batch 1080/2691 | Loss: 0.6802 | LR: 4.16e-05
+Epoch 21/35 | Batch 1120/2691 | Loss: 0.6807 | LR: 4.15e-05
+Epoch 21/35 | Batch 1160/2691 | Loss: 0.6810 | LR: 4.15e-05
+Epoch 21/35 | Batch 1200/2691 | Loss: 0.6803 | LR: 4.14e-05
+Epoch 21/35 | Batch 1240/2691 | Loss: 0.6806 | LR: 4.13e-05
+Epoch 21/35 | Batch 1280/2691 | Loss: 0.6813 | LR: 4.12e-05
+Epoch 21/35 | Batch 1320/2691 | Loss: 0.6807 | LR: 4.12e-05
+Epoch 21/35 | Batch 1360/2691 | Loss: 0.6809 | LR: 4.11e-05
+Epoch 21/35 | Batch 1400/2691 | Loss: 0.6809 | LR: 4.10e-05
+Epoch 21/35 | Batch 1440/2691 | Loss: 0.6818 | LR: 4.10e-05
+Epoch 21/35 | Batch 1480/2691 | Loss: 0.6816 | LR: 4.09e-05
+Epoch 21/35 | Batch 1520/2691 | Loss: 0.6821 | LR: 4.08e-05
+Epoch 21/35 | Batch 1560/2691 | Loss: 0.6802 | LR: 4.08e-05
+Epoch 21/35 | Batch 1600/2691 | Loss: 0.6803 | LR: 4.07e-05
+Epoch 21/35 | Batch 1640/2691 | Loss: 0.6812 | LR: 4.06e-05
+Epoch 21/35 | Batch 1680/2691 | Loss: 0.6807 | LR: 4.06e-05
+Epoch 21/35 | Batch 1720/2691 | Loss: 0.6808 | LR: 4.05e-05
+Epoch 21/35 | Batch 1760/2691 | Loss: 0.6808 | LR: 4.04e-05
+Epoch 21/35 | Batch 1800/2691 | Loss: 0.6815 | LR: 4.04e-05
+Epoch 21/35 | Batch 1840/2691 | Loss: 0.6804 | LR: 4.03e-05
+Epoch 21/35 | Batch 1880/2691 | Loss: 0.6836 | LR: 4.02e-05
+Epoch 21/35 | Batch 1920/2691 | Loss: 0.6813 | LR: 4.01e-05
+Epoch 21/35 | Batch 1960/2691 | Loss: 0.6803 | LR: 4.01e-05
+Epoch 21/35 | Batch 2000/2691 | Loss: 0.6807 | LR: 4.00e-05
+Epoch 21/35 | Batch 2040/2691 | Loss: 0.6806 | LR: 3.99e-05
+Epoch 21/35 | Batch 2080/2691 | Loss: 0.6803 | LR: 3.99e-05
+Epoch 21/35 | Batch 2120/2691 | Loss: 0.6820 | LR: 3.98e-05
+Epoch 21/35 | Batch 2160/2691 | Loss: 0.6805 | LR: 3.97e-05
+Epoch 21/35 | Batch 2200/2691 | Loss: 0.6808 | LR: 3.97e-05
+Epoch 21/35 | Batch 2240/2691 | Loss: 0.6842 | LR: 3.96e-05
+Epoch 21/35 | Batch 2280/2691 | Loss: 0.6814 | LR: 3.95e-05
+Epoch 21/35 | Batch 2320/2691 | Loss: 0.6810 | LR: 3.95e-05
+Epoch 21/35 | Batch 2360/2691 | Loss: 0.6810 | LR: 3.94e-05
+Epoch 21/35 | Batch 2400/2691 | Loss: 0.6803 | LR: 3.93e-05
+Epoch 21/35 | Batch 2440/2691 | Loss: 0.6805 | LR: 3.93e-05
+Epoch 21/35 | Batch 2480/2691 | Loss: 0.6820 | LR: 3.92e-05
+Epoch 21/35 | Batch 2520/2691 | Loss: 0.6804 | LR: 3.91e-05
+Epoch 21/35 | Batch 2560/2691 | Loss: 0.6819 | LR: 3.91e-05
+Epoch 21/35 | Batch 2600/2691 | Loss: 0.6816 | LR: 3.90e-05
+Epoch 21/35 | Batch 2640/2691 | Loss: 0.6813 | LR: 3.89e-05
+Epoch 21/35 | Batch 2680/2691 | Loss: 0.6814 | LR: 3.88e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 17, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 21 Summary:
+  Train Loss: 0.6812
+  Val Loss: 0.7056
+  PER: 0.1441
+  Avg LR: 4.11e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1441
+Epoch 22/35 | Batch 0/2691 | Loss: 0.6802 | LR: 3.88e-05
+Epoch 22/35 | Batch 40/2691 | Loss: 0.6804 | LR: 3.88e-05
+Epoch 22/35 | Batch 80/2691 | Loss: 0.6806 | LR: 3.87e-05
+Epoch 22/35 | Batch 120/2691 | Loss: 0.6814 | LR: 3.86e-05
+Epoch 22/35 | Batch 160/2691 | Loss: 0.6804 | LR: 3.86e-05
+Epoch 22/35 | Batch 200/2691 | Loss: 0.6808 | LR: 3.85e-05
+Epoch 22/35 | Batch 240/2691 | Loss: 0.6812 | LR: 3.84e-05
+Epoch 22/35 | Batch 280/2691 | Loss: 0.6804 | LR: 3.84e-05
+Epoch 22/35 | Batch 320/2691 | Loss: 0.6808 | LR: 3.83e-05
+Epoch 22/35 | Batch 360/2691 | Loss: 0.6815 | LR: 3.82e-05
+Epoch 22/35 | Batch 400/2691 | Loss: 0.6804 | LR: 3.82e-05
+Epoch 22/35 | Batch 440/2691 | Loss: 0.6816 | LR: 3.81e-05
+Epoch 22/35 | Batch 480/2691 | Loss: 0.6809 | LR: 3.80e-05
+Epoch 22/35 | Batch 520/2691 | Loss: 0.6811 | LR: 3.79e-05
+Epoch 22/35 | Batch 560/2691 | Loss: 0.6804 | LR: 3.79e-05
+Epoch 22/35 | Batch 600/2691 | Loss: 0.6805 | LR: 3.78e-05
+Epoch 22/35 | Batch 640/2691 | Loss: 0.6801 | LR: 3.77e-05
+Epoch 22/35 | Batch 680/2691 | Loss: 0.6813 | LR: 3.77e-05
+Epoch 22/35 | Batch 720/2691 | Loss: 0.6814 | LR: 3.76e-05
+Epoch 22/35 | Batch 760/2691 | Loss: 0.6812 | LR: 3.75e-05
+Epoch 22/35 | Batch 800/2691 | Loss: 0.6804 | LR: 3.75e-05
+Epoch 22/35 | Batch 840/2691 | Loss: 0.6806 | LR: 3.74e-05
+Epoch 22/35 | Batch 880/2691 | Loss: 0.6809 | LR: 3.73e-05
+Epoch 22/35 | Batch 920/2691 | Loss: 0.6810 | LR: 3.73e-05
+Epoch 22/35 | Batch 960/2691 | Loss: 0.6804 | LR: 3.72e-05
+Epoch 22/35 | Batch 1000/2691 | Loss: 0.6808 | LR: 3.71e-05
+Epoch 22/35 | Batch 1040/2691 | Loss: 0.6805 | LR: 3.71e-05
+Epoch 22/35 | Batch 1080/2691 | Loss: 0.6814 | LR: 3.70e-05
+Epoch 22/35 | Batch 1120/2691 | Loss: 0.6809 | LR: 3.69e-05
+Epoch 22/35 | Batch 1160/2691 | Loss: 0.6811 | LR: 3.69e-05
+Epoch 22/35 | Batch 1200/2691 | Loss: 0.6857 | LR: 3.68e-05
+Epoch 22/35 | Batch 1240/2691 | Loss: 0.6811 | LR: 3.67e-05
+Epoch 22/35 | Batch 1280/2691 | Loss: 0.6812 | LR: 3.67e-05
+Epoch 22/35 | Batch 1320/2691 | Loss: 0.6818 | LR: 3.66e-05
+Epoch 22/35 | Batch 1360/2691 | Loss: 0.6808 | LR: 3.65e-05
+Epoch 22/35 | Batch 1400/2691 | Loss: 0.6812 | LR: 3.65e-05
+Epoch 22/35 | Batch 1440/2691 | Loss: 0.6806 | LR: 3.64e-05
+Epoch 22/35 | Batch 1480/2691 | Loss: 0.6809 | LR: 3.63e-05
+Epoch 22/35 | Batch 1520/2691 | Loss: 0.6808 | LR: 3.63e-05
+Epoch 22/35 | Batch 1560/2691 | Loss: 0.6805 | LR: 3.62e-05
+Epoch 22/35 | Batch 1600/2691 | Loss: 0.6805 | LR: 3.61e-05
+Epoch 22/35 | Batch 1640/2691 | Loss: 0.6802 | LR: 3.61e-05
+Epoch 22/35 | Batch 1680/2691 | Loss: 0.6809 | LR: 3.60e-05
+Epoch 22/35 | Batch 1720/2691 | Loss: 0.6806 | LR: 3.59e-05
+Epoch 22/35 | Batch 1760/2691 | Loss: 0.6804 | LR: 3.59e-05
+Epoch 22/35 | Batch 1800/2691 | Loss: 0.6815 | LR: 3.58e-05
+Epoch 22/35 | Batch 1840/2691 | Loss: 0.6808 | LR: 3.57e-05
+Epoch 22/35 | Batch 1880/2691 | Loss: 0.6807 | LR: 3.57e-05
+Epoch 22/35 | Batch 1920/2691 | Loss: 0.6811 | LR: 3.56e-05
+Epoch 22/35 | Batch 1960/2691 | Loss: 0.6801 | LR: 3.55e-05
+Epoch 22/35 | Batch 2000/2691 | Loss: 0.6801 | LR: 3.55e-05
+Epoch 22/35 | Batch 2040/2691 | Loss: 0.6809 | LR: 3.54e-05
+Epoch 22/35 | Batch 2080/2691 | Loss: 0.6808 | LR: 3.53e-05
+Epoch 22/35 | Batch 2120/2691 | Loss: 0.6803 | LR: 3.53e-05
+Epoch 22/35 | Batch 2160/2691 | Loss: 0.6803 | LR: 3.52e-05
+Epoch 22/35 | Batch 2200/2691 | Loss: 0.6804 | LR: 3.51e-05
+Epoch 22/35 | Batch 2240/2691 | Loss: 0.6801 | LR: 3.51e-05
+Epoch 22/35 | Batch 2280/2691 | Loss: 0.6812 | LR: 3.50e-05
+Epoch 22/35 | Batch 2320/2691 | Loss: 0.6810 | LR: 3.49e-05
+Epoch 22/35 | Batch 2360/2691 | Loss: 0.6801 | LR: 3.49e-05
+Epoch 22/35 | Batch 2400/2691 | Loss: 0.6803 | LR: 3.48e-05
+Epoch 22/35 | Batch 2440/2691 | Loss: 0.6811 | LR: 3.47e-05
+Epoch 22/35 | Batch 2480/2691 | Loss: 0.6809 | LR: 3.47e-05
+Epoch 22/35 | Batch 2520/2691 | Loss: 0.6806 | LR: 3.46e-05
+Epoch 22/35 | Batch 2560/2691 | Loss: 0.6813 | LR: 3.45e-05
+Epoch 22/35 | Batch 2600/2691 | Loss: 0.6810 | LR: 3.45e-05
+Epoch 22/35 | Batch 2640/2691 | Loss: 0.6807 | LR: 3.44e-05
+Epoch 22/35 | Batch 2680/2691 | Loss: 0.6814 | LR: 3.43e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 22, 18, 40, 10, 3, 40, 20, 11, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 22 Summary:
+  Train Loss: 0.6810
+  Val Loss: 0.7052
+  PER: 0.1424
+  Avg LR: 3.66e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1424
+Epoch 23/35 | Batch 0/2691 | Loss: 0.6807 | LR: 3.43e-05
+Epoch 23/35 | Batch 40/2691 | Loss: 0.6805 | LR: 3.42e-05
+Epoch 23/35 | Batch 80/2691 | Loss: 0.6807 | LR: 3.42e-05
+Epoch 23/35 | Batch 120/2691 | Loss: 0.6807 | LR: 3.41e-05
+Epoch 23/35 | Batch 160/2691 | Loss: 0.6807 | LR: 3.40e-05
+Epoch 23/35 | Batch 200/2691 | Loss: 0.6805 | LR: 3.40e-05
+Epoch 23/35 | Batch 240/2691 | Loss: 0.6805 | LR: 3.39e-05
+Epoch 23/35 | Batch 280/2691 | Loss: 0.6812 | LR: 3.38e-05
+Epoch 23/35 | Batch 320/2691 | Loss: 0.6802 | LR: 3.38e-05
+Epoch 23/35 | Batch 360/2691 | Loss: 0.6812 | LR: 3.37e-05
+Epoch 23/35 | Batch 400/2691 | Loss: 0.6811 | LR: 3.36e-05
+Epoch 23/35 | Batch 440/2691 | Loss: 0.6810 | LR: 3.36e-05
+Epoch 23/35 | Batch 480/2691 | Loss: 0.6806 | LR: 3.35e-05
+Epoch 23/35 | Batch 520/2691 | Loss: 0.6802 | LR: 3.35e-05
+Epoch 23/35 | Batch 560/2691 | Loss: 0.6804 | LR: 3.34e-05
+Epoch 23/35 | Batch 600/2691 | Loss: 0.6804 | LR: 3.33e-05
+Epoch 23/35 | Batch 640/2691 | Loss: 0.6803 | LR: 3.33e-05
+Epoch 23/35 | Batch 680/2691 | Loss: 0.6811 | LR: 3.32e-05
+Epoch 23/35 | Batch 720/2691 | Loss: 0.6805 | LR: 3.31e-05
+Epoch 23/35 | Batch 760/2691 | Loss: 0.6808 | LR: 3.31e-05
+Epoch 23/35 | Batch 800/2691 | Loss: 0.6823 | LR: 3.30e-05
+Epoch 23/35 | Batch 840/2691 | Loss: 0.6806 | LR: 3.29e-05
+Epoch 23/35 | Batch 880/2691 | Loss: 0.6806 | LR: 3.29e-05
+Epoch 23/35 | Batch 920/2691 | Loss: 0.6800 | LR: 3.28e-05
+Epoch 23/35 | Batch 960/2691 | Loss: 0.6809 | LR: 3.27e-05
+Epoch 23/35 | Batch 1000/2691 | Loss: 0.6804 | LR: 3.27e-05
+Epoch 23/35 | Batch 1040/2691 | Loss: 0.6809 | LR: 3.26e-05
+Epoch 23/35 | Batch 1080/2691 | Loss: 0.6803 | LR: 3.25e-05
+Epoch 23/35 | Batch 1120/2691 | Loss: 0.6802 | LR: 3.25e-05
+Epoch 23/35 | Batch 1160/2691 | Loss: 0.6809 | LR: 3.24e-05
+Epoch 23/35 | Batch 1200/2691 | Loss: 0.6811 | LR: 3.23e-05
+Epoch 23/35 | Batch 1240/2691 | Loss: 0.6809 | LR: 3.23e-05
+Epoch 23/35 | Batch 1280/2691 | Loss: 0.6804 | LR: 3.22e-05
+Epoch 23/35 | Batch 1320/2691 | Loss: 0.6805 | LR: 3.21e-05
+Epoch 23/35 | Batch 1360/2691 | Loss: 0.6811 | LR: 3.21e-05
+Epoch 23/35 | Batch 1400/2691 | Loss: 0.6801 | LR: 3.20e-05
+Epoch 23/35 | Batch 1440/2691 | Loss: 0.6804 | LR: 3.19e-05
+Epoch 23/35 | Batch 1480/2691 | Loss: 0.6800 | LR: 3.19e-05
+Epoch 23/35 | Batch 1520/2691 | Loss: 0.6808 | LR: 3.18e-05
+Epoch 23/35 | Batch 1560/2691 | Loss: 0.6810 | LR: 3.18e-05
+Epoch 23/35 | Batch 1600/2691 | Loss: 0.6806 | LR: 3.17e-05
+Epoch 23/35 | Batch 1640/2691 | Loss: 0.6808 | LR: 3.16e-05
+Epoch 23/35 | Batch 1680/2691 | Loss: 0.6804 | LR: 3.16e-05
+Epoch 23/35 | Batch 1720/2691 | Loss: 0.6808 | LR: 3.15e-05
+Epoch 23/35 | Batch 1760/2691 | Loss: 0.6807 | LR: 3.14e-05
+Epoch 23/35 | Batch 1800/2691 | Loss: 0.6804 | LR: 3.14e-05
+Epoch 23/35 | Batch 1840/2691 | Loss: 0.7009 | LR: 3.13e-05
+Epoch 23/35 | Batch 1880/2691 | Loss: 0.6803 | LR: 3.12e-05
+Epoch 23/35 | Batch 1920/2691 | Loss: 0.6803 | LR: 3.12e-05
+Epoch 23/35 | Batch 1960/2691 | Loss: 0.6801 | LR: 3.11e-05
+Epoch 23/35 | Batch 2000/2691 | Loss: 0.6811 | LR: 3.10e-05
+Epoch 23/35 | Batch 2040/2691 | Loss: 0.6807 | LR: 3.10e-05
+Epoch 23/35 | Batch 2080/2691 | Loss: 0.6810 | LR: 3.09e-05
+Epoch 23/35 | Batch 2120/2691 | Loss: 0.6803 | LR: 3.09e-05
+Epoch 23/35 | Batch 2160/2691 | Loss: 0.6803 | LR: 3.08e-05
+Epoch 23/35 | Batch 2200/2691 | Loss: 0.6804 | LR: 3.07e-05
+Epoch 23/35 | Batch 2240/2691 | Loss: 0.6805 | LR: 3.07e-05
+Epoch 23/35 | Batch 2280/2691 | Loss: 0.6807 | LR: 3.06e-05
+Epoch 23/35 | Batch 2320/2691 | Loss: 0.6811 | LR: 3.05e-05
+Epoch 23/35 | Batch 2360/2691 | Loss: 0.6815 | LR: 3.05e-05
+Epoch 23/35 | Batch 2400/2691 | Loss: 0.6810 | LR: 3.04e-05
+Epoch 23/35 | Batch 2440/2691 | Loss: 0.6811 | LR: 3.03e-05
+Epoch 23/35 | Batch 2480/2691 | Loss: 0.6800 | LR: 3.03e-05
+Epoch 23/35 | Batch 2520/2691 | Loss: 0.6801 | LR: 3.02e-05
+Epoch 23/35 | Batch 2560/2691 | Loss: 0.6808 | LR: 3.01e-05
+Epoch 23/35 | Batch 2600/2691 | Loss: 0.6810 | LR: 3.01e-05
+Epoch 23/35 | Batch 2640/2691 | Loss: 0.6804 | LR: 3.00e-05
+Epoch 23/35 | Batch 2680/2691 | Loss: 0.6813 | LR: 3.00e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 23 Summary:
+  Train Loss: 0.6807
+  Val Loss: 0.7051
+  PER: 0.1414
+  Avg LR: 3.21e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1414
+Epoch 24/35 | Batch 0/2691 | Loss: 0.6804 | LR: 2.99e-05
+Epoch 24/35 | Batch 40/2691 | Loss: 0.6806 | LR: 2.99e-05
+Epoch 24/35 | Batch 80/2691 | Loss: 0.6804 | LR: 2.98e-05
+Epoch 24/35 | Batch 120/2691 | Loss: 0.6801 | LR: 2.97e-05
+Epoch 24/35 | Batch 160/2691 | Loss: 0.6807 | LR: 2.97e-05
+Epoch 24/35 | Batch 200/2691 | Loss: 0.6805 | LR: 2.96e-05
+Epoch 24/35 | Batch 240/2691 | Loss: 0.6803 | LR: 2.96e-05
+Epoch 24/35 | Batch 280/2691 | Loss: 0.6806 | LR: 2.95e-05
+Epoch 24/35 | Batch 320/2691 | Loss: 0.6813 | LR: 2.94e-05
+Epoch 24/35 | Batch 360/2691 | Loss: 0.6815 | LR: 2.94e-05
+Epoch 24/35 | Batch 400/2691 | Loss: 0.6801 | LR: 2.93e-05
+Epoch 24/35 | Batch 440/2691 | Loss: 0.6809 | LR: 2.92e-05
+Epoch 24/35 | Batch 480/2691 | Loss: 0.6816 | LR: 2.92e-05
+Epoch 24/35 | Batch 520/2691 | Loss: 0.6826 | LR: 2.91e-05
+Epoch 24/35 | Batch 560/2691 | Loss: 0.6805 | LR: 2.90e-05
+Epoch 24/35 | Batch 600/2691 | Loss: 0.6804 | LR: 2.90e-05
+Epoch 24/35 | Batch 640/2691 | Loss: 0.6804 | LR: 2.89e-05
+Epoch 24/35 | Batch 680/2691 | Loss: 0.6810 | LR: 2.89e-05
+Epoch 24/35 | Batch 720/2691 | Loss: 0.6813 | LR: 2.88e-05
+Epoch 24/35 | Batch 760/2691 | Loss: 0.6803 | LR: 2.87e-05
+Epoch 24/35 | Batch 800/2691 | Loss: 0.6801 | LR: 2.87e-05
+Epoch 24/35 | Batch 840/2691 | Loss: 0.6813 | LR: 2.86e-05
+Epoch 24/35 | Batch 880/2691 | Loss: 0.6803 | LR: 2.85e-05
+Epoch 24/35 | Batch 920/2691 | Loss: 0.6800 | LR: 2.85e-05
+Epoch 24/35 | Batch 960/2691 | Loss: 0.6801 | LR: 2.84e-05
+Epoch 24/35 | Batch 1000/2691 | Loss: 0.6802 | LR: 2.84e-05
+Epoch 24/35 | Batch 1040/2691 | Loss: 0.6807 | LR: 2.83e-05
+Epoch 24/35 | Batch 1080/2691 | Loss: 0.6821 | LR: 2.82e-05
+Epoch 24/35 | Batch 1120/2691 | Loss: 0.6800 | LR: 2.82e-05
+Epoch 24/35 | Batch 1160/2691 | Loss: 0.6806 | LR: 2.81e-05
+Epoch 24/35 | Batch 1200/2691 | Loss: 0.6804 | LR: 2.80e-05
+Epoch 24/35 | Batch 1240/2691 | Loss: 0.6846 | LR: 2.80e-05
+Epoch 24/35 | Batch 1280/2691 | Loss: 0.6812 | LR: 2.79e-05
+Epoch 24/35 | Batch 1320/2691 | Loss: 0.6804 | LR: 2.79e-05
+Epoch 24/35 | Batch 1360/2691 | Loss: 0.6811 | LR: 2.78e-05
+Epoch 24/35 | Batch 1400/2691 | Loss: 0.6805 | LR: 2.77e-05
+Epoch 24/35 | Batch 1440/2691 | Loss: 0.6813 | LR: 2.77e-05
+Epoch 24/35 | Batch 1480/2691 | Loss: 0.6802 | LR: 2.76e-05
+Epoch 24/35 | Batch 1520/2691 | Loss: 0.6803 | LR: 2.75e-05
+Epoch 24/35 | Batch 1560/2691 | Loss: 0.6800 | LR: 2.75e-05
+Epoch 24/35 | Batch 1600/2691 | Loss: 0.6805 | LR: 2.74e-05
+Epoch 24/35 | Batch 1640/2691 | Loss: 0.6802 | LR: 2.74e-05
+Epoch 24/35 | Batch 1680/2691 | Loss: 0.6806 | LR: 2.73e-05
+Epoch 24/35 | Batch 1720/2691 | Loss: 0.6805 | LR: 2.72e-05
+Epoch 24/35 | Batch 1760/2691 | Loss: 0.6805 | LR: 2.72e-05
+Epoch 24/35 | Batch 1800/2691 | Loss: 0.6804 | LR: 2.71e-05
+Epoch 24/35 | Batch 1840/2691 | Loss: 0.6806 | LR: 2.71e-05
+Epoch 24/35 | Batch 1880/2691 | Loss: 0.6806 | LR: 2.70e-05
+Epoch 24/35 | Batch 1920/2691 | Loss: 0.6807 | LR: 2.69e-05
+Epoch 24/35 | Batch 1960/2691 | Loss: 0.6800 | LR: 2.69e-05
+Epoch 24/35 | Batch 2000/2691 | Loss: 0.6808 | LR: 2.68e-05
+Epoch 24/35 | Batch 2040/2691 | Loss: 0.6804 | LR: 2.67e-05
+Epoch 24/35 | Batch 2080/2691 | Loss: 0.6808 | LR: 2.67e-05
+Epoch 24/35 | Batch 2120/2691 | Loss: 0.6803 | LR: 2.66e-05
+Epoch 24/35 | Batch 2160/2691 | Loss: 0.6806 | LR: 2.66e-05
+Epoch 24/35 | Batch 2200/2691 | Loss: 0.6810 | LR: 2.65e-05
+Epoch 24/35 | Batch 2240/2691 | Loss: 0.6806 | LR: 2.64e-05
+Epoch 24/35 | Batch 2280/2691 | Loss: 0.6803 | LR: 2.64e-05
+Epoch 24/35 | Batch 2320/2691 | Loss: 0.6803 | LR: 2.63e-05
+Epoch 24/35 | Batch 2360/2691 | Loss: 0.6806 | LR: 2.63e-05
+Epoch 24/35 | Batch 2400/2691 | Loss: 0.6802 | LR: 2.62e-05
+Epoch 24/35 | Batch 2440/2691 | Loss: 0.6806 | LR: 2.61e-05
+Epoch 24/35 | Batch 2480/2691 | Loss: 0.6800 | LR: 2.61e-05
+Epoch 24/35 | Batch 2520/2691 | Loss: 0.6799 | LR: 2.60e-05
+Epoch 24/35 | Batch 2560/2691 | Loss: 0.6804 | LR: 2.59e-05
+Epoch 24/35 | Batch 2600/2691 | Loss: 0.6803 | LR: 2.59e-05
+Epoch 24/35 | Batch 2640/2691 | Loss: 0.6805 | LR: 2.58e-05
+Epoch 24/35 | Batch 2680/2691 | Loss: 0.6801 | LR: 2.58e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 11, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 24 Summary:
+  Train Loss: 0.6806
+  Val Loss: 0.7042
+  PER: 0.1371
+  Avg LR: 2.78e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1371
+Epoch 25/35 | Batch 0/2691 | Loss: 0.6805 | LR: 2.58e-05
+Epoch 25/35 | Batch 40/2691 | Loss: 0.6801 | LR: 2.57e-05
+Epoch 25/35 | Batch 80/2691 | Loss: 0.6803 | LR: 2.56e-05
+Epoch 25/35 | Batch 120/2691 | Loss: 0.6807 | LR: 2.56e-05
+Epoch 25/35 | Batch 160/2691 | Loss: 0.6800 | LR: 2.55e-05
+Epoch 25/35 | Batch 200/2691 | Loss: 0.6820 | LR: 2.54e-05
+Epoch 25/35 | Batch 240/2691 | Loss: 0.6804 | LR: 2.54e-05
+Epoch 25/35 | Batch 280/2691 | Loss: 0.6799 | LR: 2.53e-05
+Epoch 25/35 | Batch 320/2691 | Loss: 0.6814 | LR: 2.53e-05
+Epoch 25/35 | Batch 360/2691 | Loss: 0.6808 | LR: 2.52e-05
+Epoch 25/35 | Batch 400/2691 | Loss: 0.6810 | LR: 2.51e-05
+Epoch 25/35 | Batch 440/2691 | Loss: 0.6805 | LR: 2.51e-05
+Epoch 25/35 | Batch 480/2691 | Loss: 0.6806 | LR: 2.50e-05
+Epoch 25/35 | Batch 520/2691 | Loss: 0.6807 | LR: 2.50e-05
+Epoch 25/35 | Batch 560/2691 | Loss: 0.6803 | LR: 2.49e-05
+Epoch 25/35 | Batch 600/2691 | Loss: 0.6802 | LR: 2.48e-05
+Epoch 25/35 | Batch 640/2691 | Loss: 0.6799 | LR: 2.48e-05
+Epoch 25/35 | Batch 680/2691 | Loss: 0.6800 | LR: 2.47e-05
+Epoch 25/35 | Batch 720/2691 | Loss: 0.6808 | LR: 2.47e-05
+Epoch 25/35 | Batch 760/2691 | Loss: 0.6808 | LR: 2.46e-05
+Epoch 25/35 | Batch 800/2691 | Loss: 0.6806 | LR: 2.45e-05
+Epoch 25/35 | Batch 840/2691 | Loss: 0.6800 | LR: 2.45e-05
+Epoch 25/35 | Batch 880/2691 | Loss: 0.6802 | LR: 2.44e-05
+Epoch 25/35 | Batch 920/2691 | Loss: 0.6811 | LR: 2.44e-05
+Epoch 25/35 | Batch 960/2691 | Loss: 0.6802 | LR: 2.43e-05
+Epoch 25/35 | Batch 1000/2691 | Loss: 0.6804 | LR: 2.42e-05
+Epoch 25/35 | Batch 1040/2691 | Loss: 0.6804 | LR: 2.42e-05
+Epoch 25/35 | Batch 1080/2691 | Loss: 0.6801 | LR: 2.41e-05
+Epoch 25/35 | Batch 1120/2691 | Loss: 0.6804 | LR: 2.41e-05
+Epoch 25/35 | Batch 1160/2691 | Loss: 0.6802 | LR: 2.40e-05
+Epoch 25/35 | Batch 1200/2691 | Loss: 0.6806 | LR: 2.40e-05
+Epoch 25/35 | Batch 1240/2691 | Loss: 0.6813 | LR: 2.39e-05
+Epoch 25/35 | Batch 1280/2691 | Loss: 0.6806 | LR: 2.38e-05
+Epoch 25/35 | Batch 1320/2691 | Loss: 0.6802 | LR: 2.38e-05
+Epoch 25/35 | Batch 1360/2691 | Loss: 0.6804 | LR: 2.37e-05
+Epoch 25/35 | Batch 1400/2691 | Loss: 0.6811 | LR: 2.37e-05
+Epoch 25/35 | Batch 1440/2691 | Loss: 0.6802 | LR: 2.36e-05
+Epoch 25/35 | Batch 1480/2691 | Loss: 0.6801 | LR: 2.35e-05
+Epoch 25/35 | Batch 1520/2691 | Loss: 0.6802 | LR: 2.35e-05
+Epoch 25/35 | Batch 1560/2691 | Loss: 0.6804 | LR: 2.34e-05
+Epoch 25/35 | Batch 1600/2691 | Loss: 0.6801 | LR: 2.34e-05
+Epoch 25/35 | Batch 1640/2691 | Loss: 0.6803 | LR: 2.33e-05
+Epoch 25/35 | Batch 1680/2691 | Loss: 0.6801 | LR: 2.32e-05
+Epoch 25/35 | Batch 1720/2691 | Loss: 0.6799 | LR: 2.32e-05
+Epoch 25/35 | Batch 1760/2691 | Loss: 0.6804 | LR: 2.31e-05
+Epoch 25/35 | Batch 1800/2691 | Loss: 0.6801 | LR: 2.31e-05
+Epoch 25/35 | Batch 1840/2691 | Loss: 0.6804 | LR: 2.30e-05
+Epoch 25/35 | Batch 1880/2691 | Loss: 0.6804 | LR: 2.30e-05
+Epoch 25/35 | Batch 1920/2691 | Loss: 0.6803 | LR: 2.29e-05
+Epoch 25/35 | Batch 1960/2691 | Loss: 0.6803 | LR: 2.28e-05
+Epoch 25/35 | Batch 2000/2691 | Loss: 0.6801 | LR: 2.28e-05
+Epoch 25/35 | Batch 2040/2691 | Loss: 0.6801 | LR: 2.27e-05
+Epoch 25/35 | Batch 2080/2691 | Loss: 0.6808 | LR: 2.27e-05
+Epoch 25/35 | Batch 2120/2691 | Loss: 0.6800 | LR: 2.26e-05
+Epoch 25/35 | Batch 2160/2691 | Loss: 0.6806 | LR: 2.25e-05
+Epoch 25/35 | Batch 2200/2691 | Loss: 0.6803 | LR: 2.25e-05
+Epoch 25/35 | Batch 2240/2691 | Loss: 0.6808 | LR: 2.24e-05
+Epoch 25/35 | Batch 2280/2691 | Loss: 0.6804 | LR: 2.24e-05
+Epoch 25/35 | Batch 2320/2691 | Loss: 0.6802 | LR: 2.23e-05
+Epoch 25/35 | Batch 2360/2691 | Loss: 0.6803 | LR: 2.23e-05
+Epoch 25/35 | Batch 2400/2691 | Loss: 0.6805 | LR: 2.22e-05
+Epoch 25/35 | Batch 2440/2691 | Loss: 0.6804 | LR: 2.21e-05
+Epoch 25/35 | Batch 2480/2691 | Loss: 0.6805 | LR: 2.21e-05
+Epoch 25/35 | Batch 2520/2691 | Loss: 0.6802 | LR: 2.20e-05
+Epoch 25/35 | Batch 2560/2691 | Loss: 0.6802 | LR: 2.20e-05
+Epoch 25/35 | Batch 2600/2691 | Loss: 0.6803 | LR: 2.19e-05
+Epoch 25/35 | Batch 2640/2691 | Loss: 0.6802 | LR: 2.19e-05
+Epoch 25/35 | Batch 2680/2691 | Loss: 0.6808 | LR: 2.18e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 2, 9] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 25 Summary:
+  Train Loss: 0.6804
+  Val Loss: 0.7034
+  PER: 0.1326
+  Avg LR: 2.37e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1326
+Epoch 26/35 | Batch 0/2691 | Loss: 0.6806 | LR: 2.18e-05
+Epoch 26/35 | Batch 40/2691 | Loss: 0.6800 | LR: 2.17e-05
+Epoch 26/35 | Batch 80/2691 | Loss: 0.6800 | LR: 2.17e-05
+Epoch 26/35 | Batch 120/2691 | Loss: 0.6808 | LR: 2.16e-05
+Epoch 26/35 | Batch 160/2691 | Loss: 0.6800 | LR: 2.16e-05
+Epoch 26/35 | Batch 200/2691 | Loss: 0.6802 | LR: 2.15e-05
+Epoch 26/35 | Batch 240/2691 | Loss: 0.6807 | LR: 2.14e-05
+Epoch 26/35 | Batch 280/2691 | Loss: 0.6800 | LR: 2.14e-05
+Epoch 26/35 | Batch 320/2691 | Loss: 0.6806 | LR: 2.13e-05
+Epoch 26/35 | Batch 360/2691 | Loss: 0.6802 | LR: 2.13e-05
+Epoch 26/35 | Batch 400/2691 | Loss: 0.6802 | LR: 2.12e-05
+Epoch 26/35 | Batch 440/2691 | Loss: 0.6805 | LR: 2.12e-05
+Epoch 26/35 | Batch 480/2691 | Loss: 0.6801 | LR: 2.11e-05
+Epoch 26/35 | Batch 520/2691 | Loss: 0.6803 | LR: 2.11e-05
+Epoch 26/35 | Batch 560/2691 | Loss: 0.6802 | LR: 2.10e-05
+Epoch 26/35 | Batch 600/2691 | Loss: 0.6804 | LR: 2.09e-05
+Epoch 26/35 | Batch 640/2691 | Loss: 0.6804 | LR: 2.09e-05
+Epoch 26/35 | Batch 680/2691 | Loss: 0.6803 | LR: 2.08e-05
+Epoch 26/35 | Batch 720/2691 | Loss: 0.6805 | LR: 2.08e-05
+Epoch 26/35 | Batch 760/2691 | Loss: 0.6807 | LR: 2.07e-05
+Epoch 26/35 | Batch 800/2691 | Loss: 0.6805 | LR: 2.07e-05
+Epoch 26/35 | Batch 840/2691 | Loss: 0.6801 | LR: 2.06e-05
+Epoch 26/35 | Batch 880/2691 | Loss: 0.6814 | LR: 2.05e-05
+Epoch 26/35 | Batch 920/2691 | Loss: 0.6802 | LR: 2.05e-05
+Epoch 26/35 | Batch 960/2691 | Loss: 0.6801 | LR: 2.04e-05
+Epoch 26/35 | Batch 1000/2691 | Loss: 0.6806 | LR: 2.04e-05
+Epoch 26/35 | Batch 1040/2691 | Loss: 0.6804 | LR: 2.03e-05
+Epoch 26/35 | Batch 1080/2691 | Loss: 0.6802 | LR: 2.03e-05
+Epoch 26/35 | Batch 1120/2691 | Loss: 0.6801 | LR: 2.02e-05
+Epoch 26/35 | Batch 1160/2691 | Loss: 0.6802 | LR: 2.02e-05
+Epoch 26/35 | Batch 1200/2691 | Loss: 0.6803 | LR: 2.01e-05
+Epoch 26/35 | Batch 1240/2691 | Loss: 0.6802 | LR: 2.00e-05
+Epoch 26/35 | Batch 1280/2691 | Loss: 0.6800 | LR: 2.00e-05
+Epoch 26/35 | Batch 1320/2691 | Loss: 0.6806 | LR: 1.99e-05
+Epoch 26/35 | Batch 1360/2691 | Loss: 0.6799 | LR: 1.99e-05
+Epoch 26/35 | Batch 1400/2691 | Loss: 0.6802 | LR: 1.98e-05
+Epoch 26/35 | Batch 1440/2691 | Loss: 0.6803 | LR: 1.98e-05
+Epoch 26/35 | Batch 1480/2691 | Loss: 0.6812 | LR: 1.97e-05
+Epoch 26/35 | Batch 1520/2691 | Loss: 0.6801 | LR: 1.97e-05
+Epoch 26/35 | Batch 1560/2691 | Loss: 0.6798 | LR: 1.96e-05
+Epoch 26/35 | Batch 1600/2691 | Loss: 0.6803 | LR: 1.96e-05
+Epoch 26/35 | Batch 1640/2691 | Loss: 0.6806 | LR: 1.95e-05
+Epoch 26/35 | Batch 1680/2691 | Loss: 0.6803 | LR: 1.94e-05
+Epoch 26/35 | Batch 1720/2691 | Loss: 0.6800 | LR: 1.94e-05
+Epoch 26/35 | Batch 1760/2691 | Loss: 0.6800 | LR: 1.93e-05
+Epoch 26/35 | Batch 1800/2691 | Loss: 0.6799 | LR: 1.93e-05
+Epoch 26/35 | Batch 1840/2691 | Loss: 0.6801 | LR: 1.92e-05
+Epoch 26/35 | Batch 1880/2691 | Loss: 0.6799 | LR: 1.92e-05
+Epoch 26/35 | Batch 1920/2691 | Loss: 0.6802 | LR: 1.91e-05
+Epoch 26/35 | Batch 1960/2691 | Loss: 0.6800 | LR: 1.91e-05
+Epoch 26/35 | Batch 2000/2691 | Loss: 0.6801 | LR: 1.90e-05
+Epoch 26/35 | Batch 2040/2691 | Loss: 0.6803 | LR: 1.90e-05
+Epoch 26/35 | Batch 2080/2691 | Loss: 0.6801 | LR: 1.89e-05
+Epoch 26/35 | Batch 2120/2691 | Loss: 0.6802 | LR: 1.88e-05
+Epoch 26/35 | Batch 2160/2691 | Loss: 0.6808 | LR: 1.88e-05
+Epoch 26/35 | Batch 2200/2691 | Loss: 0.6802 | LR: 1.87e-05
+Epoch 26/35 | Batch 2240/2691 | Loss: 0.6803 | LR: 1.87e-05
+Epoch 26/35 | Batch 2280/2691 | Loss: 0.6812 | LR: 1.86e-05
+Epoch 26/35 | Batch 2320/2691 | Loss: 0.6802 | LR: 1.86e-05
+Epoch 26/35 | Batch 2360/2691 | Loss: 0.6806 | LR: 1.85e-05
+Epoch 26/35 | Batch 2400/2691 | Loss: 0.6803 | LR: 1.85e-05
+Epoch 26/35 | Batch 2440/2691 | Loss: 0.6802 | LR: 1.84e-05
+Epoch 26/35 | Batch 2480/2691 | Loss: 0.6800 | LR: 1.84e-05
+Epoch 26/35 | Batch 2520/2691 | Loss: 0.6801 | LR: 1.83e-05
+Epoch 26/35 | Batch 2560/2691 | Loss: 0.6802 | LR: 1.83e-05
+Epoch 26/35 | Batch 2600/2691 | Loss: 0.6800 | LR: 1.82e-05
+Epoch 26/35 | Batch 2640/2691 | Loss: 0.6804 | LR: 1.82e-05
+Epoch 26/35 | Batch 2680/2691 | Loss: 0.6801 | LR: 1.81e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 26 Summary:
+  Train Loss: 0.6803
+  Val Loss: 0.7035
+  PER: 0.1349
+  Avg LR: 1.99e-05
+------------------------------------------------------------
+Epoch 27/35 | Batch 0/2691 | Loss: 0.6802 | LR: 1.81e-05
+Epoch 27/35 | Batch 40/2691 | Loss: 0.6801 | LR: 1.80e-05
+Epoch 27/35 | Batch 80/2691 | Loss: 0.6803 | LR: 1.80e-05
+Epoch 27/35 | Batch 120/2691 | Loss: 0.6804 | LR: 1.79e-05
+Epoch 27/35 | Batch 160/2691 | Loss: 0.6803 | LR: 1.79e-05
+Epoch 27/35 | Batch 200/2691 | Loss: 0.6801 | LR: 1.78e-05
+Epoch 27/35 | Batch 240/2691 | Loss: 0.6801 | LR: 1.78e-05
+Epoch 27/35 | Batch 280/2691 | Loss: 0.6802 | LR: 1.77e-05
+Epoch 27/35 | Batch 320/2691 | Loss: 0.6801 | LR: 1.77e-05
+Epoch 27/35 | Batch 360/2691 | Loss: 0.6803 | LR: 1.76e-05
+Epoch 27/35 | Batch 400/2691 | Loss: 0.6799 | LR: 1.76e-05
+Epoch 27/35 | Batch 440/2691 | Loss: 0.6801 | LR: 1.75e-05
+Epoch 27/35 | Batch 480/2691 | Loss: 0.6802 | LR: 1.75e-05
+Epoch 27/35 | Batch 520/2691 | Loss: 0.6803 | LR: 1.74e-05
+Epoch 27/35 | Batch 560/2691 | Loss: 0.6808 | LR: 1.73e-05
+Epoch 27/35 | Batch 600/2691 | Loss: 0.6805 | LR: 1.73e-05
+Epoch 27/35 | Batch 640/2691 | Loss: 0.6820 | LR: 1.72e-05
+Epoch 27/35 | Batch 680/2691 | Loss: 0.6800 | LR: 1.72e-05
+Epoch 27/35 | Batch 720/2691 | Loss: 0.6804 | LR: 1.71e-05
+Epoch 27/35 | Batch 760/2691 | Loss: 0.6799 | LR: 1.71e-05
+Epoch 27/35 | Batch 800/2691 | Loss: 0.6801 | LR: 1.70e-05
+Epoch 27/35 | Batch 840/2691 | Loss: 0.6804 | LR: 1.70e-05
+Epoch 27/35 | Batch 880/2691 | Loss: 0.6801 | LR: 1.69e-05
+Epoch 27/35 | Batch 920/2691 | Loss: 0.6805 | LR: 1.69e-05
+Epoch 27/35 | Batch 960/2691 | Loss: 0.6800 | LR: 1.68e-05
+Epoch 27/35 | Batch 1000/2691 | Loss: 0.6803 | LR: 1.68e-05
+Epoch 27/35 | Batch 1040/2691 | Loss: 0.6804 | LR: 1.67e-05
+Epoch 27/35 | Batch 1080/2691 | Loss: 0.6802 | LR: 1.67e-05
+Epoch 27/35 | Batch 1120/2691 | Loss: 0.6802 | LR: 1.66e-05
+Epoch 27/35 | Batch 1160/2691 | Loss: 0.6801 | LR: 1.66e-05
+Epoch 27/35 | Batch 1200/2691 | Loss: 0.6802 | LR: 1.65e-05
+Epoch 27/35 | Batch 1240/2691 | Loss: 0.6801 | LR: 1.65e-05
+Epoch 27/35 | Batch 1280/2691 | Loss: 0.6802 | LR: 1.64e-05
+Epoch 27/35 | Batch 1320/2691 | Loss: 0.6800 | LR: 1.64e-05
+Epoch 27/35 | Batch 1360/2691 | Loss: 0.6800 | LR: 1.63e-05
+Epoch 27/35 | Batch 1400/2691 | Loss: 0.6800 | LR: 1.63e-05
+Epoch 27/35 | Batch 1440/2691 | Loss: 0.6800 | LR: 1.62e-05
+Epoch 27/35 | Batch 1480/2691 | Loss: 0.6801 | LR: 1.62e-05
+Epoch 27/35 | Batch 1520/2691 | Loss: 0.6802 | LR: 1.61e-05
+Epoch 27/35 | Batch 1560/2691 | Loss: 0.6804 | LR: 1.61e-05
+Epoch 27/35 | Batch 1600/2691 | Loss: 0.6802 | LR: 1.60e-05
+Epoch 27/35 | Batch 1640/2691 | Loss: 0.6805 | LR: 1.60e-05
+Epoch 27/35 | Batch 1680/2691 | Loss: 0.6801 | LR: 1.59e-05
+Epoch 27/35 | Batch 1720/2691 | Loss: 0.6803 | LR: 1.59e-05
+Epoch 27/35 | Batch 1760/2691 | Loss: 0.6799 | LR: 1.58e-05
+Epoch 27/35 | Batch 1800/2691 | Loss: 0.6801 | LR: 1.58e-05
+Epoch 27/35 | Batch 1840/2691 | Loss: 0.6801 | LR: 1.57e-05
+Epoch 27/35 | Batch 1880/2691 | Loss: 0.6800 | LR: 1.57e-05
+Epoch 27/35 | Batch 1920/2691 | Loss: 0.6800 | LR: 1.56e-05
+Epoch 27/35 | Batch 1960/2691 | Loss: 0.6801 | LR: 1.56e-05
+Epoch 27/35 | Batch 2000/2691 | Loss: 0.6800 | LR: 1.55e-05
+Epoch 27/35 | Batch 2040/2691 | Loss: 0.6799 | LR: 1.55e-05
+Epoch 27/35 | Batch 2080/2691 | Loss: 0.6806 | LR: 1.54e-05
+Epoch 27/35 | Batch 2120/2691 | Loss: 0.6802 | LR: 1.54e-05
+Epoch 27/35 | Batch 2160/2691 | Loss: 0.6806 | LR: 1.53e-05
+Epoch 27/35 | Batch 2200/2691 | Loss: 0.6801 | LR: 1.53e-05
+Epoch 27/35 | Batch 2240/2691 | Loss: 0.6798 | LR: 1.52e-05
+Epoch 27/35 | Batch 2280/2691 | Loss: 0.6805 | LR: 1.52e-05
+Epoch 27/35 | Batch 2320/2691 | Loss: 0.6801 | LR: 1.51e-05
+Epoch 27/35 | Batch 2360/2691 | Loss: 0.6800 | LR: 1.51e-05
+Epoch 27/35 | Batch 2400/2691 | Loss: 0.6800 | LR: 1.50e-05
+Epoch 27/35 | Batch 2440/2691 | Loss: 0.6803 | LR: 1.50e-05
+Epoch 27/35 | Batch 2480/2691 | Loss: 0.6800 | LR: 1.49e-05
+Epoch 27/35 | Batch 2520/2691 | Loss: 0.6803 | LR: 1.49e-05
+Epoch 27/35 | Batch 2560/2691 | Loss: 0.6800 | LR: 1.48e-05
+Epoch 27/35 | Batch 2600/2691 | Loss: 0.6799 | LR: 1.48e-05
+Epoch 27/35 | Batch 2640/2691 | Loss: 0.6802 | LR: 1.47e-05
+Epoch 27/35 | Batch 2680/2691 | Loss: 0.6800 | LR: 1.47e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 27 Summary:
+  Train Loss: 0.6802
+  Val Loss: 0.7034
+  PER: 0.1333
+  Avg LR: 1.64e-05
+------------------------------------------------------------
+Epoch 28/35 | Batch 0/2691 | Loss: 0.6801 | LR: 1.47e-05
+Epoch 28/35 | Batch 40/2691 | Loss: 0.6805 | LR: 1.46e-05
+Epoch 28/35 | Batch 80/2691 | Loss: 0.6800 | LR: 1.46e-05
+Epoch 28/35 | Batch 120/2691 | Loss: 0.6807 | LR: 1.45e-05
+Epoch 28/35 | Batch 160/2691 | Loss: 0.6798 | LR: 1.45e-05
+Epoch 28/35 | Batch 200/2691 | Loss: 0.6803 | LR: 1.44e-05
+Epoch 28/35 | Batch 240/2691 | Loss: 0.6800 | LR: 1.44e-05
+Epoch 28/35 | Batch 280/2691 | Loss: 0.6802 | LR: 1.43e-05
+Epoch 28/35 | Batch 320/2691 | Loss: 0.6800 | LR: 1.43e-05
+Epoch 28/35 | Batch 360/2691 | Loss: 0.6806 | LR: 1.42e-05
+Epoch 28/35 | Batch 400/2691 | Loss: 0.6800 | LR: 1.42e-05
+Epoch 28/35 | Batch 440/2691 | Loss: 0.6800 | LR: 1.41e-05
+Epoch 28/35 | Batch 480/2691 | Loss: 0.6799 | LR: 1.41e-05
+Epoch 28/35 | Batch 520/2691 | Loss: 0.6800 | LR: 1.41e-05
+Epoch 28/35 | Batch 560/2691 | Loss: 0.6802 | LR: 1.40e-05
+Epoch 28/35 | Batch 600/2691 | Loss: 0.6810 | LR: 1.40e-05
+Epoch 28/35 | Batch 640/2691 | Loss: 0.6800 | LR: 1.39e-05
+Epoch 28/35 | Batch 680/2691 | Loss: 0.6800 | LR: 1.39e-05
+Epoch 28/35 | Batch 720/2691 | Loss: 0.6804 | LR: 1.38e-05
+Epoch 28/35 | Batch 760/2691 | Loss: 0.6799 | LR: 1.38e-05
+Epoch 28/35 | Batch 800/2691 | Loss: 0.6803 | LR: 1.37e-05
+Epoch 28/35 | Batch 840/2691 | Loss: 0.6803 | LR: 1.37e-05
+Epoch 28/35 | Batch 880/2691 | Loss: 0.6801 | LR: 1.36e-05
+Epoch 28/35 | Batch 920/2691 | Loss: 0.6799 | LR: 1.36e-05
+Epoch 28/35 | Batch 960/2691 | Loss: 0.6799 | LR: 1.35e-05
+Epoch 28/35 | Batch 1000/2691 | Loss: 0.6805 | LR: 1.35e-05
+Epoch 28/35 | Batch 1040/2691 | Loss: 0.6800 | LR: 1.34e-05
+Epoch 28/35 | Batch 1080/2691 | Loss: 0.6801 | LR: 1.34e-05
+Epoch 28/35 | Batch 1120/2691 | Loss: 0.6800 | LR: 1.34e-05
+Epoch 28/35 | Batch 1160/2691 | Loss: 0.6799 | LR: 1.33e-05
+Epoch 28/35 | Batch 1200/2691 | Loss: 0.6800 | LR: 1.33e-05
+Epoch 28/35 | Batch 1240/2691 | Loss: 0.6802 | LR: 1.32e-05
+Epoch 28/35 | Batch 1280/2691 | Loss: 0.6800 | LR: 1.32e-05
+Epoch 28/35 | Batch 1320/2691 | Loss: 0.6804 | LR: 1.31e-05
+Epoch 28/35 | Batch 1360/2691 | Loss: 0.6800 | LR: 1.31e-05
+Epoch 28/35 | Batch 1400/2691 | Loss: 0.6801 | LR: 1.30e-05
+Epoch 28/35 | Batch 1440/2691 | Loss: 0.6799 | LR: 1.30e-05
+Epoch 28/35 | Batch 1480/2691 | Loss: 0.6799 | LR: 1.29e-05
+Epoch 28/35 | Batch 1520/2691 | Loss: 0.6805 | LR: 1.29e-05
+Epoch 28/35 | Batch 1560/2691 | Loss: 0.6801 | LR: 1.28e-05
+Epoch 28/35 | Batch 1600/2691 | Loss: 0.6802 | LR: 1.28e-05
+Epoch 28/35 | Batch 1640/2691 | Loss: 0.6799 | LR: 1.28e-05
+Epoch 28/35 | Batch 1680/2691 | Loss: 0.6801 | LR: 1.27e-05
+Epoch 28/35 | Batch 1720/2691 | Loss: 0.6799 | LR: 1.27e-05
+Epoch 28/35 | Batch 1760/2691 | Loss: 0.6800 | LR: 1.26e-05
+Epoch 28/35 | Batch 1800/2691 | Loss: 0.6801 | LR: 1.26e-05
+Epoch 28/35 | Batch 1840/2691 | Loss: 0.6798 | LR: 1.25e-05
+Epoch 28/35 | Batch 1880/2691 | Loss: 0.6802 | LR: 1.25e-05
+Epoch 28/35 | Batch 1920/2691 | Loss: 0.6801 | LR: 1.24e-05
+Epoch 28/35 | Batch 1960/2691 | Loss: 0.6804 | LR: 1.24e-05
+Epoch 28/35 | Batch 2000/2691 | Loss: 0.6799 | LR: 1.23e-05
+Epoch 28/35 | Batch 2040/2691 | Loss: 0.6801 | LR: 1.23e-05
+Epoch 28/35 | Batch 2080/2691 | Loss: 0.6800 | LR: 1.23e-05
+Epoch 28/35 | Batch 2120/2691 | Loss: 0.6803 | LR: 1.22e-05
+Epoch 28/35 | Batch 2160/2691 | Loss: 0.6798 | LR: 1.22e-05
+Epoch 28/35 | Batch 2200/2691 | Loss: 0.6800 | LR: 1.21e-05
+Epoch 28/35 | Batch 2240/2691 | Loss: 0.6802 | LR: 1.21e-05
+Epoch 28/35 | Batch 2280/2691 | Loss: 0.6802 | LR: 1.20e-05
+Epoch 28/35 | Batch 2320/2691 | Loss: 0.6799 | LR: 1.20e-05
+Epoch 28/35 | Batch 2360/2691 | Loss: 0.6805 | LR: 1.20e-05
+Epoch 28/35 | Batch 2400/2691 | Loss: 0.6800 | LR: 1.19e-05
+Epoch 28/35 | Batch 2440/2691 | Loss: 0.6803 | LR: 1.19e-05
+Epoch 28/35 | Batch 2480/2691 | Loss: 0.6800 | LR: 1.18e-05
+Epoch 28/35 | Batch 2520/2691 | Loss: 0.6799 | LR: 1.18e-05
+Epoch 28/35 | Batch 2560/2691 | Loss: 0.6803 | LR: 1.17e-05
+Epoch 28/35 | Batch 2600/2691 | Loss: 0.6810 | LR: 1.17e-05
+Epoch 28/35 | Batch 2640/2691 | Loss: 0.6800 | LR: 1.16e-05
+Epoch 28/35 | Batch 2680/2691 | Loss: 0.6804 | LR: 1.16e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 28 Summary:
+  Train Loss: 0.6801
+  Val Loss: 0.7026
+  PER: 0.1296
+  Avg LR: 1.31e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1296
+Epoch 29/35 | Batch 0/2691 | Loss: 0.6800 | LR: 1.16e-05
+Epoch 29/35 | Batch 40/2691 | Loss: 0.6802 | LR: 1.15e-05
+Epoch 29/35 | Batch 80/2691 | Loss: 0.6802 | LR: 1.15e-05
+Epoch 29/35 | Batch 120/2691 | Loss: 0.6800 | LR: 1.15e-05
+Epoch 29/35 | Batch 160/2691 | Loss: 0.6799 | LR: 1.14e-05
+Epoch 29/35 | Batch 200/2691 | Loss: 0.6804 | LR: 1.14e-05
+Epoch 29/35 | Batch 240/2691 | Loss: 0.6798 | LR: 1.13e-05
+Epoch 29/35 | Batch 280/2691 | Loss: 0.6803 | LR: 1.13e-05
+Epoch 29/35 | Batch 320/2691 | Loss: 0.6800 | LR: 1.12e-05
+Epoch 29/35 | Batch 360/2691 | Loss: 0.6800 | LR: 1.12e-05
+Epoch 29/35 | Batch 400/2691 | Loss: 0.6799 | LR: 1.12e-05
+Epoch 29/35 | Batch 440/2691 | Loss: 0.6798 | LR: 1.11e-05
+Epoch 29/35 | Batch 480/2691 | Loss: 0.6799 | LR: 1.11e-05
+Epoch 29/35 | Batch 520/2691 | Loss: 0.6802 | LR: 1.10e-05
+Epoch 29/35 | Batch 560/2691 | Loss: 0.6803 | LR: 1.10e-05
+Epoch 29/35 | Batch 600/2691 | Loss: 0.6799 | LR: 1.09e-05
+Epoch 29/35 | Batch 640/2691 | Loss: 0.6798 | LR: 1.09e-05
+Epoch 29/35 | Batch 680/2691 | Loss: 0.6799 | LR: 1.09e-05
+Epoch 29/35 | Batch 720/2691 | Loss: 0.6799 | LR: 1.08e-05
+Epoch 29/35 | Batch 760/2691 | Loss: 0.6805 | LR: 1.08e-05
+Epoch 29/35 | Batch 800/2691 | Loss: 0.6802 | LR: 1.07e-05
+Epoch 29/35 | Batch 840/2691 | Loss: 0.6802 | LR: 1.07e-05
+Epoch 29/35 | Batch 880/2691 | Loss: 0.6799 | LR: 1.07e-05
+Epoch 29/35 | Batch 920/2691 | Loss: 0.6799 | LR: 1.06e-05
+Epoch 29/35 | Batch 960/2691 | Loss: 0.6799 | LR: 1.06e-05
+Epoch 29/35 | Batch 1000/2691 | Loss: 0.6799 | LR: 1.05e-05
+Epoch 29/35 | Batch 1040/2691 | Loss: 0.6801 | LR: 1.05e-05
+Epoch 29/35 | Batch 1080/2691 | Loss: 0.6801 | LR: 1.04e-05
+Epoch 29/35 | Batch 1120/2691 | Loss: 0.6800 | LR: 1.04e-05
+Epoch 29/35 | Batch 1160/2691 | Loss: 0.6800 | LR: 1.04e-05
+Epoch 29/35 | Batch 1200/2691 | Loss: 0.6800 | LR: 1.03e-05
+Epoch 29/35 | Batch 1240/2691 | Loss: 0.6799 | LR: 1.03e-05
+Epoch 29/35 | Batch 1280/2691 | Loss: 0.6802 | LR: 1.02e-05
+Epoch 29/35 | Batch 1320/2691 | Loss: 0.6800 | LR: 1.02e-05
+Epoch 29/35 | Batch 1360/2691 | Loss: 0.6801 | LR: 1.02e-05
+Epoch 29/35 | Batch 1400/2691 | Loss: 0.6798 | LR: 1.01e-05
+Epoch 29/35 | Batch 1440/2691 | Loss: 0.6798 | LR: 1.01e-05
+Epoch 29/35 | Batch 1480/2691 | Loss: 0.6798 | LR: 1.00e-05
+Epoch 29/35 | Batch 1520/2691 | Loss: 0.6801 | LR: 1.00e-05
+Epoch 29/35 | Batch 1560/2691 | Loss: 0.6800 | LR: 9.96e-06
+Epoch 29/35 | Batch 1600/2691 | Loss: 0.6800 | LR: 9.92e-06
+Epoch 29/35 | Batch 1640/2691 | Loss: 0.6800 | LR: 9.88e-06
+Epoch 29/35 | Batch 1680/2691 | Loss: 0.6800 | LR: 9.84e-06
+Epoch 29/35 | Batch 1720/2691 | Loss: 0.6801 | LR: 9.80e-06
+Epoch 29/35 | Batch 1760/2691 | Loss: 0.6811 | LR: 9.76e-06
+Epoch 29/35 | Batch 1800/2691 | Loss: 0.6803 | LR: 9.72e-06
+Epoch 29/35 | Batch 1840/2691 | Loss: 0.6800 | LR: 9.68e-06
+Epoch 29/35 | Batch 1880/2691 | Loss: 0.6801 | LR: 9.64e-06
+Epoch 29/35 | Batch 1920/2691 | Loss: 0.6800 | LR: 9.60e-06
+Epoch 29/35 | Batch 1960/2691 | Loss: 0.6815 | LR: 9.56e-06
+Epoch 29/35 | Batch 2000/2691 | Loss: 0.6806 | LR: 9.52e-06
+Epoch 29/35 | Batch 2040/2691 | Loss: 0.6800 | LR: 9.49e-06
+Epoch 29/35 | Batch 2080/2691 | Loss: 0.6799 | LR: 9.45e-06
+Epoch 29/35 | Batch 2120/2691 | Loss: 0.6801 | LR: 9.41e-06
+Epoch 29/35 | Batch 2160/2691 | Loss: 0.6802 | LR: 9.37e-06
+Epoch 29/35 | Batch 2200/2691 | Loss: 0.6800 | LR: 9.33e-06
+Epoch 29/35 | Batch 2240/2691 | Loss: 0.6800 | LR: 9.29e-06
+Epoch 29/35 | Batch 2280/2691 | Loss: 0.6808 | LR: 9.25e-06
+Epoch 29/35 | Batch 2320/2691 | Loss: 0.6801 | LR: 9.21e-06
+Epoch 29/35 | Batch 2360/2691 | Loss: 0.6801 | LR: 9.17e-06
+Epoch 29/35 | Batch 2400/2691 | Loss: 0.6801 | LR: 9.14e-06
+Epoch 29/35 | Batch 2440/2691 | Loss: 0.6802 | LR: 9.10e-06
+Epoch 29/35 | Batch 2480/2691 | Loss: 0.6799 | LR: 9.06e-06
+Epoch 29/35 | Batch 2520/2691 | Loss: 0.6801 | LR: 9.02e-06
+Epoch 29/35 | Batch 2560/2691 | Loss: 0.6801 | LR: 8.98e-06
+Epoch 29/35 | Batch 2600/2691 | Loss: 0.6799 | LR: 8.94e-06
+Epoch 29/35 | Batch 2640/2691 | Loss: 0.6801 | LR: 8.91e-06
+Epoch 29/35 | Batch 2680/2691 | Loss: 0.6799 | LR: 8.87e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 29 Summary:
+  Train Loss: 0.6801
+  Val Loss: 0.7027
+  PER: 0.1292
+  Avg LR: 1.02e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1292
+Epoch 30/35 | Batch 0/2691 | Loss: 0.6800 | LR: 8.86e-06
+Epoch 30/35 | Batch 40/2691 | Loss: 0.6800 | LR: 8.82e-06
+Epoch 30/35 | Batch 80/2691 | Loss: 0.6801 | LR: 8.78e-06
+Epoch 30/35 | Batch 120/2691 | Loss: 0.6799 | LR: 8.74e-06
+Epoch 30/35 | Batch 160/2691 | Loss: 0.6799 | LR: 8.71e-06
+Epoch 30/35 | Batch 200/2691 | Loss: 0.6803 | LR: 8.67e-06
+Epoch 30/35 | Batch 240/2691 | Loss: 0.6802 | LR: 8.63e-06
+Epoch 30/35 | Batch 280/2691 | Loss: 0.6799 | LR: 8.59e-06
+Epoch 30/35 | Batch 320/2691 | Loss: 0.6800 | LR: 8.56e-06
+Epoch 30/35 | Batch 360/2691 | Loss: 0.6800 | LR: 8.52e-06
+Epoch 30/35 | Batch 400/2691 | Loss: 0.6801 | LR: 8.48e-06
+Epoch 30/35 | Batch 440/2691 | Loss: 0.6800 | LR: 8.45e-06
+Epoch 30/35 | Batch 480/2691 | Loss: 0.6800 | LR: 8.41e-06
+Epoch 30/35 | Batch 520/2691 | Loss: 0.6803 | LR: 8.37e-06
+Epoch 30/35 | Batch 560/2691 | Loss: 0.6801 | LR: 8.34e-06
+Epoch 30/35 | Batch 600/2691 | Loss: 0.6798 | LR: 8.30e-06
+Epoch 30/35 | Batch 640/2691 | Loss: 0.6800 | LR: 8.26e-06
+Epoch 30/35 | Batch 680/2691 | Loss: 0.6798 | LR: 8.23e-06
+Epoch 30/35 | Batch 720/2691 | Loss: 0.6799 | LR: 8.19e-06
+Epoch 30/35 | Batch 760/2691 | Loss: 0.6798 | LR: 8.15e-06
+Epoch 30/35 | Batch 800/2691 | Loss: 0.6804 | LR: 8.12e-06
+Epoch 30/35 | Batch 840/2691 | Loss: 0.6805 | LR: 8.08e-06
+Epoch 30/35 | Batch 880/2691 | Loss: 0.6798 | LR: 8.05e-06
+Epoch 30/35 | Batch 920/2691 | Loss: 0.6800 | LR: 8.01e-06
+Epoch 30/35 | Batch 960/2691 | Loss: 0.6801 | LR: 7.97e-06
+Epoch 30/35 | Batch 1000/2691 | Loss: 0.6801 | LR: 7.94e-06
+Epoch 30/35 | Batch 1040/2691 | Loss: 0.6799 | LR: 7.90e-06
+Epoch 30/35 | Batch 1080/2691 | Loss: 0.6801 | LR: 7.87e-06
+Epoch 30/35 | Batch 1120/2691 | Loss: 0.6798 | LR: 7.83e-06
+Epoch 30/35 | Batch 1160/2691 | Loss: 0.6799 | LR: 7.80e-06
+Epoch 30/35 | Batch 1200/2691 | Loss: 0.6799 | LR: 7.76e-06
+Epoch 30/35 | Batch 1240/2691 | Loss: 0.6800 | LR: 7.72e-06
+Epoch 30/35 | Batch 1280/2691 | Loss: 0.6801 | LR: 7.69e-06
+Epoch 30/35 | Batch 1320/2691 | Loss: 0.6799 | LR: 7.65e-06
+Epoch 30/35 | Batch 1360/2691 | Loss: 0.6800 | LR: 7.62e-06
+Epoch 30/35 | Batch 1400/2691 | Loss: 0.6799 | LR: 7.58e-06
+Epoch 30/35 | Batch 1440/2691 | Loss: 0.6801 | LR: 7.55e-06
+Epoch 30/35 | Batch 1480/2691 | Loss: 0.6802 | LR: 7.51e-06
+Epoch 30/35 | Batch 1520/2691 | Loss: 0.6800 | LR: 7.48e-06
+Epoch 30/35 | Batch 1560/2691 | Loss: 0.6800 | LR: 7.45e-06
+Epoch 30/35 | Batch 1600/2691 | Loss: 0.6800 | LR: 7.41e-06
+Epoch 30/35 | Batch 1640/2691 | Loss: 0.6800 | LR: 7.38e-06
+Epoch 30/35 | Batch 1680/2691 | Loss: 0.6799 | LR: 7.34e-06
+Epoch 30/35 | Batch 1720/2691 | Loss: 0.6801 | LR: 7.31e-06
+Epoch 30/35 | Batch 1760/2691 | Loss: 0.6807 | LR: 7.27e-06
+Epoch 30/35 | Batch 1800/2691 | Loss: 0.6799 | LR: 7.24e-06
+Epoch 30/35 | Batch 1840/2691 | Loss: 0.6801 | LR: 7.21e-06
+Epoch 30/35 | Batch 1880/2691 | Loss: 0.6800 | LR: 7.17e-06
+Epoch 30/35 | Batch 1920/2691 | Loss: 0.6801 | LR: 7.14e-06
+Epoch 30/35 | Batch 1960/2691 | Loss: 0.6800 | LR: 7.10e-06
+Epoch 30/35 | Batch 2000/2691 | Loss: 0.6800 | LR: 7.07e-06
+Epoch 30/35 | Batch 2040/2691 | Loss: 0.6800 | LR: 7.04e-06
+Epoch 30/35 | Batch 2080/2691 | Loss: 0.6799 | LR: 7.00e-06
+Epoch 30/35 | Batch 2120/2691 | Loss: 0.6800 | LR: 6.97e-06
+Epoch 30/35 | Batch 2160/2691 | Loss: 0.6801 | LR: 6.94e-06
+Epoch 30/35 | Batch 2200/2691 | Loss: 0.6804 | LR: 6.90e-06
+Epoch 30/35 | Batch 2240/2691 | Loss: 0.6798 | LR: 6.87e-06
+Epoch 30/35 | Batch 2280/2691 | Loss: 0.6800 | LR: 6.84e-06
+Epoch 30/35 | Batch 2320/2691 | Loss: 0.6801 | LR: 6.80e-06
+Epoch 30/35 | Batch 2360/2691 | Loss: 0.6798 | LR: 6.77e-06
+Epoch 30/35 | Batch 2400/2691 | Loss: 0.6800 | LR: 6.74e-06
+Epoch 30/35 | Batch 2440/2691 | Loss: 0.6799 | LR: 6.71e-06
+Epoch 30/35 | Batch 2480/2691 | Loss: 0.6800 | LR: 6.67e-06
+Epoch 30/35 | Batch 2520/2691 | Loss: 0.6802 | LR: 6.64e-06
+Epoch 30/35 | Batch 2560/2691 | Loss: 0.6800 | LR: 6.61e-06
+Epoch 30/35 | Batch 2600/2691 | Loss: 0.6799 | LR: 6.58e-06
+Epoch 30/35 | Batch 2640/2691 | Loss: 0.6801 | LR: 6.54e-06
+Epoch 30/35 | Batch 2680/2691 | Loss: 0.6799 | LR: 6.51e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 30 Summary:
+  Train Loss: 0.6800
+  Val Loss: 0.7026
+  PER: 0.1290
+  Avg LR: 7.65e-06
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1290
+Epoch 31/35 | Batch 0/2691 | Loss: 0.6801 | LR: 6.50e-06
+Epoch 31/35 | Batch 40/2691 | Loss: 0.6800 | LR: 6.47e-06
+Epoch 31/35 | Batch 80/2691 | Loss: 0.6800 | LR: 6.44e-06
+Epoch 31/35 | Batch 120/2691 | Loss: 0.6799 | LR: 6.41e-06
+Epoch 31/35 | Batch 160/2691 | Loss: 0.6800 | LR: 6.37e-06
+Epoch 31/35 | Batch 200/2691 | Loss: 0.6800 | LR: 6.34e-06
+Epoch 31/35 | Batch 240/2691 | Loss: 0.6799 | LR: 6.31e-06
+Epoch 31/35 | Batch 280/2691 | Loss: 0.6799 | LR: 6.28e-06
+Epoch 31/35 | Batch 320/2691 | Loss: 0.6799 | LR: 6.25e-06
+Epoch 31/35 | Batch 360/2691 | Loss: 0.6801 | LR: 6.22e-06
+Epoch 31/35 | Batch 400/2691 | Loss: 0.6801 | LR: 6.19e-06
+Epoch 31/35 | Batch 440/2691 | Loss: 0.6800 | LR: 6.15e-06
+Epoch 31/35 | Batch 480/2691 | Loss: 0.6800 | LR: 6.12e-06
+Epoch 31/35 | Batch 520/2691 | Loss: 0.6801 | LR: 6.09e-06
+Epoch 31/35 | Batch 560/2691 | Loss: 0.6801 | LR: 6.06e-06
+Epoch 31/35 | Batch 600/2691 | Loss: 0.6800 | LR: 6.03e-06
+Epoch 31/35 | Batch 640/2691 | Loss: 0.6800 | LR: 6.00e-06
+Epoch 31/35 | Batch 680/2691 | Loss: 0.6799 | LR: 5.97e-06
+Epoch 31/35 | Batch 720/2691 | Loss: 0.6798 | LR: 5.94e-06
+Epoch 31/35 | Batch 760/2691 | Loss: 0.6799 | LR: 5.91e-06
+Epoch 31/35 | Batch 800/2691 | Loss: 0.6799 | LR: 5.88e-06
+Epoch 31/35 | Batch 840/2691 | Loss: 0.6800 | LR: 5.85e-06
+Epoch 31/35 | Batch 880/2691 | Loss: 0.6799 | LR: 5.82e-06
+Epoch 31/35 | Batch 920/2691 | Loss: 0.6801 | LR: 5.79e-06
+Epoch 31/35 | Batch 960/2691 | Loss: 0.6798 | LR: 5.76e-06
+Epoch 31/35 | Batch 1000/2691 | Loss: 0.6800 | LR: 5.73e-06
+Epoch 31/35 | Batch 1040/2691 | Loss: 0.6799 | LR: 5.70e-06
+Epoch 31/35 | Batch 1080/2691 | Loss: 0.6800 | LR: 5.67e-06
+Epoch 31/35 | Batch 1120/2691 | Loss: 0.6799 | LR: 5.64e-06
+Epoch 31/35 | Batch 1160/2691 | Loss: 0.6800 | LR: 5.61e-06
+Epoch 31/35 | Batch 1200/2691 | Loss: 0.6800 | LR: 5.58e-06
+Epoch 31/35 | Batch 1240/2691 | Loss: 0.6802 | LR: 5.55e-06
+Epoch 31/35 | Batch 1280/2691 | Loss: 0.6800 | LR: 5.52e-06
+Epoch 31/35 | Batch 1320/2691 | Loss: 0.6801 | LR: 5.49e-06
+Epoch 31/35 | Batch 1360/2691 | Loss: 0.6799 | LR: 5.46e-06
+Epoch 31/35 | Batch 1400/2691 | Loss: 0.6799 | LR: 5.43e-06
+Epoch 31/35 | Batch 1440/2691 | Loss: 0.6800 | LR: 5.40e-06
+Epoch 31/35 | Batch 1480/2691 | Loss: 0.6800 | LR: 5.38e-06
+Epoch 31/35 | Batch 1520/2691 | Loss: 0.6801 | LR: 5.35e-06
+Epoch 31/35 | Batch 1560/2691 | Loss: 0.6804 | LR: 5.32e-06
+Epoch 31/35 | Batch 1600/2691 | Loss: 0.6802 | LR: 5.29e-06
+Epoch 31/35 | Batch 1640/2691 | Loss: 0.6799 | LR: 5.26e-06
+Epoch 31/35 | Batch 1680/2691 | Loss: 0.6798 | LR: 5.23e-06
+Epoch 31/35 | Batch 1720/2691 | Loss: 0.6801 | LR: 5.20e-06
+Epoch 31/35 | Batch 1760/2691 | Loss: 0.6801 | LR: 5.18e-06
+Epoch 31/35 | Batch 1800/2691 | Loss: 0.6799 | LR: 5.15e-06
+Epoch 31/35 | Batch 1840/2691 | Loss: 0.6801 | LR: 5.12e-06
+Epoch 31/35 | Batch 1880/2691 | Loss: 0.6800 | LR: 5.09e-06
+Epoch 31/35 | Batch 1920/2691 | Loss: 0.6797 | LR: 5.06e-06
+Epoch 31/35 | Batch 1960/2691 | Loss: 0.6799 | LR: 5.04e-06
+Epoch 31/35 | Batch 2000/2691 | Loss: 0.6799 | LR: 5.01e-06
+Epoch 31/35 | Batch 2040/2691 | Loss: 0.6800 | LR: 4.98e-06
+Epoch 31/35 | Batch 2080/2691 | Loss: 0.6800 | LR: 4.95e-06
+Epoch 31/35 | Batch 2120/2691 | Loss: 0.6799 | LR: 4.93e-06
+Epoch 31/35 | Batch 2160/2691 | Loss: 0.6798 | LR: 4.90e-06
+Epoch 31/35 | Batch 2200/2691 | Loss: 0.6798 | LR: 4.87e-06
+Epoch 31/35 | Batch 2240/2691 | Loss: 0.6803 | LR: 4.85e-06
+Epoch 31/35 | Batch 2280/2691 | Loss: 0.6798 | LR: 4.82e-06
+Epoch 31/35 | Batch 2320/2691 | Loss: 0.6799 | LR: 4.79e-06
+Epoch 31/35 | Batch 2360/2691 | Loss: 0.6799 | LR: 4.76e-06
+Epoch 31/35 | Batch 2400/2691 | Loss: 0.6800 | LR: 4.74e-06
+Epoch 31/35 | Batch 2440/2691 | Loss: 0.6798 | LR: 4.71e-06
+Epoch 31/35 | Batch 2480/2691 | Loss: 0.6801 | LR: 4.68e-06
+Epoch 31/35 | Batch 2520/2691 | Loss: 0.6800 | LR: 4.66e-06
+Epoch 31/35 | Batch 2560/2691 | Loss: 0.6800 | LR: 4.63e-06
+Epoch 31/35 | Batch 2600/2691 | Loss: 0.6799 | LR: 4.61e-06
+Epoch 31/35 | Batch 2640/2691 | Loss: 0.6799 | LR: 4.58e-06
+Epoch 31/35 | Batch 2680/2691 | Loss: 0.6800 | LR: 4.55e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 31 Summary:
+  Train Loss: 0.6800
+  Val Loss: 0.7026
+  PER: 0.1290
+  Avg LR: 5.49e-06
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1290
+Epoch 32/35 | Batch 0/2691 | Loss: 0.6799 | LR: 4.55e-06
+Epoch 32/35 | Batch 40/2691 | Loss: 0.6803 | LR: 4.52e-06
+Epoch 32/35 | Batch 80/2691 | Loss: 0.6799 | LR: 4.49e-06
+Epoch 32/35 | Batch 120/2691 | Loss: 0.6800 | LR: 4.47e-06
+Epoch 32/35 | Batch 160/2691 | Loss: 0.6799 | LR: 4.44e-06
+Epoch 32/35 | Batch 200/2691 | Loss: 0.6799 | LR: 4.42e-06
+Epoch 32/35 | Batch 240/2691 | Loss: 0.6800 | LR: 4.39e-06
+Epoch 32/35 | Batch 280/2691 | Loss: 0.6799 | LR: 4.37e-06
+Epoch 32/35 | Batch 320/2691 | Loss: 0.6800 | LR: 4.34e-06
+Epoch 32/35 | Batch 360/2691 | Loss: 0.6798 | LR: 4.32e-06
+Epoch 32/35 | Batch 400/2691 | Loss: 0.6800 | LR: 4.29e-06
+Epoch 32/35 | Batch 440/2691 | Loss: 0.6798 | LR: 4.26e-06
+Epoch 32/35 | Batch 480/2691 | Loss: 0.6798 | LR: 4.24e-06
+Epoch 32/35 | Batch 520/2691 | Loss: 0.6800 | LR: 4.22e-06
+Epoch 32/35 | Batch 560/2691 | Loss: 0.6803 | LR: 4.19e-06
+Epoch 32/35 | Batch 600/2691 | Loss: 0.6799 | LR: 4.17e-06
+Epoch 32/35 | Batch 640/2691 | Loss: 0.6800 | LR: 4.14e-06
+Epoch 32/35 | Batch 680/2691 | Loss: 0.6800 | LR: 4.12e-06
+Epoch 32/35 | Batch 720/2691 | Loss: 0.6801 | LR: 4.09e-06
+Epoch 32/35 | Batch 760/2691 | Loss: 0.6798 | LR: 4.07e-06
+Epoch 32/35 | Batch 800/2691 | Loss: 0.6798 | LR: 4.04e-06
+Epoch 32/35 | Batch 840/2691 | Loss: 0.6803 | LR: 4.02e-06
+Epoch 32/35 | Batch 880/2691 | Loss: 0.6799 | LR: 4.00e-06
+Epoch 32/35 | Batch 920/2691 | Loss: 0.6798 | LR: 3.97e-06
+Epoch 32/35 | Batch 960/2691 | Loss: 0.6798 | LR: 3.95e-06
+Epoch 32/35 | Batch 1000/2691 | Loss: 0.6799 | LR: 3.92e-06
+Epoch 32/35 | Batch 1040/2691 | Loss: 0.6800 | LR: 3.90e-06
+Epoch 32/35 | Batch 1080/2691 | Loss: 0.6799 | LR: 3.88e-06
+Epoch 32/35 | Batch 1120/2691 | Loss: 0.6801 | LR: 3.85e-06
+Epoch 32/35 | Batch 1160/2691 | Loss: 0.6802 | LR: 3.83e-06
+Epoch 32/35 | Batch 1200/2691 | Loss: 0.6799 | LR: 3.81e-06
+Epoch 32/35 | Batch 1240/2691 | Loss: 0.6800 | LR: 3.78e-06
+Epoch 32/35 | Batch 1280/2691 | Loss: 0.6801 | LR: 3.76e-06
+Epoch 32/35 | Batch 1320/2691 | Loss: 0.6799 | LR: 3.74e-06
+Epoch 32/35 | Batch 1360/2691 | Loss: 0.6801 | LR: 3.71e-06
+Epoch 32/35 | Batch 1400/2691 | Loss: 0.6800 | LR: 3.69e-06
+Epoch 32/35 | Batch 1440/2691 | Loss: 0.6799 | LR: 3.67e-06
+Epoch 32/35 | Batch 1480/2691 | Loss: 0.6798 | LR: 3.65e-06
+Epoch 32/35 | Batch 1520/2691 | Loss: 0.6800 | LR: 3.62e-06
+Epoch 32/35 | Batch 1560/2691 | Loss: 0.6798 | LR: 3.60e-06
+Epoch 32/35 | Batch 1600/2691 | Loss: 0.6798 | LR: 3.58e-06
+Epoch 32/35 | Batch 1640/2691 | Loss: 0.6798 | LR: 3.56e-06
+Epoch 32/35 | Batch 1680/2691 | Loss: 0.6799 | LR: 3.53e-06
+Epoch 32/35 | Batch 1720/2691 | Loss: 0.6802 | LR: 3.51e-06
+Epoch 32/35 | Batch 1760/2691 | Loss: 0.6800 | LR: 3.49e-06
+Epoch 32/35 | Batch 1800/2691 | Loss: 0.6799 | LR: 3.47e-06
+Epoch 32/35 | Batch 1840/2691 | Loss: 0.6804 | LR: 3.45e-06
+Epoch 32/35 | Batch 1880/2691 | Loss: 0.6800 | LR: 3.42e-06
+Epoch 32/35 | Batch 1920/2691 | Loss: 0.6801 | LR: 3.40e-06
+Epoch 32/35 | Batch 1960/2691 | Loss: 0.6799 | LR: 3.38e-06
+Epoch 32/35 | Batch 2000/2691 | Loss: 0.6798 | LR: 3.36e-06
+Epoch 32/35 | Batch 2040/2691 | Loss: 0.6799 | LR: 3.34e-06
+Epoch 32/35 | Batch 2080/2691 | Loss: 0.6799 | LR: 3.32e-06
+Epoch 32/35 | Batch 2120/2691 | Loss: 0.6804 | LR: 3.30e-06
+Epoch 32/35 | Batch 2160/2691 | Loss: 0.6801 | LR: 3.28e-06
+Epoch 32/35 | Batch 2200/2691 | Loss: 0.6801 | LR: 3.25e-06
+Epoch 32/35 | Batch 2240/2691 | Loss: 0.6798 | LR: 3.23e-06
+Epoch 32/35 | Batch 2280/2691 | Loss: 0.6799 | LR: 3.21e-06
+Epoch 32/35 | Batch 2320/2691 | Loss: 0.6800 | LR: 3.19e-06
+Epoch 32/35 | Batch 2360/2691 | Loss: 0.6800 | LR: 3.17e-06
+Epoch 32/35 | Batch 2400/2691 | Loss: 0.6800 | LR: 3.15e-06
+Epoch 32/35 | Batch 2440/2691 | Loss: 0.6800 | LR: 3.13e-06
+Epoch 32/35 | Batch 2480/2691 | Loss: 0.6798 | LR: 3.11e-06
+Epoch 32/35 | Batch 2520/2691 | Loss: 0.6799 | LR: 3.09e-06
+Epoch 32/35 | Batch 2560/2691 | Loss: 0.6799 | LR: 3.07e-06
+Epoch 32/35 | Batch 2600/2691 | Loss: 0.6801 | LR: 3.05e-06
+Epoch 32/35 | Batch 2640/2691 | Loss: 0.6799 | LR: 3.03e-06
+Epoch 32/35 | Batch 2680/2691 | Loss: 0.6800 | LR: 3.01e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 32 Summary:
+  Train Loss: 0.6800
+  Val Loss: 0.7027
+  PER: 0.1302
+  Avg LR: 3.74e-06
+------------------------------------------------------------
+Epoch 33/35 | Batch 0/2691 | Loss: 0.6801 | LR: 3.01e-06
+Epoch 33/35 | Batch 40/2691 | Loss: 0.6799 | LR: 2.99e-06
+Epoch 33/35 | Batch 80/2691 | Loss: 0.6799 | LR: 2.97e-06
+Epoch 33/35 | Batch 120/2691 | Loss: 0.6804 | LR: 2.95e-06
+Epoch 33/35 | Batch 160/2691 | Loss: 0.6800 | LR: 2.93e-06
+Epoch 33/35 | Batch 200/2691 | Loss: 0.6801 | LR: 2.91e-06
+Epoch 33/35 | Batch 240/2691 | Loss: 0.6797 | LR: 2.89e-06
+Epoch 33/35 | Batch 280/2691 | Loss: 0.6799 | LR: 2.87e-06
+Epoch 33/35 | Batch 320/2691 | Loss: 0.6800 | LR: 2.85e-06
+Epoch 33/35 | Batch 360/2691 | Loss: 0.6799 | LR: 2.83e-06
+Epoch 33/35 | Batch 400/2691 | Loss: 0.6799 | LR: 2.81e-06
+Epoch 33/35 | Batch 440/2691 | Loss: 0.6801 | LR: 2.79e-06
+Epoch 33/35 | Batch 480/2691 | Loss: 0.6799 | LR: 2.78e-06
+Epoch 33/35 | Batch 520/2691 | Loss: 0.6799 | LR: 2.76e-06
+Epoch 33/35 | Batch 560/2691 | Loss: 0.6799 | LR: 2.74e-06
+Epoch 33/35 | Batch 600/2691 | Loss: 0.6799 | LR: 2.72e-06
+Epoch 33/35 | Batch 640/2691 | Loss: 0.6803 | LR: 2.70e-06
+Epoch 33/35 | Batch 680/2691 | Loss: 0.6800 | LR: 2.68e-06
+Epoch 33/35 | Batch 720/2691 | Loss: 0.6800 | LR: 2.67e-06
+Epoch 33/35 | Batch 760/2691 | Loss: 0.6798 | LR: 2.65e-06
+Epoch 33/35 | Batch 800/2691 | Loss: 0.6798 | LR: 2.63e-06
+Epoch 33/35 | Batch 840/2691 | Loss: 0.6799 | LR: 2.61e-06
+Epoch 33/35 | Batch 880/2691 | Loss: 0.6798 | LR: 2.59e-06
+Epoch 33/35 | Batch 920/2691 | Loss: 0.6799 | LR: 2.58e-06
+Epoch 33/35 | Batch 960/2691 | Loss: 0.6799 | LR: 2.56e-06
+Epoch 33/35 | Batch 1000/2691 | Loss: 0.6799 | LR: 2.54e-06
+Epoch 33/35 | Batch 1040/2691 | Loss: 0.6799 | LR: 2.52e-06
+Epoch 33/35 | Batch 1080/2691 | Loss: 0.6798 | LR: 2.51e-06
+Epoch 33/35 | Batch 1120/2691 | Loss: 0.6799 | LR: 2.49e-06
+Epoch 33/35 | Batch 1160/2691 | Loss: 0.6800 | LR: 2.47e-06
+Epoch 33/35 | Batch 1200/2691 | Loss: 0.6799 | LR: 2.46e-06
+Epoch 33/35 | Batch 1240/2691 | Loss: 0.6800 | LR: 2.44e-06
+Epoch 33/35 | Batch 1280/2691 | Loss: 0.6800 | LR: 2.42e-06
+Epoch 33/35 | Batch 1320/2691 | Loss: 0.6799 | LR: 2.41e-06
+Epoch 33/35 | Batch 1360/2691 | Loss: 0.6798 | LR: 2.39e-06
+Epoch 33/35 | Batch 1400/2691 | Loss: 0.6800 | LR: 2.37e-06
+Epoch 33/35 | Batch 1440/2691 | Loss: 0.6798 | LR: 2.36e-06
+Epoch 33/35 | Batch 1480/2691 | Loss: 0.6800 | LR: 2.34e-06
+Epoch 33/35 | Batch 1520/2691 | Loss: 0.6800 | LR: 2.32e-06
+Epoch 33/35 | Batch 1560/2691 | Loss: 0.6799 | LR: 2.31e-06
+Epoch 33/35 | Batch 1600/2691 | Loss: 0.6801 | LR: 2.29e-06
+Epoch 33/35 | Batch 1640/2691 | Loss: 0.6800 | LR: 2.28e-06
+Epoch 33/35 | Batch 1680/2691 | Loss: 0.6798 | LR: 2.26e-06
+Epoch 33/35 | Batch 1720/2691 | Loss: 0.6800 | LR: 2.24e-06
+Epoch 33/35 | Batch 1760/2691 | Loss: 0.6799 | LR: 2.23e-06
+Epoch 33/35 | Batch 1800/2691 | Loss: 0.6799 | LR: 2.21e-06
+Epoch 33/35 | Batch 1840/2691 | Loss: 0.6799 | LR: 2.20e-06
+Epoch 33/35 | Batch 1880/2691 | Loss: 0.6800 | LR: 2.18e-06
+Epoch 33/35 | Batch 1920/2691 | Loss: 0.6798 | LR: 2.17e-06
+Epoch 33/35 | Batch 1960/2691 | Loss: 0.6801 | LR: 2.15e-06
+Epoch 33/35 | Batch 2000/2691 | Loss: 0.6799 | LR: 2.14e-06
+Epoch 33/35 | Batch 2040/2691 | Loss: 0.6800 | LR: 2.12e-06
+Epoch 33/35 | Batch 2080/2691 | Loss: 0.6799 | LR: 2.11e-06
+Epoch 33/35 | Batch 2120/2691 | Loss: 0.6799 | LR: 2.09e-06
+Epoch 33/35 | Batch 2160/2691 | Loss: 0.6799 | LR: 2.08e-06
+Epoch 33/35 | Batch 2200/2691 | Loss: 0.6802 | LR: 2.06e-06
+Epoch 33/35 | Batch 2240/2691 | Loss: 0.6799 | LR: 2.05e-06
+Epoch 33/35 | Batch 2280/2691 | Loss: 0.6800 | LR: 2.04e-06
+Epoch 33/35 | Batch 2320/2691 | Loss: 0.6799 | LR: 2.02e-06
+Epoch 33/35 | Batch 2360/2691 | Loss: 0.6799 | LR: 2.01e-06
+Epoch 33/35 | Batch 2400/2691 | Loss: 0.6799 | LR: 1.99e-06
+Epoch 33/35 | Batch 2440/2691 | Loss: 0.6799 | LR: 1.98e-06
+Epoch 33/35 | Batch 2480/2691 | Loss: 0.6800 | LR: 1.97e-06
+Epoch 33/35 | Batch 2520/2691 | Loss: 0.6798 | LR: 1.95e-06
+Epoch 33/35 | Batch 2560/2691 | Loss: 0.6799 | LR: 1.94e-06
+Epoch 33/35 | Batch 2600/2691 | Loss: 0.6798 | LR: 1.92e-06
+Epoch 33/35 | Batch 2640/2691 | Loss: 0.6801 | LR: 1.91e-06
+Epoch 33/35 | Batch 2680/2691 | Loss: 0.6799 | LR: 1.90e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 33 Summary:
+  Train Loss: 0.6799
+  Val Loss: 0.7024
+  PER: 0.1285
+  Avg LR: 2.41e-06
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1285
+Epoch 34/35 | Batch 0/2691 | Loss: 0.6798 | LR: 1.89e-06
+Epoch 34/35 | Batch 40/2691 | Loss: 0.6799 | LR: 1.88e-06
+Epoch 34/35 | Batch 80/2691 | Loss: 0.6799 | LR: 1.87e-06
+Epoch 34/35 | Batch 120/2691 | Loss: 0.6801 | LR: 1.86e-06
+Epoch 34/35 | Batch 160/2691 | Loss: 0.6800 | LR: 1.84e-06
+Epoch 34/35 | Batch 200/2691 | Loss: 0.6798 | LR: 1.83e-06
+Epoch 34/35 | Batch 240/2691 | Loss: 0.6799 | LR: 1.82e-06
+Epoch 34/35 | Batch 280/2691 | Loss: 0.6799 | LR: 1.80e-06
+Epoch 34/35 | Batch 320/2691 | Loss: 0.6801 | LR: 1.79e-06
+Epoch 34/35 | Batch 360/2691 | Loss: 0.6800 | LR: 1.78e-06
+Epoch 34/35 | Batch 400/2691 | Loss: 0.6800 | LR: 1.77e-06
+Epoch 34/35 | Batch 440/2691 | Loss: 0.6798 | LR: 1.75e-06
+Epoch 34/35 | Batch 480/2691 | Loss: 0.6801 | LR: 1.74e-06
+Epoch 34/35 | Batch 520/2691 | Loss: 0.6801 | LR: 1.73e-06
+Epoch 34/35 | Batch 560/2691 | Loss: 0.6798 | LR: 1.72e-06
+Epoch 34/35 | Batch 600/2691 | Loss: 0.6799 | LR: 1.71e-06
+Epoch 34/35 | Batch 640/2691 | Loss: 0.6798 | LR: 1.69e-06
+Epoch 34/35 | Batch 680/2691 | Loss: 0.6798 | LR: 1.68e-06
+Epoch 34/35 | Batch 720/2691 | Loss: 0.6799 | LR: 1.67e-06
+Epoch 34/35 | Batch 760/2691 | Loss: 0.6799 | LR: 1.66e-06
+Epoch 34/35 | Batch 800/2691 | Loss: 0.6799 | LR: 1.65e-06
+Epoch 34/35 | Batch 840/2691 | Loss: 0.6799 | LR: 1.64e-06
+Epoch 34/35 | Batch 880/2691 | Loss: 0.6800 | LR: 1.63e-06
+Epoch 34/35 | Batch 920/2691 | Loss: 0.6799 | LR: 1.62e-06
+Epoch 34/35 | Batch 960/2691 | Loss: 0.6799 | LR: 1.60e-06
+Epoch 34/35 | Batch 1000/2691 | Loss: 0.6798 | LR: 1.59e-06
+Epoch 34/35 | Batch 1040/2691 | Loss: 0.6800 | LR: 1.58e-06
+Epoch 34/35 | Batch 1080/2691 | Loss: 0.6800 | LR: 1.57e-06
+Epoch 34/35 | Batch 1120/2691 | Loss: 0.6798 | LR: 1.56e-06
+Epoch 34/35 | Batch 1160/2691 | Loss: 0.6803 | LR: 1.55e-06
+Epoch 34/35 | Batch 1200/2691 | Loss: 0.6799 | LR: 1.54e-06
+Epoch 34/35 | Batch 1240/2691 | Loss: 0.6809 | LR: 1.53e-06
+Epoch 34/35 | Batch 1280/2691 | Loss: 0.6799 | LR: 1.52e-06
+Epoch 34/35 | Batch 1320/2691 | Loss: 0.6802 | LR: 1.51e-06
+Epoch 34/35 | Batch 1360/2691 | Loss: 0.6799 | LR: 1.50e-06
+Epoch 34/35 | Batch 1400/2691 | Loss: 0.6799 | LR: 1.49e-06
+Epoch 34/35 | Batch 1440/2691 | Loss: 0.6800 | LR: 1.48e-06
+Epoch 34/35 | Batch 1480/2691 | Loss: 0.6799 | LR: 1.47e-06
+Epoch 34/35 | Batch 1520/2691 | Loss: 0.6799 | LR: 1.46e-06
+Epoch 34/35 | Batch 1560/2691 | Loss: 0.6800 | LR: 1.45e-06
+Epoch 34/35 | Batch 1600/2691 | Loss: 0.6799 | LR: 1.44e-06
+Epoch 34/35 | Batch 1640/2691 | Loss: 0.6802 | LR: 1.43e-06
+Epoch 34/35 | Batch 1680/2691 | Loss: 0.6798 | LR: 1.42e-06
+Epoch 34/35 | Batch 1720/2691 | Loss: 0.6799 | LR: 1.41e-06
+Epoch 34/35 | Batch 1760/2691 | Loss: 0.6799 | LR: 1.41e-06
+Epoch 34/35 | Batch 1800/2691 | Loss: 0.6800 | LR: 1.40e-06
+Epoch 34/35 | Batch 1840/2691 | Loss: 0.6802 | LR: 1.39e-06
+Epoch 34/35 | Batch 1880/2691 | Loss: 0.6800 | LR: 1.38e-06
+Epoch 34/35 | Batch 1920/2691 | Loss: 0.6800 | LR: 1.37e-06
+Epoch 34/35 | Batch 1960/2691 | Loss: 0.6800 | LR: 1.36e-06
+Epoch 34/35 | Batch 2000/2691 | Loss: 0.6799 | LR: 1.35e-06
+Epoch 34/35 | Batch 2040/2691 | Loss: 0.6799 | LR: 1.35e-06
+Epoch 34/35 | Batch 2080/2691 | Loss: 0.6798 | LR: 1.34e-06
+Epoch 34/35 | Batch 2120/2691 | Loss: 0.6798 | LR: 1.33e-06
+Epoch 34/35 | Batch 2160/2691 | Loss: 0.6799 | LR: 1.32e-06
+Epoch 34/35 | Batch 2200/2691 | Loss: 0.6802 | LR: 1.31e-06
+Epoch 34/35 | Batch 2240/2691 | Loss: 0.6799 | LR: 1.31e-06
+Epoch 34/35 | Batch 2280/2691 | Loss: 0.6798 | LR: 1.30e-06
+Epoch 34/35 | Batch 2320/2691 | Loss: 0.6798 | LR: 1.29e-06
+Epoch 34/35 | Batch 2360/2691 | Loss: 0.6798 | LR: 1.28e-06
+Epoch 34/35 | Batch 2400/2691 | Loss: 0.6797 | LR: 1.28e-06
+Epoch 34/35 | Batch 2440/2691 | Loss: 0.6798 | LR: 1.27e-06
+Epoch 34/35 | Batch 2480/2691 | Loss: 0.6798 | LR: 1.26e-06
+Epoch 34/35 | Batch 2520/2691 | Loss: 0.6797 | LR: 1.25e-06
+Epoch 34/35 | Batch 2560/2691 | Loss: 0.6799 | LR: 1.25e-06
+Epoch 34/35 | Batch 2600/2691 | Loss: 0.6799 | LR: 1.24e-06
+Epoch 34/35 | Batch 2640/2691 | Loss: 0.6801 | LR: 1.23e-06
+Epoch 34/35 | Batch 2680/2691 | Loss: 0.6798 | LR: 1.23e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 34 Summary:
+  Train Loss: 0.6799
+  Val Loss: 0.7023
+  PER: 0.1282
+  Avg LR: 1.52e-06
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1282
+Epoch 35/35 | Batch 0/2691 | Loss: 0.6799 | LR: 1.22e-06
+Epoch 35/35 | Batch 40/2691 | Loss: 0.6799 | LR: 1.22e-06
+Epoch 35/35 | Batch 80/2691 | Loss: 0.6800 | LR: 1.21e-06
+Epoch 35/35 | Batch 120/2691 | Loss: 0.6801 | LR: 1.20e-06
+Epoch 35/35 | Batch 160/2691 | Loss: 0.6799 | LR: 1.20e-06
+Epoch 35/35 | Batch 200/2691 | Loss: 0.6798 | LR: 1.19e-06
+Epoch 35/35 | Batch 240/2691 | Loss: 0.6800 | LR: 1.19e-06
+Epoch 35/35 | Batch 280/2691 | Loss: 0.6799 | LR: 1.18e-06
+Epoch 35/35 | Batch 320/2691 | Loss: 0.6799 | LR: 1.17e-06
+Epoch 35/35 | Batch 360/2691 | Loss: 0.6799 | LR: 1.17e-06
+Epoch 35/35 | Batch 400/2691 | Loss: 0.6799 | LR: 1.16e-06
+Epoch 35/35 | Batch 440/2691 | Loss: 0.6801 | LR: 1.16e-06
+Epoch 35/35 | Batch 480/2691 | Loss: 0.6801 | LR: 1.15e-06
+Epoch 35/35 | Batch 520/2691 | Loss: 0.6799 | LR: 1.15e-06
+Epoch 35/35 | Batch 560/2691 | Loss: 0.6800 | LR: 1.14e-06
+Epoch 35/35 | Batch 600/2691 | Loss: 0.6799 | LR: 1.14e-06
+Epoch 35/35 | Batch 640/2691 | Loss: 0.6800 | LR: 1.13e-06
+Epoch 35/35 | Batch 680/2691 | Loss: 0.6799 | LR: 1.13e-06
+Epoch 35/35 | Batch 720/2691 | Loss: 0.6799 | LR: 1.12e-06
+Epoch 35/35 | Batch 760/2691 | Loss: 0.6800 | LR: 1.12e-06
+Epoch 35/35 | Batch 800/2691 | Loss: 0.6801 | LR: 1.11e-06
+Epoch 35/35 | Batch 840/2691 | Loss: 0.6800 | LR: 1.11e-06
+Epoch 35/35 | Batch 880/2691 | Loss: 0.6798 | LR: 1.10e-06
+Epoch 35/35 | Batch 920/2691 | Loss: 0.6798 | LR: 1.10e-06
+Epoch 35/35 | Batch 960/2691 | Loss: 0.6798 | LR: 1.09e-06
+Epoch 35/35 | Batch 1000/2691 | Loss: 0.6799 | LR: 1.09e-06
+Epoch 35/35 | Batch 1040/2691 | Loss: 0.6800 | LR: 1.08e-06
+Epoch 35/35 | Batch 1080/2691 | Loss: 0.6799 | LR: 1.08e-06
+Epoch 35/35 | Batch 1120/2691 | Loss: 0.6799 | LR: 1.08e-06
+Epoch 35/35 | Batch 1160/2691 | Loss: 0.6799 | LR: 1.07e-06
+Epoch 35/35 | Batch 1200/2691 | Loss: 0.6798 | LR: 1.07e-06
+Epoch 35/35 | Batch 1240/2691 | Loss: 0.6799 | LR: 1.07e-06
+Epoch 35/35 | Batch 1280/2691 | Loss: 0.6801 | LR: 1.06e-06
+Epoch 35/35 | Batch 1320/2691 | Loss: 0.6798 | LR: 1.06e-06
+Epoch 35/35 | Batch 1360/2691 | Loss: 0.6801 | LR: 1.05e-06
+Epoch 35/35 | Batch 1400/2691 | Loss: 0.6800 | LR: 1.05e-06
+Epoch 35/35 | Batch 1440/2691 | Loss: 0.6802 | LR: 1.05e-06
+Epoch 35/35 | Batch 1480/2691 | Loss: 0.6798 | LR: 1.05e-06
+Epoch 35/35 | Batch 1520/2691 | Loss: 0.6799 | LR: 1.04e-06
+Epoch 35/35 | Batch 1560/2691 | Loss: 0.6800 | LR: 1.04e-06
+Epoch 35/35 | Batch 1600/2691 | Loss: 0.6798 | LR: 1.04e-06
+Epoch 35/35 | Batch 1640/2691 | Loss: 0.6799 | LR: 1.03e-06
+Epoch 35/35 | Batch 1680/2691 | Loss: 0.6798 | LR: 1.03e-06
+Epoch 35/35 | Batch 1720/2691 | Loss: 0.6800 | LR: 1.03e-06
+Epoch 35/35 | Batch 1760/2691 | Loss: 0.6799 | LR: 1.03e-06
+Epoch 35/35 | Batch 1800/2691 | Loss: 0.6800 | LR: 1.02e-06
+Epoch 35/35 | Batch 1840/2691 | Loss: 0.6799 | LR: 1.02e-06
+Epoch 35/35 | Batch 1880/2691 | Loss: 0.6799 | LR: 1.02e-06
+Epoch 35/35 | Batch 1920/2691 | Loss: 0.6798 | LR: 1.02e-06
+Epoch 35/35 | Batch 1960/2691 | Loss: 0.6799 | LR: 1.02e-06
+Epoch 35/35 | Batch 2000/2691 | Loss: 0.6798 | LR: 1.01e-06
+Epoch 35/35 | Batch 2040/2691 | Loss: 0.6798 | LR: 1.01e-06
+Epoch 35/35 | Batch 2080/2691 | Loss: 0.6799 | LR: 1.01e-06
+Epoch 35/35 | Batch 2120/2691 | Loss: 0.6799 | LR: 1.01e-06
+Epoch 35/35 | Batch 2160/2691 | Loss: 0.6798 | LR: 1.01e-06
+Epoch 35/35 | Batch 2200/2691 | Loss: 0.6799 | LR: 1.01e-06
+Epoch 35/35 | Batch 2240/2691 | Loss: 0.6799 | LR: 1.01e-06
+Epoch 35/35 | Batch 2280/2691 | Loss: 0.6799 | LR: 1.01e-06
+Epoch 35/35 | Batch 2320/2691 | Loss: 0.6800 | LR: 1.00e-06
+Epoch 35/35 | Batch 2360/2691 | Loss: 0.6799 | LR: 1.00e-06
+Epoch 35/35 | Batch 2400/2691 | Loss: 0.6800 | LR: 1.00e-06
+Epoch 35/35 | Batch 2440/2691 | Loss: 0.6798 | LR: 1.00e-06
+Epoch 35/35 | Batch 2480/2691 | Loss: 0.6800 | LR: 1.00e-06
+Epoch 35/35 | Batch 2520/2691 | Loss: 0.6802 | LR: 1.00e-06
+Epoch 35/35 | Batch 2560/2691 | Loss: 0.6799 | LR: 1.00e-06
+Epoch 35/35 | Batch 2600/2691 | Loss: 0.6798 | LR: 1.00e-06
+Epoch 35/35 | Batch 2640/2691 | Loss: 0.6800 | LR: 1.00e-06
+Epoch 35/35 | Batch 2680/2691 | Loss: 0.6798 | LR: 1.00e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 2, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 35 Summary:
+  Train Loss: 0.6799
+  Val Loss: 0.7024
+  PER: 0.1284
+  Avg LR: 1.07e-06
+------------------------------------------------------------
+
+============================================================
+Training Complete!
+Best PER: 0.1282 (Epoch 34)
+Models saved to: /outputs/exp03_d640_b3_20251128_043602
