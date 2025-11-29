@@ -89,14 +89,14 @@ services:
     shm_size: '8gb'
     restart: "no"
 
-  # Alternative service for interactive development
-  transformer-dev:
+  # Inference service - generate Kaggle submission
+  inference:
     build:
       context: .
       dockerfile: Dockerfile
     image: brain-to-text-transformer:latest
-    container_name: b2t-transformer-dev
-    
+    container_name: b2t-inference
+
     deploy:
       resources:
         reservations:
@@ -104,15 +104,48 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-    
+
     volumes:
       - ${DATA_PATH:-./data}:/data:ro
       - ${OUTPUT_PATH:-./outputs}:/outputs
       - ./train_transformer.py:/app/train_transformer.py:ro
-    
+      - ./generate_submission.py:/app/generate_submission.py:ro
+      - ./run_inference.sh:/app/run_inference.sh:ro
+      - ../brain-to-text-clone/nejm-brain-to-text/language_model/examples/speech/s0/dict.txt:/app/dict.txt:ro
+
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
-    
+      - CUDA_VISIBLE_DEVICES=0
+
+    # Run the inference script
+    entrypoint: ["/bin/bash", "/app/run_inference.sh"]
+    shm_size: '8gb'
+    restart: "no"
+
+  # Alternative service for interactive development
+  transformer-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-transformer:latest
+    container_name: b2t-transformer-dev
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    volumes:
+      - ${DATA_PATH:-./data}:/data:ro
+      - ${OUTPUT_PATH:-./outputs}:/outputs
+      - ./train_transformer.py:/app/train_transformer.py:ro
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+
     # Override entrypoint for interactive use
     entrypoint: ["/bin/bash"]
     stdin_open: true
