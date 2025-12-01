@@ -1,0 +1,17 @@
+# Brain-to-Text BiLSTM Training Requirements
+# For use with NVIDIA CUDA Docker images
+
+# PyTorch with CUDA support (installed via pip in Dockerfile)
+# torch>=2.0.0
+# torchaudio>=2.0.0
+
+# Core dependencies
+numpy<2.0.0  # PyTorch 2.1.0 requires NumPy 1.x
+h5py>=3.7.0
+scipy>=1.9.0
+matplotlib>=3.5.0
+pandas>=1.4.0
+tqdm>=4.64.0
+
+# Text correction
+textblob>=0.15.3
