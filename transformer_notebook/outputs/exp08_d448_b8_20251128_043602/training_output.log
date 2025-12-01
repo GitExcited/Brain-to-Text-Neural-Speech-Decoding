@@ -1,0 +1,1464 @@
+============================================================
+Brain-to-Text Transformer Training
+============================================================
+PyTorch version: 2.1.0+cu121
+CUDA available: True
+CUDA version: 12.1
+GPU: NVIDIA GeForce RTX 3080
+============================================================
+
+Configuration:
+  data_dir: /data/t15_copyTask_neuralData/hdf5_data_final
+  output_dir: /outputs/exp08_d448_b8_20251128_043602
+  max_days: 45
+  d_model: 448
+  epochs: 40
+  batch_size: 8
+  lr: 0.0001
+  num_workers: 2
+  warmup_epochs: 2
+  patience: 10
+  min_delta: 0.001
+  resume: False
+  cuda: True
+  log_interval: 40
+  save_interval: 1
+============================================================
+Using CUDA: NVIDIA GeForce RTX 3080
+CUDA Memory: 10.74 GB
+TF32 enabled for faster matrix operations
+TensorBoard logs: /outputs/exp08_d448_b8_20251128_043602/tensorboard
+
+Loading data from: /data/t15_copyTask_neuralData/hdf5_data_final
+Loaded 8072 trials from 45 days (train)
+
+Label distribution (train):
+  0 (BLANK): 3821756 (94.7%)
+  1 (AA): 3403 (0.1%)
+  2 (AE): 4373 (0.1%)
+  3 (AH): 12662 (0.3%)
+  4 (AO): 2341 (0.1%)
+  5 (AW): 1316 (0.0%)
+  6 (AY): 5337 (0.1%)
+  7 (B): 2593 (0.1%)
+  8 (CH): 736 (0.0%)
+  9 (D): 6260 (0.2%)
+  ... (41 unique labels total)
+Found 41 validation files (some sessions may not have val data)
+Loaded 1426 trials from 41 days (val)
+
+Label distribution (val):
+  0 (BLANK): 671608 (94.2%)
+  1 (AA): 661 (0.1%)
+  2 (AE): 772 (0.1%)
+  3 (AH): 2705 (0.4%)
+  4 (AO): 544 (0.1%)
+  5 (AW): 226 (0.0%)
+  6 (AY): 809 (0.1%)
+  7 (B): 468 (0.1%)
+  8 (CH): 167 (0.0%)
+  9 (D): 1274 (0.2%)
+  ... (41 unique labels total)
+
+Creating model with d_model=448, 45 days
+/usr/local/lib/python3.10/dist-packages/torch/nn/modules/transformer.py:282: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Applied Xavier initialization to all layers
+Total parameters: 22,824,745
+Trainable parameters: 22,824,745
+LR Scheduler: 2018 warmup steps, 40360 total steps
+Early stopping: patience=10, min_delta=0.001
+
+Starting training for 40 epochs...
+============================================================
+Epoch 1/40 | Batch 0/1009 | Loss: 4.2268 | LR: 0.00e+00
+Epoch 1/40 | Batch 40/1009 | Loss: 0.8923 | LR: 1.98e-06
+Epoch 1/40 | Batch 80/1009 | Loss: 0.8639 | LR: 3.96e-06
+Epoch 1/40 | Batch 120/1009 | Loss: 0.8564 | LR: 5.95e-06
+Epoch 1/40 | Batch 160/1009 | Loss: 0.8331 | LR: 7.93e-06
+Epoch 1/40 | Batch 200/1009 | Loss: 0.8458 | LR: 9.91e-06
+Epoch 1/40 | Batch 240/1009 | Loss: 0.8296 | LR: 1.19e-05
+Epoch 1/40 | Batch 280/1009 | Loss: 0.8268 | LR: 1.39e-05
+Epoch 1/40 | Batch 320/1009 | Loss: 0.8182 | LR: 1.59e-05
+Epoch 1/40 | Batch 360/1009 | Loss: 0.7886 | LR: 1.78e-05
+Epoch 1/40 | Batch 400/1009 | Loss: 0.7967 | LR: 1.98e-05
+Epoch 1/40 | Batch 440/1009 | Loss: 0.7709 | LR: 2.18e-05
+Epoch 1/40 | Batch 480/1009 | Loss: 0.7762 | LR: 2.38e-05
+Epoch 1/40 | Batch 520/1009 | Loss: 0.8082 | LR: 2.58e-05
+Epoch 1/40 | Batch 560/1009 | Loss: 0.7738 | LR: 2.78e-05
+Epoch 1/40 | Batch 600/1009 | Loss: 0.8047 | LR: 2.97e-05
+Epoch 1/40 | Batch 640/1009 | Loss: 0.7888 | LR: 3.17e-05
+Epoch 1/40 | Batch 680/1009 | Loss: 0.7976 | LR: 3.37e-05
+Epoch 1/40 | Batch 720/1009 | Loss: 0.7793 | LR: 3.57e-05
+Epoch 1/40 | Batch 760/1009 | Loss: 0.8042 | LR: 3.77e-05
+Epoch 1/40 | Batch 800/1009 | Loss: 0.7886 | LR: 3.96e-05
+Epoch 1/40 | Batch 840/1009 | Loss: 0.7665 | LR: 4.16e-05
+Epoch 1/40 | Batch 880/1009 | Loss: 0.7742 | LR: 4.36e-05
+Epoch 1/40 | Batch 920/1009 | Loss: 0.7788 | LR: 4.56e-05
+Epoch 1/40 | Batch 960/1009 | Loss: 0.7913 | LR: 4.76e-05
+Epoch 1/40 | Batch 1000/1009 | Loss: 0.7732 | LR: 4.96e-05
+  Sample - Pred: [34, 40, 37, 2, 23, 40, 17, 31, 40, 17, 2, 40, 29, 2, 40] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 1 Summary:
+  Train Loss: 0.8092
+  Val Loss: 0.7865
+  PER: 0.6069
+  Avg LR: 2.50e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.6069
+Epoch 2/40 | Batch 0/1009 | Loss: 0.7652 | LR: 5.00e-05
+Epoch 2/40 | Batch 40/1009 | Loss: 0.7768 | LR: 5.20e-05
+Epoch 2/40 | Batch 80/1009 | Loss: 0.7777 | LR: 5.40e-05
+Epoch 2/40 | Batch 120/1009 | Loss: 0.7799 | LR: 5.59e-05
+Epoch 2/40 | Batch 160/1009 | Loss: 0.7761 | LR: 5.79e-05
+Epoch 2/40 | Batch 200/1009 | Loss: 0.7753 | LR: 5.99e-05
+Epoch 2/40 | Batch 240/1009 | Loss: 0.7574 | LR: 6.19e-05
+Epoch 2/40 | Batch 280/1009 | Loss: 0.7833 | LR: 6.39e-05
+Epoch 2/40 | Batch 320/1009 | Loss: 0.7634 | LR: 6.59e-05
+Epoch 2/40 | Batch 360/1009 | Loss: 0.7503 | LR: 6.78e-05
+Epoch 2/40 | Batch 400/1009 | Loss: 0.7672 | LR: 6.98e-05
+Epoch 2/40 | Batch 440/1009 | Loss: 0.7696 | LR: 7.18e-05
+Epoch 2/40 | Batch 480/1009 | Loss: 0.7774 | LR: 7.38e-05
+Epoch 2/40 | Batch 520/1009 | Loss: 0.7622 | LR: 7.58e-05
+Epoch 2/40 | Batch 560/1009 | Loss: 0.7664 | LR: 7.78e-05
+Epoch 2/40 | Batch 600/1009 | Loss: 0.7563 | LR: 7.97e-05
+Epoch 2/40 | Batch 640/1009 | Loss: 0.7326 | LR: 8.17e-05
+Epoch 2/40 | Batch 680/1009 | Loss: 0.7824 | LR: 8.37e-05
+Epoch 2/40 | Batch 720/1009 | Loss: 0.7450 | LR: 8.57e-05
+Epoch 2/40 | Batch 760/1009 | Loss: 0.7402 | LR: 8.77e-05
+Epoch 2/40 | Batch 800/1009 | Loss: 0.7536 | LR: 8.96e-05
+Epoch 2/40 | Batch 840/1009 | Loss: 0.7570 | LR: 9.16e-05
+Epoch 2/40 | Batch 880/1009 | Loss: 0.7747 | LR: 9.36e-05
+Epoch 2/40 | Batch 920/1009 | Loss: 0.7568 | LR: 9.56e-05
+Epoch 2/40 | Batch 960/1009 | Loss: 0.7539 | LR: 9.76e-05
+Epoch 2/40 | Batch 1000/1009 | Loss: 0.7511 | LR: 9.96e-05
+  Sample - Pred: [34, 40, 9, 2, 23, 40, 10, 3, 40, 10, 3, 40, 9, 2, 23] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 2 Summary:
+  Train Loss: 0.7642
+  Val Loss: 0.7633
+  PER: 0.4898
+  Avg LR: 7.50e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.4898
+Epoch 3/40 | Batch 0/1009 | Loss: 0.7421 | LR: 1.00e-04
+Epoch 3/40 | Batch 40/1009 | Loss: 0.7489 | LR: 1.00e-04
+Epoch 3/40 | Batch 80/1009 | Loss: 0.7665 | LR: 1.00e-04
+Epoch 3/40 | Batch 120/1009 | Loss: 0.7342 | LR: 1.00e-04
+Epoch 3/40 | Batch 160/1009 | Loss: 0.7372 | LR: 1.00e-04
+Epoch 3/40 | Batch 200/1009 | Loss: 0.7386 | LR: 1.00e-04
+Epoch 3/40 | Batch 240/1009 | Loss: 0.7617 | LR: 1.00e-04
+Epoch 3/40 | Batch 280/1009 | Loss: 0.7224 | LR: 1.00e-04
+Epoch 3/40 | Batch 320/1009 | Loss: 0.7448 | LR: 1.00e-04
+Epoch 3/40 | Batch 360/1009 | Loss: 0.7544 | LR: 1.00e-04
+Epoch 3/40 | Batch 400/1009 | Loss: 0.7409 | LR: 1.00e-04
+Epoch 3/40 | Batch 440/1009 | Loss: 0.7372 | LR: 1.00e-04
+Epoch 3/40 | Batch 480/1009 | Loss: 0.7400 | LR: 1.00e-04
+Epoch 3/40 | Batch 520/1009 | Loss: 0.7323 | LR: 1.00e-04
+Epoch 3/40 | Batch 560/1009 | Loss: 0.7306 | LR: 9.99e-05
+Epoch 3/40 | Batch 600/1009 | Loss: 0.7311 | LR: 9.99e-05
+Epoch 3/40 | Batch 640/1009 | Loss: 0.7318 | LR: 9.99e-05
+Epoch 3/40 | Batch 680/1009 | Loss: 0.7372 | LR: 9.99e-05
+Epoch 3/40 | Batch 720/1009 | Loss: 0.7574 | LR: 9.99e-05
+Epoch 3/40 | Batch 760/1009 | Loss: 0.7356 | LR: 9.99e-05
+Epoch 3/40 | Batch 800/1009 | Loss: 0.7368 | LR: 9.99e-05
+Epoch 3/40 | Batch 840/1009 | Loss: 0.7285 | LR: 9.99e-05
+Epoch 3/40 | Batch 880/1009 | Loss: 0.7590 | LR: 9.99e-05
+Epoch 3/40 | Batch 920/1009 | Loss: 0.7429 | LR: 9.99e-05
+Epoch 3/40 | Batch 960/1009 | Loss: 0.7395 | LR: 9.98e-05
+Epoch 3/40 | Batch 1000/1009 | Loss: 0.7322 | LR: 9.98e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 3, 40, 20, 3, 40, 20, 3, 21, 40] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 3 Summary:
+  Train Loss: 0.7430
+  Val Loss: 0.7499
+  PER: 0.4098
+  Avg LR: 9.99e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.4098
+Epoch 4/40 | Batch 0/1009 | Loss: 0.7415 | LR: 9.98e-05
+Epoch 4/40 | Batch 40/1009 | Loss: 0.7308 | LR: 9.98e-05
+Epoch 4/40 | Batch 80/1009 | Loss: 0.7348 | LR: 9.98e-05
+Epoch 4/40 | Batch 120/1009 | Loss: 0.7342 | LR: 9.98e-05
+Epoch 4/40 | Batch 160/1009 | Loss: 0.7344 | LR: 9.98e-05
+Epoch 4/40 | Batch 200/1009 | Loss: 0.7372 | LR: 9.98e-05
+Epoch 4/40 | Batch 240/1009 | Loss: 0.7223 | LR: 9.97e-05
+Epoch 4/40 | Batch 280/1009 | Loss: 0.7313 | LR: 9.97e-05
+Epoch 4/40 | Batch 320/1009 | Loss: 0.7482 | LR: 9.97e-05
+Epoch 4/40 | Batch 360/1009 | Loss: 0.7323 | LR: 9.97e-05
+Epoch 4/40 | Batch 400/1009 | Loss: 0.7202 | LR: 9.97e-05
+Epoch 4/40 | Batch 440/1009 | Loss: 0.7194 | LR: 9.97e-05
+Epoch 4/40 | Batch 480/1009 | Loss: 0.7354 | LR: 9.96e-05
+Epoch 4/40 | Batch 520/1009 | Loss: 0.7256 | LR: 9.96e-05
+Epoch 4/40 | Batch 560/1009 | Loss: 0.7235 | LR: 9.96e-05
+Epoch 4/40 | Batch 600/1009 | Loss: 0.7314 | LR: 9.96e-05
+Epoch 4/40 | Batch 640/1009 | Loss: 0.7149 | LR: 9.95e-05
+Epoch 4/40 | Batch 680/1009 | Loss: 0.7251 | LR: 9.95e-05
+Epoch 4/40 | Batch 720/1009 | Loss: 0.7022 | LR: 9.95e-05
+Epoch 4/40 | Batch 760/1009 | Loss: 0.7131 | LR: 9.95e-05
+Epoch 4/40 | Batch 800/1009 | Loss: 0.7365 | LR: 9.95e-05
+Epoch 4/40 | Batch 840/1009 | Loss: 0.7256 | LR: 9.94e-05
+Epoch 4/40 | Batch 880/1009 | Loss: 0.7294 | LR: 9.94e-05
+Epoch 4/40 | Batch 920/1009 | Loss: 0.7298 | LR: 9.94e-05
+Epoch 4/40 | Batch 960/1009 | Loss: 0.7325 | LR: 9.94e-05
+Epoch 4/40 | Batch 1000/1009 | Loss: 0.7235 | LR: 9.93e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 22, 18, 40, 10, 3, 40, 20, 3, 23] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 4 Summary:
+  Train Loss: 0.7283
+  Val Loss: 0.7373
+  PER: 0.3358
+  Avg LR: 9.96e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.3358
+Epoch 5/40 | Batch 0/1009 | Loss: 0.7147 | LR: 9.93e-05
+Epoch 5/40 | Batch 40/1009 | Loss: 0.7270 | LR: 9.93e-05
+Epoch 5/40 | Batch 80/1009 | Loss: 0.7223 | LR: 9.93e-05
+Epoch 5/40 | Batch 120/1009 | Loss: 0.7141 | LR: 9.92e-05
+Epoch 5/40 | Batch 160/1009 | Loss: 0.7165 | LR: 9.92e-05
+Epoch 5/40 | Batch 200/1009 | Loss: 0.7363 | LR: 9.92e-05
+Epoch 5/40 | Batch 240/1009 | Loss: 0.7171 | LR: 9.92e-05
+Epoch 5/40 | Batch 280/1009 | Loss: 0.7328 | LR: 9.91e-05
+Epoch 5/40 | Batch 320/1009 | Loss: 0.7173 | LR: 9.91e-05
+Epoch 5/40 | Batch 360/1009 | Loss: 0.7230 | LR: 9.91e-05
+Epoch 5/40 | Batch 400/1009 | Loss: 0.7065 | LR: 9.90e-05
+Epoch 5/40 | Batch 440/1009 | Loss: 0.7220 | LR: 9.90e-05
+Epoch 5/40 | Batch 480/1009 | Loss: 0.7116 | LR: 9.90e-05
+Epoch 5/40 | Batch 520/1009 | Loss: 0.7094 | LR: 9.89e-05
+Epoch 5/40 | Batch 560/1009 | Loss: 0.7164 | LR: 9.89e-05
+Epoch 5/40 | Batch 600/1009 | Loss: 0.7164 | LR: 9.89e-05
+Epoch 5/40 | Batch 640/1009 | Loss: 0.7043 | LR: 9.88e-05
+Epoch 5/40 | Batch 680/1009 | Loss: 0.7180 | LR: 9.88e-05
+Epoch 5/40 | Batch 720/1009 | Loss: 0.7321 | LR: 9.88e-05
+Epoch 5/40 | Batch 760/1009 | Loss: 0.7151 | LR: 9.87e-05
+Epoch 5/40 | Batch 800/1009 | Loss: 0.7120 | LR: 9.87e-05
+Epoch 5/40 | Batch 840/1009 | Loss: 0.7219 | LR: 9.86e-05
+Epoch 5/40 | Batch 880/1009 | Loss: 0.7182 | LR: 9.86e-05
+Epoch 5/40 | Batch 920/1009 | Loss: 0.7165 | LR: 9.86e-05
+Epoch 5/40 | Batch 960/1009 | Loss: 0.7073 | LR: 9.85e-05
+Epoch 5/40 | Batch 1000/1009 | Loss: 0.7194 | LR: 9.85e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 31, 29, 18, 40, 20, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 5 Summary:
+  Train Loss: 0.7192
+  Val Loss: 0.7317
+  PER: 0.3029
+  Avg LR: 9.89e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.3029
+Epoch 6/40 | Batch 0/1009 | Loss: 0.7218 | LR: 9.85e-05
+Epoch 6/40 | Batch 40/1009 | Loss: 0.6916 | LR: 9.84e-05
+Epoch 6/40 | Batch 80/1009 | Loss: 0.7099 | LR: 9.84e-05
+Epoch 6/40 | Batch 120/1009 | Loss: 0.6987 | LR: 9.84e-05
+Epoch 6/40 | Batch 160/1009 | Loss: 0.7033 | LR: 9.83e-05
+Epoch 6/40 | Batch 200/1009 | Loss: 0.7051 | LR: 9.83e-05
+Epoch 6/40 | Batch 240/1009 | Loss: 0.6990 | LR: 9.82e-05
+Epoch 6/40 | Batch 280/1009 | Loss: 0.7089 | LR: 9.82e-05
+Epoch 6/40 | Batch 320/1009 | Loss: 0.7325 | LR: 9.82e-05
+Epoch 6/40 | Batch 360/1009 | Loss: 0.7214 | LR: 9.81e-05
+Epoch 6/40 | Batch 400/1009 | Loss: 0.7433 | LR: 9.81e-05
+Epoch 6/40 | Batch 440/1009 | Loss: 0.7163 | LR: 9.80e-05
+Epoch 6/40 | Batch 480/1009 | Loss: 0.7137 | LR: 9.80e-05
+Epoch 6/40 | Batch 520/1009 | Loss: 0.7192 | LR: 9.79e-05
+Epoch 6/40 | Batch 560/1009 | Loss: 0.7229 | LR: 9.79e-05
+Epoch 6/40 | Batch 600/1009 | Loss: 0.7080 | LR: 9.78e-05
+Epoch 6/40 | Batch 640/1009 | Loss: 0.7060 | LR: 9.78e-05
+Epoch 6/40 | Batch 680/1009 | Loss: 0.7056 | LR: 9.77e-05
+Epoch 6/40 | Batch 720/1009 | Loss: 0.7121 | LR: 9.77e-05
+Epoch 6/40 | Batch 760/1009 | Loss: 0.7135 | LR: 9.76e-05
+Epoch 6/40 | Batch 800/1009 | Loss: 0.7006 | LR: 9.76e-05
+Epoch 6/40 | Batch 840/1009 | Loss: 0.7044 | LR: 9.75e-05
+Epoch 6/40 | Batch 880/1009 | Loss: 0.7079 | LR: 9.75e-05
+Epoch 6/40 | Batch 920/1009 | Loss: 0.7057 | LR: 9.74e-05
+Epoch 6/40 | Batch 960/1009 | Loss: 0.7154 | LR: 9.74e-05
+Epoch 6/40 | Batch 1000/1009 | Loss: 0.7086 | LR: 9.73e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 31, 29, 3, 40, 20, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 6 Summary:
+  Train Loss: 0.7126
+  Val Loss: 0.7305
+  PER: 0.2913
+  Avg LR: 9.79e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2913
+Epoch 7/40 | Batch 0/1009 | Loss: 0.7018 | LR: 9.73e-05
+Epoch 7/40 | Batch 40/1009 | Loss: 0.7114 | LR: 9.73e-05
+Epoch 7/40 | Batch 80/1009 | Loss: 0.7231 | LR: 9.72e-05
+Epoch 7/40 | Batch 120/1009 | Loss: 0.7003 | LR: 9.72e-05
+Epoch 7/40 | Batch 160/1009 | Loss: 0.7073 | LR: 9.71e-05
+Epoch 7/40 | Batch 200/1009 | Loss: 0.7102 | LR: 9.70e-05
+Epoch 7/40 | Batch 240/1009 | Loss: 0.7138 | LR: 9.70e-05
+Epoch 7/40 | Batch 280/1009 | Loss: 0.7040 | LR: 9.69e-05
+Epoch 7/40 | Batch 320/1009 | Loss: 0.7139 | LR: 9.69e-05
+Epoch 7/40 | Batch 360/1009 | Loss: 0.7024 | LR: 9.68e-05
+Epoch 7/40 | Batch 400/1009 | Loss: 0.7252 | LR: 9.68e-05
+Epoch 7/40 | Batch 440/1009 | Loss: 0.7263 | LR: 9.67e-05
+Epoch 7/40 | Batch 480/1009 | Loss: 0.7232 | LR: 9.66e-05
+Epoch 7/40 | Batch 520/1009 | Loss: 0.7154 | LR: 9.66e-05
+Epoch 7/40 | Batch 560/1009 | Loss: 0.7025 | LR: 9.65e-05
+Epoch 7/40 | Batch 600/1009 | Loss: 0.7061 | LR: 9.65e-05
+Epoch 7/40 | Batch 640/1009 | Loss: 0.7560 | LR: 9.64e-05
+Epoch 7/40 | Batch 680/1009 | Loss: 0.7050 | LR: 9.64e-05
+Epoch 7/40 | Batch 720/1009 | Loss: 0.6961 | LR: 9.63e-05
+Epoch 7/40 | Batch 760/1009 | Loss: 0.7012 | LR: 9.62e-05
+Epoch 7/40 | Batch 800/1009 | Loss: 0.7095 | LR: 9.62e-05
+Epoch 7/40 | Batch 840/1009 | Loss: 0.7118 | LR: 9.61e-05
+Epoch 7/40 | Batch 880/1009 | Loss: 0.7028 | LR: 9.60e-05
+Epoch 7/40 | Batch 920/1009 | Loss: 0.7122 | LR: 9.60e-05
+Epoch 7/40 | Batch 960/1009 | Loss: 0.7094 | LR: 9.59e-05
+Epoch 7/40 | Batch 1000/1009 | Loss: 0.7178 | LR: 9.58e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 7 Summary:
+  Train Loss: 0.7076
+  Val Loss: 0.7247
+  PER: 0.2544
+  Avg LR: 9.66e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2544
+Epoch 8/40 | Batch 0/1009 | Loss: 0.7039 | LR: 9.58e-05
+Epoch 8/40 | Batch 40/1009 | Loss: 0.6923 | LR: 9.58e-05
+Epoch 8/40 | Batch 80/1009 | Loss: 0.6923 | LR: 9.57e-05
+Epoch 8/40 | Batch 120/1009 | Loss: 0.6968 | LR: 9.56e-05
+Epoch 8/40 | Batch 160/1009 | Loss: 0.6945 | LR: 9.56e-05
+Epoch 8/40 | Batch 200/1009 | Loss: 0.7082 | LR: 9.55e-05
+Epoch 8/40 | Batch 240/1009 | Loss: 0.6959 | LR: 9.54e-05
+Epoch 8/40 | Batch 280/1009 | Loss: 0.6989 | LR: 9.54e-05
+Epoch 8/40 | Batch 320/1009 | Loss: 0.6994 | LR: 9.53e-05
+Epoch 8/40 | Batch 360/1009 | Loss: 0.6965 | LR: 9.52e-05
+Epoch 8/40 | Batch 400/1009 | Loss: 0.6916 | LR: 9.52e-05
+Epoch 8/40 | Batch 440/1009 | Loss: 0.7119 | LR: 9.51e-05
+Epoch 8/40 | Batch 480/1009 | Loss: 0.7062 | LR: 9.50e-05
+Epoch 8/40 | Batch 520/1009 | Loss: 0.7091 | LR: 9.49e-05
+Epoch 8/40 | Batch 560/1009 | Loss: 0.7164 | LR: 9.49e-05
+Epoch 8/40 | Batch 600/1009 | Loss: 0.7150 | LR: 9.48e-05
+Epoch 8/40 | Batch 640/1009 | Loss: 0.7139 | LR: 9.47e-05
+Epoch 8/40 | Batch 680/1009 | Loss: 0.7055 | LR: 9.47e-05
+Epoch 8/40 | Batch 720/1009 | Loss: 0.6964 | LR: 9.46e-05
+Epoch 8/40 | Batch 760/1009 | Loss: 0.6976 | LR: 9.45e-05
+Epoch 8/40 | Batch 800/1009 | Loss: 0.7048 | LR: 9.44e-05
+Epoch 8/40 | Batch 840/1009 | Loss: 0.7186 | LR: 9.44e-05
+Epoch 8/40 | Batch 880/1009 | Loss: 0.6938 | LR: 9.43e-05
+Epoch 8/40 | Batch 920/1009 | Loss: 0.7054 | LR: 9.42e-05
+Epoch 8/40 | Batch 960/1009 | Loss: 0.7068 | LR: 9.41e-05
+Epoch 8/40 | Batch 1000/1009 | Loss: 0.7057 | LR: 9.41e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 22, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 8 Summary:
+  Train Loss: 0.7031
+  Val Loss: 0.7238
+  PER: 0.2456
+  Avg LR: 9.50e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2456
+Epoch 9/40 | Batch 0/1009 | Loss: 0.6958 | LR: 9.40e-05
+Epoch 9/40 | Batch 40/1009 | Loss: 0.6937 | LR: 9.40e-05
+Epoch 9/40 | Batch 80/1009 | Loss: 0.7017 | LR: 9.39e-05
+Epoch 9/40 | Batch 120/1009 | Loss: 0.6980 | LR: 9.38e-05
+Epoch 9/40 | Batch 160/1009 | Loss: 0.6929 | LR: 9.37e-05
+Epoch 9/40 | Batch 200/1009 | Loss: 0.7027 | LR: 9.36e-05
+Epoch 9/40 | Batch 240/1009 | Loss: 0.7018 | LR: 9.36e-05
+Epoch 9/40 | Batch 280/1009 | Loss: 0.7163 | LR: 9.35e-05
+Epoch 9/40 | Batch 320/1009 | Loss: 0.6956 | LR: 9.34e-05
+Epoch 9/40 | Batch 360/1009 | Loss: 0.7018 | LR: 9.33e-05
+Epoch 9/40 | Batch 400/1009 | Loss: 0.7099 | LR: 9.32e-05
+Epoch 9/40 | Batch 440/1009 | Loss: 0.7129 | LR: 9.32e-05
+Epoch 9/40 | Batch 480/1009 | Loss: 0.6948 | LR: 9.31e-05
+Epoch 9/40 | Batch 520/1009 | Loss: 0.7038 | LR: 9.30e-05
+Epoch 9/40 | Batch 560/1009 | Loss: 0.6995 | LR: 9.29e-05
+Epoch 9/40 | Batch 600/1009 | Loss: 0.7001 | LR: 9.28e-05
+Epoch 9/40 | Batch 640/1009 | Loss: 0.6972 | LR: 9.27e-05
+Epoch 9/40 | Batch 680/1009 | Loss: 0.6941 | LR: 9.27e-05
+Epoch 9/40 | Batch 720/1009 | Loss: 0.6965 | LR: 9.26e-05
+Epoch 9/40 | Batch 760/1009 | Loss: 0.7075 | LR: 9.25e-05
+Epoch 9/40 | Batch 800/1009 | Loss: 0.7020 | LR: 9.24e-05
+Epoch 9/40 | Batch 840/1009 | Loss: 0.6931 | LR: 9.23e-05
+Epoch 9/40 | Batch 880/1009 | Loss: 0.7102 | LR: 9.22e-05
+Epoch 9/40 | Batch 920/1009 | Loss: 0.6943 | LR: 9.21e-05
+Epoch 9/40 | Batch 960/1009 | Loss: 0.6924 | LR: 9.20e-05
+Epoch 9/40 | Batch 1000/1009 | Loss: 0.7001 | LR: 9.20e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 31, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 9 Summary:
+  Train Loss: 0.6998
+  Val Loss: 0.7216
+  PER: 0.2307
+  Avg LR: 9.30e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2307
+Epoch 10/40 | Batch 0/1009 | Loss: 0.7066 | LR: 9.19e-05
+Epoch 10/40 | Batch 40/1009 | Loss: 0.6996 | LR: 9.19e-05
+Epoch 10/40 | Batch 80/1009 | Loss: 0.6979 | LR: 9.18e-05
+Epoch 10/40 | Batch 120/1009 | Loss: 0.7072 | LR: 9.17e-05
+Epoch 10/40 | Batch 160/1009 | Loss: 0.6912 | LR: 9.16e-05
+Epoch 10/40 | Batch 200/1009 | Loss: 0.6896 | LR: 9.15e-05
+Epoch 10/40 | Batch 240/1009 | Loss: 0.6979 | LR: 9.14e-05
+Epoch 10/40 | Batch 280/1009 | Loss: 0.6927 | LR: 9.13e-05
+Epoch 10/40 | Batch 320/1009 | Loss: 0.6983 | LR: 9.12e-05
+Epoch 10/40 | Batch 360/1009 | Loss: 0.6992 | LR: 9.11e-05
+Epoch 10/40 | Batch 400/1009 | Loss: 0.6951 | LR: 9.10e-05
+Epoch 10/40 | Batch 440/1009 | Loss: 0.7046 | LR: 9.09e-05
+Epoch 10/40 | Batch 480/1009 | Loss: 0.6974 | LR: 9.08e-05
+Epoch 10/40 | Batch 520/1009 | Loss: 0.6871 | LR: 9.07e-05
+Epoch 10/40 | Batch 560/1009 | Loss: 0.7010 | LR: 9.07e-05
+Epoch 10/40 | Batch 600/1009 | Loss: 0.6921 | LR: 9.06e-05
+Epoch 10/40 | Batch 640/1009 | Loss: 0.6935 | LR: 9.05e-05
+Epoch 10/40 | Batch 680/1009 | Loss: 0.6972 | LR: 9.04e-05
+Epoch 10/40 | Batch 720/1009 | Loss: 0.7040 | LR: 9.03e-05
+Epoch 10/40 | Batch 760/1009 | Loss: 0.7020 | LR: 9.02e-05
+Epoch 10/40 | Batch 800/1009 | Loss: 0.6926 | LR: 9.01e-05
+Epoch 10/40 | Batch 840/1009 | Loss: 0.6983 | LR: 9.00e-05
+Epoch 10/40 | Batch 880/1009 | Loss: 0.7012 | LR: 8.99e-05
+Epoch 10/40 | Batch 920/1009 | Loss: 0.7017 | LR: 8.98e-05
+Epoch 10/40 | Batch 960/1009 | Loss: 0.6912 | LR: 8.97e-05
+Epoch 10/40 | Batch 1000/1009 | Loss: 0.7010 | LR: 8.96e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 31, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 10 Summary:
+  Train Loss: 0.6967
+  Val Loss: 0.7219
+  PER: 0.2345
+  Avg LR: 9.08e-05
+------------------------------------------------------------
+Epoch 11/40 | Batch 0/1009 | Loss: 0.6982 | LR: 8.96e-05
+Epoch 11/40 | Batch 40/1009 | Loss: 0.6917 | LR: 8.95e-05
+Epoch 11/40 | Batch 80/1009 | Loss: 0.6898 | LR: 8.94e-05
+Epoch 11/40 | Batch 120/1009 | Loss: 0.6917 | LR: 8.93e-05
+Epoch 11/40 | Batch 160/1009 | Loss: 0.6915 | LR: 8.92e-05
+Epoch 11/40 | Batch 200/1009 | Loss: 0.6909 | LR: 8.91e-05
+Epoch 11/40 | Batch 240/1009 | Loss: 0.7031 | LR: 8.90e-05
+Epoch 11/40 | Batch 280/1009 | Loss: 0.6994 | LR: 8.89e-05
+Epoch 11/40 | Batch 320/1009 | Loss: 0.6928 | LR: 8.88e-05
+Epoch 11/40 | Batch 360/1009 | Loss: 0.6995 | LR: 8.86e-05
+Epoch 11/40 | Batch 400/1009 | Loss: 0.6904 | LR: 8.85e-05
+Epoch 11/40 | Batch 440/1009 | Loss: 0.6877 | LR: 8.84e-05
+Epoch 11/40 | Batch 480/1009 | Loss: 0.6986 | LR: 8.83e-05
+Epoch 11/40 | Batch 520/1009 | Loss: 0.6989 | LR: 8.82e-05
+Epoch 11/40 | Batch 560/1009 | Loss: 0.6986 | LR: 8.81e-05
+Epoch 11/40 | Batch 600/1009 | Loss: 0.6862 | LR: 8.80e-05
+Epoch 11/40 | Batch 640/1009 | Loss: 0.6921 | LR: 8.79e-05
+Epoch 11/40 | Batch 680/1009 | Loss: 0.6916 | LR: 8.78e-05
+Epoch 11/40 | Batch 720/1009 | Loss: 0.6918 | LR: 8.77e-05
+Epoch 11/40 | Batch 760/1009 | Loss: 0.6884 | LR: 8.76e-05
+Epoch 11/40 | Batch 800/1009 | Loss: 0.7082 | LR: 8.75e-05
+Epoch 11/40 | Batch 840/1009 | Loss: 0.6991 | LR: 8.74e-05
+Epoch 11/40 | Batch 880/1009 | Loss: 0.6961 | LR: 8.73e-05
+Epoch 11/40 | Batch 920/1009 | Loss: 0.6931 | LR: 8.72e-05
+Epoch 11/40 | Batch 960/1009 | Loss: 0.6923 | LR: 8.71e-05
+Epoch 11/40 | Batch 1000/1009 | Loss: 0.6971 | LR: 8.69e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 31, 37, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 11 Summary:
+  Train Loss: 0.6943
+  Val Loss: 0.7192
+  PER: 0.2179
+  Avg LR: 8.83e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2179
+Epoch 12/40 | Batch 0/1009 | Loss: 0.6885 | LR: 8.69e-05
+Epoch 12/40 | Batch 40/1009 | Loss: 0.6906 | LR: 8.68e-05
+Epoch 12/40 | Batch 80/1009 | Loss: 0.6940 | LR: 8.67e-05
+Epoch 12/40 | Batch 120/1009 | Loss: 0.6949 | LR: 8.66e-05
+Epoch 12/40 | Batch 160/1009 | Loss: 0.6935 | LR: 8.65e-05
+Epoch 12/40 | Batch 200/1009 | Loss: 0.6914 | LR: 8.64e-05
+Epoch 12/40 | Batch 240/1009 | Loss: 0.6941 | LR: 8.63e-05
+Epoch 12/40 | Batch 280/1009 | Loss: 0.6856 | LR: 8.61e-05
+Epoch 12/40 | Batch 320/1009 | Loss: 0.6914 | LR: 8.60e-05
+Epoch 12/40 | Batch 360/1009 | Loss: 0.6899 | LR: 8.59e-05
+Epoch 12/40 | Batch 400/1009 | Loss: 0.6941 | LR: 8.58e-05
+Epoch 12/40 | Batch 440/1009 | Loss: 0.6979 | LR: 8.57e-05
+Epoch 12/40 | Batch 480/1009 | Loss: 0.6911 | LR: 8.56e-05
+Epoch 12/40 | Batch 520/1009 | Loss: 0.6938 | LR: 8.55e-05
+Epoch 12/40 | Batch 560/1009 | Loss: 0.6919 | LR: 8.53e-05
+Epoch 12/40 | Batch 600/1009 | Loss: 0.6876 | LR: 8.52e-05
+Epoch 12/40 | Batch 640/1009 | Loss: 0.6904 | LR: 8.51e-05
+Epoch 12/40 | Batch 680/1009 | Loss: 0.6887 | LR: 8.50e-05
+Epoch 12/40 | Batch 720/1009 | Loss: 0.6909 | LR: 8.49e-05
+Epoch 12/40 | Batch 760/1009 | Loss: 0.6962 | LR: 8.48e-05
+Epoch 12/40 | Batch 800/1009 | Loss: 0.6926 | LR: 8.46e-05
+Epoch 12/40 | Batch 840/1009 | Loss: 0.6908 | LR: 8.45e-05
+Epoch 12/40 | Batch 880/1009 | Loss: 0.6930 | LR: 8.44e-05
+Epoch 12/40 | Batch 920/1009 | Loss: 0.6879 | LR: 8.43e-05
+Epoch 12/40 | Batch 960/1009 | Loss: 0.7057 | LR: 8.42e-05
+Epoch 12/40 | Batch 1000/1009 | Loss: 0.6941 | LR: 8.41e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 12 Summary:
+  Train Loss: 0.6922
+  Val Loss: 0.7191
+  PER: 0.2127
+  Avg LR: 8.55e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2127
+Epoch 13/40 | Batch 0/1009 | Loss: 0.6887 | LR: 8.40e-05
+Epoch 13/40 | Batch 40/1009 | Loss: 0.6865 | LR: 8.39e-05
+Epoch 13/40 | Batch 80/1009 | Loss: 0.6889 | LR: 8.38e-05
+Epoch 13/40 | Batch 120/1009 | Loss: 0.6931 | LR: 8.37e-05
+Epoch 13/40 | Batch 160/1009 | Loss: 0.6900 | LR: 8.35e-05
+Epoch 13/40 | Batch 200/1009 | Loss: 0.6889 | LR: 8.34e-05
+Epoch 13/40 | Batch 240/1009 | Loss: 0.6871 | LR: 8.33e-05
+Epoch 13/40 | Batch 280/1009 | Loss: 0.6905 | LR: 8.32e-05
+Epoch 13/40 | Batch 320/1009 | Loss: 0.6969 | LR: 8.31e-05
+Epoch 13/40 | Batch 360/1009 | Loss: 0.6930 | LR: 8.29e-05
+Epoch 13/40 | Batch 400/1009 | Loss: 0.6863 | LR: 8.28e-05
+Epoch 13/40 | Batch 440/1009 | Loss: 0.6889 | LR: 8.27e-05
+Epoch 13/40 | Batch 480/1009 | Loss: 0.6930 | LR: 8.26e-05
+Epoch 13/40 | Batch 520/1009 | Loss: 0.6883 | LR: 8.24e-05
+Epoch 13/40 | Batch 560/1009 | Loss: 0.6915 | LR: 8.23e-05
+Epoch 13/40 | Batch 600/1009 | Loss: 0.6931 | LR: 8.22e-05
+Epoch 13/40 | Batch 640/1009 | Loss: 0.6896 | LR: 8.21e-05
+Epoch 13/40 | Batch 680/1009 | Loss: 0.6898 | LR: 8.19e-05
+Epoch 13/40 | Batch 720/1009 | Loss: 0.6908 | LR: 8.18e-05
+Epoch 13/40 | Batch 760/1009 | Loss: 0.7018 | LR: 8.17e-05
+Epoch 13/40 | Batch 800/1009 | Loss: 0.6903 | LR: 8.16e-05
+Epoch 13/40 | Batch 840/1009 | Loss: 0.6897 | LR: 8.14e-05
+Epoch 13/40 | Batch 880/1009 | Loss: 0.6983 | LR: 8.13e-05
+Epoch 13/40 | Batch 920/1009 | Loss: 0.6898 | LR: 8.12e-05
+Epoch 13/40 | Batch 960/1009 | Loss: 0.6893 | LR: 8.11e-05
+Epoch 13/40 | Batch 1000/1009 | Loss: 0.6904 | LR: 8.09e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 31, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 13 Summary:
+  Train Loss: 0.6906
+  Val Loss: 0.7201
+  PER: 0.2176
+  Avg LR: 8.25e-05
+------------------------------------------------------------
+Epoch 14/40 | Batch 0/1009 | Loss: 0.6890 | LR: 8.09e-05
+Epoch 14/40 | Batch 40/1009 | Loss: 0.6877 | LR: 8.08e-05
+Epoch 14/40 | Batch 80/1009 | Loss: 0.6887 | LR: 8.06e-05
+Epoch 14/40 | Batch 120/1009 | Loss: 0.6872 | LR: 8.05e-05
+Epoch 14/40 | Batch 160/1009 | Loss: 0.6900 | LR: 8.04e-05
+Epoch 14/40 | Batch 200/1009 | Loss: 0.6941 | LR: 8.03e-05
+Epoch 14/40 | Batch 240/1009 | Loss: 0.6880 | LR: 8.01e-05
+Epoch 14/40 | Batch 280/1009 | Loss: 0.6900 | LR: 8.00e-05
+Epoch 14/40 | Batch 320/1009 | Loss: 0.6869 | LR: 7.99e-05
+Epoch 14/40 | Batch 360/1009 | Loss: 0.6905 | LR: 7.97e-05
+Epoch 14/40 | Batch 400/1009 | Loss: 0.6872 | LR: 7.96e-05
+Epoch 14/40 | Batch 440/1009 | Loss: 0.6899 | LR: 7.95e-05
+Epoch 14/40 | Batch 480/1009 | Loss: 0.6916 | LR: 7.93e-05
+Epoch 14/40 | Batch 520/1009 | Loss: 0.6915 | LR: 7.92e-05
+Epoch 14/40 | Batch 560/1009 | Loss: 0.6924 | LR: 7.91e-05
+Epoch 14/40 | Batch 600/1009 | Loss: 0.6870 | LR: 7.89e-05
+Epoch 14/40 | Batch 640/1009 | Loss: 0.6900 | LR: 7.88e-05
+Epoch 14/40 | Batch 680/1009 | Loss: 0.6936 | LR: 7.87e-05
+Epoch 14/40 | Batch 720/1009 | Loss: 0.6892 | LR: 7.85e-05
+Epoch 14/40 | Batch 760/1009 | Loss: 0.6879 | LR: 7.84e-05
+Epoch 14/40 | Batch 800/1009 | Loss: 0.6952 | LR: 7.83e-05
+Epoch 14/40 | Batch 840/1009 | Loss: 0.6906 | LR: 7.81e-05
+Epoch 14/40 | Batch 880/1009 | Loss: 0.6865 | LR: 7.80e-05
+Epoch 14/40 | Batch 920/1009 | Loss: 0.6976 | LR: 7.79e-05
+Epoch 14/40 | Batch 960/1009 | Loss: 0.6868 | LR: 7.77e-05
+Epoch 14/40 | Batch 1000/1009 | Loss: 0.6875 | LR: 7.76e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 14 Summary:
+  Train Loss: 0.6889
+  Val Loss: 0.7182
+  PER: 0.2068
+  Avg LR: 7.93e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2068
+Epoch 15/40 | Batch 0/1009 | Loss: 0.6926 | LR: 7.76e-05
+Epoch 15/40 | Batch 40/1009 | Loss: 0.6922 | LR: 7.74e-05
+Epoch 15/40 | Batch 80/1009 | Loss: 0.6879 | LR: 7.73e-05
+Epoch 15/40 | Batch 120/1009 | Loss: 0.6862 | LR: 7.72e-05
+Epoch 15/40 | Batch 160/1009 | Loss: 0.6836 | LR: 7.70e-05
+Epoch 15/40 | Batch 200/1009 | Loss: 0.6844 | LR: 7.69e-05
+Epoch 15/40 | Batch 240/1009 | Loss: 0.6893 | LR: 7.68e-05
+Epoch 15/40 | Batch 280/1009 | Loss: 0.6872 | LR: 7.66e-05
+Epoch 15/40 | Batch 320/1009 | Loss: 0.6861 | LR: 7.65e-05
+Epoch 15/40 | Batch 360/1009 | Loss: 0.6882 | LR: 7.63e-05
+Epoch 15/40 | Batch 400/1009 | Loss: 0.6858 | LR: 7.62e-05
+Epoch 15/40 | Batch 440/1009 | Loss: 0.6907 | LR: 7.61e-05
+Epoch 15/40 | Batch 480/1009 | Loss: 0.6866 | LR: 7.59e-05
+Epoch 15/40 | Batch 520/1009 | Loss: 0.6859 | LR: 7.58e-05
+Epoch 15/40 | Batch 560/1009 | Loss: 0.6912 | LR: 7.56e-05
+Epoch 15/40 | Batch 600/1009 | Loss: 0.6872 | LR: 7.55e-05
+Epoch 15/40 | Batch 640/1009 | Loss: 0.6907 | LR: 7.54e-05
+Epoch 15/40 | Batch 680/1009 | Loss: 0.6890 | LR: 7.52e-05
+Epoch 15/40 | Batch 720/1009 | Loss: 0.6888 | LR: 7.51e-05
+Epoch 15/40 | Batch 760/1009 | Loss: 0.6882 | LR: 7.49e-05
+Epoch 15/40 | Batch 800/1009 | Loss: 0.6904 | LR: 7.48e-05
+Epoch 15/40 | Batch 840/1009 | Loss: 0.6893 | LR: 7.47e-05
+Epoch 15/40 | Batch 880/1009 | Loss: 0.6862 | LR: 7.45e-05
+Epoch 15/40 | Batch 920/1009 | Loss: 0.6890 | LR: 7.44e-05
+Epoch 15/40 | Batch 960/1009 | Loss: 0.6868 | LR: 7.42e-05
+Epoch 15/40 | Batch 1000/1009 | Loss: 0.6854 | LR: 7.41e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 31, 18, 40, 10, 3, 40, 20, 3, 21, 40] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 15 Summary:
+  Train Loss: 0.6877
+  Val Loss: 0.7169
+  PER: 0.2030
+  Avg LR: 7.58e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.2030
+Epoch 16/40 | Batch 0/1009 | Loss: 0.6893 | LR: 7.41e-05
+Epoch 16/40 | Batch 40/1009 | Loss: 0.6847 | LR: 7.39e-05
+Epoch 16/40 | Batch 80/1009 | Loss: 0.6856 | LR: 7.38e-05
+Epoch 16/40 | Batch 120/1009 | Loss: 0.6885 | LR: 7.36e-05
+Epoch 16/40 | Batch 160/1009 | Loss: 0.6876 | LR: 7.35e-05
+Epoch 16/40 | Batch 200/1009 | Loss: 0.6850 | LR: 7.33e-05
+Epoch 16/40 | Batch 240/1009 | Loss: 0.6840 | LR: 7.32e-05
+Epoch 16/40 | Batch 280/1009 | Loss: 0.6854 | LR: 7.31e-05
+Epoch 16/40 | Batch 320/1009 | Loss: 0.6875 | LR: 7.29e-05
+Epoch 16/40 | Batch 360/1009 | Loss: 0.6860 | LR: 7.28e-05
+Epoch 16/40 | Batch 400/1009 | Loss: 0.6874 | LR: 7.26e-05
+Epoch 16/40 | Batch 440/1009 | Loss: 0.6894 | LR: 7.25e-05
+Epoch 16/40 | Batch 480/1009 | Loss: 0.6859 | LR: 7.23e-05
+Epoch 16/40 | Batch 520/1009 | Loss: 0.6866 | LR: 7.22e-05
+Epoch 16/40 | Batch 560/1009 | Loss: 0.6839 | LR: 7.20e-05
+Epoch 16/40 | Batch 600/1009 | Loss: 0.6862 | LR: 7.19e-05
+Epoch 16/40 | Batch 640/1009 | Loss: 0.6893 | LR: 7.17e-05
+Epoch 16/40 | Batch 680/1009 | Loss: 0.6866 | LR: 7.16e-05
+Epoch 16/40 | Batch 720/1009 | Loss: 0.6870 | LR: 7.15e-05
+Epoch 16/40 | Batch 760/1009 | Loss: 0.6872 | LR: 7.13e-05
+Epoch 16/40 | Batch 800/1009 | Loss: 0.6860 | LR: 7.12e-05
+Epoch 16/40 | Batch 840/1009 | Loss: 0.6850 | LR: 7.10e-05
+Epoch 16/40 | Batch 880/1009 | Loss: 0.6859 | LR: 7.09e-05
+Epoch 16/40 | Batch 920/1009 | Loss: 0.6889 | LR: 7.07e-05
+Epoch 16/40 | Batch 960/1009 | Loss: 0.6889 | LR: 7.06e-05
+Epoch 16/40 | Batch 1000/1009 | Loss: 0.6845 | LR: 7.04e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 31, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 16 Summary:
+  Train Loss: 0.6868
+  Val Loss: 0.7162
+  PER: 0.1975
+  Avg LR: 7.22e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1975
+Epoch 17/40 | Batch 0/1009 | Loss: 0.6875 | LR: 7.04e-05
+Epoch 17/40 | Batch 40/1009 | Loss: 0.6884 | LR: 7.02e-05
+Epoch 17/40 | Batch 80/1009 | Loss: 0.6847 | LR: 7.01e-05
+Epoch 17/40 | Batch 120/1009 | Loss: 0.6848 | LR: 6.99e-05
+Epoch 17/40 | Batch 160/1009 | Loss: 0.6869 | LR: 6.98e-05
+Epoch 17/40 | Batch 200/1009 | Loss: 0.6865 | LR: 6.96e-05
+Epoch 17/40 | Batch 240/1009 | Loss: 0.6906 | LR: 6.95e-05
+Epoch 17/40 | Batch 280/1009 | Loss: 0.6854 | LR: 6.93e-05
+Epoch 17/40 | Batch 320/1009 | Loss: 0.6874 | LR: 6.92e-05
+Epoch 17/40 | Batch 360/1009 | Loss: 0.6872 | LR: 6.90e-05
+Epoch 17/40 | Batch 400/1009 | Loss: 0.6858 | LR: 6.89e-05
+Epoch 17/40 | Batch 440/1009 | Loss: 0.6854 | LR: 6.87e-05
+Epoch 17/40 | Batch 480/1009 | Loss: 0.6842 | LR: 6.86e-05
+Epoch 17/40 | Batch 520/1009 | Loss: 0.6834 | LR: 6.84e-05
+Epoch 17/40 | Batch 560/1009 | Loss: 0.6871 | LR: 6.83e-05
+Epoch 17/40 | Batch 600/1009 | Loss: 0.6865 | LR: 6.81e-05
+Epoch 17/40 | Batch 640/1009 | Loss: 0.6854 | LR: 6.80e-05
+Epoch 17/40 | Batch 680/1009 | Loss: 0.6904 | LR: 6.78e-05
+Epoch 17/40 | Batch 720/1009 | Loss: 0.6841 | LR: 6.77e-05
+Epoch 17/40 | Batch 760/1009 | Loss: 0.6880 | LR: 6.75e-05
+Epoch 17/40 | Batch 800/1009 | Loss: 0.6829 | LR: 6.74e-05
+Epoch 17/40 | Batch 840/1009 | Loss: 0.6876 | LR: 6.72e-05
+Epoch 17/40 | Batch 880/1009 | Loss: 0.6889 | LR: 6.71e-05
+Epoch 17/40 | Batch 920/1009 | Loss: 0.6839 | LR: 6.69e-05
+Epoch 17/40 | Batch 960/1009 | Loss: 0.6872 | LR: 6.68e-05
+Epoch 17/40 | Batch 1000/1009 | Loss: 0.6844 | LR: 6.66e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 31, 18, 40, 10, 3, 40, 20, 25, 21, 40] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 17 Summary:
+  Train Loss: 0.6859
+  Val Loss: 0.7154
+  PER: 0.1949
+  Avg LR: 6.85e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1949
+Epoch 18/40 | Batch 0/1009 | Loss: 0.6851 | LR: 6.66e-05
+Epoch 18/40 | Batch 40/1009 | Loss: 0.6852 | LR: 6.64e-05
+Epoch 18/40 | Batch 80/1009 | Loss: 0.6841 | LR: 6.63e-05
+Epoch 18/40 | Batch 120/1009 | Loss: 0.6856 | LR: 6.61e-05
+Epoch 18/40 | Batch 160/1009 | Loss: 0.6837 | LR: 6.60e-05
+Epoch 18/40 | Batch 200/1009 | Loss: 0.6858 | LR: 6.58e-05
+Epoch 18/40 | Batch 240/1009 | Loss: 0.6837 | LR: 6.56e-05
+Epoch 18/40 | Batch 280/1009 | Loss: 0.6848 | LR: 6.55e-05
+Epoch 18/40 | Batch 320/1009 | Loss: 0.6866 | LR: 6.53e-05
+Epoch 18/40 | Batch 360/1009 | Loss: 0.6827 | LR: 6.52e-05
+Epoch 18/40 | Batch 400/1009 | Loss: 0.6892 | LR: 6.50e-05
+Epoch 18/40 | Batch 440/1009 | Loss: 0.6838 | LR: 6.49e-05
+Epoch 18/40 | Batch 480/1009 | Loss: 0.7025 | LR: 6.47e-05
+Epoch 18/40 | Batch 520/1009 | Loss: 0.6832 | LR: 6.46e-05
+Epoch 18/40 | Batch 560/1009 | Loss: 0.6832 | LR: 6.44e-05
+Epoch 18/40 | Batch 600/1009 | Loss: 0.6848 | LR: 6.43e-05
+Epoch 18/40 | Batch 640/1009 | Loss: 0.6846 | LR: 6.41e-05
+Epoch 18/40 | Batch 680/1009 | Loss: 0.6841 | LR: 6.39e-05
+Epoch 18/40 | Batch 720/1009 | Loss: 0.6843 | LR: 6.38e-05
+Epoch 18/40 | Batch 760/1009 | Loss: 0.6860 | LR: 6.36e-05
+Epoch 18/40 | Batch 800/1009 | Loss: 0.6858 | LR: 6.35e-05
+Epoch 18/40 | Batch 840/1009 | Loss: 0.6831 | LR: 6.33e-05
+Epoch 18/40 | Batch 880/1009 | Loss: 0.6833 | LR: 6.32e-05
+Epoch 18/40 | Batch 920/1009 | Loss: 0.6838 | LR: 6.30e-05
+Epoch 18/40 | Batch 960/1009 | Loss: 0.6853 | LR: 6.28e-05
+Epoch 18/40 | Batch 1000/1009 | Loss: 0.6850 | LR: 6.27e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 18 Summary:
+  Train Loss: 0.6852
+  Val Loss: 0.7163
+  PER: 0.1986
+  Avg LR: 6.46e-05
+------------------------------------------------------------
+Epoch 19/40 | Batch 0/1009 | Loss: 0.6851 | LR: 6.27e-05
+Epoch 19/40 | Batch 40/1009 | Loss: 0.6845 | LR: 6.25e-05
+Epoch 19/40 | Batch 80/1009 | Loss: 0.6840 | LR: 6.23e-05
+Epoch 19/40 | Batch 120/1009 | Loss: 0.6839 | LR: 6.22e-05
+Epoch 19/40 | Batch 160/1009 | Loss: 0.6834 | LR: 6.20e-05
+Epoch 19/40 | Batch 200/1009 | Loss: 0.6855 | LR: 6.19e-05
+Epoch 19/40 | Batch 240/1009 | Loss: 0.6833 | LR: 6.17e-05
+Epoch 19/40 | Batch 280/1009 | Loss: 0.6847 | LR: 6.15e-05
+Epoch 19/40 | Batch 320/1009 | Loss: 0.6840 | LR: 6.14e-05
+Epoch 19/40 | Batch 360/1009 | Loss: 0.6871 | LR: 6.12e-05
+Epoch 19/40 | Batch 400/1009 | Loss: 0.6827 | LR: 6.11e-05
+Epoch 19/40 | Batch 440/1009 | Loss: 0.6834 | LR: 6.09e-05
+Epoch 19/40 | Batch 480/1009 | Loss: 0.6856 | LR: 6.08e-05
+Epoch 19/40 | Batch 520/1009 | Loss: 0.6830 | LR: 6.06e-05
+Epoch 19/40 | Batch 560/1009 | Loss: 0.6837 | LR: 6.04e-05
+Epoch 19/40 | Batch 600/1009 | Loss: 0.6851 | LR: 6.03e-05
+Epoch 19/40 | Batch 640/1009 | Loss: 0.6830 | LR: 6.01e-05
+Epoch 19/40 | Batch 680/1009 | Loss: 0.6830 | LR: 6.00e-05
+Epoch 19/40 | Batch 720/1009 | Loss: 0.6836 | LR: 5.98e-05
+Epoch 19/40 | Batch 760/1009 | Loss: 0.6834 | LR: 5.96e-05
+Epoch 19/40 | Batch 800/1009 | Loss: 0.6847 | LR: 5.95e-05
+Epoch 19/40 | Batch 840/1009 | Loss: 0.6850 | LR: 5.93e-05
+Epoch 19/40 | Batch 880/1009 | Loss: 0.6851 | LR: 5.92e-05
+Epoch 19/40 | Batch 920/1009 | Loss: 0.6851 | LR: 5.90e-05
+Epoch 19/40 | Batch 960/1009 | Loss: 0.6843 | LR: 5.88e-05
+Epoch 19/40 | Batch 1000/1009 | Loss: 0.6837 | LR: 5.87e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 2, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 19 Summary:
+  Train Loss: 0.6846
+  Val Loss: 0.7147
+  PER: 0.1904
+  Avg LR: 6.07e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1904
+Epoch 20/40 | Batch 0/1009 | Loss: 0.6841 | LR: 5.86e-05
+Epoch 20/40 | Batch 40/1009 | Loss: 0.6838 | LR: 5.85e-05
+Epoch 20/40 | Batch 80/1009 | Loss: 0.6829 | LR: 5.83e-05
+Epoch 20/40 | Batch 120/1009 | Loss: 0.6828 | LR: 5.82e-05
+Epoch 20/40 | Batch 160/1009 | Loss: 0.6847 | LR: 5.80e-05
+Epoch 20/40 | Batch 200/1009 | Loss: 0.6843 | LR: 5.78e-05
+Epoch 20/40 | Batch 240/1009 | Loss: 0.6856 | LR: 5.77e-05
+Epoch 20/40 | Batch 280/1009 | Loss: 0.6840 | LR: 5.75e-05
+Epoch 20/40 | Batch 320/1009 | Loss: 0.6822 | LR: 5.74e-05
+Epoch 20/40 | Batch 360/1009 | Loss: 0.6839 | LR: 5.72e-05
+Epoch 20/40 | Batch 400/1009 | Loss: 0.6832 | LR: 5.70e-05
+Epoch 20/40 | Batch 440/1009 | Loss: 0.6843 | LR: 5.69e-05
+Epoch 20/40 | Batch 480/1009 | Loss: 0.6828 | LR: 5.67e-05
+Epoch 20/40 | Batch 520/1009 | Loss: 0.6839 | LR: 5.66e-05
+Epoch 20/40 | Batch 560/1009 | Loss: 0.6848 | LR: 5.64e-05
+Epoch 20/40 | Batch 600/1009 | Loss: 0.6838 | LR: 5.62e-05
+Epoch 20/40 | Batch 640/1009 | Loss: 0.6993 | LR: 5.61e-05
+Epoch 20/40 | Batch 680/1009 | Loss: 0.6831 | LR: 5.59e-05
+Epoch 20/40 | Batch 720/1009 | Loss: 0.6832 | LR: 5.58e-05
+Epoch 20/40 | Batch 760/1009 | Loss: 0.6857 | LR: 5.56e-05
+Epoch 20/40 | Batch 800/1009 | Loss: 0.6833 | LR: 5.54e-05
+Epoch 20/40 | Batch 840/1009 | Loss: 0.6853 | LR: 5.53e-05
+Epoch 20/40 | Batch 880/1009 | Loss: 0.6830 | LR: 5.51e-05
+Epoch 20/40 | Batch 920/1009 | Loss: 0.6859 | LR: 5.49e-05
+Epoch 20/40 | Batch 960/1009 | Loss: 0.6843 | LR: 5.48e-05
+Epoch 20/40 | Batch 1000/1009 | Loss: 0.6835 | LR: 5.46e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 31, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 20 Summary:
+  Train Loss: 0.6840
+  Val Loss: 0.7136
+  PER: 0.1837
+  Avg LR: 5.66e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1837
+Epoch 21/40 | Batch 0/1009 | Loss: 0.6828 | LR: 5.46e-05
+Epoch 21/40 | Batch 40/1009 | Loss: 0.6842 | LR: 5.44e-05
+Epoch 21/40 | Batch 80/1009 | Loss: 0.6831 | LR: 5.43e-05
+Epoch 21/40 | Batch 120/1009 | Loss: 0.6829 | LR: 5.41e-05
+Epoch 21/40 | Batch 160/1009 | Loss: 0.6847 | LR: 5.39e-05
+Epoch 21/40 | Batch 200/1009 | Loss: 0.6822 | LR: 5.38e-05
+Epoch 21/40 | Batch 240/1009 | Loss: 0.6824 | LR: 5.36e-05
+Epoch 21/40 | Batch 280/1009 | Loss: 0.6840 | LR: 5.35e-05
+Epoch 21/40 | Batch 320/1009 | Loss: 0.6833 | LR: 5.33e-05
+Epoch 21/40 | Batch 360/1009 | Loss: 0.6825 | LR: 5.31e-05
+Epoch 21/40 | Batch 400/1009 | Loss: 0.6823 | LR: 5.30e-05
+Epoch 21/40 | Batch 440/1009 | Loss: 0.6844 | LR: 5.28e-05
+Epoch 21/40 | Batch 480/1009 | Loss: 0.6818 | LR: 5.26e-05
+Epoch 21/40 | Batch 520/1009 | Loss: 0.6821 | LR: 5.25e-05
+Epoch 21/40 | Batch 560/1009 | Loss: 0.6831 | LR: 5.23e-05
+Epoch 21/40 | Batch 600/1009 | Loss: 0.6840 | LR: 5.22e-05
+Epoch 21/40 | Batch 640/1009 | Loss: 0.6832 | LR: 5.20e-05
+Epoch 21/40 | Batch 680/1009 | Loss: 0.6839 | LR: 5.18e-05
+Epoch 21/40 | Batch 720/1009 | Loss: 0.6867 | LR: 5.17e-05
+Epoch 21/40 | Batch 760/1009 | Loss: 0.6835 | LR: 5.15e-05
+Epoch 21/40 | Batch 800/1009 | Loss: 0.6865 | LR: 5.13e-05
+Epoch 21/40 | Batch 840/1009 | Loss: 0.6831 | LR: 5.12e-05
+Epoch 21/40 | Batch 880/1009 | Loss: 0.6834 | LR: 5.10e-05
+Epoch 21/40 | Batch 920/1009 | Loss: 0.6854 | LR: 5.09e-05
+Epoch 21/40 | Batch 960/1009 | Loss: 0.6834 | LR: 5.07e-05
+Epoch 21/40 | Batch 1000/1009 | Loss: 0.6845 | LR: 5.05e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 21 Summary:
+  Train Loss: 0.6836
+  Val Loss: 0.7138
+  PER: 0.1880
+  Avg LR: 5.25e-05
+------------------------------------------------------------
+Epoch 22/40 | Batch 0/1009 | Loss: 0.6829 | LR: 5.05e-05
+Epoch 22/40 | Batch 40/1009 | Loss: 0.6821 | LR: 5.03e-05
+Epoch 22/40 | Batch 80/1009 | Loss: 0.6827 | LR: 5.02e-05
+Epoch 22/40 | Batch 120/1009 | Loss: 0.6824 | LR: 5.00e-05
+Epoch 22/40 | Batch 160/1009 | Loss: 0.6824 | LR: 4.99e-05
+Epoch 22/40 | Batch 200/1009 | Loss: 0.6827 | LR: 4.97e-05
+Epoch 22/40 | Batch 240/1009 | Loss: 0.6826 | LR: 4.95e-05
+Epoch 22/40 | Batch 280/1009 | Loss: 0.6832 | LR: 4.94e-05
+Epoch 22/40 | Batch 320/1009 | Loss: 0.6816 | LR: 4.92e-05
+Epoch 22/40 | Batch 360/1009 | Loss: 0.6830 | LR: 4.90e-05
+Epoch 22/40 | Batch 400/1009 | Loss: 0.6831 | LR: 4.89e-05
+Epoch 22/40 | Batch 440/1009 | Loss: 0.6847 | LR: 4.87e-05
+Epoch 22/40 | Batch 480/1009 | Loss: 0.6822 | LR: 4.86e-05
+Epoch 22/40 | Batch 520/1009 | Loss: 0.6822 | LR: 4.84e-05
+Epoch 22/40 | Batch 560/1009 | Loss: 0.6831 | LR: 4.82e-05
+Epoch 22/40 | Batch 600/1009 | Loss: 0.6820 | LR: 4.81e-05
+Epoch 22/40 | Batch 640/1009 | Loss: 0.6841 | LR: 4.79e-05
+Epoch 22/40 | Batch 680/1009 | Loss: 0.6832 | LR: 4.77e-05
+Epoch 22/40 | Batch 720/1009 | Loss: 0.6840 | LR: 4.76e-05
+Epoch 22/40 | Batch 760/1009 | Loss: 0.6827 | LR: 4.74e-05
+Epoch 22/40 | Batch 800/1009 | Loss: 0.6838 | LR: 4.73e-05
+Epoch 22/40 | Batch 840/1009 | Loss: 0.6826 | LR: 4.71e-05
+Epoch 22/40 | Batch 880/1009 | Loss: 0.6821 | LR: 4.69e-05
+Epoch 22/40 | Batch 920/1009 | Loss: 0.6839 | LR: 4.68e-05
+Epoch 22/40 | Batch 960/1009 | Loss: 0.6825 | LR: 4.66e-05
+Epoch 22/40 | Batch 1000/1009 | Loss: 0.6856 | LR: 4.64e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 31, 29, 18, 40, 10, 3, 40, 20, 13, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 22 Summary:
+  Train Loss: 0.6832
+  Val Loss: 0.7135
+  PER: 0.1830
+  Avg LR: 4.85e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1830
+Epoch 23/40 | Batch 0/1009 | Loss: 0.6829 | LR: 4.64e-05
+Epoch 23/40 | Batch 40/1009 | Loss: 0.6829 | LR: 4.63e-05
+Epoch 23/40 | Batch 80/1009 | Loss: 0.6853 | LR: 4.61e-05
+Epoch 23/40 | Batch 120/1009 | Loss: 0.6829 | LR: 4.59e-05
+Epoch 23/40 | Batch 160/1009 | Loss: 0.6825 | LR: 4.58e-05
+Epoch 23/40 | Batch 200/1009 | Loss: 0.6828 | LR: 4.56e-05
+Epoch 23/40 | Batch 240/1009 | Loss: 0.6830 | LR: 4.54e-05
+Epoch 23/40 | Batch 280/1009 | Loss: 0.6814 | LR: 4.53e-05
+Epoch 23/40 | Batch 320/1009 | Loss: 0.6831 | LR: 4.51e-05
+Epoch 23/40 | Batch 360/1009 | Loss: 0.6828 | LR: 4.50e-05
+Epoch 23/40 | Batch 400/1009 | Loss: 0.6850 | LR: 4.48e-05
+Epoch 23/40 | Batch 440/1009 | Loss: 0.6832 | LR: 4.46e-05
+Epoch 23/40 | Batch 480/1009 | Loss: 0.6836 | LR: 4.45e-05
+Epoch 23/40 | Batch 520/1009 | Loss: 0.6830 | LR: 4.43e-05
+Epoch 23/40 | Batch 560/1009 | Loss: 0.6838 | LR: 4.42e-05
+Epoch 23/40 | Batch 600/1009 | Loss: 0.6821 | LR: 4.40e-05
+Epoch 23/40 | Batch 640/1009 | Loss: 0.6825 | LR: 4.38e-05
+Epoch 23/40 | Batch 680/1009 | Loss: 0.6821 | LR: 4.37e-05
+Epoch 23/40 | Batch 720/1009 | Loss: 0.6822 | LR: 4.35e-05
+Epoch 23/40 | Batch 760/1009 | Loss: 0.6842 | LR: 4.34e-05
+Epoch 23/40 | Batch 800/1009 | Loss: 0.6832 | LR: 4.32e-05
+Epoch 23/40 | Batch 840/1009 | Loss: 0.6833 | LR: 4.30e-05
+Epoch 23/40 | Batch 880/1009 | Loss: 0.6839 | LR: 4.29e-05
+Epoch 23/40 | Batch 920/1009 | Loss: 0.6841 | LR: 4.27e-05
+Epoch 23/40 | Batch 960/1009 | Loss: 0.6819 | LR: 4.25e-05
+Epoch 23/40 | Batch 1000/1009 | Loss: 0.6827 | LR: 4.24e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 23 Summary:
+  Train Loss: 0.6829
+  Val Loss: 0.7130
+  PER: 0.1812
+  Avg LR: 4.44e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1812
+Epoch 24/40 | Batch 0/1009 | Loss: 0.6824 | LR: 4.24e-05
+Epoch 24/40 | Batch 40/1009 | Loss: 0.6816 | LR: 4.22e-05
+Epoch 24/40 | Batch 80/1009 | Loss: 0.6829 | LR: 4.20e-05
+Epoch 24/40 | Batch 120/1009 | Loss: 0.6819 | LR: 4.19e-05
+Epoch 24/40 | Batch 160/1009 | Loss: 0.6825 | LR: 4.17e-05
+Epoch 24/40 | Batch 200/1009 | Loss: 0.6827 | LR: 4.16e-05
+Epoch 24/40 | Batch 240/1009 | Loss: 0.6820 | LR: 4.14e-05
+Epoch 24/40 | Batch 280/1009 | Loss: 0.6819 | LR: 4.12e-05
+Epoch 24/40 | Batch 320/1009 | Loss: 0.6837 | LR: 4.11e-05
+Epoch 24/40 | Batch 360/1009 | Loss: 0.6827 | LR: 4.09e-05
+Epoch 24/40 | Batch 400/1009 | Loss: 0.6828 | LR: 4.08e-05
+Epoch 24/40 | Batch 440/1009 | Loss: 0.6816 | LR: 4.06e-05
+Epoch 24/40 | Batch 480/1009 | Loss: 0.6823 | LR: 4.04e-05
+Epoch 24/40 | Batch 520/1009 | Loss: 0.6824 | LR: 4.03e-05
+Epoch 24/40 | Batch 560/1009 | Loss: 0.6826 | LR: 4.01e-05
+Epoch 24/40 | Batch 600/1009 | Loss: 0.6821 | LR: 4.00e-05
+Epoch 24/40 | Batch 640/1009 | Loss: 0.6823 | LR: 3.98e-05
+Epoch 24/40 | Batch 680/1009 | Loss: 0.6824 | LR: 3.96e-05
+Epoch 24/40 | Batch 720/1009 | Loss: 0.6820 | LR: 3.95e-05
+Epoch 24/40 | Batch 760/1009 | Loss: 0.6815 | LR: 3.93e-05
+Epoch 24/40 | Batch 800/1009 | Loss: 0.6816 | LR: 3.92e-05
+Epoch 24/40 | Batch 840/1009 | Loss: 0.6855 | LR: 3.90e-05
+Epoch 24/40 | Batch 880/1009 | Loss: 0.6825 | LR: 3.89e-05
+Epoch 24/40 | Batch 920/1009 | Loss: 0.6836 | LR: 3.87e-05
+Epoch 24/40 | Batch 960/1009 | Loss: 0.6822 | LR: 3.85e-05
+Epoch 24/40 | Batch 1000/1009 | Loss: 0.6813 | LR: 3.84e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 24 Summary:
+  Train Loss: 0.6825
+  Val Loss: 0.7124
+  PER: 0.1799
+  Avg LR: 4.03e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1799
+Epoch 25/40 | Batch 0/1009 | Loss: 0.6819 | LR: 3.83e-05
+Epoch 25/40 | Batch 40/1009 | Loss: 0.6824 | LR: 3.82e-05
+Epoch 25/40 | Batch 80/1009 | Loss: 0.6818 | LR: 3.80e-05
+Epoch 25/40 | Batch 120/1009 | Loss: 0.6829 | LR: 3.79e-05
+Epoch 25/40 | Batch 160/1009 | Loss: 0.6826 | LR: 3.77e-05
+Epoch 25/40 | Batch 200/1009 | Loss: 0.6821 | LR: 3.76e-05
+Epoch 25/40 | Batch 240/1009 | Loss: 0.6819 | LR: 3.74e-05
+Epoch 25/40 | Batch 280/1009 | Loss: 0.6826 | LR: 3.73e-05
+Epoch 25/40 | Batch 320/1009 | Loss: 0.6816 | LR: 3.71e-05
+Epoch 25/40 | Batch 360/1009 | Loss: 0.6812 | LR: 3.69e-05
+Epoch 25/40 | Batch 400/1009 | Loss: 0.6815 | LR: 3.68e-05
+Epoch 25/40 | Batch 440/1009 | Loss: 0.6816 | LR: 3.66e-05
+Epoch 25/40 | Batch 480/1009 | Loss: 0.6836 | LR: 3.65e-05
+Epoch 25/40 | Batch 520/1009 | Loss: 0.6822 | LR: 3.63e-05
+Epoch 25/40 | Batch 560/1009 | Loss: 0.6819 | LR: 3.62e-05
+Epoch 25/40 | Batch 600/1009 | Loss: 0.6817 | LR: 3.60e-05
+Epoch 25/40 | Batch 640/1009 | Loss: 0.6816 | LR: 3.59e-05
+Epoch 25/40 | Batch 680/1009 | Loss: 0.6837 | LR: 3.57e-05
+Epoch 25/40 | Batch 720/1009 | Loss: 0.6821 | LR: 3.55e-05
+Epoch 25/40 | Batch 760/1009 | Loss: 0.6820 | LR: 3.54e-05
+Epoch 25/40 | Batch 800/1009 | Loss: 0.6855 | LR: 3.52e-05
+Epoch 25/40 | Batch 840/1009 | Loss: 0.6823 | LR: 3.51e-05
+Epoch 25/40 | Batch 880/1009 | Loss: 0.6827 | LR: 3.49e-05
+Epoch 25/40 | Batch 920/1009 | Loss: 0.6828 | LR: 3.48e-05
+Epoch 25/40 | Batch 960/1009 | Loss: 0.6824 | LR: 3.46e-05
+Epoch 25/40 | Batch 1000/1009 | Loss: 0.6818 | LR: 3.45e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 25 Summary:
+  Train Loss: 0.6823
+  Val Loss: 0.7131
+  PER: 0.1808
+  Avg LR: 3.64e-05
+------------------------------------------------------------
+Epoch 26/40 | Batch 0/1009 | Loss: 0.6832 | LR: 3.44e-05
+Epoch 26/40 | Batch 40/1009 | Loss: 0.6824 | LR: 3.43e-05
+Epoch 26/40 | Batch 80/1009 | Loss: 0.6816 | LR: 3.41e-05
+Epoch 26/40 | Batch 120/1009 | Loss: 0.6824 | LR: 3.40e-05
+Epoch 26/40 | Batch 160/1009 | Loss: 0.6815 | LR: 3.38e-05
+Epoch 26/40 | Batch 200/1009 | Loss: 0.6826 | LR: 3.37e-05
+Epoch 26/40 | Batch 240/1009 | Loss: 0.6814 | LR: 3.35e-05
+Epoch 26/40 | Batch 280/1009 | Loss: 0.6820 | LR: 3.34e-05
+Epoch 26/40 | Batch 320/1009 | Loss: 0.6823 | LR: 3.32e-05
+Epoch 26/40 | Batch 360/1009 | Loss: 0.6813 | LR: 3.31e-05
+Epoch 26/40 | Batch 400/1009 | Loss: 0.6817 | LR: 3.29e-05
+Epoch 26/40 | Batch 440/1009 | Loss: 0.6815 | LR: 3.28e-05
+Epoch 26/40 | Batch 480/1009 | Loss: 0.6817 | LR: 3.26e-05
+Epoch 26/40 | Batch 520/1009 | Loss: 0.6813 | LR: 3.24e-05
+Epoch 26/40 | Batch 560/1009 | Loss: 0.6822 | LR: 3.23e-05
+Epoch 26/40 | Batch 600/1009 | Loss: 0.6818 | LR: 3.21e-05
+Epoch 26/40 | Batch 640/1009 | Loss: 0.6820 | LR: 3.20e-05
+Epoch 26/40 | Batch 680/1009 | Loss: 0.6825 | LR: 3.18e-05
+Epoch 26/40 | Batch 720/1009 | Loss: 0.6820 | LR: 3.17e-05
+Epoch 26/40 | Batch 760/1009 | Loss: 0.6814 | LR: 3.15e-05
+Epoch 26/40 | Batch 800/1009 | Loss: 0.6811 | LR: 3.14e-05
+Epoch 26/40 | Batch 840/1009 | Loss: 0.6819 | LR: 3.12e-05
+Epoch 26/40 | Batch 880/1009 | Loss: 0.6824 | LR: 3.11e-05
+Epoch 26/40 | Batch 920/1009 | Loss: 0.6815 | LR: 3.09e-05
+Epoch 26/40 | Batch 960/1009 | Loss: 0.6817 | LR: 3.08e-05
+Epoch 26/40 | Batch 1000/1009 | Loss: 0.6811 | LR: 3.06e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 26 Summary:
+  Train Loss: 0.6821
+  Val Loss: 0.7126
+  PER: 0.1796
+  Avg LR: 3.25e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1796
+Epoch 27/40 | Batch 0/1009 | Loss: 0.6819 | LR: 3.06e-05
+Epoch 27/40 | Batch 40/1009 | Loss: 0.6815 | LR: 3.05e-05
+Epoch 27/40 | Batch 80/1009 | Loss: 0.6815 | LR: 3.03e-05
+Epoch 27/40 | Batch 120/1009 | Loss: 0.6805 | LR: 3.02e-05
+Epoch 27/40 | Batch 160/1009 | Loss: 0.6824 | LR: 3.00e-05
+Epoch 27/40 | Batch 200/1009 | Loss: 0.6821 | LR: 2.99e-05
+Epoch 27/40 | Batch 240/1009 | Loss: 0.6816 | LR: 2.97e-05
+Epoch 27/40 | Batch 280/1009 | Loss: 0.6826 | LR: 2.96e-05
+Epoch 27/40 | Batch 320/1009 | Loss: 0.6808 | LR: 2.94e-05
+Epoch 27/40 | Batch 360/1009 | Loss: 0.6818 | LR: 2.93e-05
+Epoch 27/40 | Batch 400/1009 | Loss: 0.6816 | LR: 2.91e-05
+Epoch 27/40 | Batch 440/1009 | Loss: 0.6811 | LR: 2.90e-05
+Epoch 27/40 | Batch 480/1009 | Loss: 0.6814 | LR: 2.88e-05
+Epoch 27/40 | Batch 520/1009 | Loss: 0.6833 | LR: 2.87e-05
+Epoch 27/40 | Batch 560/1009 | Loss: 0.6819 | LR: 2.86e-05
+Epoch 27/40 | Batch 600/1009 | Loss: 0.6842 | LR: 2.84e-05
+Epoch 27/40 | Batch 640/1009 | Loss: 0.6826 | LR: 2.83e-05
+Epoch 27/40 | Batch 680/1009 | Loss: 0.6819 | LR: 2.81e-05
+Epoch 27/40 | Batch 720/1009 | Loss: 0.6816 | LR: 2.80e-05
+Epoch 27/40 | Batch 760/1009 | Loss: 0.6818 | LR: 2.78e-05
+Epoch 27/40 | Batch 800/1009 | Loss: 0.6818 | LR: 2.77e-05
+Epoch 27/40 | Batch 840/1009 | Loss: 0.6815 | LR: 2.75e-05
+Epoch 27/40 | Batch 880/1009 | Loss: 0.6831 | LR: 2.74e-05
+Epoch 27/40 | Batch 920/1009 | Loss: 0.6817 | LR: 2.73e-05
+Epoch 27/40 | Batch 960/1009 | Loss: 0.6813 | LR: 2.71e-05
+Epoch 27/40 | Batch 1000/1009 | Loss: 0.6823 | LR: 2.70e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 13, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 27 Summary:
+  Train Loss: 0.6818
+  Val Loss: 0.7124
+  PER: 0.1781
+  Avg LR: 2.88e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1781
+Epoch 28/40 | Batch 0/1009 | Loss: 0.6810 | LR: 2.69e-05
+Epoch 28/40 | Batch 40/1009 | Loss: 0.6822 | LR: 2.68e-05
+Epoch 28/40 | Batch 80/1009 | Loss: 0.6813 | LR: 2.67e-05
+Epoch 28/40 | Batch 120/1009 | Loss: 0.6813 | LR: 2.65e-05
+Epoch 28/40 | Batch 160/1009 | Loss: 0.6813 | LR: 2.64e-05
+Epoch 28/40 | Batch 200/1009 | Loss: 0.6818 | LR: 2.62e-05
+Epoch 28/40 | Batch 240/1009 | Loss: 0.6819 | LR: 2.61e-05
+Epoch 28/40 | Batch 280/1009 | Loss: 0.6822 | LR: 2.59e-05
+Epoch 28/40 | Batch 320/1009 | Loss: 0.6813 | LR: 2.58e-05
+Epoch 28/40 | Batch 360/1009 | Loss: 0.6818 | LR: 2.57e-05
+Epoch 28/40 | Batch 400/1009 | Loss: 0.6821 | LR: 2.55e-05
+Epoch 28/40 | Batch 440/1009 | Loss: 0.6813 | LR: 2.54e-05
+Epoch 28/40 | Batch 480/1009 | Loss: 0.6815 | LR: 2.52e-05
+Epoch 28/40 | Batch 520/1009 | Loss: 0.6821 | LR: 2.51e-05
+Epoch 28/40 | Batch 560/1009 | Loss: 0.6813 | LR: 2.50e-05
+Epoch 28/40 | Batch 600/1009 | Loss: 0.6813 | LR: 2.48e-05
+Epoch 28/40 | Batch 640/1009 | Loss: 0.6816 | LR: 2.47e-05
+Epoch 28/40 | Batch 680/1009 | Loss: 0.6811 | LR: 2.46e-05
+Epoch 28/40 | Batch 720/1009 | Loss: 0.6814 | LR: 2.44e-05
+Epoch 28/40 | Batch 760/1009 | Loss: 0.6814 | LR: 2.43e-05
+Epoch 28/40 | Batch 800/1009 | Loss: 0.6833 | LR: 2.41e-05
+Epoch 28/40 | Batch 840/1009 | Loss: 0.6812 | LR: 2.40e-05
+Epoch 28/40 | Batch 880/1009 | Loss: 0.6818 | LR: 2.39e-05
+Epoch 28/40 | Batch 920/1009 | Loss: 0.6820 | LR: 2.37e-05
+Epoch 28/40 | Batch 960/1009 | Loss: 0.6846 | LR: 2.36e-05
+Epoch 28/40 | Batch 1000/1009 | Loss: 0.6813 | LR: 2.35e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 28 Summary:
+  Train Loss: 0.6817
+  Val Loss: 0.7114
+  PER: 0.1729
+  Avg LR: 2.52e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1729
+Epoch 29/40 | Batch 0/1009 | Loss: 0.6815 | LR: 2.34e-05
+Epoch 29/40 | Batch 40/1009 | Loss: 0.6824 | LR: 2.33e-05
+Epoch 29/40 | Batch 80/1009 | Loss: 0.6819 | LR: 2.32e-05
+Epoch 29/40 | Batch 120/1009 | Loss: 0.6816 | LR: 2.30e-05
+Epoch 29/40 | Batch 160/1009 | Loss: 0.6811 | LR: 2.29e-05
+Epoch 29/40 | Batch 200/1009 | Loss: 0.6817 | LR: 2.28e-05
+Epoch 29/40 | Batch 240/1009 | Loss: 0.6810 | LR: 2.26e-05
+Epoch 29/40 | Batch 280/1009 | Loss: 0.6812 | LR: 2.25e-05
+Epoch 29/40 | Batch 320/1009 | Loss: 0.6815 | LR: 2.23e-05
+Epoch 29/40 | Batch 360/1009 | Loss: 0.6818 | LR: 2.22e-05
+Epoch 29/40 | Batch 400/1009 | Loss: 0.6818 | LR: 2.21e-05
+Epoch 29/40 | Batch 440/1009 | Loss: 0.6812 | LR: 2.20e-05
+Epoch 29/40 | Batch 480/1009 | Loss: 0.6820 | LR: 2.18e-05
+Epoch 29/40 | Batch 520/1009 | Loss: 0.6809 | LR: 2.17e-05
+Epoch 29/40 | Batch 560/1009 | Loss: 0.6815 | LR: 2.16e-05
+Epoch 29/40 | Batch 600/1009 | Loss: 0.6811 | LR: 2.14e-05
+Epoch 29/40 | Batch 640/1009 | Loss: 0.6817 | LR: 2.13e-05
+Epoch 29/40 | Batch 680/1009 | Loss: 0.6820 | LR: 2.12e-05
+Epoch 29/40 | Batch 720/1009 | Loss: 0.6816 | LR: 2.10e-05
+Epoch 29/40 | Batch 760/1009 | Loss: 0.6813 | LR: 2.09e-05
+Epoch 29/40 | Batch 800/1009 | Loss: 0.6818 | LR: 2.08e-05
+Epoch 29/40 | Batch 840/1009 | Loss: 0.6823 | LR: 2.06e-05
+Epoch 29/40 | Batch 880/1009 | Loss: 0.6820 | LR: 2.05e-05
+Epoch 29/40 | Batch 920/1009 | Loss: 0.6810 | LR: 2.04e-05
+Epoch 29/40 | Batch 960/1009 | Loss: 0.6817 | LR: 2.03e-05
+Epoch 29/40 | Batch 1000/1009 | Loss: 0.6814 | LR: 2.01e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 29 Summary:
+  Train Loss: 0.6815
+  Val Loss: 0.7115
+  PER: 0.1737
+  Avg LR: 2.17e-05
+------------------------------------------------------------
+Epoch 30/40 | Batch 0/1009 | Loss: 0.6811 | LR: 2.01e-05
+Epoch 30/40 | Batch 40/1009 | Loss: 0.6808 | LR: 2.00e-05
+Epoch 30/40 | Batch 80/1009 | Loss: 0.6811 | LR: 1.98e-05
+Epoch 30/40 | Batch 120/1009 | Loss: 0.6813 | LR: 1.97e-05
+Epoch 30/40 | Batch 160/1009 | Loss: 0.6813 | LR: 1.96e-05
+Epoch 30/40 | Batch 200/1009 | Loss: 0.6813 | LR: 1.95e-05
+Epoch 30/40 | Batch 240/1009 | Loss: 0.6815 | LR: 1.93e-05
+Epoch 30/40 | Batch 280/1009 | Loss: 0.6825 | LR: 1.92e-05
+Epoch 30/40 | Batch 320/1009 | Loss: 0.6808 | LR: 1.91e-05
+Epoch 30/40 | Batch 360/1009 | Loss: 0.6812 | LR: 1.90e-05
+Epoch 30/40 | Batch 400/1009 | Loss: 0.6812 | LR: 1.88e-05
+Epoch 30/40 | Batch 440/1009 | Loss: 0.6814 | LR: 1.87e-05
+Epoch 30/40 | Batch 480/1009 | Loss: 0.6812 | LR: 1.86e-05
+Epoch 30/40 | Batch 520/1009 | Loss: 0.6820 | LR: 1.85e-05
+Epoch 30/40 | Batch 560/1009 | Loss: 0.6816 | LR: 1.83e-05
+Epoch 30/40 | Batch 600/1009 | Loss: 0.6825 | LR: 1.82e-05
+Epoch 30/40 | Batch 640/1009 | Loss: 0.6809 | LR: 1.81e-05
+Epoch 30/40 | Batch 680/1009 | Loss: 0.6816 | LR: 1.80e-05
+Epoch 30/40 | Batch 720/1009 | Loss: 0.6813 | LR: 1.78e-05
+Epoch 30/40 | Batch 760/1009 | Loss: 0.6808 | LR: 1.77e-05
+Epoch 30/40 | Batch 800/1009 | Loss: 0.6832 | LR: 1.76e-05
+Epoch 30/40 | Batch 840/1009 | Loss: 0.6811 | LR: 1.75e-05
+Epoch 30/40 | Batch 880/1009 | Loss: 0.6813 | LR: 1.74e-05
+Epoch 30/40 | Batch 920/1009 | Loss: 0.6817 | LR: 1.72e-05
+Epoch 30/40 | Batch 960/1009 | Loss: 0.6814 | LR: 1.71e-05
+Epoch 30/40 | Batch 1000/1009 | Loss: 0.6807 | LR: 1.70e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 30 Summary:
+  Train Loss: 0.6814
+  Val Loss: 0.7115
+  PER: 0.1735
+  Avg LR: 1.85e-05
+------------------------------------------------------------
+Epoch 31/40 | Batch 0/1009 | Loss: 0.6809 | LR: 1.70e-05
+Epoch 31/40 | Batch 40/1009 | Loss: 0.6813 | LR: 1.69e-05
+Epoch 31/40 | Batch 80/1009 | Loss: 0.6809 | LR: 1.67e-05
+Epoch 31/40 | Batch 120/1009 | Loss: 0.6814 | LR: 1.66e-05
+Epoch 31/40 | Batch 160/1009 | Loss: 0.6806 | LR: 1.65e-05
+Epoch 31/40 | Batch 200/1009 | Loss: 0.6809 | LR: 1.64e-05
+Epoch 31/40 | Batch 240/1009 | Loss: 0.6812 | LR: 1.63e-05
+Epoch 31/40 | Batch 280/1009 | Loss: 0.6812 | LR: 1.61e-05
+Epoch 31/40 | Batch 320/1009 | Loss: 0.6808 | LR: 1.60e-05
+Epoch 31/40 | Batch 360/1009 | Loss: 0.6809 | LR: 1.59e-05
+Epoch 31/40 | Batch 400/1009 | Loss: 0.6813 | LR: 1.58e-05
+Epoch 31/40 | Batch 440/1009 | Loss: 0.6816 | LR: 1.57e-05
+Epoch 31/40 | Batch 480/1009 | Loss: 0.6807 | LR: 1.56e-05
+Epoch 31/40 | Batch 520/1009 | Loss: 0.6812 | LR: 1.55e-05
+Epoch 31/40 | Batch 560/1009 | Loss: 0.6818 | LR: 1.53e-05
+Epoch 31/40 | Batch 600/1009 | Loss: 0.6807 | LR: 1.52e-05
+Epoch 31/40 | Batch 640/1009 | Loss: 0.6812 | LR: 1.51e-05
+Epoch 31/40 | Batch 680/1009 | Loss: 0.6816 | LR: 1.50e-05
+Epoch 31/40 | Batch 720/1009 | Loss: 0.6809 | LR: 1.49e-05
+Epoch 31/40 | Batch 760/1009 | Loss: 0.6811 | LR: 1.48e-05
+Epoch 31/40 | Batch 800/1009 | Loss: 0.6828 | LR: 1.47e-05
+Epoch 31/40 | Batch 840/1009 | Loss: 0.6811 | LR: 1.45e-05
+Epoch 31/40 | Batch 880/1009 | Loss: 0.6810 | LR: 1.44e-05
+Epoch 31/40 | Batch 920/1009 | Loss: 0.6822 | LR: 1.43e-05
+Epoch 31/40 | Batch 960/1009 | Loss: 0.6812 | LR: 1.42e-05
+Epoch 31/40 | Batch 1000/1009 | Loss: 0.6811 | LR: 1.41e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 31 Summary:
+  Train Loss: 0.6813
+  Val Loss: 0.7111
+  PER: 0.1713
+  Avg LR: 1.55e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1713
+Epoch 32/40 | Batch 0/1009 | Loss: 0.6811 | LR: 1.41e-05
+Epoch 32/40 | Batch 40/1009 | Loss: 0.6816 | LR: 1.40e-05
+Epoch 32/40 | Batch 80/1009 | Loss: 0.6813 | LR: 1.39e-05
+Epoch 32/40 | Batch 120/1009 | Loss: 0.6810 | LR: 1.38e-05
+Epoch 32/40 | Batch 160/1009 | Loss: 0.6811 | LR: 1.36e-05
+Epoch 32/40 | Batch 200/1009 | Loss: 0.6810 | LR: 1.35e-05
+Epoch 32/40 | Batch 240/1009 | Loss: 0.6813 | LR: 1.34e-05
+Epoch 32/40 | Batch 280/1009 | Loss: 0.6813 | LR: 1.33e-05
+Epoch 32/40 | Batch 320/1009 | Loss: 0.6812 | LR: 1.32e-05
+Epoch 32/40 | Batch 360/1009 | Loss: 0.6811 | LR: 1.31e-05
+Epoch 32/40 | Batch 400/1009 | Loss: 0.6811 | LR: 1.30e-05
+Epoch 32/40 | Batch 440/1009 | Loss: 0.6811 | LR: 1.29e-05
+Epoch 32/40 | Batch 480/1009 | Loss: 0.6819 | LR: 1.28e-05
+Epoch 32/40 | Batch 520/1009 | Loss: 0.6815 | LR: 1.27e-05
+Epoch 32/40 | Batch 560/1009 | Loss: 0.6817 | LR: 1.26e-05
+Epoch 32/40 | Batch 600/1009 | Loss: 0.6817 | LR: 1.25e-05
+Epoch 32/40 | Batch 640/1009 | Loss: 0.6806 | LR: 1.24e-05
+Epoch 32/40 | Batch 680/1009 | Loss: 0.6814 | LR: 1.23e-05
+Epoch 32/40 | Batch 720/1009 | Loss: 0.6822 | LR: 1.22e-05
+Epoch 32/40 | Batch 760/1009 | Loss: 0.6811 | LR: 1.21e-05
+Epoch 32/40 | Batch 800/1009 | Loss: 0.6809 | LR: 1.20e-05
+Epoch 32/40 | Batch 840/1009 | Loss: 0.6825 | LR: 1.19e-05
+Epoch 32/40 | Batch 880/1009 | Loss: 0.6808 | LR: 1.18e-05
+Epoch 32/40 | Batch 920/1009 | Loss: 0.6812 | LR: 1.17e-05
+Epoch 32/40 | Batch 960/1009 | Loss: 0.6809 | LR: 1.16e-05
+Epoch 32/40 | Batch 1000/1009 | Loss: 0.6816 | LR: 1.15e-05
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 32 Summary:
+  Train Loss: 0.6812
+  Val Loss: 0.7107
+  PER: 0.1706
+  Avg LR: 1.27e-05
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1706
+Epoch 33/40 | Batch 0/1009 | Loss: 0.6809 | LR: 1.14e-05
+Epoch 33/40 | Batch 40/1009 | Loss: 0.6811 | LR: 1.13e-05
+Epoch 33/40 | Batch 80/1009 | Loss: 0.6814 | LR: 1.12e-05
+Epoch 33/40 | Batch 120/1009 | Loss: 0.6817 | LR: 1.11e-05
+Epoch 33/40 | Batch 160/1009 | Loss: 0.6815 | LR: 1.10e-05
+Epoch 33/40 | Batch 200/1009 | Loss: 0.6814 | LR: 1.09e-05
+Epoch 33/40 | Batch 240/1009 | Loss: 0.6811 | LR: 1.08e-05
+Epoch 33/40 | Batch 280/1009 | Loss: 0.6809 | LR: 1.08e-05
+Epoch 33/40 | Batch 320/1009 | Loss: 0.6814 | LR: 1.07e-05
+Epoch 33/40 | Batch 360/1009 | Loss: 0.6814 | LR: 1.06e-05
+Epoch 33/40 | Batch 400/1009 | Loss: 0.6812 | LR: 1.05e-05
+Epoch 33/40 | Batch 440/1009 | Loss: 0.6810 | LR: 1.04e-05
+Epoch 33/40 | Batch 480/1009 | Loss: 0.6811 | LR: 1.03e-05
+Epoch 33/40 | Batch 520/1009 | Loss: 0.6809 | LR: 1.02e-05
+Epoch 33/40 | Batch 560/1009 | Loss: 0.6811 | LR: 1.01e-05
+Epoch 33/40 | Batch 600/1009 | Loss: 0.6811 | LR: 9.99e-06
+Epoch 33/40 | Batch 640/1009 | Loss: 0.6815 | LR: 9.90e-06
+Epoch 33/40 | Batch 680/1009 | Loss: 0.6812 | LR: 9.81e-06
+Epoch 33/40 | Batch 720/1009 | Loss: 0.6807 | LR: 9.71e-06
+Epoch 33/40 | Batch 760/1009 | Loss: 0.6808 | LR: 9.62e-06
+Epoch 33/40 | Batch 800/1009 | Loss: 0.6816 | LR: 9.53e-06
+Epoch 33/40 | Batch 840/1009 | Loss: 0.6810 | LR: 9.44e-06
+Epoch 33/40 | Batch 880/1009 | Loss: 0.6809 | LR: 9.35e-06
+Epoch 33/40 | Batch 920/1009 | Loss: 0.6819 | LR: 9.26e-06
+Epoch 33/40 | Batch 960/1009 | Loss: 0.6814 | LR: 9.17e-06
+Epoch 33/40 | Batch 1000/1009 | Loss: 0.6812 | LR: 9.08e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 33 Summary:
+  Train Loss: 0.6811
+  Val Loss: 0.7109
+  PER: 0.1706
+  Avg LR: 1.02e-05
+------------------------------------------------------------
+Epoch 34/40 | Batch 0/1009 | Loss: 0.6806 | LR: 9.06e-06
+Epoch 34/40 | Batch 40/1009 | Loss: 0.6814 | LR: 8.97e-06
+Epoch 34/40 | Batch 80/1009 | Loss: 0.6809 | LR: 8.88e-06
+Epoch 34/40 | Batch 120/1009 | Loss: 0.6807 | LR: 8.80e-06
+Epoch 34/40 | Batch 160/1009 | Loss: 0.6807 | LR: 8.71e-06
+Epoch 34/40 | Batch 200/1009 | Loss: 0.6811 | LR: 8.62e-06
+Epoch 34/40 | Batch 240/1009 | Loss: 0.6808 | LR: 8.54e-06
+Epoch 34/40 | Batch 280/1009 | Loss: 0.6810 | LR: 8.45e-06
+Epoch 34/40 | Batch 320/1009 | Loss: 0.6812 | LR: 8.36e-06
+Epoch 34/40 | Batch 360/1009 | Loss: 0.6808 | LR: 8.28e-06
+Epoch 34/40 | Batch 400/1009 | Loss: 0.6810 | LR: 8.20e-06
+Epoch 34/40 | Batch 440/1009 | Loss: 0.6807 | LR: 8.11e-06
+Epoch 34/40 | Batch 480/1009 | Loss: 0.6806 | LR: 8.03e-06
+Epoch 34/40 | Batch 520/1009 | Loss: 0.6814 | LR: 7.94e-06
+Epoch 34/40 | Batch 560/1009 | Loss: 0.6804 | LR: 7.86e-06
+Epoch 34/40 | Batch 600/1009 | Loss: 0.6809 | LR: 7.78e-06
+Epoch 34/40 | Batch 640/1009 | Loss: 0.6814 | LR: 7.70e-06
+Epoch 34/40 | Batch 680/1009 | Loss: 0.6805 | LR: 7.62e-06
+Epoch 34/40 | Batch 720/1009 | Loss: 0.6812 | LR: 7.54e-06
+Epoch 34/40 | Batch 760/1009 | Loss: 0.6818 | LR: 7.46e-06
+Epoch 34/40 | Batch 800/1009 | Loss: 0.6812 | LR: 7.38e-06
+Epoch 34/40 | Batch 840/1009 | Loss: 0.6807 | LR: 7.30e-06
+Epoch 34/40 | Batch 880/1009 | Loss: 0.6812 | LR: 7.22e-06
+Epoch 34/40 | Batch 920/1009 | Loss: 0.6810 | LR: 7.14e-06
+Epoch 34/40 | Batch 960/1009 | Loss: 0.6808 | LR: 7.06e-06
+Epoch 34/40 | Batch 1000/1009 | Loss: 0.6809 | LR: 6.98e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 34 Summary:
+  Train Loss: 0.6810
+  Val Loss: 0.7110
+  PER: 0.1707
+  Avg LR: 7.99e-06
+------------------------------------------------------------
+Epoch 35/40 | Batch 0/1009 | Loss: 0.6807 | LR: 6.97e-06
+Epoch 35/40 | Batch 40/1009 | Loss: 0.6813 | LR: 6.89e-06
+Epoch 35/40 | Batch 80/1009 | Loss: 0.6814 | LR: 6.81e-06
+Epoch 35/40 | Batch 120/1009 | Loss: 0.6808 | LR: 6.74e-06
+Epoch 35/40 | Batch 160/1009 | Loss: 0.6808 | LR: 6.66e-06
+Epoch 35/40 | Batch 200/1009 | Loss: 0.6811 | LR: 6.59e-06
+Epoch 35/40 | Batch 240/1009 | Loss: 0.6809 | LR: 6.51e-06
+Epoch 35/40 | Batch 280/1009 | Loss: 0.6811 | LR: 6.44e-06
+Epoch 35/40 | Batch 320/1009 | Loss: 0.6808 | LR: 6.36e-06
+Epoch 35/40 | Batch 360/1009 | Loss: 0.6809 | LR: 6.29e-06
+Epoch 35/40 | Batch 400/1009 | Loss: 0.6807 | LR: 6.22e-06
+Epoch 35/40 | Batch 440/1009 | Loss: 0.6806 | LR: 6.15e-06
+Epoch 35/40 | Batch 480/1009 | Loss: 0.6812 | LR: 6.07e-06
+Epoch 35/40 | Batch 520/1009 | Loss: 0.6809 | LR: 6.00e-06
+Epoch 35/40 | Batch 560/1009 | Loss: 0.6809 | LR: 5.93e-06
+Epoch 35/40 | Batch 600/1009 | Loss: 0.6813 | LR: 5.86e-06
+Epoch 35/40 | Batch 640/1009 | Loss: 0.6808 | LR: 5.79e-06
+Epoch 35/40 | Batch 680/1009 | Loss: 0.6808 | LR: 5.72e-06
+Epoch 35/40 | Batch 720/1009 | Loss: 0.6817 | LR: 5.65e-06
+Epoch 35/40 | Batch 760/1009 | Loss: 0.6812 | LR: 5.58e-06
+Epoch 35/40 | Batch 800/1009 | Loss: 0.6810 | LR: 5.52e-06
+Epoch 35/40 | Batch 840/1009 | Loss: 0.6805 | LR: 5.45e-06
+Epoch 35/40 | Batch 880/1009 | Loss: 0.6807 | LR: 5.38e-06
+Epoch 35/40 | Batch 920/1009 | Loss: 0.6809 | LR: 5.32e-06
+Epoch 35/40 | Batch 960/1009 | Loss: 0.6812 | LR: 5.25e-06
+Epoch 35/40 | Batch 1000/1009 | Loss: 0.6814 | LR: 5.18e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 35 Summary:
+  Train Loss: 0.6810
+  Val Loss: 0.7106
+  PER: 0.1691
+  Avg LR: 6.04e-06
+------------------------------------------------------------
+  ** New best model saved! PER: 0.1691
+Epoch 36/40 | Batch 0/1009 | Loss: 0.6805 | LR: 5.17e-06
+Epoch 36/40 | Batch 40/1009 | Loss: 0.6812 | LR: 5.10e-06
+Epoch 36/40 | Batch 80/1009 | Loss: 0.6811 | LR: 5.04e-06
+Epoch 36/40 | Batch 120/1009 | Loss: 0.6808 | LR: 4.98e-06
+Epoch 36/40 | Batch 160/1009 | Loss: 0.6808 | LR: 4.91e-06
+Epoch 36/40 | Batch 200/1009 | Loss: 0.6813 | LR: 4.85e-06
+Epoch 36/40 | Batch 240/1009 | Loss: 0.6810 | LR: 4.79e-06
+Epoch 36/40 | Batch 280/1009 | Loss: 0.6806 | LR: 4.73e-06
+Epoch 36/40 | Batch 320/1009 | Loss: 0.6811 | LR: 4.66e-06
+Epoch 36/40 | Batch 360/1009 | Loss: 0.6809 | LR: 4.60e-06
+Epoch 36/40 | Batch 400/1009 | Loss: 0.6807 | LR: 4.54e-06
+Epoch 36/40 | Batch 440/1009 | Loss: 0.6815 | LR: 4.48e-06
+Epoch 36/40 | Batch 480/1009 | Loss: 0.6810 | LR: 4.42e-06
+Epoch 36/40 | Batch 520/1009 | Loss: 0.6805 | LR: 4.36e-06
+Epoch 36/40 | Batch 560/1009 | Loss: 0.6808 | LR: 4.30e-06
+Epoch 36/40 | Batch 600/1009 | Loss: 0.6811 | LR: 4.25e-06
+Epoch 36/40 | Batch 640/1009 | Loss: 0.6809 | LR: 4.19e-06
+Epoch 36/40 | Batch 680/1009 | Loss: 0.6808 | LR: 4.13e-06
+Epoch 36/40 | Batch 720/1009 | Loss: 0.6808 | LR: 4.08e-06
+Epoch 36/40 | Batch 760/1009 | Loss: 0.6810 | LR: 4.02e-06
+Epoch 36/40 | Batch 800/1009 | Loss: 0.6814 | LR: 3.96e-06
+Epoch 36/40 | Batch 840/1009 | Loss: 0.6812 | LR: 3.91e-06
+Epoch 36/40 | Batch 880/1009 | Loss: 0.6808 | LR: 3.85e-06
+Epoch 36/40 | Batch 920/1009 | Loss: 0.6805 | LR: 3.80e-06
+Epoch 36/40 | Batch 960/1009 | Loss: 0.6813 | LR: 3.75e-06
+Epoch 36/40 | Batch 1000/1009 | Loss: 0.6811 | LR: 3.69e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 36 Summary:
+  Train Loss: 0.6809
+  Val Loss: 0.7106
+  PER: 0.1704
+  Avg LR: 4.40e-06
+------------------------------------------------------------
+Epoch 37/40 | Batch 0/1009 | Loss: 0.6810 | LR: 3.68e-06
+Epoch 37/40 | Batch 40/1009 | Loss: 0.6807 | LR: 3.63e-06
+Epoch 37/40 | Batch 80/1009 | Loss: 0.6809 | LR: 3.58e-06
+Epoch 37/40 | Batch 120/1009 | Loss: 0.6805 | LR: 3.53e-06
+Epoch 37/40 | Batch 160/1009 | Loss: 0.6813 | LR: 3.48e-06
+Epoch 37/40 | Batch 200/1009 | Loss: 0.6807 | LR: 3.42e-06
+Epoch 37/40 | Batch 240/1009 | Loss: 0.6813 | LR: 3.38e-06
+Epoch 37/40 | Batch 280/1009 | Loss: 0.6807 | LR: 3.33e-06
+Epoch 37/40 | Batch 320/1009 | Loss: 0.6805 | LR: 3.28e-06
+Epoch 37/40 | Batch 360/1009 | Loss: 0.6812 | LR: 3.23e-06
+Epoch 37/40 | Batch 400/1009 | Loss: 0.6805 | LR: 3.18e-06
+Epoch 37/40 | Batch 440/1009 | Loss: 0.6805 | LR: 3.13e-06
+Epoch 37/40 | Batch 480/1009 | Loss: 0.6809 | LR: 3.09e-06
+Epoch 37/40 | Batch 520/1009 | Loss: 0.6810 | LR: 3.04e-06
+Epoch 37/40 | Batch 560/1009 | Loss: 0.6807 | LR: 2.99e-06
+Epoch 37/40 | Batch 600/1009 | Loss: 0.6814 | LR: 2.95e-06
+Epoch 37/40 | Batch 640/1009 | Loss: 0.6816 | LR: 2.90e-06
+Epoch 37/40 | Batch 680/1009 | Loss: 0.6806 | LR: 2.86e-06
+Epoch 37/40 | Batch 720/1009 | Loss: 0.6813 | LR: 2.82e-06
+Epoch 37/40 | Batch 760/1009 | Loss: 0.6809 | LR: 2.77e-06
+Epoch 37/40 | Batch 800/1009 | Loss: 0.6810 | LR: 2.73e-06
+Epoch 37/40 | Batch 840/1009 | Loss: 0.6807 | LR: 2.69e-06
+Epoch 37/40 | Batch 880/1009 | Loss: 0.6811 | LR: 2.65e-06
+Epoch 37/40 | Batch 920/1009 | Loss: 0.6815 | LR: 2.60e-06
+Epoch 37/40 | Batch 960/1009 | Loss: 0.6813 | LR: 2.56e-06
+Epoch 37/40 | Batch 1000/1009 | Loss: 0.6812 | LR: 2.52e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 37 Summary:
+  Train Loss: 0.6809
+  Val Loss: 0.7107
+  PER: 0.1706
+  Avg LR: 3.07e-06
+------------------------------------------------------------
+Epoch 38/40 | Batch 0/1009 | Loss: 0.6809 | LR: 2.51e-06
+Epoch 38/40 | Batch 40/1009 | Loss: 0.6806 | LR: 2.48e-06
+Epoch 38/40 | Batch 80/1009 | Loss: 0.6810 | LR: 2.44e-06
+Epoch 38/40 | Batch 120/1009 | Loss: 0.6808 | LR: 2.40e-06
+Epoch 38/40 | Batch 160/1009 | Loss: 0.6807 | LR: 2.36e-06
+Epoch 38/40 | Batch 200/1009 | Loss: 0.6805 | LR: 2.32e-06
+Epoch 38/40 | Batch 240/1009 | Loss: 0.6809 | LR: 2.29e-06
+Epoch 38/40 | Batch 280/1009 | Loss: 0.6808 | LR: 2.25e-06
+Epoch 38/40 | Batch 320/1009 | Loss: 0.6812 | LR: 2.21e-06
+Epoch 38/40 | Batch 360/1009 | Loss: 0.6809 | LR: 2.18e-06
+Epoch 38/40 | Batch 400/1009 | Loss: 0.6810 | LR: 2.14e-06
+Epoch 38/40 | Batch 440/1009 | Loss: 0.6804 | LR: 2.11e-06
+Epoch 38/40 | Batch 480/1009 | Loss: 0.6808 | LR: 2.07e-06
+Epoch 38/40 | Batch 520/1009 | Loss: 0.6806 | LR: 2.04e-06
+Epoch 38/40 | Batch 560/1009 | Loss: 0.6807 | LR: 2.01e-06
+Epoch 38/40 | Batch 600/1009 | Loss: 0.6804 | LR: 1.98e-06
+Epoch 38/40 | Batch 640/1009 | Loss: 0.6809 | LR: 1.94e-06
+Epoch 38/40 | Batch 680/1009 | Loss: 0.6808 | LR: 1.91e-06
+Epoch 38/40 | Batch 720/1009 | Loss: 0.6804 | LR: 1.88e-06
+Epoch 38/40 | Batch 760/1009 | Loss: 0.6803 | LR: 1.85e-06
+Epoch 38/40 | Batch 800/1009 | Loss: 0.6808 | LR: 1.82e-06
+Epoch 38/40 | Batch 840/1009 | Loss: 0.6806 | LR: 1.79e-06
+Epoch 38/40 | Batch 880/1009 | Loss: 0.6804 | LR: 1.76e-06
+Epoch 38/40 | Batch 920/1009 | Loss: 0.6808 | LR: 1.74e-06
+Epoch 38/40 | Batch 960/1009 | Loss: 0.6808 | LR: 1.71e-06
+Epoch 38/40 | Batch 1000/1009 | Loss: 0.6808 | LR: 1.68e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 38 Summary:
+  Train Loss: 0.6809
+  Val Loss: 0.7106
+  PER: 0.1699
+  Avg LR: 2.07e-06
+------------------------------------------------------------
+Epoch 39/40 | Batch 0/1009 | Loss: 0.6809 | LR: 1.68e-06
+Epoch 39/40 | Batch 40/1009 | Loss: 0.6816 | LR: 1.65e-06
+Epoch 39/40 | Batch 80/1009 | Loss: 0.6808 | LR: 1.62e-06
+Epoch 39/40 | Batch 120/1009 | Loss: 0.6811 | LR: 1.60e-06
+Epoch 39/40 | Batch 160/1009 | Loss: 0.6808 | LR: 1.57e-06
+Epoch 39/40 | Batch 200/1009 | Loss: 0.6810 | LR: 1.55e-06
+Epoch 39/40 | Batch 240/1009 | Loss: 0.6810 | LR: 1.52e-06
+Epoch 39/40 | Batch 280/1009 | Loss: 0.6816 | LR: 1.50e-06
+Epoch 39/40 | Batch 320/1009 | Loss: 0.6810 | LR: 1.48e-06
+Epoch 39/40 | Batch 360/1009 | Loss: 0.6810 | LR: 1.46e-06
+Epoch 39/40 | Batch 400/1009 | Loss: 0.6807 | LR: 1.43e-06
+Epoch 39/40 | Batch 440/1009 | Loss: 0.6809 | LR: 1.41e-06
+Epoch 39/40 | Batch 480/1009 | Loss: 0.6810 | LR: 1.39e-06
+Epoch 39/40 | Batch 520/1009 | Loss: 0.6811 | LR: 1.37e-06
+Epoch 39/40 | Batch 560/1009 | Loss: 0.6808 | LR: 1.35e-06
+Epoch 39/40 | Batch 600/1009 | Loss: 0.6813 | LR: 1.33e-06
+Epoch 39/40 | Batch 640/1009 | Loss: 0.6813 | LR: 1.32e-06
+Epoch 39/40 | Batch 680/1009 | Loss: 0.6807 | LR: 1.30e-06
+Epoch 39/40 | Batch 720/1009 | Loss: 0.6808 | LR: 1.28e-06
+Epoch 39/40 | Batch 760/1009 | Loss: 0.6807 | LR: 1.26e-06
+Epoch 39/40 | Batch 800/1009 | Loss: 0.6811 | LR: 1.25e-06
+Epoch 39/40 | Batch 840/1009 | Loss: 0.6807 | LR: 1.23e-06
+Epoch 39/40 | Batch 880/1009 | Loss: 0.6811 | LR: 1.22e-06
+Epoch 39/40 | Batch 920/1009 | Loss: 0.6807 | LR: 1.20e-06
+Epoch 39/40 | Batch 960/1009 | Loss: 0.6809 | LR: 1.19e-06
+Epoch 39/40 | Batch 1000/1009 | Loss: 0.6813 | LR: 1.17e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 39 Summary:
+  Train Loss: 0.6809
+  Val Loss: 0.7106
+  PER: 0.1696
+  Avg LR: 1.39e-06
+------------------------------------------------------------
+Epoch 40/40 | Batch 0/1009 | Loss: 0.6804 | LR: 1.17e-06
+Epoch 40/40 | Batch 40/1009 | Loss: 0.6809 | LR: 1.16e-06
+Epoch 40/40 | Batch 80/1009 | Loss: 0.6814 | LR: 1.14e-06
+Epoch 40/40 | Batch 120/1009 | Loss: 0.6807 | LR: 1.13e-06
+Epoch 40/40 | Batch 160/1009 | Loss: 0.6805 | LR: 1.12e-06
+Epoch 40/40 | Batch 200/1009 | Loss: 0.6811 | LR: 1.11e-06
+Epoch 40/40 | Batch 240/1009 | Loss: 0.6806 | LR: 1.10e-06
+Epoch 40/40 | Batch 280/1009 | Loss: 0.6810 | LR: 1.09e-06
+Epoch 40/40 | Batch 320/1009 | Loss: 0.6805 | LR: 1.08e-06
+Epoch 40/40 | Batch 360/1009 | Loss: 0.6807 | LR: 1.07e-06
+Epoch 40/40 | Batch 400/1009 | Loss: 0.6810 | LR: 1.06e-06
+Epoch 40/40 | Batch 440/1009 | Loss: 0.6812 | LR: 1.05e-06
+Epoch 40/40 | Batch 480/1009 | Loss: 0.6809 | LR: 1.05e-06
+Epoch 40/40 | Batch 520/1009 | Loss: 0.6804 | LR: 1.04e-06
+Epoch 40/40 | Batch 560/1009 | Loss: 0.6810 | LR: 1.03e-06
+Epoch 40/40 | Batch 600/1009 | Loss: 0.6817 | LR: 1.03e-06
+Epoch 40/40 | Batch 640/1009 | Loss: 0.6803 | LR: 1.02e-06
+Epoch 40/40 | Batch 680/1009 | Loss: 0.6810 | LR: 1.02e-06
+Epoch 40/40 | Batch 720/1009 | Loss: 0.6810 | LR: 1.01e-06
+Epoch 40/40 | Batch 760/1009 | Loss: 0.6811 | LR: 1.01e-06
+Epoch 40/40 | Batch 800/1009 | Loss: 0.6809 | LR: 1.01e-06
+Epoch 40/40 | Batch 840/1009 | Loss: 0.6812 | LR: 1.00e-06
+Epoch 40/40 | Batch 880/1009 | Loss: 0.6809 | LR: 1.00e-06
+Epoch 40/40 | Batch 920/1009 | Loss: 0.6809 | LR: 1.00e-06
+Epoch 40/40 | Batch 960/1009 | Loss: 0.6808 | LR: 1.00e-06
+Epoch 40/40 | Batch 1000/1009 | Loss: 0.6819 | LR: 1.00e-06
+  Sample - Pred: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 3, 21] | True: [34, 40, 20, 2, 23, 40, 29, 18, 40, 10, 3, 40, 20, 25, 9]
+
+Epoch 40 Summary:
+  Train Loss: 0.6809
+  Val Loss: 0.7106
+  PER: 0.1696
+  Avg LR: 1.06e-06
+------------------------------------------------------------
+
+============================================================
+Training Complete!
+Best PER: 0.1691 (Epoch 35)
+Models saved to: /outputs/exp08_d448_b8_20251128_043602
