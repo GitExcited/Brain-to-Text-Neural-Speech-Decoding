@@ -12,6 +12,7 @@ import sys
 import json
 import pickle
 
+
 from dataset import BrainToTextDataset, train_test_split_indicies
 from data_augmentations import gauss_smooth
 
@@ -60,16 +61,13 @@ class BrainToTextDecoder_Trainer:
         if args['mode'] == 'train':
             os.makedirs(self.args['output_dir'], exist_ok=True)
 
-        # Create checkpoint directory
-        if args['save_best_checkpoint'] or args['save_all_val_steps'] or args['save_final_model']:
-            os.makedirs(self.args['checkpoint_dir'], exist_ok=True)
 
         # Set up logging
         self.logger = logging.getLogger(__name__)
         for handler in self.logger.handlers[:]:  # make a copy of the list
             self.logger.removeHandler(handler)
         self.logger.setLevel(logging.INFO)
-        formatter = logging.Formatter(fmt='%(asctime)s: %(message)s')
+        formatter = logging.Formatter(fmt='%(message)s')
 
         if args['mode'] == 'train':
             # During training, save logs to file in output directory
@@ -134,7 +132,7 @@ class BrainToTextDecoder_Trainer:
 
         self.logger.info(f"Initialized RNN decoding model")
 
-        self.logger.info(self.model)
+        #self.logger.info(self.model)
 
         # Log how many parameters are in the model
         total_params = sum(p.numel() for p in self.model.parameters())
@@ -151,8 +149,7 @@ class BrainToTextDecoder_Trainer:
 
         # Create datasets and dataloaders
         # For Kaggle competition, only data_train.hdf5 exists, so we split it into train/val
-        all_file_paths = [os.path.join(self.args["dataset"]["dataset_dir"], s, 'data_train.hdf5') for s in
-                          self.args['dataset']['sessions']]
+        all_file_paths = [os.path.join(self.args["dataset"]["dataset_dir"], s, 'data_train.hdf5') for s in self.args['dataset']['sessions']]
 
         # Ensure that there are no duplicate days
         if len(set(all_file_paths)) != len(all_file_paths):
@@ -234,10 +231,6 @@ class BrainToTextDecoder_Trainer:
 
         self.ctc_loss = torch.nn.CTCLoss(blank=0, reduction='none', zero_infinity=False)
 
-        # If a checkpoint is provided, then load from checkpoint
-        if self.args['init_from_checkpoint']:
-            self.load_model_checkpoint(self.args['init_checkpoint_path'])
-
         # Set rnn and/or input layers to not trainable if specified
         for name, param in self.model.named_parameters():
             if not self.args['model']['rnn_trainable'] and 'gru' in name:
@@ -257,6 +250,10 @@ class BrainToTextDecoder_Trainer:
 
         Day weights should have a separate learning rate
         '''
+        optimizer_name = self.args['optimizer_name'].lower()
+        lr_mult = {"adamw": 1, "novograd": 1, "lion": 0.25, "sgd": 5, "rmsprop": 0.05}
+        base_lr = self.args['lr_max'] * lr_mult[optimizer_name]
+
         bias_params = [p for name, p in self.model.named_parameters() if 'gru.bias' in name or 'out.bias' in name]
         day_params = [p for name, p in self.model.named_parameters() if 'day_' in name]
         other_params = [p for name, p in self.model.named_parameters() if
@@ -265,9 +262,8 @@ class BrainToTextDecoder_Trainer:
         if len(day_params) != 0:
             param_groups = [
                 {'params': bias_params, 'weight_decay': 0, 'group_type': 'bias'},
-                {'params': day_params, 'lr': self.args['lr_max_day'], 'weight_decay': self.args['weight_decay_day'],
-                 'group_type': 'day_layer'},
-                {'params': other_params, 'group_type': 'other'}
+                {'params': other_params, 'group_type': 'other'},
+                {'params': day_params, 'lr': self.args["lr_max_day"] * lr_mult[optimizer_name], 'weight_decay': self.args['weight_decay_day'], 'group_type': 'day_layer'}
             ]
         else:
             param_groups = [
@@ -275,14 +271,30 @@ class BrainToTextDecoder_Trainer:
                 {'params': other_params, 'group_type': 'other'}
             ]
 
-        optim = torch.optim.AdamW(
-            param_groups,
-            lr=self.args['lr_max'],
-            betas=(self.args['beta0'], self.args['beta1']),
-            eps=self.args['epsilon'],
-            weight_decay=self.args['weight_decay'],
-            fused=True
-        )
+        
+        if optimizer_name == 'adamw':
+            optim = torch.optim.AdamW(
+                param_groups,
+                lr = base_lr,
+                betas=(self.args['beta0'], self.args['beta1']),
+                eps=self.args['epsilon'],
+                weight_decay=self.args['weight_decay'],
+                fused=True
+            )
+        elif optimizer_name == "lion":
+            from lion_pytorch import Lion
+            optim = Lion(param_groups, lr = base_lr, betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
+
+        elif optimizer_name == "sgd":
+            optim = torch.optim.SGD(param_groups,  lr = base_lr, momentum = self.args["momentum"], weight_decay=self.args['weight_decay'])
+
+        elif optimizer_name == "rmsprop":
+            optim = torch.optim.RMSprop(param_groups,  lr = base_lr, momentum = self.args["momentum"], weight_decay = 1e-4, alpha = self.args["alpha"])
+        elif optimizer_name == "novograd":
+            from torch_optimizer import NovoGrad
+            optim = NovoGrad(param_groups, lr=base_lr, betas=(self.args['beta0'], self.args['beta1']), weight_decay=self.args['weight_decay'])
+        else:
+            raise ValueError(f"Unknown optimizer: {optimizer_name}")
 
         return optim
 
@@ -356,49 +368,6 @@ class BrainToTextDecoder_Trainer:
             raise ValueError(f"Invalid number of param groups in optimizer: {len(optim.param_groups)}")
 
         return LambdaLR(optim, lr_lambdas, -1)
-
-    def load_model_checkpoint(self, load_path):
-        '''
-        Load a training checkpoint
-        '''
-        checkpoint = torch.load(load_path, weights_only=False)  # checkpoint is just a dict
-
-        self.model.load_state_dict(checkpoint['model_state_dict'])
-        self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-        self.learning_rate_scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
-        self.best_val_PER = checkpoint['val_PER']  # best phoneme error rate
-        self.best_val_loss = checkpoint['val_loss'] if 'val_loss' in checkpoint.keys() else torch.inf
-
-        self.model.to(self.device)
-
-        # Send optimizer params back to GPU
-        for state in self.optimizer.state.values():
-            for k, v in state.items():
-                if isinstance(v, torch.Tensor):
-                    state[k] = v.to(self.device)
-
-        self.logger.info("Loaded model from checkpoint: " + load_path)
-
-    def save_model_checkpoint(self, save_path, PER, loss):
-        '''
-        Save a training checkpoint
-        '''
-
-        checkpoint = {
-            'model_state_dict': self.model.state_dict(),
-            'optimizer_state_dict': self.optimizer.state_dict(),
-            'scheduler_state_dict': self.learning_rate_scheduler.state_dict(),
-            'val_PER': PER,
-            'val_loss': loss
-        }
-
-        torch.save(checkpoint, save_path)
-
-        self.logger.info("Saved model to checkpoint: " + save_path)
-
-        # Save the args file alongside the checkpoint
-        with open(os.path.join(self.args['checkpoint_dir'], 'args.yaml'), 'w') as f:
-            OmegaConf.save(config=self.args, f=f)
 
     def create_attention_mask(self, sequence_lengths):
 
@@ -479,7 +448,8 @@ class BrainToTextDecoder_Trainer:
             )
 
         return features, n_time_steps
-
+    
+    
     def train(self):
         '''
         Train the model
@@ -497,7 +467,6 @@ class BrainToTextDecoder_Trainer:
         val_steps_since_improvement = 0
 
         # training params
-        save_best_checkpoint = self.args.get('save_best_checkpoint', True)
         early_stopping = self.args.get('early_stopping', True)
 
         early_stopping_val_steps = self.args['early_stopping_val_steps']
@@ -526,8 +495,7 @@ class BrainToTextDecoder_Trainer:
                 # Apply augmentations to the data
                 features, n_time_steps = self.transform_data(features, n_time_steps, 'train')
 
-                adjusted_lens = ((n_time_steps - self.args['model']['patch_size']) / self.args['model'][
-                    'patch_stride'] + 1).to(torch.int32)
+                adjusted_lens = ((n_time_steps - self.args['model']['patch_size']) / self.args['model']['patch_stride'] + 1).to(torch.int32)
 
                 # Get phoneme predictions
                 logits = self.model(features, day_indicies)
@@ -548,7 +516,7 @@ class BrainToTextDecoder_Trainer:
             if self.args['grad_norm_clip_value'] > 0:
                 grad_norm = torch.nn.utils.clip_grad_norm_(self.model.parameters(),
                                                            max_norm=self.args['grad_norm_clip_value'],
-                                                           error_if_nonfinite=True,
+                                                           error_if_nonfinite=False,
                                                            foreach=True
                                                            )
 
@@ -582,50 +550,10 @@ class BrainToTextDecoder_Trainer:
                                  f'CTC Loss (avg): {val_metrics["avg_loss"]:.4f} ' +
                                  f'time: {val_step_duration:.3f}')
 
-                if self.args['log_individual_day_val_PER']:
-                    for day in val_metrics['day_PERs'].keys():
-                        self.logger.info(
-                            f"{self.args['dataset']['sessions'][day]} val PER: {val_metrics['day_PERs'][day]['total_edit_distance'] / val_metrics['day_PERs'][day]['total_seq_length']:0.4f}")
-
                 # Save metrics
                 val_PERs.append(val_metrics['avg_PER'])
                 val_losses.append(val_metrics['avg_loss'])
                 val_results.append(val_metrics)
-
-                # Determine if new best day. Based on if PER is lower, or in the case of a PER tie, if loss is lower
-                new_best = False
-                if val_metrics['avg_PER'] < self.best_val_PER:
-                    self.logger.info(f"New best test PER {self.best_val_PER:.4f} --> {val_metrics['avg_PER']:.4f}")
-                    self.best_val_PER = val_metrics['avg_PER']
-                    self.best_val_loss = val_metrics['avg_loss']
-                    new_best = True
-                elif val_metrics['avg_PER'] == self.best_val_PER and (val_metrics['avg_loss'] < self.best_val_loss):
-                    self.logger.info(f"New best test loss {self.best_val_loss:.4f} --> {val_metrics['avg_loss']:.4f}")
-                    self.best_val_loss = val_metrics['avg_loss']
-                    new_best = True
-
-                if new_best:
-
-                    # Checkpoint if metrics have improved
-                    if save_best_checkpoint:
-                        self.logger.info(f"Checkpointing model")
-                        self.save_model_checkpoint(f'{self.args["checkpoint_dir"]}/best_checkpoint', self.best_val_PER,
-                                                   self.best_val_loss)
-
-                    # save validation metrics to pickle file
-                    if self.args['save_val_metrics']:
-                        with open(f'{self.args["checkpoint_dir"]}/val_metrics.pkl', 'wb') as f:
-                            pickle.dump(val_metrics, f)
-
-                    val_steps_since_improvement = 0
-
-                else:
-                    val_steps_since_improvement += 1
-
-                # Optionally save this validation checkpoint, regardless of performance
-                if self.args['save_all_val_steps']:
-                    self.save_model_checkpoint(f'{self.args["checkpoint_dir"]}/checkpoint_batch_{i}',
-                                               val_metrics['avg_PER'])
 
                 # Early stopping
                 if early_stopping and (val_steps_since_improvement >= early_stopping_val_steps):
@@ -639,9 +567,6 @@ class BrainToTextDecoder_Trainer:
         self.logger.info(f'Best avg val PER achieved: {self.best_val_PER:.5f}')
         self.logger.info(f'Total training time: {(training_duration / 60):.2f} minutes')
 
-        # Save final model
-        if self.args['save_final_model']:
-            self.save_model_checkpoint(f'{self.args["checkpoint_dir"]}/final_checkpoint_batch_{i}', val_PERs[-1])
 
         train_stats = {}
         train_stats['train_losses'] = train_losses

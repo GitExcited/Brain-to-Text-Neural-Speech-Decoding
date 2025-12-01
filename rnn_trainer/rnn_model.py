@@ -73,6 +73,8 @@ class GRUDecoder(nn.Module):
             bidirectional=False,
         )
 
+        self.linear_norm_hidden = nn.LayerNorm(n_units)
+
         # Set recurrent units to have orthogonal param init and input layers to have xavier init
         for name, param in self.gru.named_parameters():
             if "weight_hh" in name:
@@ -95,8 +97,11 @@ class GRUDecoder(nn.Module):
 
         # Apply day-specific layer to (hopefully) project neural data from the different days to the same latent space
         day_weights = torch.stack([self.day_weights[i] for i in day_idx], dim=0)
-        day_biases = torch.cat([self.day_biases[i] for i in day_idx], dim=0).unsqueeze(1)
 
+        day_weights = day_weights / (day_weights.norm(dim=-1, keepdim=True) + 1e-8)
+
+        day_biases = torch.cat([self.day_biases[i] for i in day_idx], dim=0).unsqueeze(1)
+        x = (x - x.mean(dim=1, keepdim=True)) / (x.std(dim=1, keepdim=True) + 1e-8)
         x = torch.einsum("btd,bdk->btk", x, day_weights) + day_biases
         x = self.day_layer_activation(x)
 
@@ -126,6 +131,9 @@ class GRUDecoder(nn.Module):
 
         # Pass input through RNN
         output, hidden_states = self.gru(x, states)
+        
+        # layer norm
+        output = self.linear_norm_hidden(output)
 
         # Compute logits
         logits = self.out(output)

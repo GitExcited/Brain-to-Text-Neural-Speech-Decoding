@@ -137,14 +137,10 @@ class BrainToTextDataset(Dataset):
                         batch['input_features'].append(input_features)
 
                         batch['seq_class_ids'].append(torch.from_numpy(g['seq_class_ids'][:]))  # phoneme labels
-                        batch['transcriptions'].append(
-                            torch.from_numpy(g['transcription'][:]))  # character level transcriptions
-                        batch['n_time_steps'].append(g.attrs[
-                                                         'n_time_steps'])  # number of time steps in the trial - required since we are padding
-                        batch['phone_seq_lens'].append(
-                            g.attrs['seq_len'])  # number of phonemes in the label - required since we are padding
-                        batch['day_indicies'].append(
-                            int(d))  # day index of each trial - required for the day specific layers
+                        batch['transcriptions'].append(torch.from_numpy(g['transcription'][:]))  # character level transcriptions
+                        batch['n_time_steps'].append(g.attrs['n_time_steps'])  # number of time steps in the trial - required since we are padding
+                        batch['phone_seq_lens'].append(g.attrs['seq_len'])  # number of phonemes in the label - required since we are padding
+                        batch['day_indicies'].append(int(d))  # day index of each trial - required for the day specific layers
                         batch['block_nums'].append(g.attrs['block_num'])
                         batch['trial_nums'].append(g.attrs['trial_num'])
 

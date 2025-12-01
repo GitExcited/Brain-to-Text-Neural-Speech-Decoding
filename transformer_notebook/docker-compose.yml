@@ -1,0 +1,153 @@
+version: '3.8'
+
+services:
+  transformer-training:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-transformer:latest
+    container_name: b2t-transformer-train
+    
+    # NVIDIA GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all  # Use all available GPUs, or specify: count: 1
+              capabilities: [gpu]
+    
+    # Mount volumes
+    volumes:
+      # Mount your data directory (adjust path to your data location)
+      - ${DATA_PATH:-./data}:/data:ro
+      # Mount outputs directory for saving models
+      - ${OUTPUT_PATH:-./outputs}:/outputs
+      # Optional: mount the script for development without rebuilding
+      # - ./train_transformer.py:/app/train_transformer.py:ro
+    
+    # Environment variables
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    
+    # Training configuration via command
+    command: [
+      "--data-dir", "/data/t15_copyTask_neuralData/hdf5_data_final",
+      "--output-dir", "/outputs",
+      "--epochs", "${EPOCHS:-5}",
+      "--batch-size", "${BATCH_SIZE:-8}",
+      "--lr", "${LR:-0.0001}",
+      "--d-model", "${D_MODEL:-192}",
+      "--max-days", "${MAX_DAYS:-1000}",
+      "--num-workers", "${NUM_WORKERS:-2}",
+      "--log-interval", "${LOG_INTERVAL:-50}",
+      "--cuda"
+    ]
+    
+    # Keep container running for debugging (optional)
+    # stdin_open: true
+    # tty: true
+    
+    # Restart policy
+    restart: "no"
+    
+    # Shared memory size (important for DataLoader with multiple workers)
+    shm_size: '8gb'
+
+  # Experiment runner - runs multiple experiments sequentially overnight
+  experiment-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-transformer:latest
+    container_name: b2t-experiment-runner
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    volumes:
+      - ${DATA_PATH:-./data}:/data:ro
+      - ${OUTPUT_PATH:-./outputs}:/outputs
+      - ./run_experiments.sh:/app/run_experiments.sh:ro
+      - ./train_transformer.py:/app/train_transformer.py:ro
+    
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    
+    # Run the experiment script
+    entrypoint: ["/bin/bash", "/app/run_experiments.sh"]
+    
+    shm_size: '8gb'
+    restart: "no"
+
+  # Inference service - generate Kaggle submission
+  inference:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-transformer:latest
+    container_name: b2t-inference
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    volumes:
+      - ${DATA_PATH:-./data}:/data:ro
+      - ${OUTPUT_PATH:-./outputs}:/outputs
+      - ./train_transformer.py:/app/train_transformer.py:ro
+      - ./generate_submission.py:/app/generate_submission.py:ro
+      - ./run_inference.sh:/app/run_inference.sh:ro
+      - ../brain-to-text-clone/nejm-brain-to-text/language_model/examples/speech/s0/dict.txt:/app/dict.txt:ro
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+
+    # Run the inference script
+    entrypoint: ["/bin/bash", "/app/run_inference.sh"]
+    shm_size: '8gb'
+    restart: "no"
+
+  # Alternative service for interactive development
+  transformer-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-transformer:latest
+    container_name: b2t-transformer-dev
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    volumes:
+      - ${DATA_PATH:-./data}:/data:ro
+      - ${OUTPUT_PATH:-./outputs}:/outputs
+      - ./train_transformer.py:/app/train_transformer.py:ro
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+
+    # Override entrypoint for interactive use
+    entrypoint: ["/bin/bash"]
+    stdin_open: true
+    tty: true
+    shm_size: '8gb'
