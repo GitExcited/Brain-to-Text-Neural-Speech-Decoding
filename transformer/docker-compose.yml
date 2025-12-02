@@ -19,8 +19,8 @@ services:
     
     # Mount volumes
     volumes:
-      # Mount your data directory (adjust path to your data location)
-      - ${DATA_PATH:-./data}:/data:ro
+      # Mount data directory from repository root (../data from transformer/)
+      - ${DATA_PATH:-../data}:/data:ro
       # Mount outputs directory for saving models
       - ${OUTPUT_PATH:-./outputs}:/outputs
       # Optional: mount the script for development without rebuilding
@@ -73,7 +73,7 @@ services:
               capabilities: [gpu]
     
     volumes:
-      - ${DATA_PATH:-./data}:/data:ro
+      - ${DATA_PATH:-../data}:/data:ro
       - ${OUTPUT_PATH:-./outputs}:/outputs
       - ./run_experiments.sh:/app/run_experiments.sh:ro
       - ./train_transformer.py:/app/train_transformer.py:ro
@@ -106,7 +106,7 @@ services:
               capabilities: [gpu]
 
     volumes:
-      - ${DATA_PATH:-./data}:/data:ro
+      - ${DATA_PATH:-../data}:/data:ro
       - ${OUTPUT_PATH:-./outputs}:/outputs
       - ./train_transformer.py:/app/train_transformer.py:ro
       - ./generate_submission.py:/app/generate_submission.py:ro
@@ -139,7 +139,7 @@ services:
               capabilities: [gpu]
 
     volumes:
-      - ${DATA_PATH:-./data}:/data:ro
+      - ${DATA_PATH:-../data}:/data:ro
       - ${OUTPUT_PATH:-./outputs}:/outputs
       - ./train_transformer.py:/app/train_transformer.py:ro
 

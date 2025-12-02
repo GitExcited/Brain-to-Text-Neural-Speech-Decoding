@@ -10,6 +10,7 @@ Deep learning models for decoding intracortical neural activity during attempted
 
 ## 📋 Table of Contents
 
+- [ Quick Start for Graders](#-quick-start-for-graders)
 - [Project Overview](#-project-overview)
 - [Team Information](#-team-information)
 - [Repository Structure](#-repository-structure)
@@ -28,7 +29,86 @@ Deep learning models for decoding intracortical neural activity during attempted
 
 ---
 
-## 🎯 Project Overview
+##  Quick Start for Graders
+
+**Complete setup in 5 minutes (assuming Docker + GPU are installed):**
+
+```bash
+# Step 1: Clone repository
+git clone https://github.com/GitExcited/Brain-to-Text-Neural-Speech-Decoding.git
+cd Brain-to-Text-Neural-Speech-Decoding
+
+# Step 2: Download and extract dataset
+# Option A: Using Kaggle API (faster)
+pip install kaggle
+kaggle competitions download -c brain-to-text-25
+unzip brain-to-text-25.zip -d ./data/
+
+# Option B: Manual download
+# Download from https://www.kaggle.com/competitions/brain-to-text-25/data
+# Extract to ./data/ folder in repository root
+
+# Step 3: Verify data structure (should show 45 folders)
+ls data/t15_copyTask_neuralData/hdf5_data_final/
+
+# Step 4: Train transformer model (our best model)
+cd transformer
+docker-compose up transformer-training
+
+# Model will train and save to transformer/outputs/
+# Training curves will be at transformer/outputs/training_curves.png
+```
+
+**Expected Directory Structure:**
+```
+Brain-to-Text-Neural-Speech-Decoding/
+├── data/                              ← Extract Kaggle data here
+│   └── t15_copyTask_neuralData/
+│       └── hdf5_data_final/
+│           ├── t15.2023.08.11/
+│           ├── t15.2023.08.13/
+│           └── ... (45 sessions total)
+├── transformer/                       ← cd here to run transformer
+│   ├── docker-compose.yml             ← Uses ../data automatically
+│   └── outputs/                       ← Results saved here
+└── bi-lstm/                           ← cd here to run BiLSTM
+    ├── docker-compose.yml             ← Uses ../data automatically
+    └── outputs/                       ← Results saved here
+```
+
+**Test on Sample Data (no full download needed):**
+```bash
+# Quick test with just 5 sessions (~2GB instead of full 10GB)
+cd transformer
+python train_transformer.py \
+  --data-dir ../data/t15_copyTask_neuralData/hdf5_data_final \
+  --output-dir ./outputs/test \
+  --epochs 1 \
+  --batch-size 4 \
+  --max-days 5 \
+  --cuda
+```
+
+**No Docker?**
+```bash
+# Local installation (5 minutes)
+cd transformer
+python3.10 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install torch==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+pip install -r requirements.txt
+
+# Train
+python train_transformer.py \
+  --data-dir ../data/t15_copyTask_neuralData/hdf5_data_final \
+  --output-dir ./outputs \
+  --epochs 5 \
+  --cuda
+```
+
+---
+
+##  Project Overview
 
 Speech brain-computer interfaces (BCIs) aim to restore communication for people with paralysis caused by ALS or brainstem stroke by decoding speech directly from brain activity. This project develops deep learning models to map intracortical neural spiking activity to text output.
 
@@ -160,7 +240,7 @@ data/
 
 ---
 
-## 🔧 Requirements
+##  Requirements
 
 ### Hardware Requirements
 
@@ -187,37 +267,49 @@ data/
 
 ---
 
-## 📦 Installation
+##  Installation
 
 ### Option 1: Docker (Recommended for Reproducibility)
 
 **Prerequisites:**
 - Docker Desktop (Windows/Mac) or Docker Engine (Linux)
 - NVIDIA Container Toolkit (for GPU support)
+- Dataset extracted to `data/` in repository root
 
 ```bash
 # Clone repository
 git clone https://github.com/GitExcited/Brain-to-Text-Neural-Speech-Decoding.git
 cd Brain-to-Text-Neural-Speech-Decoding
 
+# Download and extract dataset (see Dataset section)
+# Data should be at: ./data/t15_copyTask_neuralData/hdf5_data_final/
+
 # Navigate to transformer directory
 cd transformer
 
-# Build Docker image
-docker build -t brain-to-text-transformer:latest .
+# Option A: Using docker-compose (easiest)
+docker-compose up transformer-training
+# Data is automatically mounted from ../data (repository root)
+# Outputs saved to ./outputs/
 
-# Run with GPU support
+# Option B: Manual docker run
+docker build -t brain-to-text-transformer:latest .
 docker run --gpus all \
-  -v ./data:/data:ro \
-  -v ./outputs:/outputs \
+  -v $(pwd)/../data:/data:ro \
+  -v $(pwd)/outputs:/outputs \
+  --shm-size=8g \
   brain-to-text-transformer:latest \
   --data-dir /data/t15_copyTask_neuralData/hdf5_data_final \
   --output-dir /outputs \
-  --epochs 25 \
-  --batch-size 1 \
-  --d-model 896 \
+  --epochs 5 \
+  --batch-size 4 \
   --cuda
 ```
+
+**Important Path Notes:**
+- Run `docker-compose up` from `transformer/` or `bi-lstm/` directory
+- Data is mounted from `../data/` (one level up from model directory)
+- Outputs save to `./outputs/` (inside model directory)
 
 See [transformer/DOCKER_README.md](transformer/DOCKER_README.md) for detailed Docker instructions.
 
