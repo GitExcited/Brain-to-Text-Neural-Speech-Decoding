@@ -3,8 +3,11 @@
 [![Kaggle Competition](https://img.shields.io/badge/Kaggle-Brain--to--Text--25-20BEFF?logo=kaggle)](https://www.kaggle.com/competitions/brain-to-text-25)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1.0-EE4C2C?logo=pytorch)](https://pytorch.org/)
 [![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python)](https://www.python.org/)
+[![YouTube Demo](https://img.shields.io/badge/YouTube-Demo-FF0000?logo=youtube)](https://youtu.be/QXMPveUYRCI)
 
 Deep learning models for decoding intracortical neural activity during attempted speech into text. This repository contains our team's implementation for the **COMP 433 Fall 2025** course project, tackling the [Kaggle Brain-to-Text '25](https://www.kaggle.com/competitions/brain-to-text-25) challenge.
+
+**🎥 [Watch our project demo and walkthrough on YouTube →](https://youtu.be/QXMPveUYRCI)**
 
 ---
 
@@ -682,6 +685,7 @@ If you use this code, please cite:
 
 ## 🔗 Additional Resources
 
+- **🎥 Project Demo Video**: [https://youtu.be/QXMPveUYRCI](https://youtu.be/QXMPveUYRCI)
 - **Kaggle Competition**: [https://www.kaggle.com/competitions/brain-to-text-25](https://www.kaggle.com/competitions/brain-to-text-25)
 - **Project Proposal**: [proposal.md](proposal.md)
 - **Literature Review**: [papers.md](papers.md)
