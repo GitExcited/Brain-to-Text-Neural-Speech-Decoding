@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where python)",
+      "Bash(python:*)",
+      "Bash(export:*)",
+      "Bash(jupyter --version)",
+      "Bash(echo $PATH)",
+      "Read(//c/Users/David/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

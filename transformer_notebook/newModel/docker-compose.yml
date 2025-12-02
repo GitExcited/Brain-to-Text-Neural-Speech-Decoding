@@ -1,0 +1,181 @@
+version: '3.8'
+
+services:
+  bilstm-training:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-bilstm:latest
+    container_name: b2t-bilstm-train
+
+    # NVIDIA GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all  # Use all available GPUs, or specify: count: 1
+              capabilities: [gpu]
+
+    # Mount volumes
+    volumes:
+      # Mount data directory (../data from newModel/ = transformer_notebook/data)
+      - ../data:/data:ro
+      # Mount outputs directory for saving models
+      - ./outputs:/outputs
+      # Mount the script so we get the latest version with unbuffered output
+      - ./train_bilstm.py:/app/train_bilstm.py:ro
+
+    # Environment variables
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+    # Training configuration via command
+    command: [
+      "--data-dir", "/data/t15_copyTask_neuralData/hdf5_data_final",
+      "--output-dir", "/outputs",
+      "--mode", "both",
+      "--epochs", "30",
+      "--batch-size", "32",
+      "--lr", "0.004",
+      "--hidden-dim", "768",
+      "--num-layers", "3",
+      "--dropout", "0.35",
+      "--weight-decay", "0.01",
+      "--max-days", "1000",
+      "--num-workers", "0",
+      "--bonus-weight", "0.15",
+      "--bonus-every-n-batches", "3",
+      "--cuda"
+    ]
+
+    # Restart policy
+    restart: "no"
+
+    # Interactive terminal for live progress updates
+    stdin_open: true
+    tty: true
+
+    # Shared memory size (important for DataLoader with multiple workers)
+    shm_size: '8gb'
+
+  # Inference service - generate Kaggle submission
+  bilstm-inference:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-bilstm:latest
+    container_name: b2t-bilstm-inference
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    volumes:
+      - ../data:/data:ro
+      - ./outputs:/outputs
+      - ./train_bilstm.py:/app/train_bilstm.py:ro
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+
+    # Run inference only
+    command: [
+      "--data-dir", "/data/t15_copyTask_neuralData/hdf5_data_final",
+      "--output-dir", "/outputs",
+      "--mode", "inference",
+      "--batch-size", "32",
+      "--hidden-dim", "512",
+      "--num-layers", "3",
+      "--dropout", "0.4",
+      "--max-days", "1000",
+      "--num-workers", "2",
+      "--cuda"
+    ]
+
+    shm_size: '8gb'
+    restart: "no"
+
+  # Combined training + inference
+  bilstm-full:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-bilstm:latest
+    container_name: b2t-bilstm-full
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    volumes:
+      - ../data:/data:ro
+      - ./outputs:/outputs
+      - ./train_bilstm.py:/app/train_bilstm.py:ro
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+    # Train and then run inference
+    command: [
+      "--data-dir", "/data/t15_copyTask_neuralData/hdf5_data_final",
+      "--output-dir", "/outputs",
+      "--mode", "both",
+      "--epochs", "20",
+      "--batch-size", "32",
+      "--lr", "0.003",
+      "--hidden-dim", "512",
+      "--num-layers", "3",
+      "--dropout", "0.4",
+      "--max-days", "1000",
+      "--num-workers", "2",
+      "--bonus-weight", "0.1",
+      "--bonus-every-n-batches", "5",
+      "--cuda"
+    ]
+
+    shm_size: '8gb'
+    restart: "no"
+
+  # Alternative service for interactive development
+  bilstm-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brain-to-text-bilstm:latest
+    container_name: b2t-bilstm-dev
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    volumes:
+      - ../data:/data:ro
+      - ./outputs:/outputs
+      - ./train_bilstm.py:/app/train_bilstm.py:ro
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+
+    # Override entrypoint for interactive use
+    entrypoint: ["/bin/bash"]
+    stdin_open: true
+    tty: true
+    shm_size: '8gb'
