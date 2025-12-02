@@ -5,6 +5,7 @@ Containerized training with CUDA support
 """
 
 import os
+import sys
 import argparse
 import random
 import numpy as np
@@ -20,6 +21,10 @@ from scipy.ndimage import gaussian_filter1d
 import json
 from datetime import datetime
 import matplotlib.pyplot as plt
+
+# Force unbuffered output for Docker
+sys.stdout.reconfigure(line_buffering=True)
+sys.stderr.reconfigure(line_buffering=True)
 
 # Install TextBlob if not available
 try:
@@ -420,7 +425,7 @@ def train_model(args):
         batch_size=args.batch_size,
         collate_fn=collate_fn,
         num_workers=args.num_workers,
-        pin_memory=True if args.cuda else False,
+        pin_memory=True if (args.cuda and args.num_workers > 0) else False,
         shuffle=True,
         persistent_workers=True if args.num_workers > 0 else False,
         prefetch_factor=2 if args.num_workers > 0 else None
@@ -430,7 +435,7 @@ def train_model(args):
         batch_size=args.batch_size,
         collate_fn=collate_fn,
         num_workers=args.num_workers,
-        pin_memory=True if args.cuda else False,
+        pin_memory=True if (args.cuda and args.num_workers > 0) else False,
         persistent_workers=True if args.num_workers > 0 else False
     )
 
@@ -637,8 +642,14 @@ def generate_submission(model, args):
         max_days=args.max_days,
         num_features=args.num_features
     )
-    test_loader = DataLoader(test_dataset, batch_size=args.batch_size,
-                            shuffle=False, collate_fn=collate_fn, num_workers=args.num_workers)
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        collate_fn=collate_fn,
+        num_workers=args.num_workers,
+        pin_memory=True if (args.cuda and args.num_workers > 0) else False
+    )
 
     output_dir = Path(args.output_dir)
     try:

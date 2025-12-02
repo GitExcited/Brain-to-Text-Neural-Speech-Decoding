@@ -19,12 +19,12 @@ services:
 
     # Mount volumes
     volumes:
-      # Mount data directory (same as transformer: ../../data from newModel/)
-      - ../../data:/data:ro
+      # Mount data directory (../data from newModel/ = transformer_notebook/data)
+      - ../data:/data:ro
       # Mount outputs directory for saving models
       - ./outputs:/outputs
-      # Optional: mount the script for development without rebuilding
-      # - ./train_bilstm.py:/app/train_bilstm.py:ro
+      # Mount the script so we get the latest version with unbuffered output
+      - ./train_bilstm.py:/app/train_bilstm.py:ro
 
     # Environment variables
     environment:
@@ -36,22 +36,27 @@ services:
     command: [
       "--data-dir", "/data/t15_copyTask_neuralData/hdf5_data_final",
       "--output-dir", "/outputs",
-      "--mode", "train",
-      "--epochs", "20",
+      "--mode", "both",
+      "--epochs", "30",
       "--batch-size", "32",
-      "--lr", "0.003",
-      "--hidden-dim", "512",
+      "--lr", "0.004",
+      "--hidden-dim", "768",
       "--num-layers", "3",
-      "--dropout", "0.4",
+      "--dropout", "0.35",
+      "--weight-decay", "0.01",
       "--max-days", "1000",
-      "--num-workers", "2",
-      "--bonus-weight", "0.1",
-      "--bonus-every-n-batches", "5",
+      "--num-workers", "0",
+      "--bonus-weight", "0.15",
+      "--bonus-every-n-batches", "3",
       "--cuda"
     ]
 
     # Restart policy
     restart: "no"
+
+    # Interactive terminal for live progress updates
+    stdin_open: true
+    tty: true
 
     # Shared memory size (important for DataLoader with multiple workers)
     shm_size: '8gb'
@@ -73,7 +78,7 @@ services:
               capabilities: [gpu]
 
     volumes:
-      - ../../data:/data:ro
+      - ../data:/data:ro
       - ./outputs:/outputs
       - ./train_bilstm.py:/app/train_bilstm.py:ro
 
@@ -115,7 +120,7 @@ services:
               capabilities: [gpu]
 
     volumes:
-      - ../../data:/data:ro
+      - ../data:/data:ro
       - ./outputs:/outputs
       - ./train_bilstm.py:/app/train_bilstm.py:ro
 
@@ -162,7 +167,7 @@ services:
               capabilities: [gpu]
 
     volumes:
-      - ../../data:/data:ro
+      - ../data:/data:ro
       - ./outputs:/outputs
       - ./train_bilstm.py:/app/train_bilstm.py:ro
 
