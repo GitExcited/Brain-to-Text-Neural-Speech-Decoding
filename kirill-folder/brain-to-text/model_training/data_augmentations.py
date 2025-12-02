@@ -1,5 +1,6 @@
 import torch
 import torch.nn.functional as F
+import torchaudio.transforms as T
 import numpy as np
 from scipy.ndimage import gaussian_filter1d
 
@@ -35,3 +36,47 @@ def gauss_smooth(inputs, device, smooth_kernel_std=2, smooth_kernel_size=100,  p
     # Perform convolution
     smoothed = F.conv1d(inputs, gaussKernel, padding=padding, groups=C)
     return smoothed.permute(0, 2, 1)  # [B, T, C]
+
+
+
+
+def spec_augment_torchaudio(inputs, device, freq_mask_param=10, time_mask_param=15, 
+                            n_freq_masks=2, n_time_masks=2):
+    """
+    SpecAugment using torchaudio's built-in transforms.
+    
+    Reference:
+        Park, D. S., et al. "SpecAugment: A Simple Data Augmentation Method for 
+        Automatic Speech Recognition." Interspeech 2019.
+        
+    Implementation:
+        Uses torchaudio.transforms.FrequencyMasking and TimeMasking
+        https://pytorch.org/audio/stable/transforms.html
+    
+    Args:
+        inputs (tensor): Shape (B, T, N) - batch, time, features
+        device: torch device
+        freq_mask_param (int): Maximum frequency mask width
+        time_mask_param (int): Maximum time mask width
+        n_freq_masks (int): Number of frequency masks
+        n_time_masks (int): Number of time masks
+    
+    Returns:
+        augmented (tensor): Same shape as input
+    """
+    # torchaudio expects (batch, features, time) but we have (batch, time, features)
+    # So we need to transpose
+    x = inputs.transpose(1, 2)  # (B, T, N) -> (B, N, T)
+    
+    # Apply frequency masking
+    freq_masker = T.FrequencyMasking(freq_mask_param=freq_mask_param)
+    for _ in range(n_freq_masks):
+        x = freq_masker(x)
+    
+    # Apply time masking
+    time_masker = T.TimeMasking(time_mask_param=time_mask_param)
+    for _ in range(n_time_masks):
+        x = time_masker(x)
+    
+    # Transpose back to (B, T, N)
+    return x.transpose(1, 2)

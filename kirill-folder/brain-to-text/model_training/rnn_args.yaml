@@ -69,6 +69,13 @@ dataset:
     smooth_data: true # whether to smooth the data
     smooth_kernel_std: 2 # standard deviation of the smoothing kernel applied to the data
 
+    #SpecAugment parameters
+    use_spec_augment: true       # Enable SpecAugment during training
+    freq_mask_param: 10          # Maximum frequency mask width
+    time_mask_param: 15          # Maximum time mask width
+    n_freq_masks: 2              # Number of frequency masks to apply
+    n_time_masks: 2              # Number of time masks to apply
+
   neural_dim: 512 # dimensionality of the neural data
   batch_size: 64 # batch size for training
   n_classes: 41 # number of classes (phonemes) in the dataset

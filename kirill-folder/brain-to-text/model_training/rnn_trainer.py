@@ -13,7 +13,7 @@ import json
 import pickle
 
 from dataset import BrainToTextDataset, train_test_split_indicies
-from data_augmentations import gauss_smooth
+from data_augmentations import gauss_smooth , spec_augment_torchaudio
 
 import torchaudio.functional as F # for edit distance
 from omegaconf import OmegaConf
@@ -54,6 +54,7 @@ class BrainToTextDecoder_Trainer:
         self.val_loader = None 
 
         self.transform_args = self.args['dataset']['data_transforms']
+        self.apply_spec_augment = self.transform_args.get('use_spec_augment', False)  
 
         import datetime
 
@@ -482,7 +483,16 @@ class BrainToTextDecoder_Trainer:
                 smooth_kernel_std = self.transform_args['smooth_kernel_std'],
                 smooth_kernel_size= self.transform_args['smooth_kernel_size'],
                 )
-            
+        # Apply SpecAugment ( during training, after smoothing)
+        if mode == 'train' and self.apply_spec_augment:
+            features = spec_augment_torchaudio(
+            inputs=features,
+            device=self.device,
+            freq_mask_param=self.transform_args.get('freq_mask_param', 10),
+            time_mask_param=self.transform_args.get('time_mask_param', 15),
+            n_freq_masks=self.transform_args.get('n_freq_masks', 2),
+            n_time_masks=self.transform_args.get('n_time_masks', 2),
+        )    
         
         return features, n_time_steps
 
