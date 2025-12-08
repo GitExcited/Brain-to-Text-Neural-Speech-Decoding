@@ -126,7 +126,7 @@ Speech brain-computer interfaces (BCIs) aim to restore communication for people 
 
 - **Course:** COMP 433 – Deep Learning, Fall 2025
 - **Team Members:**
-  - **J. David Ruiz** (40176885) - Team Lead
+  - **J. David Ruiz** (40176885) 
   - **Elion Abdyli** (40132982)
   - **Ion Turcan** (40154098)
   - **Kirill Vishnyakov** (40281175)
