@@ -32,7 +32,7 @@ Deep learning models for decoding intracortical neural activity during attempted
 
 ---
 
-##  Quick Start for Graders
+##  Quick Start
 
 **Complete setup in 5 minutes (assuming Docker + GPU are installed):**
 
